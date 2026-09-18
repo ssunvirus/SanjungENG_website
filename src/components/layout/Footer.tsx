@@ -38,7 +38,7 @@ export default function Footer() {
                         <dl className="mt-[13px] grid grid-cols-[64px_1fr] gap-y-[8px] text-[15px] leading-[18px]">
                             <dt className="pl-1 font-light text-white/75">Tel</dt>
                             <dd className="font-semibold">
-                                <a href="tel:0108911728">010-891-1728</a>
+                                <a href="tel:028911728">02-891-1728</a>
                             </dd>
                             <dt className="pl-1 font-light text-white/75">E-mail</dt>
                             <dd className="font-semibold">
