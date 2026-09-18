@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="mt-auto w-full pt-[40px] pb-[30px] bg-[#102D4A] text-white">
+        <footer className="mt-auto w-full pt-[78px] pb-[47px] bg-[#102D4A] text-white">
             <div className="mx-auto h-[378px] w-full max-w-[1440px] overflow-hidden">
                 <div className="grid h-[215px] grid-cols-[396px_1px_436px_1px_606px]">
                     <section>
@@ -13,7 +13,7 @@ export default function Footer() {
                             width={204}
                             height={68}
                         />
-                        <h2 className="mt-[18px] text-[25px] font-medium leading-[30px]">
+                        <h2 className="mt-[18px] text-[25px] font-semibold leading-[30px]">
                             30년 경험으로
                             <br />
                             더 나은 냉동공조 환경을 만듭니다.
@@ -23,7 +23,7 @@ export default function Footer() {
                         </p>
                     </section>
 
-                    <div className="mt-[6px] h-[176px] bg-white/10" aria-hidden="true" />
+                    <div className="mt-[15px] h-[176px] bg-white/10" aria-hidden="true" />
 
                     <address className="pl-[88px] pt-[6px] not-italic">
                         <p className="text-[15px] font-light leading-[18px] text-white/75">
@@ -31,31 +31,31 @@ export default function Footer() {
                         </p>
                         <a
                             href="tel:01053401728"
-                            className="mt-[9px] block w-fit text-[25px] font-medium leading-[30px]"
+                            className="mt-[9px] block w-fit text-[25px] font-semibold leading-[30px]"
                         >
                             010-5340-1728
                         </a>
                         <dl className="mt-[13px] grid grid-cols-[64px_1fr] gap-y-[8px] text-[15px] leading-[18px]">
                             <dt className="pl-1 font-light text-white/75">Tel</dt>
-                            <dd className="font-medium">
+                            <dd className="font-semibold">
                                 <a href="tel:0108911728">010-891-1728</a>
                             </dd>
                             <dt className="pl-1 font-light text-white/75">E-mail</dt>
-                            <dd className="font-medium">
+                            <dd className="font-semibold">
                                 <a href="mailto:sanjungeng@naver.com">sanjungeng@naver.com</a>
                             </dd>
                         </dl>
-                        <p className="mt-[13px] pl-1 text-[15px] font-medium leading-[18px]">
+                        <p className="mt-[13px] pl-1 text-[15px] font-semibold leading-[18px]">
                             서울특별시 금천구 시흥대로 97, 6동 213호
                             <br />
                             (시흥동, 시흥산업용재유통센타)
                         </p>
                     </address>
 
-                    <div className="mt-[6px] h-[176px] bg-white/10" aria-hidden="true" />
+                    <div className="mt-[15px] h-[176px] bg-white/10" aria-hidden="true" />
 
                     <section className="pl-[124px] pt-[2px]">
-                        <h2 className="text-[25px] font-medium leading-[30px]">공식 블로그</h2>
+                        <h2 className="text-[25px] font-semibold leading-[30px]">공식 블로그</h2>
                         <Link
                             href="https://blog.naver.com/sanjungeng"
                             target="_blank"
@@ -69,7 +69,7 @@ export default function Footer() {
                 </div>
 
                 <section className="grid h-[124px] grid-cols-[397px_396px_1fr] border-t border-white/10">
-                    <h2 className="pt-[42px] text-[25px] font-medium leading-[30px] text-white/75">
+                    <h2 className="pt-[42px] text-[25px] font-semibold leading-[30px] text-white/75">
                         파트너사
                     </h2>
                     <div aria-hidden="true" />
@@ -79,7 +79,7 @@ export default function Footer() {
                             alt="Multixair"
                             width={158}
                             height={84}
-                            className="mt-[7px]"
+                            className="mt-[11px]"
                         />
                         <Image
                             src="/partner-klimagiel.svg"
@@ -98,7 +98,7 @@ export default function Footer() {
                     </div>
                 </section>
 
-                <div className="flex h-[39px] items-start border-t border-white/10 pt-[15px] text-[15px] font-light leading-[18px] text-white/50">
+                <div className="flex h-[39px] items-start border-t border-white/10 pt-[19px] text-[15px] font-light leading-[18px] text-white/75">
                     <span>사업자 등록번호 : 119-81-58805</span>
                     <span
                         aria-hidden="true"

@@ -49,7 +49,7 @@ export default function Hero() {
 
     return (
         <section
-            className="relative h-[1081px] w-full overflow-hidden bg-[#102D4A] text-white"
+            className="relative mx-auto h-[1081px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
             aria-roledescription="carousel"
             aria-label="산정엔지니어링 주요 서비스"
         >
@@ -81,17 +81,17 @@ export default function Hero() {
                     {slide.title[1]}
                 </h1>
 
-                <p className="mt-[20px] text-[45px] font-medium leading-[54px]">
+                <p className="mt-[25px] text-[45px] font-medium leading-[54px]">
                     {slide.subtitle}
                 </p>
 
-                <p className="mt-[20px] whitespace-pre text-[30px] font-normal leading-[36px]">
+                <p className="mt-[37px] whitespace-pre text-[30px] font-normal leading-[36px]">
                     {slide.details}
                 </p>
 
-                <div className="mt-[74px] flex gap-[35px]">
+                <div className="mt-[80px] flex gap-[35px]">
                     <Link
-                        href="/projects"
+                        href="/#projects"
                         className="flex h-[66px] w-[232px] items-center justify-center rounded-full bg-[#00ADDB] text-[30px] font-medium"
                     >
                         시공사례&nbsp; →

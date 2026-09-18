@@ -73,7 +73,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #eff7fb;
   --foreground: #171717;
 }
 
@@ -81,13 +81,6 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Pretendard", Arial, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
