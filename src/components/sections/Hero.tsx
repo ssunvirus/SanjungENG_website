@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const slides = [
     {
-        image: "/images/hero/hero-hvac.png",
+        image: "/images/hero/hero-hvac-compact.png",
         imageAlt: "산업용 냉동공조 설비가 설치된 현장",
         category: "냉동공조 솔루션",
         title: ["냉동기 설치부터", "유지보수까지"],
@@ -49,7 +49,7 @@ export default function Hero() {
 
     return (
         <section
-            className="relative mx-auto h-[1081px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
+            className="relative mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
             aria-roledescription="carousel"
             aria-label="산정엔지니어링 주요 서비스"
         >
@@ -68,37 +68,37 @@ export default function Hero() {
 
             <div
                 key={currentSlide}
-                className="absolute top-[248px] left-[237px] animate-[hero-content_700ms_ease-out]"
+                className="absolute top-[178px] left-[239px] animate-[hero-content_700ms_ease-out]"
                 aria-live="polite"
             >
-                <p className="text-[30px] font-bold leading-[36px] text-[#00ADDB]">
+                <p className="text-[23px] font-bold leading-[29px] text-[#00ADDB]">
                     {slide.category}
                 </p>
 
-                <h1 className="mt-[37px] text-[60px] font-extrabold leading-[72px]">
+                <h1 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
                     {slide.title[0]}
                     <br />
                     {slide.title[1]}
                 </h1>
 
-                <p className="mt-[25px] text-[45px] font-medium leading-[54px]">
+                <p className="mt-[34px] text-[34px] font-medium leading-[42px]">
                     {slide.subtitle}
                 </p>
 
-                <p className="mt-[37px] whitespace-pre text-[30px] font-normal leading-[36px]">
+                <p className="mt-[34px] whitespace-pre text-[23px] font-normal leading-[29px]">
                     {slide.details}
                 </p>
 
-                <div className="mt-[80px] flex gap-[35px]">
+                <div className="mt-[34px] flex gap-[26px]">
                     <Link
                         href="/#projects"
-                        className="flex h-[66px] w-[232px] items-center justify-center rounded-full bg-[#00ADDB] text-[30px] font-medium"
+                        className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-[#00ADDB] text-[30px] font-semibold"
                     >
                         시공사례&nbsp; →
                     </Link>
                     <Link
-                        href="/contact"
-                        className="flex h-[66px] w-[232px] items-center justify-center rounded-full border border-white bg-white/10 text-[30px] font-medium"
+                        href="/#contact"
+                        className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] border border-white bg-white/30 text-[30px] font-semibold"
                     >
                         견적 문의&nbsp; →
                     </Link>

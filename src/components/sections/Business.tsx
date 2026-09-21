@@ -75,10 +75,10 @@ function BusinessOverview() {
 
             <ol aria-label="주요 사업 안내">
                 {[
-                    { title: "냉동설비", description: "설치 & 교체", x: 397, y: 399, width: 171, offset: 8, end: 624 },
-                    { title: "수리&오버홀", description: "성능 복구", x: 781, y: 485, width: 220, offset: 10, end: 695 },
-                    { title: "유지보수", description: "정기점검", x: 1174, y: 543, width: 166, offset: 8, end: 728 },
-                    { title: "섬유덕트", description: "CFD 설계 & 시공", x: 1534, y: 192, width: 204, offset: 8, end: 442 },
+                    { title: "냉동설비", description: "설치 & 교체", x: 389, y: 399, width: 171, offset: 8, end: 624 },
+                    { title: "수리&오버홀", description: "성능 복구", x: 771, y: 485, width: 220, offset: 10, end: 695 },
+                    { title: "유지보수", description: "정기점검", x: 1166, y: 543, width: 166, offset: 8, end: 728 },
+                    { title: "섬유덕트", description: "CFD 설계 & 시공", x: 1526, y: 213, width: 204, offset: 8, end: 442 },
                 ].map((service, index) => (
                     <li key={service.title} className="absolute" style={{ left: service.x, top: service.y }}>
                         <span
@@ -122,36 +122,36 @@ function BusinessOverview() {
 
 function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
     return (
-        <article className="w-[355px] overflow-hidden rounded-[10px] bg-white">
-            <div className="relative h-[461px] overflow-hidden rounded-[10px]">
+        <article className="h-[632px] w-[266px] shrink-0 overflow-hidden rounded-[10px] bg-white">
+            <div className="relative h-[346px] overflow-hidden rounded-[10px]">
                 <Image
                     src={card.image}
                     alt={card.imageAlt}
                     fill
-                    sizes="355px"
+                    sizes="266px"
                     className="object-cover"
                 />
             </div>
 
-            <div className="px-[15px] pt-[28px] pb-[20px]">
-                <p className="text-[20px] font-medium leading-6 text-[#00ADDB]">{card.number}</p>
-                <h3 className="mt-[36px] whitespace-nowrap text-[45px] font-extrabold leading-[54px] text-[#102D4A]">
+            <div className="px-[12px] pt-[19px] pb-[15px]">
+                <p className="text-[15px] font-medium leading-5 text-[#00ADDB]">{card.number}</p>
+                <h3 className="mt-[18px] whitespace-nowrap text-[34px] font-extrabold leading-[42px] text-[#102D4A]">
                     {card.title}
                 </h3>
-                <p className="mt-[31px] whitespace-nowrap text-[25px] font-semibold leading-[30px] text-[#243447]">
+                <p className="mt-[19px] whitespace-nowrap text-[18px] font-semibold leading-[26px] text-[#243447]">
                     {card.description}
                 </p>
-                <div className="mx-[8px] mt-[28px] border-t border-black/15 pt-[20px]">
-                    <p className="whitespace-nowrap text-[20px] leading-6 text-[#243447]/80">
+                <div className="mx-[5px] mt-[18px] border-t border-black/15 pt-[15px]">
+                    <p className="whitespace-nowrap text-[15px] leading-5 text-[#243447]/80">
                         {card.services}
                     </p>
                 </div>
                 <Link
                     href={card.href}
-                    className="mx-[8px] mt-[22px] flex items-center justify-between border-t border-black/15 px-[2px] pt-[26px] text-[20px] font-medium leading-6 text-[#243447]"
+                    className="mx-[5px] mt-[16px] flex items-center justify-between border-t border-black/15 px-[2px] pt-[15px] text-[15px] font-medium leading-5 text-[#243447]"
                 >
                     <span>자세히 보기</span>
-                    <ArrowRightCircle size={48} strokeWidth={2} aria-hidden="true" />
+                    <ArrowRightCircle size={36} strokeWidth={2} aria-hidden="true" />
                 </Link>
             </div>
         </article>
@@ -160,16 +160,16 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
 
 function BusinessAreas() {
     return (
-        <section className="h-[1159px] overflow-hidden bg-[#EFF7FB] pt-[53px]">
-            <div className="mx-auto w-[1440px]">
-                <div className="flex h-6 items-center gap-[39px] text-[#00ADDB]/60">
-                    <span className="text-[20px] font-semibold tracking-[6px]">OUR BUSINESS</span>
-                    <span aria-hidden="true" className="h-[3px] w-[181px] bg-current" />
+        <section className="mx-auto h-[875px] w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
+            <div className="mx-auto w-[1200px]">
+                <div className="flex h-6 items-center gap-[20px] text-[#00ADDB]/60">
+                    <span className="text-[20px] font-medium tracking-[6px]">OUR BUSINESS</span>
+                    <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
                 </div>
-                <h2 className="mt-[19px] text-[75px] font-bold leading-[90px] text-[#102D4A]">
+                <h2 className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]">
                     사업영역
                 </h2>
-                <div className="mt-[75px] grid w-[1489px] grid-cols-4 gap-[23px]">
+                <div className="mt-[57px] flex w-[1200px] justify-center gap-[17px]">
                     {businessCards.map((card) => (
                         <BusinessCard key={card.number} card={card} />
                     ))}
