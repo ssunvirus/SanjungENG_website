@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer className="mx-auto h-[340px] w-[1440px] bg-[#102D4A] px-[180px] py-[22px] text-white">
             <div className="w-[1080px] overflow-hidden">
-                <div className="flex h-[171px] items-start gap-[80px]">
+                <div className="flex h-[181px] items-start gap-[80px]">
                     <section className="w-[250px] shrink-0">
                         <Image src="/logo-white.svg" alt="산정엔지니어링" width={158} height={48} />
                         <h2 className="mt-[16px] text-[19px] font-semibold leading-[24px]">

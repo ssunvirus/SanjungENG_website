@@ -38,18 +38,25 @@ export default function Hero() {
     }, [currentSlide, isPlaying]);
 
     const showPreviousSlide = () => {
+        setIsPlaying(false);
         setCurrentSlide((current) => (current - 1 + slides.length) % slides.length);
     };
 
     const showNextSlide = () => {
+        setIsPlaying(false);
         setCurrentSlide((current) => (current + 1) % slides.length);
+    };
+
+    const showSlide = (index: number) => {
+        setIsPlaying(false);
+        setCurrentSlide(index);
     };
 
     const slide = slides[currentSlide];
 
     return (
         <section
-            className="relative mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
+            className="relative isolate mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
             aria-roledescription="carousel"
             aria-label="산정엔지니어링 주요 서비스"
         >
@@ -61,14 +68,14 @@ export default function Hero() {
                     fill
                     priority={index === 0}
                     sizes="1920px"
-                    className={`pointer-events-none object-cover transition-opacity duration-700 ${index === currentSlide ? "opacity-100" : "opacity-0"
+                    className={`pointer-events-none z-0 object-cover transition-opacity duration-700 ${index === currentSlide ? "opacity-100" : "opacity-0"
                         }`}
                 />
             ))}
 
             <div
                 key={currentSlide}
-                className="absolute top-[178px] left-[239px] animate-[hero-content_700ms_ease-out]"
+                className="absolute top-[178px] left-[239px] z-10 animate-[hero-content_700ms_ease-out]"
                 aria-live="polite"
             >
                 <p className="text-[23px] font-bold leading-[29px] text-[#00ADDB]">
@@ -106,7 +113,7 @@ export default function Hero() {
             </div>
 
             <div
-                className="absolute top-[915px] left-[237px] z-10 flex h-[64px] items-center"
+                className="pointer-events-auto absolute top-[915px] left-[237px] z-20 flex h-[64px] items-center"
                 aria-label="Hero 슬라이드 컨트롤"
             >
                 <span className="inline-block w-[34px] text-[30px] font-bold tabular-nums">
@@ -120,12 +127,17 @@ export default function Hero() {
                         <button
                             key={item.image}
                             type="button"
-                            onClick={() => setCurrentSlide(index)}
-                            className={`h-[3px] w-[80px] cursor-pointer transition-colors ${index === currentSlide ? "bg-[#00ADDB]" : "bg-white/75"
-                                }`}
+                            onClick={() => showSlide(index)}
+                            className="flex h-[32px] w-[80px] cursor-pointer items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                             aria-label={`${index + 1}번 슬라이드 보기`}
                             aria-current={index === currentSlide}
-                        />
+                        >
+                            <span
+                                aria-hidden="true"
+                                className={`h-[3px] w-full transition-colors ${index === currentSlide ? "bg-[#00ADDB]" : "bg-white/75"
+                                    }`}
+                            />
+                        </button>
                     ))}
                 </div>
 
