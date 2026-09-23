@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Tag, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
-    { title: "농협 저온저장고 냉동설비 설치", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png" },
-    { title: "구례 실내 수영장 섬유덕트 설치", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png" },
-    { title: "반도체 공장 공냉식 냉동기 교체공사", description: "공냉식 냉동기 교체", image: "/images/projects/semiconductor-chiller.png" },
-    { title: "서안성 냉동창고 정기점검", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png" },
+    { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png" },
+    { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png" },
+    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/projects/semiconductor-chiller.png" },
+    { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png" },
 ];
 
 const CARD_STEP = 536.25;
@@ -50,15 +50,15 @@ export default function Projects() {
                 </div>
                 <h2 id="projects-heading" className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]">시공사례</h2>
                 <p className="mt-[25px] text-[19px] font-semibold leading-[29px] text-[#243447]">
-                        냉동공조 부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
+                    냉동공조 부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
                 </p>
                 <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-[#243447]">
-                        <button type="button" aria-label="이전 시공사례" aria-controls="project-cards" disabled={currentSlide === 0} onClick={() => move(-1)} className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]">
-                            <ChevronLeft size={28} strokeWidth={2.5} aria-hidden="true" />
-                        </button>
-                        <button type="button" aria-label="다음 시공사례" aria-controls="project-cards" disabled={currentSlide === LAST_SLIDE} onClick={() => move(1)} className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]">
-                            <ChevronRight size={28} strokeWidth={2.5} aria-hidden="true" />
-                        </button>
+                    <button type="button" aria-label="이전 시공사례" aria-controls="project-cards" disabled={currentSlide === 0} onClick={() => move(-1)} className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]">
+                        <ChevronLeft size={28} strokeWidth={2.5} aria-hidden="true" />
+                    </button>
+                    <button type="button" aria-label="다음 시공사례" aria-controls="project-cards" disabled={currentSlide === LAST_SLIDE} onClick={() => move(1)} className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]">
+                        <ChevronRight size={28} strokeWidth={2.5} aria-hidden="true" />
+                    </button>
                 </div>
                 <div
                     id="project-cards"
@@ -99,7 +99,7 @@ export default function Projects() {
                                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                                     <Image src={project.image} alt={project.title} fill sizes="503px" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]" />
                                     <span className="absolute top-[23px] left-[34px] flex h-[38px] items-center rounded-[20px] bg-[#00ADDB]/60 px-[14px] text-[18px] font-medium text-white/80">
-                                        # 냉동설비
+                                        # {project.tag}
                                     </span>
                                 </div>
                                 <div className="relative px-[21px] pt-[23px] pr-[70px]">
