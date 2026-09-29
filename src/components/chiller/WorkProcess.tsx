@@ -1,10 +1,10 @@
 import Image from "next/image";
 
 const steps = [
-  { number: "01", title: "현장 확인", description: "설비상태, 공간, 운전 조건 검토", image: "/images/solutions/process-1.png" },
-  { number: "02", title: "장비, 작업 계획", description: "용량, 공정, 일정 협의", image: "/images/solutions/process-2.png" },
-  { number: "03", title: "철거 & 설치", description: "기존 설비 철거 및 신규 장비 입고", image: "/images/solutions/process-3.png" },
-  { number: "04", title: "시운전 & 인계", description: "운전 확인 및 관리사항 안내", image: "/images/solutions/process-4.png" },
+  { number: "01", title: "현장 확인", description: "설비상태, 공간, 운전 조건 검토", image: "/images/chiller/process-site-inspection.png" },
+  { number: "02", title: "장비, 작업 계획", description: "용량, 공정, 일정 협의", image: "/images/chiller/process-work-planning.png" },
+  { number: "03", title: "철거 & 설치", description: "기존 설비 철거 및 신규 장비 입고", image: "/images/chiller/process-removal-installation.png" },
+  { number: "04", title: "시운전 & 인계", description: "운전 확인 및 관리사항 안내", image: "/images/chiller/process-commissioning-handover.png" },
 ];
 
 export default function WorkProcess() {
@@ -16,7 +16,15 @@ export default function WorkProcess() {
       <div className="mt-[60px] grid grid-cols-4 gap-[10px]">
         {steps.map((step) => (
           <div key={step.number} className="relative h-[400px] overflow-hidden rounded-[10px] shadow-md">
-            <Image src={step.image} alt={`${step.title} 작업 현장`} fill sizes="300px" className={`object-cover ${step.number === "04" ? "object-[56%_center]" : ""}`} />
+            <Image
+              src={step.image}
+              alt={`${step.title} 작업 현장`}
+              fill
+              sizes="300px"
+              quality={100}
+              unoptimized={step.number === "03" || step.number === "04"}
+              className={`object-cover ${step.number === "04" ? "object-[56%_center]" : ""}`}
+            />
           </div>
         ))}
       </div>

@@ -2,10 +2,13 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import { Check, Clipboard, Droplet, Settings } from "lucide-react";
 
-export default function ChillerServices() {
+export default function Services() {
   return (
     <section className="mx-auto w-full max-w-[1920px] ">
-      <div aria-hidden="true" className="h-[77px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+      <div
+        aria-hidden="true"
+        className="relative z-10 h-[77px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+      />
       <div className="mx-auto w-[1440px] bg-white px-[120px] py-[50px]">
         <header className="text-center">
           <p className="text-[20px] font-bold tracking-[6px] text-[#00ADDB]">CHILLER SERVICE</p>
@@ -14,7 +17,7 @@ export default function ChillerServices() {
         </header>
         <div className="mt-[50px] flex w-[1129px] gap-[50px]">
           <div className="relative h-[385px] w-[605px] shrink-0 overflow-hidden rounded-[10px] shadow-md">
-            <Image src="/images/solutions/service-install.png" alt="냉동기 배관 설치 현장" fill sizes="605px" className="object-cover object-[center_70%]" />
+            <Image src="/images/chiller/service-installation.png" alt="냉동기 배관 설치 현장" fill sizes="605px" className="object-cover object-[center_70%]" />
             <span className="absolute left-[39px] top-[21px] rounded-[20px] bg-[#006E8F]/80 px-[16px] py-[10px] text-[24px] font-semibold text-white"># 냉동기 설치</span>
           </div>
           <div className="w-[474px]">

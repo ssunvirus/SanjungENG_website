@@ -17,7 +17,7 @@ export default function CaseStudy() {
       </header>
       <article className="mt-[61px] flex h-[419px] w-[1164px] items-center gap-[100px] overflow-hidden rounded-[5px] bg-white px-[20px] py-[10px]">
         <div className="relative h-[399px] w-[532px] shrink-0 overflow-hidden rounded-[10px]">
-          <Image src="/images/solutions/case-semiconductor.png" alt="반도체 공장 냉동시스템 설치 사례" fill sizes="532px" className="object-cover" />
+          <Image src="/images/chiller/case-semiconductor-factory.png" alt="반도체 공장 냉동시스템 설치 사례" fill sizes="532px" className="object-cover" />
           <span className="absolute left-[19px] top-[11px] rounded-[20px] bg-[#178DA5]/80 px-[16px] py-[10px] text-[24px] font-semibold tracking-[1px] text-white"># 냉동기 설치</span>
         </div>
         <div className="w-[482px]">

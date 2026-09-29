@@ -2,13 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle, ChevronRight } from "lucide-react";
 
-export default function SolutionsHero() {
+export default function Hero() {
   return (
     <section className="relative mx-auto h-[627px] w-full max-w-[1920px] overflow-hidden text-white">
-      <Image src="/images/solutions/hero-source-1.png" alt="옥상에 설치된 산업용 냉동공조 설비" fill priority sizes="1920px" className="object-cover" />
+      <Image src="/images/chiller/hero-high-resolution.png" alt="옥상에 설치된 산업용 냉동공조 설비" fill priority sizes="1920px" quality={100} className="object-cover" />
       <div className="absolute left-[245px] top-[108px]">
         <nav aria-label="현재 위치" className="flex items-center text-[22.5px] font-bold text-[#00ADDB]">
-          <Link href="/">홈</Link><ChevronRight size={38} /><span>냉동공조</span><ChevronRight size={38} /><span>냉동기</span>
+          <Link href="/">홈</Link>
+          <ChevronRight size={38} aria-hidden="true" />
+          <Link href="/solutions">냉동공조</Link>
+          <ChevronRight size={38} aria-hidden="true" />
+          <Link href="/solutions">냉동기</Link>
         </nav>
         <h1 className="mt-[34px] text-[45px] font-extrabold">냉동기 솔루션</h1>
         <p className="mt-[34px] text-[34px] font-medium">현장 진단부터 설치, 유지보수까지</p>

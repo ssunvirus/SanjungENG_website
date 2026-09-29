@@ -8,7 +8,7 @@ const businessCards = [
         title: "냉동공조",
         description: "현장에 맞는 설계, 설치, 교체",
         services: "냉동기 / 공조기 / CDU / 냉각탑",
-        image: "/images/business/business-hvac.png",
+        image: "/images/business/hvac-card.png",
         imageAlt: "산업용 냉동공조 설비",
         href: "/solutions",
     },
@@ -17,7 +17,7 @@ const businessCards = [
         title: "섬유덕트",
         description: "공간에 맞춘 공기 분배 설계",
         services: "맞춤 설계 / 제작 / 시공",
-        image: "/images/business/business-fabric-duct.png",
+        image: "/images/business/fabric-duct-card.png",
         imageAlt: "실내 천장에 설치된 섬유덕트",
         href: "/fabric-duct",
     },
@@ -26,7 +26,7 @@ const businessCards = [
         title: "수리 & 오버홀",
         description: "고장 원인 진단과 성능 복구",
         services: "고장 진단 / 부품 교체 / 분해 정비",
-        image: "/images/business/business-overhaul.png",
+        image: "/images/business/overhaul-card.png",
         imageAlt: "냉동공조 설비 수리 및 오버홀 현장",
         href: "/solutions#overhaul",
     },
@@ -35,7 +35,7 @@ const businessCards = [
         title: "유지보수",
         description: "안정적인 가동을 위한 정기점검",
         services: "정기점검 / 예방정비 / 설비관리",
-        image: "/images/business/business-maintenance.png",
+        image: "/images/business/maintenance-card.png",
         imageAlt: "냉동공조 설비 유지보수 현장",
         href: "/solutions#maintenance",
     },
@@ -56,7 +56,7 @@ function BusinessOverview() {
     return (
         <section className="relative mx-auto h-[1081px] w-full max-w-[1920px] overflow-hidden">
             <Image
-                src="/images/business/business-overview.png"
+                src="/images/business/overview-background.png"
                 alt="냉동공조와 섬유덕트가 적용된 산업 시설"
                 fill
                 sizes="1920px"
@@ -108,11 +108,11 @@ function BusinessOverview() {
             <div className="absolute top-[980px] left-[512px] flex items-center text-[30px] font-semibold leading-9 text-[#243447]">
                 <span>상담 &amp; 현장확인</span>
                 <span className="ml-[50px] mr-[88px] flex items-center" aria-hidden="true">
-                    <Image src="/images/business/process-arrow.svg" alt="" width={90} height={15} />
+                    <Image src="/images/business/workflow-arrow.svg" alt="" width={90} height={15} />
                 </span>
                 <span>설치 &amp; 시공</span>
                 <span className="ml-[90px] mr-[58px] flex items-center" aria-hidden="true">
-                    <Image src="/images/business/process-arrow.svg" alt="" width={90} height={15} />
+                    <Image src="/images/business/workflow-arrow.svg" alt="" width={90} height={15} />
                 </span>
                 <span>사후관리</span>
             </div>

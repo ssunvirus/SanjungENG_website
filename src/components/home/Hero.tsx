@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const slides = [
     {
-        image: "/images/hero/hero-hvac-compact.png",
+        image: "/images/hero/hvac-slide.png",
         imageAlt: "산업용 냉동공조 설비가 설치된 현장",
         category: "냉동공조 솔루션",
         title: ["냉동기 설치부터", "유지보수까지"],
@@ -14,7 +14,7 @@ const slides = [
         details: "설치 ◦ 교체   |   수리 ◦ 오버홀   |   정기점검",
     },
     {
-        image: "/images/hero/hero_fabricdut.png",
+        image: "/images/hero/fabric-duct-slide.png",
         imageAlt: "섬유덕트가 설치된 산업 시설 내부",
         category: "섬유덕트 솔루션",
         title: ["공간에 맞춘 설계", "고르게 퍼지는 공기"],

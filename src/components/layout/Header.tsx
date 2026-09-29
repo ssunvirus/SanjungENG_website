@@ -1,4 +1,6 @@
-﻿import Image from "next/image";
+﻿"use client";
+
+import Image from "next/image";
 import Link from "next/link";
 
 const menus = [
@@ -10,7 +12,7 @@ const menus = [
             { label: "냉동기", href: "/solutions" },
             { label: "항온항습기", href: "/solutions?category=precision-ac" },
             { label: "냉각탑", href: "/solutions?category=cooling-tower" },
-            { label: "저온저장고", href: "/solutions?category=cold-storage" },
+            { label: "저온저장고", href: "/solutions/cold-storage" },
         ],
     },
     { label: "섬유덕트", href: "/fabric-duct" },
@@ -38,6 +40,7 @@ export default function Header() {
                                 <li key={menu.href} className="group relative shrink-0 text-center">
                                     <Link
                                         href={menu.href}
+                                        onClick={(event) => event.currentTarget.blur()}
                                         className="relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold text-[#243447] transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full"
                                     >
                                         {menu.label}
@@ -51,6 +54,7 @@ export default function Header() {
                                                 <li key={submenu.label}>
                                                     <Link
                                                         href={submenu.href}
+                                                        onClick={(event) => event.currentTarget.blur()}
                                                         className="flex h-[61px] items-center px-[8px] text-[21px] font-bold tracking-[-0.5px] text-[#243447] transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
                                                     >
                                                         {submenu.label}

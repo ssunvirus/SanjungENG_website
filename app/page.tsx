@@ -1,8 +1,8 @@
-import Hero from "../src/components/sections/Hero";
-import Business from "../src/components/sections/Business";
-import Projects from "../src/components/sections/Projects";
-import Customers from "../src/components/sections/Customers";
-import EstimateCta from "../src/components/sections/EstimateCta";
+import Hero from "../src/components/home/Hero";
+import Business from "../src/components/home/Business";
+import Projects from "../src/components/home/Projects";
+import Customers from "../src/components/home/Customers";
+import EstimateCta from "../src/components/home/EstimateCta";
 
 export default function Home() {
   return (

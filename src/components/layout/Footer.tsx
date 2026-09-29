@@ -37,11 +37,11 @@ export default function Footer() {
                 </div>
                 <section className="flex h-[91px] items-center justify-between border-t border-white/15">
                     <h2 className="text-[19px] font-semibold text-white/75">파트너사</h2>
-                    <div className="flex w-[425px] items-center gap-[8px]">
-                        <Image src="/partner-multixair.svg" alt="Multixair" width={119} height={63} />
-                        <Image src="/partner-klimagiel.svg" alt="Klimagiel" width={119} height={79} />
-                        <Image src="/partner-carrier.svg" alt="Carrier" width={152} height={76} />
-                    </div>
+                      <div className="flex w-[442px] items-center gap-[20px]">
+                          <Image src="/partner-multixair.svg" alt="Multixair" width={119} height={63} />
+                          <Image src="/partner-klimagiel.svg" alt="Klimagiel" width={119} height={79} />
+                          <Image src="/partner-century.png" alt="Century" width={164} height={68} />
+                      </div>
                 </section>
                 <div className="flex items-center gap-[10px] border-t border-white/15 pt-[10px] text-[11px] font-light text-white/75">
                     <span>사업자 등록번호 : 119-81-58805</span>

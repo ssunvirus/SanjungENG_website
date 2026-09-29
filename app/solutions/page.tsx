@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import CaseStudy from "../../src/components/solutions/CaseStudy";
-import ChillerServices from "../../src/components/solutions/ChillerServices";
-import ChillerTypes from "../../src/components/solutions/ChillerTypes";
-import SolutionsHero from "../../src/components/solutions/SolutionsHero";
-import WorkProcess from "../../src/components/solutions/WorkProcess";
+import CaseStudy from "../../src/components/chiller/CaseStudy";
+import ChillerTypes from "../../src/components/chiller/ChillerTypes";
+import Hero from "../../src/components/chiller/Hero";
+import Maintenance from "../../src/components/chiller/Maintenance";
+import Services from "../../src/components/chiller/Services";
+import WorkProcess from "../../src/components/chiller/WorkProcess";
 
 export const metadata: Metadata = {
   title: "냉동공조 | 산정엔지니어링",
@@ -13,9 +14,10 @@ export const metadata: Metadata = {
 export default function SolutionsPage() {
   return (
     <main className="flex-1 bg-[#EFF7FB] text-[#243447]">
-      <SolutionsHero />
-      <ChillerServices />
+      <Hero />
+      <Services />
       <WorkProcess />
+      <Maintenance />
       <ChillerTypes />
       <CaseStudy />
     </main>

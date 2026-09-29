@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Tag, X } from "lucide-react";
+import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
