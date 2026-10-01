@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 const projects = [
     { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png" },
     { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png" },
-    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/projects/semiconductor-chiller.png" },
+    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png" },
     { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png" },
 ];
 
@@ -42,7 +42,7 @@ export default function Projects() {
     }
 
     return (
-        <section id="projects" aria-labelledby="projects-heading" className="relative mx-auto h-[951px] w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
+        <section id="projects" aria-labelledby="projects-heading" className="relative mx-auto h-[929px] w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
             <div className="mx-auto w-[1192px]">
                 <div className="flex h-6 items-center gap-[20px] text-[#00ADDB]/60">
                     <span className="text-[20px] font-medium tracking-[6px]">PROJECTS</span>

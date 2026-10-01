@@ -3,7 +3,7 @@
 import { ChevronDown, Mail, PhoneCall } from "lucide-react";
 import { FormEvent, useState } from "react";
 
-const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[12px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
+const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[14px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
 
 export default function EstimateCta() {
     const [submitted, setSubmitted] = useState(false);
@@ -46,8 +46,8 @@ export default function EstimateCta() {
 
                 <form onSubmit={handleSubmit} className="flex size-[570px] shrink-0 flex-col gap-[15px] rounded-[15px] bg-white px-[39px] py-[34px] shadow-[0_14px_34px_rgba(16,45,74,0.12)]">
                     <div>
-                        <h3 className="text-[23px] font-bold leading-[32px] text-[#102D4A]">간편 견적 문의</h3>
-                        <p className="mt-1 text-[12px] leading-[19px] text-[#637382]">필수 정보만 남겨주시면 담당자가 확인 후 연락드립니다.</p>
+                        <h3 className="text-[26px] font-bold leading-[34px] text-[#102D4A]">간편 견적 문의</h3>
+                        <p className="mt-1 text-[14px] leading-[20px] text-[#637382]">필수 정보만 남겨주시면 담당자가 확인 후 연락드립니다.</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                         <input required name="company" aria-label="업체명" placeholder="업체명 *  회사명을 입력해주세요" className={fieldClass} />
@@ -70,14 +70,14 @@ export default function EstimateCta() {
                         <input name="email" type="email" aria-label="이메일" placeholder="이메일  example@company.com" className={fieldClass} />
                     </div>
                     <textarea name="message" aria-label="현장 및 문의 내용" placeholder="현장 및 문의 내용&#10;현장 위치, 설비 종류, 요청 작업을 간단히 입력해주세요." className={`${fieldClass} h-[87px] resize-none py-[8px]`} />
-                    <label className="flex cursor-pointer items-center gap-2 text-[11px] leading-[17px] text-[#637382]">
-                        <input required name="privacy" type="checkbox" className="size-[13px] accent-[#00ADDB]" />
+                    <label className="flex cursor-pointer items-center gap-2 text-[13px] leading-[18px] text-[#637382]">
+                        <input required name="privacy" type="checkbox" className="size-[15px] accent-[#00ADDB]" />
                         개인정보 수집 및 이용에 동의합니다.
                     </label>
-                    <button type="submit" className="h-[51px] shrink-0 rounded-[8px] bg-[#00ADDB] text-[15px] font-bold text-white transition-colors hover:bg-[#0098c2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D4A]">
+                    <button type="submit" className="h-[51px] shrink-0 rounded-[8px] bg-[#00ADDB] text-[17px] font-bold text-white transition-colors hover:bg-[#0098c2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D4A]">
                         무료 견적 요청하기　→
                     </button>
-                    <p aria-live="polite" className="h-[17px] text-center text-[11px] text-[#007FA5]">
+                    <p aria-live="polite" className="h-[17px] text-center text-[12px] text-[#007FA5]">
                         {submitted ? "문의 내용이 입력되었습니다. 전송 기능은 연결 준비 중입니다." : ""}
                     </p>
                 </form>

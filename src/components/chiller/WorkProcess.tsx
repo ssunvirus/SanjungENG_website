@@ -31,7 +31,7 @@ export default function WorkProcess() {
       <div className="mt-[40px] grid grid-cols-4 gap-[10px]">
         {steps.map((step, index) => (
           <article key={step.number} className="relative text-center">
-            {index < 3 && <span aria-hidden="true" className="absolute left-[203px] top-[38px] h-[2px] w-[184px] bg-[#00ADDB]" />}
+            {index < 3 && <span aria-hidden="true" className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] h-[2px] bg-[#00ADDB]" />}
             <span className="relative z-10 mx-auto flex size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[30px] font-bold text-white">{step.number}</span>
             <h3 className="mt-[25px] text-[30px] font-semibold">{step.title}</h3>
             <p className="mt-[15px] whitespace-nowrap text-[22px] font-semibold text-[#243447]/80">{step.description}</p>

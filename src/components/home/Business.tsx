@@ -7,8 +7,8 @@ const businessCards = [
         number: "01",
         title: "냉동공조",
         description: "현장에 맞는 설계, 설치, 교체",
-        services: "냉동기 / 공조기 / CDU / 냉각탑",
-        image: "/images/business/hvac-card.png",
+        services: "냉동기 / 항온항습기 / 냉각탑",
+        image: "/images/home-refresh/business-hvac.png",
         imageAlt: "산업용 냉동공조 설비",
         href: "/solutions",
     },
@@ -17,18 +17,18 @@ const businessCards = [
         title: "섬유덕트",
         description: "공간에 맞춘 공기 분배 설계",
         services: "맞춤 설계 / 제작 / 시공",
-        image: "/images/business/fabric-duct-card.png",
+        image: "/images/business/fabric-duct-source.jpg",
         imageAlt: "실내 천장에 설치된 섬유덕트",
         href: "/fabric-duct",
     },
     {
         number: "03",
-        title: "수리 & 오버홀",
-        description: "고장 원인 진단과 성능 복구",
-        services: "고장 진단 / 부품 교체 / 분해 정비",
-        image: "/images/business/overhaul-card.png",
-        imageAlt: "냉동공조 설비 수리 및 오버홀 현장",
-        href: "/solutions#overhaul",
+        title: "저온저장고",
+        description: "저온 보관을 위한 설비 구축",
+        services: "저장고 설계 / CDU, 유니트쿨러 설치",
+        image: "/images/home-refresh/business-cold-storage.png",
+        imageAlt: "저온저장고 설비현장",
+        href: "/solutions/cold-storage",
     },
     {
         number: "04",
@@ -129,6 +129,8 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
                     alt={card.imageAlt}
                     fill
                     sizes="266px"
+                    quality={card.image.includes("business-cold-storage") ? 75 : 100}
+                    unoptimized={card.image === "/images/home-refresh/business-hvac.png"}
                     className="object-cover"
                 />
             </div>
@@ -160,7 +162,7 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
 
 function BusinessAreas() {
     return (
-        <section className="mx-auto h-[875px] w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
+        <section className="mx-auto h-[869px] w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
             <div className="mx-auto w-[1200px]">
                 <div className="flex h-6 items-center gap-[20px] text-[#00ADDB]/60">
                     <span className="text-[20px] font-medium tracking-[6px]">OUR BUSINESS</span>
@@ -169,7 +171,7 @@ function BusinessAreas() {
                 <h2 className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]">
                     사업영역
                 </h2>
-                <div className="mt-[57px] flex w-[1200px] justify-center gap-[17px]">
+                <div className="mt-[57px] flex w-[1200px] justify-center gap-[35px]">
                     {businessCards.map((card) => (
                         <BusinessCard key={card.number} card={card} />
                     ))}

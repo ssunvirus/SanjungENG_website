@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const menus = [
     { label: "회사소개", href: "/about" },
@@ -10,9 +12,9 @@ const menus = [
         href: "/solutions",
         submenu: [
             { label: "냉동기", href: "/solutions" },
-            { label: "항온항습기", href: "/solutions?category=precision-ac" },
-            { label: "냉각탑", href: "/solutions?category=cooling-tower" },
             { label: "저온저장고", href: "/solutions/cold-storage" },
+            { label: "냉각탑", href: "/solutions/cooling-tower" },
+            { label: "항온항습기", href: "/solutions/precision-ac" },
         ],
     },
     { label: "섬유덕트", href: "/fabric-duct" },
@@ -20,9 +22,17 @@ const menus = [
 ];
 
 export default function Header() {
+    const pathname = usePathname();
+
+    const isMenuActive = (href: string) => {
+        if (href === "/solutions") return pathname.startsWith("/solutions");
+        if (href.includes("#")) return false;
+        return pathname === href;
+    };
+
     return (
-        <header className="sticky top-0 z-50 h-[90px] bg-white shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px]">
-            <div className="mx-auto flex h-full w-[1440px] items-center">
+        <header className="sticky top-0 z-50 h-[90px] bg-white/90 shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px]">
+            <div className="mx-auto flex h-full w-[1920px] items-center pl-[240px]">
                 <Link href="/" aria-label="산정엔지니어링 메인으로 이동">
                     <Image
                         src="/logo-default.svg"
@@ -33,15 +43,19 @@ export default function Header() {
                     />
                 </Link>
 
-                <div className="ml-[500px] flex items-center gap-[100px]">
+                <div className="ml-[450px] flex h-full items-center gap-[138px]">
                     <nav aria-label="주요 메뉴">
-                        <ul className="flex w-[515px] items-center justify-center gap-[45px]">
+                        <ul className="flex w-[528px] items-center justify-center gap-[60px]">
                             {menus.map((menu) => (
                                 <li key={menu.href} className="group relative shrink-0 text-center">
                                     <Link
                                         href={menu.href}
                                         onClick={(event) => event.currentTarget.blur()}
-                                        className="relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold text-[#243447] transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full"
+                                        className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
+                                            isMenuActive(menu.href)
+                                                ? "text-[#006EB8] after:w-full"
+                                                : "text-[#243447] after:w-0"
+                                        }`}
                                     >
                                         {menu.label}
                                     </Link>
@@ -70,9 +84,10 @@ export default function Header() {
 
                     <Link
                         href="/#contact"
-                        className="flex h-[40px] w-[120px] items-center justify-center rounded-[8px] bg-[#164A84] text-[25px] font-bold text-white"
+                        className="flex h-[90px] w-[407px] items-center gap-[12px] bg-[#102D4A] pl-[150px] text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
                     >
-                        견적문의
+                        <Search size={30} strokeWidth={2.5} aria-hidden="true" />
+                        <span className="whitespace-nowrap">견적문의</span>
                     </Link>
                 </div>
             </div>

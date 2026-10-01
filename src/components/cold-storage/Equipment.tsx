@@ -30,11 +30,11 @@ export default function Equipment() {
         <p className="mt-[25px] text-[25px] font-semibold text-[#243447]/60">보관 품목과 공간에 맞춰 냉동설비를 구성합니다.</p>
       </header>
 
-      <div className="mx-auto mt-[71px] flex w-[1092px] gap-[52px]">
-        <div className="relative h-[498px] w-[374px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="mx-auto mt-[51px] flex w-[1092px] gap-[52px]">
+        <div className="relative h-[520px] w-[390px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image src="/images/cold-storage/equipment-overview.png" alt="저온저장고 냉동설비" fill sizes="374px" className="object-cover" />
         </div>
-        <div className="flex w-[666px] flex-col gap-[10px]">
+        <div className="flex w-[666px] flex-col gap-[30px]">
           {equipmentPoints.map((point, index) => (
             <article key={point.number} className={`flex h-[159px] items-center gap-[20px] ${index < equipmentPoints.length - 1 ? "border-b-2 border-[#00ADDB]/30" : ""}`}>
               <div className="relative size-[100px] shrink-0">
