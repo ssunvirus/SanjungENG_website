@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CompanyOverview from "../../src/components/about/CompanyOverview";
+import BusinessAreas from "../../src/components/about/BusinessAreas";
 import Hero from "../../src/components/about/Hero";
 import Highlights from "../../src/components/about/Highlights";
 import Introduction from "../../src/components/about/Introduction";
@@ -17,6 +18,7 @@ export default function AboutPage() {
       <Introduction />
       <Highlights />
       <CompanyOverview />
+      <BusinessAreas />
     </main>
   );
 }

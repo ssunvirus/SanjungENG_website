@@ -1,16 +1,45 @@
 "use client";
 
 import { ChevronDown, Mail, PhoneCall } from "lucide-react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
 const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[14px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
 
 export default function EstimateCta() {
-    const [submitted, setSubmitted] = useState(false);
+    const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+    const [notice, setNotice] = useState("");
+    const sending = useRef(false);
 
-    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setSubmitted(true);
+        if (sending.current) return;
+        const form = event.currentTarget;
+        const fields = new FormData(form);
+        sending.current = true;
+        setStatus("sending");
+        setNotice("문의를 전송하고 있습니다.");
+        try {
+            const response = await fetch("/api/estimate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    company: fields.get("company"), manager: fields.get("manager"),
+                    phone: fields.get("phone"), email: fields.get("email"),
+                    category: fields.get("category"), message: fields.get("message"),
+                    privacy: fields.get("privacy") === "on",
+                }),
+            });
+            const result = await response.json();
+            if (!response.ok) throw new Error(result.message || "전송에 실패했습니다. 다시 시도해주세요.");
+            setStatus("success");
+            setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
+            form.reset();
+        } catch (error) {
+            setStatus("error");
+            setNotice(error instanceof Error ? error.message : "연결을 확인하고 다시 시도해주세요.");
+        } finally {
+            sending.current = false;
+        }
     }
 
     return (
@@ -74,11 +103,11 @@ export default function EstimateCta() {
                         <input required name="privacy" type="checkbox" className="size-[15px] accent-[#00ADDB]" />
                         개인정보 수집 및 이용에 동의합니다.
                     </label>
-                    <button type="submit" className="h-[51px] shrink-0 rounded-[8px] bg-[#00ADDB] text-[17px] font-bold text-white transition-colors hover:bg-[#0098c2] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D4A]">
-                        무료 견적 요청하기　→
+                    <button type="submit" disabled={status === "sending"} className="h-[51px] shrink-0 rounded-[8px] bg-[#00ADDB] text-[17px] font-bold text-white transition-colors hover:bg-[#0098c2] disabled:cursor-wait disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D4A]">
+                        {status === "sending" ? "전송 중…" : "무료 견적 요청하기　→"}
                     </button>
-                    <p aria-live="polite" className="h-[17px] text-center text-[12px] text-[#007FA5]">
-                        {submitted ? "문의 내용이 입력되었습니다. 전송 기능은 연결 준비 중입니다." : ""}
+                    <p aria-live="polite" className={`min-h-[32px] text-center text-[12px] leading-[16px] ${status === "error" ? "text-red-600" : "text-[#007FA5]"}`}>
+                        {notice}
                     </p>
                 </form>
             </div>
