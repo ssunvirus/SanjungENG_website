@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="mx-auto h-[340px] w-[1440px] bg-[#102D4A] px-[180px] py-[22px] text-white">
-            <div className="w-[1080px] overflow-hidden">
+        <footer className="h-[340px] w-full bg-[#102D4A] py-[22px] text-white">
+            <div className="mx-auto w-[1080px] overflow-hidden">
                 <div className="flex h-[181px] items-start gap-[80px]">
                     <section className="w-[260px] shrink-0">
                         <Image src="/logo-white.svg" alt="산정엔지니어링" width={158} height={48} />

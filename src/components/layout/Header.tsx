@@ -17,7 +17,14 @@ const menus = [
             { label: "항온항습기", href: "/solutions/precision-ac" },
         ],
     },
-    { label: "섬유덕트", href: "/fabric-duct" },
+    {
+        label: "섬유덕트",
+        href: "/fabric-duct",
+        submenu: [
+            { label: "섬유덕트 솔루션", href: "/fabric-duct" },
+            { label: "인증서 & 카탈로그", href: "/fabric-duct/resources" },
+        ],
+    },
     { label: "시공사례", href: "/#projects" },
 ];
 
@@ -26,6 +33,7 @@ export default function Header() {
 
     const isMenuActive = (href: string) => {
         if (href === "/solutions") return pathname.startsWith("/solutions");
+        if (href === "/fabric-duct") return pathname.startsWith("/fabric-duct");
         if (href.includes("#")) return false;
         return pathname === href;
     };
@@ -51,25 +59,24 @@ export default function Header() {
                                     <Link
                                         href={menu.href}
                                         onClick={(event) => event.currentTarget.blur()}
-                                        className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
-                                            isMenuActive(menu.href)
-                                                ? "text-[#006EB8] after:w-full"
-                                                : "text-[#243447] after:w-0"
-                                        }`}
+                                        className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${isMenuActive(menu.href)
+                                            ? "text-[#006EB8] after:w-full"
+                                            : "text-[#243447] after:w-0"
+                                            }`}
                                     >
                                         {menu.label}
                                     </Link>
                                     {menu.submenu && (
                                         <ul
                                             className="invisible absolute left-1/2 top-[calc(100%+8px)] z-50 w-[202px] -translate-x-1/2 translate-y-[-4px] rounded-[6px] border border-[#D1DFE8] bg-white p-[8px] text-left opacity-0 shadow-[0_3px_6px_rgba(0,0,0,0.25)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[9px] before:left-0 before:h-[9px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
-                                            aria-label="냉동공조 하위 메뉴"
+                                            aria-label={`${menu.label} 하위 메뉴`}
                                         >
                                             {menu.submenu.map((submenu) => (
                                                 <li key={submenu.label}>
                                                     <Link
                                                         href={submenu.href}
                                                         onClick={(event) => event.currentTarget.blur()}
-                                                        className="flex h-[61px] items-center px-[8px] text-[21px] font-bold tracking-[-0.5px] text-[#243447] transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
+                                                        className="flex h-[61px] items-center px-[8px] text-[20px] font-bold tracking-[-0.5px] text-[#243447]/80 transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
                                                     >
                                                         {submenu.label}
                                                     </Link>

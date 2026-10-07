@@ -4,8 +4,20 @@ import { ArrowRightCircle, ChevronRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative mx-auto h-[627px] w-full max-w-[1920px] overflow-hidden text-white">
-      <Image src="/images/chiller/hero-high-resolution.png" alt="옥상에 설치된 산업용 냉동공조 설비" fill priority sizes="1920px" quality={100} className="object-cover" />
+    <section className="relative mx-auto h-[600px] w-full max-w-[1920px] overflow-hidden text-white">
+      <Image
+        src="/images/chiller/hero-indoor-chillers.jpg"
+        alt="실내 기계실에 설치된 냉동기와 배관 설비"
+        fill
+        priority
+        sizes="1920px"
+        quality={100}
+        className="object-cover"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
+      />
       <div className="absolute left-[245px] top-[108px]">
         <nav aria-label="현재 위치" className="flex items-center text-[22.5px] font-bold text-[#00ADDB]">
           <Link href="/">홈</Link>
