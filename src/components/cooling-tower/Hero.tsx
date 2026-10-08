@@ -31,7 +31,7 @@ export default function Hero() {
           <Link href="#cooling-tower-case" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-[#00ADDB] text-[30px] font-semibold">
             시공사례 <ArrowRightCircle size={38} aria-hidden="true" />
           </Link>
-          <Link href="/#contact" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-white/30 text-[30px] font-semibold">
+          <Link href="/contact" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-white/30 text-[30px] font-semibold">
             견적문의 <ArrowRightCircle size={38} aria-hidden="true" />
           </Link>
         </div>

@@ -306,7 +306,7 @@ export default function DownloadCenter() {
             disabled={currentPage === 1}
             onClick={() => selectPage(currentPage - 1)}
             aria-label="이전 페이지"
-            className="cursor-pointer disabled:cursor-default"
+            className="cursor-pointer disabled:cursor-default disabled:opacity-40"
           >
             <ChevronLeft size={48} aria-hidden="true" />
           </button>
@@ -341,7 +341,7 @@ export default function DownloadCenter() {
             disabled={currentPage === pageCount}
             onClick={() => selectPage(currentPage + 1)}
             aria-label="다음 페이지"
-            className="cursor-pointer disabled:cursor-default"
+            className="cursor-pointer disabled:cursor-default disabled:opacity-40"
           >
             <ChevronRight size={48} aria-hidden="true" />
           </button>

@@ -37,7 +37,7 @@ export default function CaseStudy() {
               </div>
             ))}
           </div>
-          <Link href="/#projects" className="mt-[30px] flex h-[41px] w-full items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">시공사례 보러가기 <ArrowRight size={22} aria-hidden="true" /></Link>
+          <Link href="/projects" className="mt-[30px] flex h-[41px] w-full items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">시공사례 보러가기 <ArrowRight size={22} aria-hidden="true" /></Link>
         </div>
       </article>
     </section>

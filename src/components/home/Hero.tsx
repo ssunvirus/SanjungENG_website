@@ -98,13 +98,13 @@ export default function Hero() {
 
                 <div className="mt-[34px] flex gap-[26px]">
                     <Link
-                        href="/#projects"
+                        href="/projects"
                         className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-[#00ADDB] text-[30px] font-semibold"
                     >
                         시공사례&nbsp; →
                     </Link>
                     <Link
-                        href="/#contact"
+                        href="/contact"
                         className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] border border-white bg-white/30 text-[30px] font-semibold"
                     >
                         견적 문의&nbsp; →

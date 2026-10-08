@@ -25,7 +25,7 @@ export default function CaseStudy() {
           <div className="mt-[30px] flex flex-col gap-[30px]">
             {details.map(({ icon: Icon, title, description }) => <div key={title} className="flex items-center gap-[30px]"><Icon size={40} className="shrink-0 text-[#1D1B20]" aria-hidden="true" /><div><h4 className="text-[20px] font-bold text-[#00ADDB]">{title}</h4><p className="mt-[5px] text-[15px] font-semibold text-[#243447]/80">{description}</p></div></div>)}
           </div>
-          <Link href="/#projects" className="mt-[30px] flex h-[41px] w-full items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">시공사례 보러가기 <ArrowRight size={22} aria-hidden="true" /></Link>
+          <Link href="/projects" className="mt-[30px] flex h-[41px] w-full items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">시공사례 보러가기 <ArrowRight size={22} aria-hidden="true" /></Link>
         </div>
       </article>
     </section>

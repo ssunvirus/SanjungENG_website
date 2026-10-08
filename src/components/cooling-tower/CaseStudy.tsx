@@ -39,7 +39,7 @@ export default function CaseStudy() {
               </div>
             ))}
           </div>
-          <Link href="/#projects" className="mt-[40px] flex h-[43px] w-[240px] items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">
+          <Link href="/projects" className="mt-[40px] flex h-[43px] w-[240px] items-center justify-center gap-[10px] rounded-[10px] bg-[#102D4A] text-[20px] font-semibold text-white">
             시공사례 보러가기 <ArrowRight size={22} aria-hidden="true" />
           </Link>
         </div>

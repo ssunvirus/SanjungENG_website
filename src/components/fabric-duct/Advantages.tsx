@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading";
 const advantages = [
   {
     title: "균일한 공기분배",
-    description: ["공간 전체에 공기를 고르게 분산시켜", "핫존, 콜든존과 같은 온도편차를 줄입니다."],
+    description: ["공간 전체에 공기를 고르게 분산시켜", "핫존, 콜드존과 같은 온도편차를 줄입니다."],
     image: "distribution-icon.png",
     slot: "h-[77px] w-[107px]",
     crop: "h-[188.52%] w-[135.29%] left-[-17.65%] top-[-27.87%]",

@@ -1,13 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const projects = [
-    { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png" },
-    { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png" },
-    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png" },
+const projects: {
+    title: string;
+    tag: string;
+    description: string;
+    image: string;
+    href?: string;
+}[] = [
+    { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png", href: "/projects/wonsam-nonghyup" },
+    { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png", href: "/projects/gurye-pool" },
+    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png", href: "/projects/semiconductor-chiller" },
     { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png" },
 ];
 
@@ -87,15 +94,10 @@ export default function Projects() {
                     }}
                     className="mt-[35px] flex h-[498px] w-[1192px] snap-x snap-mandatory gap-[33.75px] overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-[#006EB8]"
                 >
-                    {projects.map((project) => (
-                        <article key={project.image} className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white">
-                            <button
-                                type="button"
-                                aria-label={`${project.title} 사진 크게 보기`}
-                                aria-haspopup="dialog"
-                                onClick={() => { setSelected(project); dialogRef.current?.showModal(); }}
-                                className="group flex h-full w-full cursor-pointer flex-col items-stretch justify-start p-0 text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]"
-                            >
+                    {projects.map((project) => {
+                        const cardClassName = "group flex h-full w-full cursor-pointer flex-col items-stretch justify-start p-0 text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]";
+                        const content = (
+                            <>
                                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                                     <Image src={project.image} alt={project.title} fill sizes="503px" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]" />
                                     <span className="absolute top-[23px] left-[34px] flex h-[38px] items-center rounded-[20px] bg-[#00ADDB]/60 px-[14px] text-[18px] font-medium text-white/80">
@@ -107,15 +109,44 @@ export default function Projects() {
                                     <p className="mt-[11px] text-[19px] font-medium leading-6 text-[#102D4A]/50">{project.description}</p>
                                     <ArrowRightCircle size={42} strokeWidth={2} aria-hidden="true" className="absolute top-[30px] right-[20px] text-[#102D4A]" />
                                 </div>
-                            </button>
-                        </article>
-                    ))}
+                            </>
+                        );
+
+                        return (
+                            <article
+                                key={project.image}
+                                className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white"
+                            >
+                                {project.href ? (
+                                    <Link
+                                        href={project.href}
+                                        className={cardClassName}
+                                    >
+                                        {content}
+                                    </Link>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        aria-label={`${project.title} ?? ?? ??`}
+                                        aria-haspopup="dialog"
+                                        onClick={() => {
+                                            setSelected(project);
+                                            dialogRef.current?.showModal();
+                                        }}
+                                        className={cardClassName}
+                                    >
+                                        {content}
+                                    </button>
+                                )}
+                            </article>
+                        );
+                    })}
                 </div>
                 <div aria-hidden="true" className="mt-[26px] h-[2px] w-[1114px] bg-[#CBD3D7]">
                     <div className="h-full w-[143px] bg-[#00ADDB]" style={{ transform: `translateX(${progress * 971}px)` }} />
                 </div>
                 <a
-                    href="#contact"
+                    href="/projects"
                     className="mx-auto mt-[49px] flex h-[53px] w-[267px] items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-[#102D4A] bg-[#102D4A] text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB]"
                 >
                     시공사례 더 보기

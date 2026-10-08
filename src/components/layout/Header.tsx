@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -25,13 +25,14 @@ const menus = [
             { label: "인증서 & 카탈로그", href: "/fabric-duct/resources" },
         ],
     },
-    { label: "시공사례", href: "/#projects" },
+    { label: "시공사례", href: "/projects" },
 ];
 
 export default function Header() {
     const pathname = usePathname();
 
     const isMenuActive = (href: string) => {
+        if (href === "/projects") return pathname === "/projects" || pathname.startsWith("/projects/");
         if (href === "/solutions") return pathname.startsWith("/solutions");
         if (href === "/fabric-duct") return pathname.startsWith("/fabric-duct");
         if (href.includes("#")) return false;
@@ -90,7 +91,7 @@ export default function Header() {
                     </nav>
 
                     <Link
-                        href="/#contact"
+                        href="/contact"
                         className="flex h-[90px] w-[407px] items-center gap-[12px] bg-[#102D4A] pl-[150px] text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
                     >
                         <Search size={30} strokeWidth={2.5} aria-hidden="true" />

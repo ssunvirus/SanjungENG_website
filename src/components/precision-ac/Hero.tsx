@@ -18,7 +18,7 @@ export default function Hero() {
         <p className="text-[22.5px]">항온항습기 설치, 교체&nbsp;&nbsp; | &nbsp;&nbsp;수리, 부품 교체&nbsp;&nbsp; | &nbsp;&nbsp;정기점검</p>
         <div className="flex gap-[26px]">
           <Link href="#precision-case" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-[#00ADDB] text-[30px] font-semibold">시공사례 <ArrowRightCircle size={38} aria-hidden="true" /></Link>
-          <Link href="/#contact" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-white/30 text-[30px] font-semibold">견적문의 <ArrowRightCircle size={38} aria-hidden="true" /></Link>
+          <Link href="/contact" className="flex h-[65px] w-[210px] items-center justify-center gap-[14px] rounded-[22.5px] bg-white/30 text-[30px] font-semibold">견적문의 <ArrowRightCircle size={38} aria-hidden="true" /></Link>
         </div>
       </div>
     </section>
