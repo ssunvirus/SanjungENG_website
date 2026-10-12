@@ -9,29 +9,29 @@ const areas = [
 
 export default function BusinessAreas() {
   return (
-    <section aria-labelledby="about-business-heading" className="mx-auto w-[1440px] px-[75px] py-[60px]">
-      <header className="flex flex-col items-center gap-[10px]">
-        <div className="flex items-center gap-[16px] text-[20px] font-bold tracking-[6px] text-[#00ADDB]">
+    <section aria-labelledby="about-business-heading" className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-[60px]">
+      <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
+        <div className="flex items-center gap-[16px] lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
           <img src="/images/about/business-heading-left.svg" alt="" aria-hidden="true" />
           <p>BUSINESS AREA</p>
           <img src="/images/about/business-heading-right.svg" alt="" aria-hidden="true" />
         </div>
-        <h2 id="about-business-heading" className="text-[50px] font-bold leading-[60px] tracking-[2.5px] text-[#102D4A]">사업영역</h2>
+        <h2 id="about-business-heading" className="text-[28px] lg:text-[50px] font-bold leading-[36px] lg:leading-[60px] tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">사업영역</h2>
       </header>
-      <div className="mt-[54px] grid grid-cols-4 gap-[30px]">
+      <div className="mt-[24px] lg:mt-[54px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[16px] lg:gap-[30px]">
         {areas.map((area) => (
-          <article key={area.title} className="flex w-[300px] flex-col items-center gap-[22px] bg-white/80 pb-[30px]">
-            <div className="relative h-[294px] w-full overflow-hidden">
+          <article key={area.title} className="flex w-full lg:w-[300px] flex-col items-center gap-[16px] lg:gap-[22px] bg-white/80 pb-[30px]">
+            <div className="relative h-[260px] lg:h-[294px] w-full overflow-hidden">
               <div className="absolute h-[136.05%] w-full" style={{ top: area.top }}>
                 {/* 4:3 사진이 높이 400px에 맞춰 약 534px 폭으로 확대된 뒤 잘립니다. */}
-                <Image src={`/images/about/${area.image}`} alt={`${area.title} 설비 현장`} fill sizes="534px" quality={area.image === "business-fabric-duct.png" || area.image === "business-cold-storage.png" ? 100 : 75} className="object-cover" />
+                <Image src={`/images/about/${area.image}`} alt={`${area.title} 설비 현장`} fill sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 534px" quality={area.image === "business-fabric-duct.png" || area.image === "business-cold-storage.png" ? 100 : 75} className="object-cover" />
               </div>
               <div aria-hidden="true" className="absolute bottom-0 h-[44px] w-full bg-gradient-to-b from-transparent to-white" />
             </div>
-            <div className="flex h-[248px] w-[215px] flex-col gap-[16px]">
-              <h3 className="text-center text-[30px] font-bold leading-[36px] tracking-[-3px] text-[#102D4A]">{area.title}</h3>
+            <div className="flex h-auto lg:h-[248px] px-5 lg:px-0 w-full lg:w-[215px] flex-col gap-[16px] lg:gap-[16px]">
+              <h3 className="text-center text-[20px] lg:text-[30px] font-bold leading-[24px] lg:leading-[36px] tracking-[0px] lg:tracking-[-3px] text-[#102D4A]">{area.title}</h3>
               <img src="/images/about/business-divider.svg" alt="" aria-hidden="true" />
-              <ul className="text-[20px] font-semibold leading-[30px] text-[#243447]/60">
+              <ul className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[30px] text-[#243447]/60">
                 {area.lines.map((line) => <li key={line}>{line}</li>)}
               </ul>
             </div>

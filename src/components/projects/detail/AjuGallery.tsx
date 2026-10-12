@@ -14,15 +14,15 @@ const photos = [
 
 export default function AjuGallery() {
   return (
-    <div className="mx-auto mt-[20px] w-[1000px]">
+    <div className="mx-auto mt-[20px] w-full lg:w-[1000px]">
       <Link
         href="/projects"
-        className="mb-[20px] flex h-[40px] w-fit items-center gap-[5px] text-[25px] font-medium hover:text-[#00ADDB] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+        className="mb-[20px] flex h-[40px] w-fit items-center gap-[5px] text-base lg:text-[25px] font-medium hover:text-[#00ADDB] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
       >
-        <ArrowLeft size={40} aria-hidden="true" />
+        <ArrowLeft size={40} aria-hidden="true" className="size-6 lg:size-10" />
         목록으로 돌아가기
       </Link>
-      <div className="flex flex-col gap-[30px]">
+      <div className="flex flex-col gap-4 lg:gap-[30px]">
         {photos.map((photo) => (
           <figure key={photo.number}>
             <Image
@@ -30,7 +30,7 @@ export default function AjuGallery() {
               alt={photo.alt}
               width={photo.portrait ? 720 : 960}
               height={photo.portrait ? 960 : 720}
-              sizes="1000px"
+              sizes="(max-width: 1023px) 100vw, 1000px"
               quality={100}
               className="h-auto w-full"
             />

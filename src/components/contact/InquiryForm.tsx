@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, Paperclip } from "lucide-react";
 import { type FormEvent, useRef, useState } from "react";
 
-const inputClass = "mt-[10px] block h-[50px] w-full border-2 border-[#102D4A]/10 bg-white px-[19px] text-[20px] font-semibold placeholder:text-[#102D4A]/20 focus:border-[#00ADDB] focus:outline-none";
+const inputClass = "text-base lg:text-[20px] mt-[10px] block h-[50px] w-full border-2 border-[#102D4A]/10 bg-white px-3 lg:px-[19px] font-semibold placeholder:text-[#102D4A]/20 focus:border-[#00ADDB] focus:outline-none";
 
 function Field({ name, label, placeholder, required = false, type = "text", maxLength = 100 }: {
   name: string;
@@ -15,7 +15,7 @@ function Field({ name, label, placeholder, required = false, type = "text", maxL
   maxLength?: number;
 }) {
   return (
-    <label className="block text-[20px] font-semibold leading-[24px]">
+    <label className="block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
       {label}
       {required && name !== "company" && <span className="ml-1 text-red-600">*</span>}
       <input
@@ -73,11 +73,11 @@ export default function InquiryForm() {
     <form
       onSubmit={handleSubmit}
       aria-labelledby="inquiry-form-heading"
-      className="mt-[88px] min-h-[1189px] bg-white px-[58px] pb-[24px] pt-[18px]"
+      className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18.0px] lg:pt-[18px]"
     >
-      <div className="relative -ml-[14px] w-[735px]">
-        <h2 id="inquiry-form-heading" className="text-[40px] font-bold leading-[48px]">문의 내용 작성</h2>
-        <p className="absolute right-0 top-[38px] text-right text-[20px] leading-[24px] text-[#102D4A]/80">
+      <div className="relative ml-0 lg:-ml-[14px] w-full lg:w-[735px]">
+        <h2 id="inquiry-form-heading" className="text-[28px] lg:text-[40px] font-bold leading-[36px] lg:leading-[48px]">문의 내용 작성</h2>
+        <p className="relative mt-2 lg:mt-0 lg:absolute lg:right-0 lg:top-[38px] text-right text-[14px] lg:text-[20px] leading-[24px] lg:leading-[24px] text-[#102D4A]/80">
           <span className="mr-2 text-red-600">*</span>필수 입력
         </p>
         <Image
@@ -86,16 +86,16 @@ export default function InquiryForm() {
           height={2}
           alt=""
           aria-hidden="true"
-          className="mt-[19px]"
+          className="mt-[12px] lg:mt-[19px]"
         />
       </div>
-      <fieldset className="mt-[26px]" disabled={status === "sending"}>
-        <legend className="text-[20px] font-semibold leading-[24px]">
+      <fieldset className="mt-[24px] lg:mt-[26px]" disabled={status === "sending"}>
+        <legend className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
           문의 분야 <span className="text-red-600">*</span>
         </legend>
-        <div className="mt-[16px] flex gap-[66px]">
+        <div className="mt-[12px] lg:mt-[16px] flex gap-[20px] lg:gap-[66px]">
           {["냉동공조", "섬유덕트"].map((value) => (
-            <label key={value} className="relative flex cursor-pointer items-center gap-[8px] text-[25px] font-semibold leading-[30px]">
+            <label key={value} className="relative flex cursor-pointer items-center gap-[12px] lg:gap-[8px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[30px]">
               <input
                 type="radio"
                 name="category"
@@ -118,18 +118,18 @@ export default function InquiryForm() {
           ))}
         </div>
       </fieldset>
-      <fieldset disabled={status === "sending"} className="mt-[38px] w-[708px]">
+      <fieldset disabled={status === "sending"} className="mt-[24px] lg:mt-[38px] w-full lg:w-[708px]">
         <legend className="sr-only">담당자 및 현장 정보</legend>
-        <div className="grid grid-cols-2 gap-x-[68px] gap-y-[35px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-x-[68px] lg:gap-y-[35px]">
           <Field name="company" label="회사명" placeholder="회사명을 입력해 주세요" required />
           <Field name="manager" label="담당자명" placeholder="성함을 입력해 주세요" required />
           <Field name="phone" label="연락처" placeholder="연락 가능한 번호" required type="tel" maxLength={30} />
           <Field name="email" label="이메일" placeholder="이메일 주소" type="email" maxLength={254} />
         </div>
-        <div className="mt-[29px]">
+        <div className="mt-[24px] lg:mt-[29px]">
           <Field name="location" label="현장 위치" placeholder="시/군/구 또는 현장 주소" maxLength={300} />
         </div>
-        <label className="mt-[44px] block text-[20px] font-semibold leading-[24px]">
+        <label className="mt-[24px] lg:mt-[44px] block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
           문의 내용
           <textarea
             name="message"
@@ -138,11 +138,11 @@ export default function InquiryForm() {
             className={`${inputClass} h-[232px] resize-y py-[19px] leading-[30px]`}
           />
         </label>
-        <div className="mt-[44px]">
-          <label htmlFor="inquiry-files" className="text-[20px] font-semibold leading-[24px]">첨부파일</label>
-          <div className="mt-[10px] flex min-h-[75px] items-center gap-[20px] border-2 border-[#102D4A]/10 px-[19px]">
+        <div className="mt-[24px] lg:mt-[44px]">
+          <label htmlFor="inquiry-files" className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">첨부파일</label>
+          <div className="mt-[12px] lg:mt-[10px] flex flex-wrap lg:flex-nowrap min-h-[75px] py-3 lg:py-0 items-center gap-[12px] lg:gap-[20px] border-2 border-[#102D4A]/10 px-[16px] lg:px-[19px]">
             <Paperclip size={30} className="shrink-0 text-[#102D4A]/20" aria-hidden="true" />
-            <label className="relative shrink-0 cursor-pointer border border-[#102D4A]/10 bg-[#243447]/10 px-[16px] py-[11px] text-[20px] font-semibold text-[#102D4A]/80 focus-within:outline-2 focus-within:outline-[#00ADDB]">
+            <label className="relative shrink-0 cursor-pointer border border-[#102D4A]/10 bg-[#243447]/10 px-[16px] lg:px-[16px] py-[16px] lg:py-[11px] text-[14px] lg:text-[20px] font-semibold text-[#102D4A]/80 focus-within:outline-2 focus-within:outline-[#00ADDB]">
               파일 선택
               <input
                 id="inquiry-files"
@@ -154,27 +154,27 @@ export default function InquiryForm() {
                 className="absolute inset-0 w-full cursor-pointer opacity-0"
               />
             </label>
-            <span className={`min-w-0 break-all text-[20px] font-semibold ${fileNames ? "text-[#102D4A]/80" : "text-[#102D4A]/20"}`}>
+            <span className={`min-w-0 break-all text-sm lg:text-[20px] font-semibold ${fileNames ? "text-[#102D4A]/80" : "text-[#102D4A]/20"}`}>
               {fileNames || "현장 사진 / 설비 명판 / 도면 등 (선택)"}
             </span>
           </div>
-          <p className="mt-2 text-[14px] text-[#102D4A]/60">JPG, PNG, WEBP, PDF · 최대 3개 / 전체 3MB</p>
+          <p className="mt-2 text-[14px] lg:text-[14px] text-[#102D4A]/60">JPG, PNG, WEBP, PDF · 최대 3개 / 전체 3MB</p>
         </div>
-        <label className="mt-[17px] flex cursor-pointer items-center gap-2 text-[20px] font-medium leading-[24px]">
-          <input type="checkbox" name="privacy" required className="size-[18px] accent-[#00ADDB]" />
+        <label className="mt-[12px] lg:mt-[17px] flex cursor-pointer items-center gap-2 text-[14px] lg:text-[20px] font-medium leading-[24px] lg:leading-[24px]">
+          <input type="checkbox" name="privacy" required className="size-[18px] shrink-0 accent-[#00ADDB]" />
           개인정보 수집 및 이용에 동의합니다.
         </label>
         <button
           type="submit"
           disabled={status === "sending"}
-          className="relative mt-[23px] flex h-[58px] w-full items-center justify-center rounded-[5px] bg-[#102D4A] text-[25px] font-semibold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB] disabled:cursor-wait disabled:opacity-60"
+          className="relative mt-[12px] lg:mt-[23px] flex h-[58px] w-full items-center justify-center rounded-[5px] bg-[#102D4A] text-[16px] lg:text-[25px] font-semibold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB] disabled:cursor-wait disabled:opacity-60"
         >
           {status === "sending" ? "전송 중…" : "견적문의 보내기"}
           <ArrowRight size={30} className="absolute right-[28px]" aria-hidden="true" />
         </button>
       </fieldset>
       {notice && (
-        <p role={status === "error" ? "alert" : "status"} className={`mt-4 w-[708px] text-[18px] ${status === "error" ? "text-red-600" : "text-[#007FA5]"}`}>
+        <p role={status === "error" ? "alert" : "status"} className={`mt-4 w-full lg:w-[708px] text-sm lg:text-[18px] ${status === "error" ? "text-red-600" : "text-[#007FA5]"}`}>
           {notice}
         </p>
       )}

@@ -18,9 +18,9 @@ export default function ProjectGallery() {
   const pageCount = category === "전체" ? Math.max(3, Math.ceil(filtered.length / pageSize)) : Math.max(1, Math.ceil(filtered.length / pageSize));
 
   return (
-    <section aria-labelledby="projects-list-heading" className="mx-auto min-h-[1430px] w-[1440px] pt-[81px]">
+    <section aria-labelledby="projects-list-heading" className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:w-[1440px] lg:px-0 lg:pt-[81px]">
       <div className="flex items-center gap-[20px]">
-        <p className="text-[20px] font-semibold leading-[24px] tracking-[6px] text-[#00ADDB]/60">PROJECTS</p>
+        <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">PROJECTS</p>
         <Image
           src="/images/projects-page/heading-line.svg"
           width={46.3058}
@@ -29,11 +29,11 @@ export default function ProjectGallery() {
           aria-hidden="true"
         />
       </div>
-      <h2 id="projects-list-heading" className="mt-[16px] text-[45px] font-extrabold leading-[54px]">시공사례</h2>
+      <h2 id="projects-list-heading" className="mt-3 lg:mt-[16px] text-[28px] lg:text-[45px] font-extrabold leading-normal lg:leading-[54px]">시공사례</h2>
       <div
         role="group"
         aria-label="시공사례 분류"
-        className="mt-[46px] flex h-[56px] gap-[160px]"
+        className="mt-6 flex gap-3 lg:mt-[46px] lg:h-[56px] lg:gap-[160px]"
       >
         {categories.map((value) => (
           <button
@@ -42,13 +42,13 @@ export default function ProjectGallery() {
             aria-pressed={category === value}
             aria-controls="projects-list"
             onClick={() => { setCategory(value); setPage(1); }}
-            className={`w-[219px] cursor-pointer self-start whitespace-nowrap text-left text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${category === value ? "text-[#00ADDB]" : "text-[#102D4A]/60"}`}
+            className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] border-b-2 pb-3 lg:border-0 lg:pb-0 cursor-pointer self-start whitespace-nowrap text-center lg:text-left text-base lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${category === value ? "text-[#00ADDB] border-[#00ADDB]" : "text-[#102D4A]/60 border-[#B7C6CF]"}`}
           >
             {value}
           </button>
         ))}
       </div>
-      <div aria-hidden="true" className="relative">
+      <div aria-hidden="true" className="relative hidden lg:block">
         <Image
           src="/images/projects-page/tabs-line.svg"
           width={1472}
@@ -65,9 +65,9 @@ export default function ProjectGallery() {
           style={{ transform: `translateX(${categories.indexOf(category) * 379}px)` }}
         />
       </div>
-      <div id="projects-list" aria-live="polite" className="mt-[55px] min-h-[912px]">
+      <div id="projects-list" aria-live="polite" className="mt-6 lg:mt-[55px] lg:min-h-[912px]">
         {visible.length ? (
-          <div className="grid grid-cols-3 gap-x-[22.5px] gap-y-[48px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-x-[22.5px] lg:gap-y-[48px]">
             {visible.map((project) => <ProjectCard key={project.id} project={project} />)}
           </div>
         ) : (
@@ -76,7 +76,7 @@ export default function ProjectGallery() {
           </p>
         )}
       </div>
-      <nav aria-label="시공사례 페이지" className="mt-[86px] flex h-[48px] items-center justify-center gap-[5px] pb-[50px] box-content">
+      <nav aria-label="시공사례 페이지" className="mt-9 lg:mt-[86px] flex h-[48px] items-center justify-center gap-[5px] pb-[50px] box-content">
         <button
           type="button"
           aria-label="이전 페이지"

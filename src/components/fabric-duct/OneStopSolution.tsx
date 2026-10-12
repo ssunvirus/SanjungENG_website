@@ -44,15 +44,15 @@ export default function OneStopSolution() {
   return (
     <section
       aria-labelledby="one-stop-heading"
-      className="mx-auto grid pl-[65px] h-[817px] w-[1440px] grid-cols-[485px_734px] gap-[52px] pt-[47.12px]"
+      className="mx-auto grid pb-6 px-5 lg:px-0 lg:pl-[65px] h-auto lg:h-[817px] w-full lg:w-[1440px] grid-cols-1 lg:grid-cols-[485px_734px] gap-[28px] lg:gap-[52px] pt-[24px] lg:pt-[47.12px]"
     >
       <div>
-        <p className="text-[20px] font-bold leading-[24px] tracking-[6px] text-[#00ADDB]">
+        <p className="text-[14px] lg:text-[20px] font-bold leading-[24.0px] lg:leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
           ONE-STOP SOLUTION
         </p>
         <h2
           id="one-stop-heading"
-          className="mt-[41px] whitespace-nowrap text-[45px] font-bold leading-[60px] tracking-[2.25px] text-[#102D4A]"
+          className="mt-[24px] lg:mt-[41px] lg:whitespace-nowrap text-[28px] lg:text-[45px] font-bold leading-10 lg:leading-[60px] tracking-[1px] lg:tracking-[2.25px] text-[#102D4A]"
         >
           냉동설비부터
           <br />
@@ -61,7 +61,7 @@ export default function OneStopSolution() {
           설치부터 관리까지
           <span className="ml-[11px] text-[#00ADDB]">한 번에</span>
         </h2>
-        <p className="mt-[27px] text-[25px] font-semibold leading-[40px] text-[#243447]/60">
+        <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-[#243447]/60">
           산정엔지니어링은
           <br />
           냉동/공조설비부터 섬유덕트 설치,
@@ -74,16 +74,16 @@ export default function OneStopSolution() {
           width={412}
           height={126}
           sizes="412px"
-          className="mt-[61px] object-cover"
+          className="mt-[24px] lg:mt-[61px] h-auto w-[220px] lg:w-[412px] object-cover"
         />
       </div>
-      <ol className="mt-[51px] flex flex-col gap-[39px]">
+      <ol className="mt-[24px] lg:mt-[51px] flex flex-col gap-[28px] lg:gap-[39px]">
         {steps.map((step, index) => (
           <li
             key={step.number}
-            className="grid h-[194px] grid-cols-[56px_374px_263px] items-center gap-x-[20px]"
+            className="grid h-auto lg:h-[194px] grid-cols-1 lg:grid-cols-[56px_374px_263px] items-center gap-y-4 lg:gap-y-0 gap-x-[20px]"
           >
-            <div aria-hidden="true" className="relative h-full">
+            <div aria-hidden="true" className="hidden lg:block relative h-full">
               <Image
                 src={step.line}
                 width={step.lineWidth}
@@ -96,7 +96,7 @@ export default function OneStopSolution() {
                 }}
               />
               <span
-                className="absolute flex size-[56px] items-center justify-center rounded-full border border-[#00ADDB] bg-white text-[30px] font-medium leading-[36px] text-[#00ADDB]"
+                className="absolute flex size-[56px] items-center justify-center rounded-full border border-[#00ADDB] bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-[#00ADDB]"
                 style={{ top: step.circleTop, left: index === 0 ? 1 : 0 }}
               >
                 {step.number}
@@ -110,7 +110,7 @@ export default function OneStopSolution() {
                 />
               )}
             </div>
-            <div className="relative ml-[1px] h-[194px] w-[374px] overflow-hidden">
+            <div className="relative ml-[1px] h-[240px] lg:h-[194px] w-full lg:w-[374px] overflow-hidden">
               <div
                 className={
                   index === 0 ? "absolute top-[-48.36%] h-[257.04%] w-full" : "absolute inset-0"
@@ -126,11 +126,12 @@ export default function OneStopSolution() {
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-[10px] font-semibold">
-              <h3 className="whitespace-nowrap text-[35px] leading-[40px] text-[#243447]">
+            <div className="flex flex-col gap-[16px] lg:gap-[10px] font-semibold">
+              <span className="text-[#00ADDB] lg:hidden">{step.number}</span>
+              <h3 className="lg:whitespace-nowrap text-[21px] lg:text-[35px] leading-[24px] lg:leading-[40px] text-[#243447]">
                 {step.title}
               </h3>
-              <p className="whitespace-pre text-[20px] leading-[40px] text-[#243447]/60">
+              <p className="whitespace-pre-line lg:whitespace-pre text-[14px] lg:text-[20px] leading-[24px] lg:leading-[40px] text-[#243447]/60">
                 {step.description}
               </p>
             </div>

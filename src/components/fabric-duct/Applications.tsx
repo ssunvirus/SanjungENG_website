@@ -52,9 +52,9 @@ export default function Applications() {
   return (
     <section
       id="fabric-case"
-      className="mx-auto h-auto w-[1440px] mb-[100px] scroll-mt-[110px] pl-[46px] pt-[36.12px]"
+      className="mx-auto h-auto w-full lg:w-[1440px] mb-9 lg:mb-[100px] scroll-mt-[110px] px-5 lg:px-0 lg:pl-[46px] pt-[24px] lg:pt-[36.12px]"
     >
-      <div className="h-[145.882px]">
+      <div className="h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="APPLICATION" title="다양한 공간에 적용됩니다.">
           <p>
             섬유덕트는 저온저장고, 식품 생산시설, 물류센터, 스마트팜, 체육시설, 상업/공공시설 등에
@@ -65,7 +65,7 @@ export default function Applications() {
       <div
         role="tablist"
         aria-label="섬유덕트 적용 공간"
-        className="mt-[63.118px] flex gap-[60px] font-semibold"
+        className="mt-[24px] lg:mt-[63.118px] grid grid-cols-2 lg:flex gap-x-4 gap-y-3 lg:gap-[60px] font-semibold"
       >
         {applications.map(([title, description], index) => (
           <button
@@ -88,20 +88,23 @@ export default function Applications() {
               selectTab(nextIndex, true);
             }}
             key={title}
-            className="w-[310px] shrink-0 cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#00ADDB]"
+            className={`min-h-12 min-w-0 w-full lg:w-[310px] shrink-0 cursor-pointer border-b-2 pb-3 text-left lg:border-0 lg:pb-0 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-[#00ADDB] ${index === activeIndex ? "border-[#00ADDB]" : "border-[#B7C6CF]"}`}
           >
             <span
-              className={`mb-[10px] block text-[25px] leading-[30px] transition-colors ${index === activeIndex ? "text-[#00ADDB]" : "text-[#102D4A]/80"}`}
+              className={`mb-2 block text-base lg:text-[25px] leading-6 lg:leading-[30px] transition-colors ${index === activeIndex ? "text-[#00ADDB]" : "text-[#102D4A]/80"}`}
             >
               {title}
             </span>
-            <span className="mt-[6px] block whitespace-nowrap text-[20px] leading-[24px] text-[#102D4A]/60">
+            <span className="mt-[6px] hidden lg:block lg:whitespace-nowrap text-[20px] leading-[24px] text-[#102D4A]/60">
               {description}
             </span>
           </button>
         ))}
       </div>
-      <div className="relative ml-[4px] mt-[26px]">
+      <p className="mt-4 text-sm leading-6 text-[#102D4A]/70 lg:hidden">
+        {applications[activeIndex][1]}
+      </p>
+      <div className="hidden lg:block relative ml-[4px] mt-[24px] lg:mt-[26px]">
         <Image
           src="/images/fabric-duct/application-line.svg"
           width={1363}
@@ -124,13 +127,15 @@ export default function Applications() {
         id="fabric-application-panel"
         aria-labelledby={`fabric-application-tab-${activeIndex}`}
         tabIndex={0}
-        className="mt-[26px] flex gap-[36px] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+        className="mt-[24px] lg:mt-[26px] flex flex-col lg:flex-row gap-[28px] lg:gap-[36px] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
       >
-        <figure className="relative h-[504px] w-[904px] shrink-0 overflow-hidden rounded-[10px]">
+        <figure className="relative aspect-[904/504] lg:aspect-auto lg:h-[504px] w-full lg:w-[904px] shrink-0 overflow-hidden rounded-[10px]">
           {slide.image ? (
             <div
               className={
-                activeIndex === 1 ? "absolute top-[-16.12%] h-[134.47%] w-full" : "absolute inset-0"
+                activeIndex === 1
+                  ? "absolute inset-0 lg:inset-auto lg:top-[-16.12%] lg:h-[134.47%] w-full"
+                  : "absolute inset-0"
               }
             >
               <Image
@@ -138,13 +143,13 @@ export default function Applications() {
                 src={slide.image}
                 alt={`${slide.title} 섬유덕트 설치 현장`}
                 fill
-                sizes="904px"
+                sizes="(max-width: 1023px) 100vw, 904px"
                 quality={100}
                 className="object-cover"
               />
             </div>
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center bg-[#DFEEF5] text-[25px] text-[#102D4A]/60">
+            <div className="absolute inset-0 flex items-center justify-center bg-[#DFEEF5] text-[16px] lg:text-[25px] text-[#102D4A]/60">
               준비중입니다.
             </div>
           )}
@@ -152,18 +157,18 @@ export default function Applications() {
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-b from-transparent from-[76.761%] via-black/60 via-[87.383%] to-black/80"
           />
-          <figcaption className="absolute bottom-[27px] left-[44px] text-[25px] font-semibold text-white/80">
+          <figcaption className="absolute bottom-5 left-5 lg:bottom-[27px] lg:left-[44px] text-[16px] lg:text-[25px] font-semibold text-white/80">
             {slide.title}
           </figcaption>
         </figure>
-        <div className="w-[428px] pt-[38px]">
-          <p className="flex h-[47px] w-fit min-w-[187px] items-center justify-center border-[1.5px] border-[#00ADDB] px-[21px] text-[25px] leading-[35px] text-[#00ADDB]">
+        <div className="w-full lg:w-[428px] pt-0 lg:pt-[38px]">
+          <p className="flex h-9 lg:h-[47px] w-fit lg:min-w-[187px] items-center justify-center border-[1.5px] border-[#00ADDB] px-[20px] lg:px-[21px] text-[16px] lg:text-[25px] leading-[24px] lg:leading-[35px] text-[#00ADDB]">
             {applications[activeIndex][0]}
           </p>
-          <h3 className="mt-[34px] text-[45px] font-bold leading-[54px] tracking-[2.25px] text-[#102D4A]">
+          <h3 className="mt-4 lg:mt-[34px] text-[24px] lg:text-[45px] font-bold leading-[1.35] lg:leading-[54px] tracking-[1px] lg:tracking-[2.25px] text-[#102D4A]">
             {slide.title}
           </h3>
-          <p className="mt-[28px] whitespace-pre-line text-[20px] leading-[35px]">
+          <p className="mt-3 lg:mt-[28px] whitespace-pre-line text-[15px] lg:text-[20px] leading-[26px] lg:leading-[35px]">
             {slide.description}
           </p>
         </div>

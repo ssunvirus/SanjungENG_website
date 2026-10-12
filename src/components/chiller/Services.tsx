@@ -20,7 +20,7 @@ export default function Services() {
         <div className="mx-auto mt-[24px] lg:mt-[50px] flex flex-col lg:flex-row w-full lg:w-[960px] gap-6 lg:gap-[60px]">
           <div className="relative h-[240px] lg:h-[318px] w-full lg:w-[500px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
             <Image src="/images/chiller/service-installation.png" alt="냉동기 배관 설치 현장" fill sizes="500px" className="object-cover object-bottom" />
-            <span className="absolute left-[30px] top-[20px] flex h-[44px] w-[144px] items-center justify-center rounded-[20px] bg-[#00ADDB]/60 text-[15px] lg:text-[20px] font-semibold tracking-[1px] lg:tracking-[1px] text-white"># 냉동기 설치</span>
+            <span className="absolute left-[30px] top-[20px] hidden lg:flex h-[44px] w-[144px] items-center justify-center rounded-[20px] bg-[#00ADDB]/60 text-[15px] lg:text-[20px] font-semibold tracking-[1px] lg:tracking-[1px] text-white"># 냉동기 설치</span>
           </div>
           <div className="relative w-full lg:w-[400px]">
             <Wrench aria-hidden="true" className="absolute right-0 top-0 hidden lg:block size-8 text-[#1D1B20] lg:size-12" size={48} />

@@ -10,15 +10,15 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="flex-1 bg-[#EFF7FB] text-[#102D4A]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#102D4A]">
       <Hero />
       <div
         aria-hidden="true"
-        className="relative z-10 h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+        className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
       <section
         aria-label="견적 상담 및 문의 작성"
-        className="mx-auto grid min-h-[1302px] w-[1440px] grid-cols-[473px_856px] gap-[111px] pb-[25px]"
+        className="mx-auto grid w-full grid-cols-1 gap-8 px-5 pb-9 lg:min-h-[1302px] lg:w-[1440px] lg:grid-cols-[473px_856px] lg:gap-[111px] lg:px-0 lg:pb-[25px]"
       >
         <ContactInfo />
         <InquiryForm />

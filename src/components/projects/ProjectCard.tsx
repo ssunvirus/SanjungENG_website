@@ -5,7 +5,7 @@ import type { Project } from "./data";
 export default function ProjectCard({ project }: { project: Project }) {
   const content = (
     <>
-      <div className="group relative h-[316px] overflow-hidden">
+      <div className="group relative aspect-[465/316] overflow-hidden lg:aspect-auto lg:h-[316px]">
         <div
           className="absolute h-[125.08%] w-full"
           style={{ top: project.imageTop, left: project.imageLeft ?? "0%" }}
@@ -14,15 +14,15 @@ export default function ProjectCard({ project }: { project: Project }) {
             src={project.image}
             alt={project.title}
             fill
-            sizes="465px"
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 465px"
             quality={100}
-            className="object-fill transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
+            className="object-cover lg:object-fill transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
           />
         </div>
       </div>
-      <div className="px-[17px] pt-[10px]">
-        <p className="text-[20px] font-semibold leading-[24px] text-[#00ADDB]">{project.tag}</p>
-        <h3 className="mt-[9px] whitespace-nowrap text-[22.5px] font-bold leading-[27px]">
+      <div className="px-[17px] pt-[10px] pb-5 lg:pb-0">
+        <p className="text-sm font-semibold leading-[24px] text-[#00ADDB] lg:text-[20px]">{project.tag}</p>
+        <h3 className="mt-[9px] text-lg font-bold leading-[27px] lg:whitespace-nowrap lg:text-[22.5px]">
           {project.title}
         </h3>
         <p className="mt-[9px] text-[15px] font-medium leading-[18px] text-[#102D4A]/50">
@@ -33,7 +33,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <article className="h-[432px] overflow-hidden bg-white">
+    <article className="min-w-0 overflow-hidden bg-white lg:h-[432px]">
       {project.href ? (
         <Link
           href={project.href}

@@ -12,7 +12,7 @@ export default function SectionHeading({
 }) {
   return (
     <header>
-      <p className="flex items-center gap-[17.647px] text-[17.65px] font-semibold leading-[1.2] tracking-[5.295px] text-[#00ADDB]/60">
+      <p className="flex items-center gap-[16px] lg:gap-[17.647px] text-[14px] lg:text-[17.65px] font-semibold leading-[1.2] tracking-[3px] lg:tracking-[5.295px] text-[#00ADDB]/60">
         {eyebrow}
         <Image
           src="/images/fabric-duct/heading-line.svg"
@@ -22,10 +22,10 @@ export default function SectionHeading({
           aria-hidden="true"
         />
       </p>
-      <h2 className="mt-[8.824px] text-[51.38px] font-bold leading-[1.2] tracking-[2.569px] text-[#102D4A]">
+      <h2 className="mt-[10px] lg:mt-[8.824px] text-[28px] lg:text-[51.38px] font-bold leading-[1.2] tracking-[1px] lg:tracking-[2.569px] text-[#102D4A]">
         {title}
       </h2>
-      <div className="mt-[22.059px] text-[16.54px] font-semibold leading-[1.2] text-[#243447]">
+      <div className="mt-[10px] lg:mt-[22.059px] text-[14px] lg:text-[16.54px] font-semibold leading-[1.2] text-[#243447]">
         {children}
       </div>
     </header>

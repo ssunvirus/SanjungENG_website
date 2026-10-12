@@ -11,10 +11,10 @@ const rows = [
 
 export default function Introduction() {
   return (
-    <section className="mx-auto h-[866px] w-[1920px] bg-white pl-[280px] pr-[178px] pt-[69px]">
-      <div className="grid grid-cols-[739px_683px] gap-[40px]">
+    <section className="mx-auto h-auto lg:h-[866px] w-full lg:w-[1920px] bg-white pl-[20px] pb-7 lg:pl-[280px] pr-[20px] lg:pr-[178px] pt-[24px] lg:pt-[69px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[739px_683px] gap-5 lg:gap-[40px]">
         <div>
-          <div className="h-[218px]">
+          <div className="h-auto lg:h-[218px]">
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
               <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.</p>
               <p>
@@ -22,7 +22,7 @@ export default function Introduction() {
               </p>
             </SectionHeading>
           </div>
-          <div className="relative h-[510px]">
+          <div className="relative h-[260px] lg:h-[510px]">
             <Image
               src="/images/fabric-duct/introduction.png"
               alt="MultiXair 공기분배 덕트 설치 현장"
@@ -33,11 +33,11 @@ export default function Introduction() {
             />
           </div>
         </div>
-        <div className="pt-[40px]">
-          <h3 className="ml-[15px] text-[40px] font-bold leading-[48px] tracking-[2px] text-[#006EB8]">
+        <div className="pt-[24px] lg:pt-[40px]">
+          <h3 className="ml-[15px] text-[21px] lg:text-[40px] font-bold leading-[24px] lg:leading-[48px] tracking-[1px] lg:tracking-[2px] text-[#006EB8]">
             금속덕트와 차이점
           </h3>
-          <table className="mt-[33px] h-[337px] w-[681px] table-fixed border-separate border-spacing-0 text-center text-[20px] tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
+          <table className="mt-[24px] lg:mt-[33px] h-auto lg:h-[337px] w-full lg:w-[681px] table-fixed border-separate border-spacing-0 text-center text-[14px] lg:text-[20px] tracking-[1px] lg:tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
             <colgroup>
               <col className="w-1/5" />
               <col className="w-2/5" />
@@ -48,7 +48,7 @@ export default function Introduction() {
                 {rows[0].map((cell, index) => (
                   <th
                     key={cell}
-                    className={`h-[59.4px] text-[25px] font-bold ${index === 2 ? "bg-[#00ADDB]/60 text-white" : "bg-[#F0F1F3] text-[#102D4A]"}`}
+                    className={`h-[48px] lg:h-[59.4px] text-sm lg:text-[25px] font-bold ${index === 2 ? "bg-[#00ADDB]/60 text-white" : "bg-[#F0F1F3] text-[#102D4A]"}`}
                   >
                     {cell}
                   </th>
@@ -67,7 +67,7 @@ export default function Introduction() {
               ))}
             </tbody>
           </table>
-          <div className="relative mt-[15px] h-[255px] overflow-hidden">
+          <div className="relative mt-[10px] lg:mt-[15px] h-[240px] lg:h-[255px] overflow-hidden">
             <div className="absolute top-[-27.63%] h-[178.58%] w-full">
               <Image
                 src="/images/fabric-duct/comparison.png"

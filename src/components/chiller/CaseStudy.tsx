@@ -19,7 +19,7 @@ export default function CaseStudy() {
         <div className="relative h-[240px] lg:h-[399px] w-full lg:w-[532px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image src="/images/chiller/case-semiconductor-factory.jpg" alt="반도체 공장 냉동시스템 설치 사례" fill sizes="532px" quality={100} className="object-cover" />
         </div>
-        <span className="absolute left-[32px] top-[32px] lg:left-[41px] lg:top-[40px] flex h-[49px] w-[159px] items-center justify-center rounded-[20px] bg-[#00ADDB]/30 text-[16px] lg:text-[20px] font-semibold tracking-[1px] lg:tracking-[1px] text-white"># 냉동기 설치</span>
+        <span className="absolute left-[32px] top-[32px] lg:left-[41px] lg:top-[40px] hidden lg:flex h-[49px] w-[159px] items-center justify-center rounded-[20px] bg-[#00ADDB]/30 text-[16px] lg:text-[20px] font-semibold tracking-[1px] lg:tracking-[1px] text-white"># 냉동기 설치</span>
         <div className="flex h-auto lg:h-[429px] w-full lg:w-[482px] flex-col justify-center">
           <h3 className="h-auto lg:h-[72px] text-[20px] lg:text-[30px] font-bold leading-[36px] tracking-[1px] lg:tracking-[1.5px] text-[#164A84]">반도체 공장<br />냉동시스템 구축</h3>
           <Image

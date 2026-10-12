@@ -8,32 +8,32 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="mx-auto flex h-auto w-[1920px] flex-col items-center gap-[67px] bg-white px-[120px] py-[60px]">
+    <section className="mx-auto flex h-auto w-full lg:w-[1920px] flex-col items-center gap-[28px] lg:gap-[67px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header className="text-center">
-        <p className="text-[20px] font-bold tracking-[6px] text-[#00ADDB]">AIR CONDITIONER SERVICE</p>
-        <h2 className="mt-[10px] text-[50px] font-bold tracking-[2.5px] text-[#102D4A]">항온항습기 주요 서비스</h2>
-        <p className="mt-[25px] text-[25px] font-semibold text-[#243447]/60">항온항습기 설치부터 유지관리까지</p>
+        <p className="text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">AIR CONDITIONER SERVICE</p>
+        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">항온항습기 주요 서비스</h2>
+        <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-[#243447]/60">항온항습기 설치부터 유지관리까지</p>
       </header>
-      <div className="flex h-[623px] w-[1159px] gap-[52px]">
-        <div className="relative h-[623px] w-[467px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="flex flex-col lg:flex-row h-auto lg:h-[623px] w-full lg:w-[1159px] gap-[28px] lg:gap-[52px]">
+        <div className="relative h-[240px] lg:h-[623px] w-full lg:w-[467px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image src="/images/precision-ac/services-main-current.png" alt="항온항습기 내부 전기 설비" fill sizes="467px" quality={100} className="object-cover" />
         </div>
-        <div className="flex w-[640px] flex-col justify-center">
+        <div className="flex w-full lg:w-[640px] flex-col gap-8 lg:gap-0 justify-center">
           {services.map(([number, title, line1, line2, image], index) => (
             <div key={number}>
-              <article className="flex h-[190px] items-center gap-[20px]">
-                <div className="relative size-[100px] shrink-0">
+              <article className="flex h-auto lg:h-[190px] items-center gap-[16px] lg:gap-[20px]">
+                <div className="relative hidden lg:block size-[100px] shrink-0">
                   <Image src={`/images/precision-ac/${image}`} alt="" fill sizes="100px" className="object-contain" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[25px] font-bold tracking-[5px] text-[#00ADDB]">{number}</p>
-                  <h3 className="mt-[10px] whitespace-nowrap text-[35px] font-bold tracking-[1.75px] text-[#102D4A]">{title}</h3>
-                  <p className="mt-[10px] whitespace-nowrap text-[25px] font-semibold leading-[40px] tracking-[1.25px] text-[#243447]/80">
+                  <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-[#00ADDB]">{number}</p>
+                  <h3 className="mt-[10px] lg:mt-[10px] lg:whitespace-nowrap text-[21px] lg:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-[#102D4A]">{title}</h3>
+                  <p className="mt-[10px] lg:mt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-[#243447]/80">
                     {line1}<br />{line2}
                   </p>
                 </div>
               </article>
-              {index < services.length - 1 && <div className="h-[2px] my-4 w-full bg-[#00ADDB]/30" />}
+              {index < services.length - 1 && <div className="hidden lg:block h-[2px] my-4 w-full bg-[#00ADDB]/30" />}
             </div>
           ))}
         </div>

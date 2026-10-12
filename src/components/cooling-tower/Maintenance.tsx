@@ -11,24 +11,24 @@ const items = [
 
 export default function Maintenance() {
   return (
-    <section className="mx-auto h-[798.725px] w-[1440px] bg-white px-[120px] py-[60px]">
-      <header className="h-[140.882px] w-[1200px]">
-        <div className="flex items-center gap-[17.647px] text-[17.65px] font-medium tracking-[5.295px] text-[#00ADDB]/60">
+    <section className="mx-auto h-auto lg:h-[798.725px] w-full lg:w-[1440px] bg-white px-[20px] lg:px-[120px] py-[24px] lg:py-[60px]">
+      <header className="h-auto lg:h-[140.882px] w-full lg:w-[1200px]">
+        <div className="flex items-center gap-[16px] lg:gap-[17.647px] text-[14px] lg:text-[17.65px] font-medium tracking-[3px] lg:tracking-[5.295px] text-[#00ADDB]/60">
           MAINTENANCE <span className="h-[1.76px] w-[40.858px] bg-current" />
         </div>
-        <h2 className="mt-[8.824px] text-[51.38px] font-bold tracking-[2.569px] text-[#102D4A]">냉각탑 주요 정비</h2>
-        <p className="mt-[22.059px] text-[16.54px] font-semibold">충진물부터 구동부, 살수계통, 배관까지 설비 상태에 맞춰 점검, 정비합니다.</p>
+        <h2 className="mt-[10px] lg:mt-[8.824px] text-[28px] lg:text-[51.38px] font-bold tracking-[1px] lg:tracking-[2.569px] text-[#102D4A]">냉각탑 주요 정비</h2>
+        <p className="mt-[10px] lg:mt-[22.059px] text-[14px] lg:text-[16.54px] font-semibold">충진물부터 구동부, 살수계통, 배관까지 설비 상태에 맞춰 점검, 정비합니다.</p>
       </header>
 
-      <div className="mt-[36.667px] grid h-[501.176px] w-[1200px] grid-cols-3 gap-[21.176px]">
+      <div className="mt-[24px] lg:mt-[36.667px] grid h-auto lg:h-[501.176px] w-full lg:w-[1200px] grid-cols-2 lg:grid-cols-3 gap-[16px] lg:gap-[21.176px]">
         {items.map(([number, title, description, image]) => (
-          <article key={number} className="h-[240px] rounded-[10.588px] bg-[#EFF7FB] px-[26.471px] py-[21.176px]">
-            <div className="flex h-[100.588px] items-start justify-between">
-              <Image src={`/images/cooling-tower/${image}`} alt="" width={97} height={97} />
-              <span className="text-[18.529px] font-bold leading-[27.353px] text-[#00ADDB]">{number}</span>
+          <article key={number} className="min-h-[220px] h-auto lg:h-[240px] rounded-[10.588px] bg-[#EFF7FB] px-3 lg:px-[26.471px] py-[24px] lg:py-[21.176px]">
+            <div className="flex h-[64px] lg:h-[100.588px] items-start justify-between">
+              <Image src={`/images/cooling-tower/${image}`} alt="" width={97} height={97} className="size-14 lg:size-[97px]" />
+              <span className="text-[14px] lg:text-[18.529px] font-bold leading-[27.353px] lg:leading-[27.353px] text-[#00ADDB]">{number}</span>
             </div>
-            <h3 className="mt-[10.588px] text-[26.471px] font-bold leading-[38.824px] text-[#102D4A]">{title}</h3>
-            <p className="mt-[10.588px] text-[17.647px] leading-[25.588px] text-[#526075]">{description}</p>
+            <h3 className="mt-[10px] lg:mt-[10.588px] text-[20px] lg:text-[26.471px] font-bold leading-[24px] lg:leading-[38.824px] text-[#102D4A]">{title}</h3>
+            <p className="mt-[10px] lg:mt-[10.588px] text-[14px] lg:text-[17.647px] leading-[25.588px] lg:leading-[25.588px] text-[#526075]">{description}</p>
           </article>
         ))}
       </div>

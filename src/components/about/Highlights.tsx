@@ -8,12 +8,12 @@ const highlights = [
 
 export default function Highlights() {
   return (
-    <section className="mx-auto flex h-[130px] w-[1920px] items-center justify-center bg-[#00ADDB]/10">
-      <div className="flex items-center gap-[104px]">
+    <section className="mx-auto flex h-auto lg:h-[130px] w-full lg:w-[1920px] items-center justify-center px-5 py-7 lg:px-0 lg:py-0 bg-[#00ADDB]/10">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-[104px]">
         {highlights.map(({ icon: Icon, title, description }) => (
-          <article key={title} className="flex items-center gap-[15px]">
-            <Icon size={59} strokeWidth={1.8} className="shrink-0 text-[#102D4A]" aria-hidden="true" />
-            <div><h3 className="text-[30px] font-bold tracking-[-3px] text-[#102D4A]">{title}</h3><p className="mt-[5px] text-[20px] font-semibold tracking-[-2px] text-[#243447]/60">{description}</p></div>
+          <article key={title} className="flex items-center gap-[16px] lg:gap-[15px]">
+            <Icon size={59} strokeWidth={1.8} className="size-10 lg:size-[59px] shrink-0 text-[#102D4A]" aria-hidden="true" />
+            <div><h3 className="text-[20px] lg:text-[30px] font-bold tracking-[0px] lg:tracking-[-3px] text-[#102D4A]">{title}</h3><p className="mt-[10px] lg:mt-[5px] text-[14px] lg:text-[20px] font-semibold tracking-[0px] lg:tracking-[-2px] text-[#243447]/60">{description}</p></div>
           </article>
         ))}
       </div>

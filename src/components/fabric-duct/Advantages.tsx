@@ -30,14 +30,14 @@ const advantages = [
 
 export default function Advantages() {
   return (
-    <section className="mx-auto w-[1440px] px-[51px] py-[70px]">
-      <div className="h-[170.882px]">
+    <section className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[51px] py-[36px] lg:py-[70px]">
+      <div className="h-auto lg:h-[170.882px]">
         <SectionHeading
           eyebrow="ADVANTAGES"
           title={
             <>
               섬유덕트의{" "}
-              <span className="text-[58.235px] tracking-[2.9118px] text-[#00ADDB]">주요 장점</span>
+              <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-[#00ADDB]">주요 장점</span>
             </>
           }
         >
@@ -48,8 +48,8 @@ export default function Advantages() {
           </p>
         </SectionHeading>
       </div>
-      <div className="mt-[41px] flex w-[1276px] items-center gap-[16px]">
-        <div className="relative h-[528px] w-[717px] shrink-0">
+      <div className="mt-[24px] lg:mt-[41px] flex flex-col lg:flex-row w-full lg:w-[1276px] items-center gap-[16px] lg:gap-[16px]">
+        <div className="relative h-[240px] lg:h-[528px] w-full lg:w-[717px] shrink-0">
           <Image
             src="/images/fabric-duct/advantages.png"
             alt="기계실에 설치된 섬유덕트"
@@ -59,14 +59,14 @@ export default function Advantages() {
             className="object-cover"
           />
         </div>
-        <div className="flex w-[543px] flex-col gap-[27px]">
+        <div className="flex w-full lg:w-[543px] flex-col gap-[16px] lg:gap-[27px]">
           {advantages.map((advantage, index) => (
             <article
               key={advantage.title}
-              className={`flex h-[158px] w-[539px] items-center gap-[33px] rounded-[20px] bg-white/60 px-[47px] py-[14px] ${index ? "ml-[4px]" : ""}`}
+              className={`flex h-auto lg:h-[158px] w-full lg:w-[539px] items-center gap-4 lg:gap-[33px] rounded-[20px] bg-white/60 px-4 lg:px-[47px] py-4 lg:py-[14px] ${index ? "ml-[4px]" : ""}`}
             >
-              <div className="flex size-[130px] shrink-0 items-center justify-center rounded-full bg-[#00ADDB]/10">
-                <div className={`relative overflow-hidden ${advantage.slot}`}>
+              <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-[#00ADDB]/10">
+                <div className={`relative scale-[0.55] lg:scale-100 overflow-hidden ${advantage.slot}`}>
                   <div className={`absolute ${advantage.crop}`}>
                     <Image
                       src={`/images/fabric-duct/${advantage.image}`}
@@ -78,9 +78,9 @@ export default function Advantages() {
                   </div>
                 </div>
               </div>
-              <div className="w-[278px] shrink-0 font-bold leading-[1.45]">
-                <h3 className="text-[25px] text-[#102D4A]">{advantage.title}</h3>
-                <p className="mt-[9px] text-[15px] text-[#102D4A]/80">
+              <div className="min-w-0 flex-1 lg:flex-none w-full lg:w-[278px] font-bold leading-[1.45]">
+                <h3 className="text-[16px] lg:text-[25px] text-[#102D4A]">{advantage.title}</h3>
+                <p className="mt-[10px] lg:mt-[9px] text-[14px] lg:text-[15px] text-[#102D4A]/80">
                   {advantage.description[0]}
                   <br />
                   {advantage.description[1]}

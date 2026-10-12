@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 
 export default function FabricDuctPage() {
   return (
-    <main className="flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
       <Hero />
       <div
         aria-hidden="true"
-        className="relative z-10 mx-auto h-[64px] w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+        className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
       <div className="h-[4px]" aria-hidden="true" />
       <Introduction />
