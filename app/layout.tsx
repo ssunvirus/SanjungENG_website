@@ -4,8 +4,30 @@ import Header from "../src/components/layout/Header";
 import Footer from "../src/components/layout/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://sanjung-eng-website.vercel.app"),
   title: "산정엔지니어링",
-  description: "냉동/공조설비 전문기업 산정엔지니어링",
+  description: "냉동공조 설계부터 설치, 유지보수까지",
+  openGraph: {
+    title: "산정엔지니어링",
+    description: "냉동공조 설계부터 설치, 유지보수까지",
+    siteName: "산정엔지니어링",
+    locale: "ko_KR",
+    type: "website",
+    images: [
+      {
+        url: "/images/share/home-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "산정엔지니어링 로고",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "산정엔지니어링",
+    description: "냉동공조 설계부터 설치, 유지보수까지",
+    images: ["/images/share/home-logo.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

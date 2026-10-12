@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Eyebrow from "./Eyebrow";
 
 const cases = [
@@ -15,12 +15,52 @@ const cases = [
 
 export default function MobileProjects() {
   const [caseIndex, setCaseIndex] = useState(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
+  const swipeHandled = useRef(false);
   const project = cases[caseIndex];
   return (
       <section className="mx-auto max-w-[600px] px-5 py-8">
         <Eyebrow>PROJECTS</Eyebrow>
         <div className="mt-3 flex items-center justify-between"><h2 className="text-[28px] font-extrabold">시공사례</h2><Link href="/projects" className="flex min-h-11 items-center gap-2 text-sm">전체 보기<ArrowRight size={16} aria-hidden="true" /></Link></div>
-        <Link href={project.href} className="mt-5 block overflow-hidden rounded-xl bg-white">
+        <Link
+          href={project.href}
+          className="mt-5 block overflow-hidden rounded-xl bg-white"
+          onTouchStart={(event) => {
+            swipeHandled.current = false;
+            if (event.touches.length !== 1) {
+              touchStart.current = null;
+              return;
+            }
+            const touch = event.touches[0];
+            touchStart.current = { x: touch.clientX, y: touch.clientY };
+          }}
+          onTouchEnd={(event) => {
+            const start = touchStart.current;
+            touchStart.current = null;
+            if (!start || event.changedTouches.length === 0) return;
+
+            const touch = event.changedTouches[0];
+            const deltaX = touch.clientX - start.x;
+            const deltaY = touch.clientY - start.y;
+            if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+            swipeHandled.current = true;
+            if (event.cancelable) event.preventDefault();
+            setCaseIndex((index) => (
+              index + (deltaX < 0 ? 1 : -1) + cases.length
+            ) % cases.length);
+          }}
+          onTouchCancel={() => {
+            touchStart.current = null;
+            swipeHandled.current = false;
+          }}
+          onClick={(event) => {
+            if (swipeHandled.current) {
+              event.preventDefault();
+              swipeHandled.current = false;
+            }
+          }}
+        >
           <div className="relative aspect-[1.7]"><Image src={project.image} alt={project.title} fill sizes="(max-width: 600px) 100vw, 600px" className="object-cover" /><span className="absolute left-4 top-4 rounded-full bg-[#00ADDB]/90 px-3 py-1 text-sm text-white">{project.tag}</span></div>
           <div className="p-5"><h3 className="text-lg font-bold">{project.title}</h3><p className="mt-2 text-sm text-[#637382]">{project.description}</p></div>
         </Link>

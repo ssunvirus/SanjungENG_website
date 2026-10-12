@@ -14,7 +14,7 @@ export default function MobileBusiness() {
   return (
     <>
       <section className="mx-auto max-w-[600px] pt-8 text-center">
-        <p className="text-xs tracking-[3px] text-[#00ADDB]">BUSINESS AREA</p>
+        <p className="text-xs tracking-[3px] font-semibold text-[#00ADDB]">BUSINESS AREA</p>
         <h2 className="mt-5 text-[28px] font-extrabold">냉동공조 설계 &amp; 시공</h2>
         <p className="mt-3 px-5 text-base font-medium leading-7">냉동기부터 섬유덕트까지<br />원스톱으로 제공하는 산정엔지니어링</p>
         <div className="mt-6 grid grid-cols-2 gap-3 px-5">
@@ -42,7 +42,15 @@ export default function MobileBusiness() {
         <div className="mt-5 space-y-3">
           {business.map((item) => (
             <Link key={item.title} href={item.href} className="flex min-h-[130px] items-center gap-4 rounded-[22px] bg-white p-3">
-              <div className="relative h-[108px] w-[100px] shrink-0 overflow-hidden rounded-xl"><Image src={item.image} alt={item.title} fill sizes="100px" className="object-cover" /></div>
+              <div className="relative h-[108px] w-[100px] shrink-0 overflow-hidden rounded-xl">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="100px"
+                  className="object-cover"
+                />
+              </div>
               <div className="min-w-0 flex-1"><h3 className="text-[21px] font-bold">{item.title}</h3><p className="mt-2 text-sm leading-5 text-[#637382]">{item.description}</p><ArrowRightCircle size={28} aria-hidden="true" className="ml-auto mt-3 text-[#006EB8]" /></div>
             </Link>
           ))}
