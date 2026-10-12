@@ -10,7 +10,7 @@ const details = [
 
 export default function CaseStudy() {
   return (
-    <section className="mx-auto h-[739px] w-[1440px] bg-[#EFF7FB] px-[120px] py-[60px]">
+    <section className="mx-auto h-[769px] w-[1440px] bg-[#EFF7FB] px-[120px] py-[60px]">
       <header className="flex h-[88px] w-[1295px] items-end gap-[500px]">
         <div>
           <p className="flex items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-[#00ADDB]/60">CASE STUDY <span className="h-[2px] w-[46px] bg-current" /></p>
@@ -19,13 +19,21 @@ export default function CaseStudy() {
         <p className="text-[19px] font-semibold leading-[30px] text-[#243447]/80">다양한 산업 현장에서 축적한 경험으로<br />고객의 환경에 최적화된 냉동공조 솔루션을 제안합니다.</p>
       </header>
 
-      <article className="relative mt-[61px] flex h-[470px] w-[1164px] items-center gap-[100px] overflow-hidden rounded-[5px] bg-white py-[30px] pl-[20px] pr-[30px]">
+      <article className="relative mt-[61px] flex h-[500px] w-[1164px] items-center gap-[100px] overflow-hidden rounded-[5px] bg-white py-[30px] pl-[20px] pr-[30px]">
         <div className="relative h-[399px] w-[532px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image src="/images/cold-storage/case-cold-storage.jpg" alt="농협 저온저장고 냉동설비 신설공사" fill sizes="532px" quality={100} className="object-cover" />
         </div>
         <span className="absolute left-[41px] top-[40px] flex h-[49px] w-[159px] items-center justify-center rounded-[20px] bg-[#00ADDB]/30 text-[20px] font-semibold tracking-[1px] text-white"># 저온저장고</span>
         <div className="w-[482px]">
           <h3 className="h-[72px] text-[30px] font-bold leading-[36px] tracking-[1.5px] text-[#164A84]">농협 저온저장고<br />냉동설비 신설공사</h3>
+          <Image
+            src="/images/shared/case-title-divider.svg"
+            width={116}
+            height={2}
+            alt=""
+            aria-hidden="true"
+            className="mt-[28px] shrink-0"
+          />
           <div className="mt-[30px] flex flex-col gap-[30px]">
             {details.map(({ icon: Icon, title, description }) => (
               <div key={title} className="flex items-center gap-[30px]">

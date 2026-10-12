@@ -8,7 +8,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="mx-auto flex h-[963px] w-[1920px] flex-col items-center gap-[67px] bg-white px-[120px] py-[60px]">
+    <section className="mx-auto flex h-auto w-[1920px] flex-col items-center gap-[67px] bg-white px-[120px] py-[60px]">
       <header className="text-center">
         <p className="text-[20px] font-bold tracking-[6px] text-[#00ADDB]">AIR CONDITIONER SERVICE</p>
         <h2 className="mt-[10px] text-[50px] font-bold tracking-[2.5px] text-[#102D4A]">항온항습기 주요 서비스</h2>
@@ -33,7 +33,7 @@ export default function Services() {
                   </p>
                 </div>
               </article>
-              {index < services.length - 1 && <div className="h-[2px] w-full bg-[#00ADDB]/30" />}
+              {index < services.length - 1 && <div className="h-[2px] my-4 w-full bg-[#00ADDB]/30" />}
             </div>
           ))}
         </div>
