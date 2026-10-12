@@ -7,7 +7,7 @@ import SectionHeading from "./SectionHeading";
 const applications = [
   ["물류센터", "보관 구역과 적재물 맞춤 공기분배"],
   ["생산시설", "작업 구역과 설비 배치에 맞춤 공기분배"],
-  ["스마트팜", "재배공간과 환경 조건에 맞춤 공기분배"],
+  ["상업시설", "다양한 상업공간에 맞춘 효율적인 공기분배"],
   ["체육 / 공공시설", "넓은 실내 공간에 맞춤 공기분배"],
 ];
 
@@ -26,10 +26,10 @@ const slides: { title: string; image: string | null; description: string }[] = [
       "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성했습니다.",
   },
   {
-    title: "스마트팜",
-    image: null,
+    title: "상업시설",
+    image: "/images/fabric-duct/application-commercial.jpg",
     description:
-      "작물과 재배 구역의 배치를 고려해 공기를 고르게\n 공급하고 균일한 재배 환경 조성합니다.",
+      "넓은 상업공간에 공기를 균일하게 분배해\n공간별 온도 편차를 줄이고 쾌적함을 높입니다.",
   },
   {
     title: "구례 실내수영장",

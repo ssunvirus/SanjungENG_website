@@ -44,7 +44,7 @@ export default function OneStopSolution() {
   return (
     <section
       aria-labelledby="one-stop-heading"
-      className="mx-auto grid h-[817px] w-[1440px] grid-cols-[485px_734px] gap-[52px] pt-[47.12px]"
+      className="mx-auto grid pl-[65px] h-[817px] w-[1440px] grid-cols-[485px_734px] gap-[52px] pt-[47.12px]"
     >
       <div>
         <p className="text-[20px] font-bold leading-[24px] tracking-[6px] text-[#00ADDB]">

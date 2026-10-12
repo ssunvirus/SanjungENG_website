@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const menus = [
@@ -30,6 +31,13 @@ const menus = [
 
 export default function Header() {
     const pathname = usePathname();
+    const [mobileOpen, setMobileOpen] = useState(false);
+    const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+
+    function closeMobileMenu() {
+        setMobileOpen(false);
+        setExpandedMenu(null);
+    }
 
     const isMenuActive = (href: string) => {
         if (href === "/projects") return pathname === "/projects" || pathname.startsWith("/projects/");
@@ -40,21 +48,45 @@ export default function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50 h-[90px] bg-white/90 shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px]">
-            <div className="mx-auto flex h-full w-[1920px] items-center pl-[240px]">
-                <Link href="/" aria-label="산정엔지니어링 메인으로 이동">
+        <header
+            onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                    closeMobileMenu();
+                    document.getElementById("mobile-menu-toggle")?.focus();
+                }
+            }}
+            className="sticky top-0 z-50 h-[64px] bg-white/90 shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px] lg:h-[90px]"
+        >
+            <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-5 lg:pl-[clamp(24px,12.5vw,240px)] lg:pr-0">
+                <Link href="/" onClick={closeMobileMenu} className="shrink-0" aria-label="산정엔지니어링 메인으로 이동">
                     <Image
                         src="/logo-default.svg"
                         alt="산정엔지니어링"
                         width={158}
                         height={48}
                         priority
+                        className="h-auto w-[132px] lg:w-[158px]"
                     />
                 </Link>
 
-                <div className="ml-[450px] flex h-full items-center gap-[138px]">
+                <button
+                    id="mobile-menu-toggle"
+                    type="button"
+                    aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"}
+                    aria-expanded={mobileOpen}
+                    aria-controls="mobile-navigation"
+                    onClick={() => {
+                        if (mobileOpen) closeMobileMenu();
+                        else setMobileOpen(true);
+                    }}
+                    className="flex size-11 cursor-pointer items-center justify-center rounded text-[#102D4A] focus-visible:outline-2 focus-visible:outline-[#00ADDB] lg:hidden"
+                >
+                    {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+                </button>
+
+                <div className="hidden h-full items-center gap-[clamp(24px,7.1875vw,138px)] lg:flex">
                     <nav aria-label="주요 메뉴">
-                        <ul className="flex w-[528px] items-center justify-center gap-[60px]">
+                        <ul className="flex items-center justify-center gap-[clamp(20px,3.125vw,60px)]">
                             {menus.map((menu) => (
                                 <li key={menu.href} className="group relative shrink-0 text-center">
                                     <Link
@@ -92,13 +124,77 @@ export default function Header() {
 
                     <Link
                         href="/contact"
-                        className="flex h-[90px] w-[407px] items-center gap-[12px] bg-[#102D4A] pl-[150px] text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
+                        className="flex h-[90px] w-[clamp(200px,21.2vw,407px)] items-center justify-center gap-[12px] bg-[#102D4A] text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
                     >
                         <Search size={30} strokeWidth={2.5} aria-hidden="true" />
                         <span className="whitespace-nowrap">견적문의</span>
                     </Link>
                 </div>
             </div>
+            {mobileOpen && (
+                <nav
+                    id="mobile-navigation"
+                    aria-label="모바일 주요 메뉴"
+                    className="absolute left-0 top-full max-h-[calc(100dvh-64px)] w-full overflow-y-auto border-t border-[#D1DFE8] bg-white px-5 pb-6 shadow-lg lg:hidden"
+                >
+                    <ul>
+                        {menus.map((menu) => (
+                            <li key={menu.href} className="border-b border-[#D1DFE8]">
+                                <div className="flex items-center justify-between">
+                                    <Link
+                                        href={menu.href}
+                                        onClick={closeMobileMenu}
+                                        aria-current={isMenuActive(menu.href) ? "page" : undefined}
+                                        className={`flex min-h-14 flex-1 items-center text-lg font-bold ${isMenuActive(menu.href) ? "text-[#006EB8] underline decoration-[#00ADDB] underline-offset-8" : "text-[#243447]"}`}
+                                    >
+                                        {menu.label}
+                                    </Link>
+                                    {menu.submenu && (
+                                        <button
+                                            type="button"
+                                            aria-label={`${menu.label} 하위 메뉴`}
+                                            aria-expanded={expandedMenu === menu.href}
+                                            aria-controls={`mobile-submenu-${menu.href.slice(1)}`}
+                                            onClick={() => setExpandedMenu(expandedMenu === menu.href ? null : menu.href)}
+                                            className="flex size-11 cursor-pointer items-center justify-center rounded text-[#102D4A] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+                                        >
+                                            <ChevronDown aria-hidden="true" className={expandedMenu === menu.href ? "rotate-180" : ""} />
+                                        </button>
+                                    )}
+                                </div>
+                                {menu.submenu && (
+                                    <ul
+                                        id={`mobile-submenu-${menu.href.slice(1)}`}
+                                        hidden={expandedMenu !== menu.href}
+                                        className="mb-3 rounded bg-[#EFF7FB] px-4 py-2"
+                                    >
+                                        {menu.submenu.map((submenu) => (
+                                            <li key={submenu.href}>
+                                                <Link
+                                                    href={submenu.href}
+                                                    onClick={closeMobileMenu}
+                                                    aria-current={pathname === submenu.href ? "page" : undefined}
+                                                    className={`flex min-h-11 items-center text-base font-medium ${pathname === submenu.href ? "text-[#006EB8]" : "text-[#243447]"}`}
+                                                >
+                                                    {submenu.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                    <Link
+                        href="/contact"
+                        onClick={closeMobileMenu}
+                        className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded bg-[#102D4A] text-lg font-bold text-white"
+                    >
+                        <Search size={22} aria-hidden="true" />
+                        견적문의
+                    </Link>
+                </nav>
+            )}
         </header>
     );
 }

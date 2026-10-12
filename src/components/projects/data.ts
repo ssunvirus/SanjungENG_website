@@ -12,6 +12,16 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "aju-pharmaceutical",
+    href: "/projects/aju-pharmaceutical",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "아주약품 터보동기 설치공사",
+    description: "터보냉동기 교체",
+    image: "/images/projects/aju-pharmaceutical/5.jpg",
+    imageTop: "-12.54%",
+  },
+  {
     id: "orion-production",
     href: "/projects/orion-production",
     category: "섬유덕트",
