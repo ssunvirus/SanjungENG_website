@@ -41,7 +41,7 @@ export default function Footer() {
                     <Link href="/fabric-duct">섬유덕트</Link>
                     <Link href="/projects">시공사례</Link>
                 </nav>
-                <section className="mt-8 flex flex-col items-center gap-4 border-t border-white/15 py-6 md:items-start md:flex-row md:items-center md:justify-between xl:mt-0 xl:h-[91px] xl:py-0">
+                <section className="mt-8 flex flex-col items-center gap-4 border-t border-white/15 py-6 md:flex-row md:items-center md:justify-between xl:mt-0 xl:h-[91px] xl:py-0">
                     <h2 className="text-[19px] font-semibold text-white/75">파트너사</h2>
                     <div className="flex w-full flex-wrap items-center justify-center gap-5 md:justify-start md:w-auto xl:w-[442px]">
                         <Image src="/partner-multixair.svg" alt="Multixair" width={119} height={63} className="h-auto w-[85px] xl:w-[119px]" />

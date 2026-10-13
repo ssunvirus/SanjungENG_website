@@ -130,8 +130,9 @@ export default function InquiryForm() {
           <Field name="location" label="현장 위치" placeholder="시/군/구 또는 현장 주소" maxLength={300} />
         </div>
         <label className="mt-[24px] lg:mt-[44px] block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
-          문의 내용
+          문의 내용 <span className="text-red-600">*</span>
           <textarea
+            required
             name="message"
             maxLength={3000}
             placeholder="설비 종류, 필요한 작업, 현장 상황을 알려주세요."

@@ -57,7 +57,7 @@ export const projects: Project[] = [
     href: "/projects/semiconductor-chiller",
     category: "냉동공조",
     tag: "냉동기",
-    title: "반도체 공장 공냉식 냉동기 교체공사",
+    title: "반도체 공장 칠러 시스템 구축",
     description: "공냉식 냉동기 교체",
     image: "/images/projects-page/chiller.jpg",
     imageTop: "0.02%",
@@ -85,6 +85,7 @@ export const projects: Project[] = [
   },
   {
     id: "warehouse-precision-ac",
+    href: "/projects/warehouse-precision-ac",
     category: "냉동공조",
     tag: "항온항습기",
     title: "S 기업 물류창고 항온항습기 설치",

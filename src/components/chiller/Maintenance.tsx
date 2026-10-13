@@ -44,7 +44,7 @@ export default function Maintenance() {
         </p>
       </header>
 
-      <div className="mt-[24px] lg:mt-[72px] flex flex-col lg:flex-row items-start gap-[28px] lg:gap-[50px]">
+      <div className="mt-[24px] lg:mt-8 flex flex-col lg:flex-row items-start gap-[28px] lg:gap-[50px]">
         {maintenanceServices.map((service) => (
           <article key={service.number} style={{ "--card-width": `${service.width}px` } as CSSProperties} className="w-full lg:w-[var(--card-width)] shrink-0">
             <div className="relative h-[240px] lg:h-[300px]">

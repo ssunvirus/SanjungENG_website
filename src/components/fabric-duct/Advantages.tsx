@@ -11,7 +11,7 @@ const advantages = [
   },
   {
     title: "다양한 공간 적용가능",
-    description: ["저온저장고, 물류창고, 스마트팜, 생산시설 등", "다양한 공간에 맞춤 적용가능"],
+    description: ["저온저장고, 물류창고, 스마트팜, 생산시설 등", "다양한 공간에 맞춤 적용가능합니다."],
     image: "applications-icon.png",
     slot: "h-[43px] w-[113px]",
     crop: "h-[113.73%] w-[130.34%] left-[-14.61%] top-[-12.75%]",

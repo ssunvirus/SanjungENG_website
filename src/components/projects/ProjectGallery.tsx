@@ -2,20 +2,35 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { projects } from "./data";
 import ProjectCard from "./ProjectCard";
 
 const categories = ["전체", "냉동공조", "섬유덕트"] as const;
 const pageSize = 6;
 
+function subscribeHash(onChange: () => void) {
+  window.addEventListener("hashchange", onChange);
+  return () => window.removeEventListener("hashchange", onChange);
+}
+
+function getHash() { return window.location.hash.slice(1); }
+function getServerHash() { return ""; }
+
 export default function ProjectGallery() {
   const [category, setCategory] = useState<(typeof categories)[number]>("전체");
-  const [page, setPage] = useState(1);
+  const [selectedPage, setPage] = useState<number | null>(null);
+  const targetId = useSyncExternalStore(subscribeHash, getHash, getServerHash);
   const filtered = projects.filter((project) => category === "전체" || project.category === category);
+  const targetIndex = filtered.findIndex((project) => project.id === targetId);
+  const page = selectedPage ?? (targetIndex >= 0 ? Math.floor(targetIndex / pageSize) + 1 : 1);
   const visible = filtered.slice((page - 1) * pageSize, page * pageSize);
-  // Figma의 전체 목록 3페이지 구성. 추가 사례는 data.ts에 이어서 등록합니다.
-  const pageCount = category === "전체" ? Math.max(3, Math.ceil(filtered.length / pageSize)) : Math.max(1, Math.ceil(filtered.length / pageSize));
+  useEffect(() => {
+    if (targetId && selectedPage === null) {
+      document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+    }
+  }, [targetId, selectedPage]);
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
 
   return (
     <section aria-labelledby="projects-list-heading" className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:w-[1440px] lg:px-0 lg:pt-[81px]">

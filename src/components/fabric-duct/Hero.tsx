@@ -40,7 +40,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">
           <Link
-            href="#fabric-case"
+            href="/projects"
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-[#00ADDB] text-lg lg:text-[30px] font-semibold"
           >
             시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" /><ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />

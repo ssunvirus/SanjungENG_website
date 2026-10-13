@@ -2,16 +2,16 @@ import Image from "next/image";
 import SectionEyebrow from "./SectionEyebrow";
 
 const process = [
-  ["01", "운전 상태 확인", "설정 온/습도 실제 측정값, 알람 확인", "process-inspection-current.png"],
+  ["01", "운전 상태 확인", "설정 온/습도 실제 측정값, 알람 확인", "process-inspection-card.jpg"],
   ["02", "주요 부품 점검", "필터, 압축기 등 장비 상태 확인", "process-parts-current.png"],
-  ["03", "세척 및 부품 정비", "고장 및 오염 부품 교체", "process-repair-current.png"],
-  ["04", "시운전 및 최종 확인", "설치 및 수리 완료 후 인계", "process-test-current.png"],
+  ["03", "세척 및 부품 정비", "고장 및 오염 부품 교체", "process-repair-card.jpg"],
+  ["04", "시운전 및 최종 확인", "설치 및 수리 완료 후 인계", "process-test-card.jpg"],
 ] as const;
 
 export default function WorkProcess() {
   return (
     <section className="mx-auto h-auto lg:h-[941px] w-full lg:w-[1440px] bg-[#00ADDB]/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
-      <SectionEyebrow>WORK PROCESS</SectionEyebrow><h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">항온항습기, 이렇게 점검하고 정비합니다.</h2><p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">온/습도 제어 상태부터 주요 부품까지 점검하고, 필요한 정비 후 정상 작동을 확인합니다.</p>
+      <SectionEyebrow>WORK PROCESS</SectionEyebrow><h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">항온항습기, 이렇게 점검하고 정비합니다.</h2><p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">온/습도 제어 상태부터 주요 부품까지 점검하고, 필요시 정비 후 정상 작동을 확인합니다.</p>
       <div className="relative mt-[24px] lg:mt-[60px] grid grid-cols-2 lg:flex gap-[16px] lg:gap-[19px]">
         <span aria-hidden="true" className="hidden lg:block absolute left-[209px] top-[484px] h-[2px] w-[200px] bg-[#00ADDB]" />
         <span aria-hidden="true" className="hidden lg:block absolute left-[528px] top-[484px] h-[2px] w-[200px] bg-[#00ADDB]" />

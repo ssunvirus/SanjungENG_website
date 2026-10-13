@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const services = [
-  ["01", "항온항습기 설치, 교체", "공간 용도와 요구, 온/습도, 설치 조건을 확인 후", "장비 선정 및 노후 설비 교체", "service-install-figma.png"],
+  ["01", "항온항습기 설치, 교체", "공간 용도와 요구 온/습도, 설치 조건을 확인 후", "장비 설치 및 노후 설비 교체", "service-install-figma.png"],
   ["02", "수리, 부품교체", "운전 이상 원인을 점검하고", "필요한 부품 수리, 교체 진행", "service-parts-figma.png"],
   ["03", "유지보수, 정기점검", "온/습도 제어 상태와 주요 부품을 확인하고", "설비 상태에 따른 정비 진행", "service-maintenance-figma.png"],
 ] as const;

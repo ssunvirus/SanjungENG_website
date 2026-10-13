@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading";
 const rows = [
   ["구분", "금속덕트", "섬유덕트"],
   ["소재", "아연도금 강판", "섬유 소재"],
-  ["공기분배", "별도 취출구", "원단/타공부/노츨"],
+  ["공기분배", "별도 취출구", "원단/타공부/노즐"],
   ["설치방식", "조립 지지대 고정", "케이블/레일설치"],
   ["유지관리", "내부 점검/청소", "탈착/세척"],
 ];
@@ -18,7 +18,7 @@ export default function Introduction() {
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
               <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.</p>
               <p>
-                공조설비에서 공급된 공기를 통기성 원단이나 타공부/노즐을 통해 공간에 분배합니다.
+                공조설비에서 공급된 공기를 통기성 원단이나 타공부/노즐을 통해 공간에 빈틈없이 분배합니다.
               </p>
             </SectionHeading>
           </div>
@@ -68,7 +68,7 @@ export default function Introduction() {
             </tbody>
           </table>
           <div className="relative mt-[10px] lg:mt-[15px] h-[240px] lg:h-[255px] overflow-hidden">
-            <div className="absolute top-[-27.63%] h-[178.58%] w-full">
+            <div className="absolute hidden lg:block top-[-27.63%] h-[178.58%] w-full">
               <Image
                 src="/images/fabric-duct/comparison.png"
                 alt="천장에 설치된 덕트와 공조설비"

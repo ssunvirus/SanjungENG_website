@@ -7,7 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "반도체 공장 공냉식 냉동기 교체공사 | 산정엔지니어링",
+  title: "반도체 공장 칠러 시스템 구축 | 산정엔지니어링",
   description: "반도체 공장의 안정적인 냉각환경 조성을 위한 공냉식 냉동기 교체 현장입니다",
 };
 
@@ -21,7 +21,7 @@ export default function SemiconductorChillerPage() {
       />
       <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
-          title="반도체 공장 공냉식 냉동기 교체공사"
+          title="반도체 공장 칠러 시스템 구축"
           description="반도체 공장의 안정적인 냉각환경 조성을 위한 공냉식 냉동기 교체 현장입니다"
           category="냉동기"
           work="냉동기 교체공사"

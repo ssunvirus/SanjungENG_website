@@ -33,7 +33,7 @@ export default function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <article className="min-w-0 overflow-hidden bg-white lg:h-[432px]">
+    <article id={project.id} className="min-w-0 scroll-mt-24 overflow-hidden bg-white lg:h-[432px]">
       {project.href ? (
         <Link
           href={project.href}

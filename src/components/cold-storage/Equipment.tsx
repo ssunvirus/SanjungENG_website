@@ -26,7 +26,7 @@ export default function Equipment() {
     <section className="mx-auto h-auto w-full lg:w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header className="text-center">
         <p className="text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">COLD STORAGE SERVICE</p>
-        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">저온저장고 주요 설비</h2>
+        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">저온저장고 냉동설계 핵심요소</h2>
         <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-[#243447]/60">보관 품목과 공간에 맞춰 냉동설비를 구성합니다.</p>
       </header>
 

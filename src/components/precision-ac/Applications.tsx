@@ -4,7 +4,7 @@ import SectionEyebrow from "./SectionEyebrow";
 const applications = [
   ["01", "전산실 / 서버실", "장비 운전 환경에 맞춘 온/습도 관리", "space-server-current.png"],
   ["02", "연구실 / 검사실", "시험/측정 조건에 맞춘 실내 환경 관리", "space-lab-current.png"],
-  ["03", "생산 / 품질관리 공간", "공정에서 요구하는 온/습도 조건 검토", "space-production-current.png"],
+  ["03", "생산 / 품질관리 공간", "공정에서 요구하는 온/습도 조건 유지", "space-production-current.png"],
 ] as const;
 
 export default function Applications() {

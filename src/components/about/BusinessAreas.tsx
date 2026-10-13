@@ -9,7 +9,7 @@ const areas = [
 
 export default function BusinessAreas() {
   return (
-    <section aria-labelledby="about-business-heading" className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-[60px]">
+    <section aria-labelledby="about-business-heading" className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-20">
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
         <div className="flex items-center gap-[16px] lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
           <img src="/images/about/business-heading-left.svg" alt="" aria-hidden="true" />

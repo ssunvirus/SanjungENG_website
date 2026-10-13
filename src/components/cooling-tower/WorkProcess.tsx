@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const steps = [
   ["01", "현장 확인 및 설비 점검", "운전 상태와 주요 설비 확인", "process-inspection.jpg"],
-  ["02", "정비 항목 및 작업 범위 확인", "충진물, 부품, 배관 상태 점검", "process-scope.jpg"],
+  ["02", "정비 항목 확인", "충진물, 부품, 배관 상태 점검", "process-scope-card.jpg"],
   ["03", "부품 교체 및 보수 작업", "노후 부품 교체 및 설비 보수", "process-repair.jpg"],
   ["04", "시운전 및 최종 확인", "작동 상태와 이상 여부 확인", "process-test.jpg"],
 ];

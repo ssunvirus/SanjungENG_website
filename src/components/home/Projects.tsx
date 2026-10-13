@@ -14,7 +14,7 @@ const projects: {
 }[] = [
     { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png", href: "/projects/wonsam-nonghyup" },
     { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png", href: "/projects/gurye-pool" },
-    { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png", href: "/projects/semiconductor-chiller" },
+    { title: "반도체 공장 칠러 시스템 구축", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png", href: "/projects/semiconductor-chiller" },
     { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png", href: "/projects/seoanseong-maintenance" },
 ];
 
@@ -100,9 +100,6 @@ export default function Projects() {
                             <>
                                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                                     <Image src={project.image} alt={project.title} fill sizes="503px" className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]" />
-                                    <span className="absolute top-[23px] left-[34px] flex h-[38px] items-center rounded-[20px] bg-[#00ADDB]/60 px-[14px] text-[18px] font-medium text-white/80">
-                                        # {project.tag}
-                                    </span>
                                 </div>
                                 <div className="relative px-[21px] pt-[23px] pr-[70px]">
                                     <h3 className="whitespace-nowrap text-[23px] font-bold leading-[29px] text-[#102D4A]">{project.title}</h3>
