@@ -5,7 +5,20 @@ import { FormEvent, useRef, useState } from "react";
 
 const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[14px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
 
+function RequiredInput({ name, label, hint, type = "text" }: { name: string; label: string; hint: string; type?: string }) {
+    return (
+        <label className="relative min-w-0">
+            <input required name={name} type={type} aria-label={label} placeholder=" " className={`${fieldClass} peer w-full`} />
+            <span aria-hidden="true" className="pointer-events-none absolute inset-0 hidden items-center gap-1 px-[14px] text-[14px] text-[#6E7D8C] peer-placeholder-shown:flex">
+                <span>{label} <span className="text-red-600">*</span></span>
+                <span>{hint}</span>
+            </span>
+        </label>
+    );
+}
+
 export default function EstimateCta() {
+    const [category, setCategory] = useState("");
     const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
     const [notice, setNotice] = useState("");
     const sending = useRef(false);
@@ -34,6 +47,7 @@ export default function EstimateCta() {
             setStatus("success");
             setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
             form.reset();
+            setCategory("");
         } catch (error) {
             setStatus("error");
             setNotice(error instanceof Error ? error.message : "연결을 확인하고 다시 시도해주세요.");
@@ -54,7 +68,7 @@ export default function EstimateCta() {
                         현장에 필요한 답을,<br />빠르고 정확하게 제안합니다.
                     </h2>
                     <p className="text-[16px] leading-[26px] text-[#4F6173]">
-                        냉동·공조 설비부터 섬유덕트, 유지보수까지<br />
+                        냉동공조 설비부터 섬유덕트, 유지보수까지<br />
                         현장 조건과 필요한 작업을 남겨주시면 담당자가 확인 후 연락드립니다.
                     </p>
                     <span aria-hidden="true" className="h-[3px] w-[60px] rounded-sm bg-[#00ADDB]" />
@@ -79,14 +93,20 @@ export default function EstimateCta() {
                         <p className="mt-1 text-[14px] leading-[20px] text-[#637382]">필수 정보만 남겨주시면 담당자가 확인 후 연락드립니다.</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                        <input required name="company" aria-label="업체명" placeholder="업체명 *  회사명을 입력해주세요" className={fieldClass} />
-                        <input required name="manager" aria-label="담당자명" placeholder="담당자명 *  성함을 입력해주세요" className={fieldClass} />
+                        <RequiredInput name="company" label="업체명" hint="회사명을 입력해주세요" />
+                        <RequiredInput name="manager" label="담당자명" hint="성함을 입력해주세요" />
                     </div>
                     <div className="relative w-full">
-                        <select required name="category" aria-label="문의 분야" defaultValue="" className={`${fieldClass} w-full appearance-none pr-[38px]`}>
-                            <option value="" disabled>문의 분야 *　냉동설비 · 공조설비 · 섬유덕트 · 유지보수</option>
+                        <select required name="category" aria-label="문의 분야" value={category} onChange={(event) => setCategory(event.target.value)} className={`${fieldClass} w-full appearance-none pr-[38px]`}>
+                            <option value="" disabled>문의 분야를 선택해주세요</option>
                             <option>냉동설비</option><option>공조설비</option><option>섬유덕트</option><option>유지보수</option>
                         </select>
+                        {!category && (
+                            <span aria-hidden="true" className="pointer-events-none absolute inset-y-px left-px right-[35px] flex min-w-0 items-center overflow-hidden rounded-l-[7px] bg-[#F7FBFD] pl-[13px] text-[14px] text-[#102D4A]">
+                                <span className="shrink-0">문의 분야 <span className="ml-1 text-red-600">*</span></span>
+                                <span className="ml-3 min-w-0 truncate">냉동설비 · 공조설비 · 섬유덕트 · 유지보수</span>
+                            </span>
+                        )}
                         <ChevronDown
                             aria-hidden="true"
                             size={16}
@@ -95,7 +115,7 @@ export default function EstimateCta() {
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                        <input required name="phone" type="tel" aria-label="연락처" placeholder="연락처 *  010-0000-0000" className={fieldClass} />
+                        <RequiredInput name="phone" type="tel" label="연락처" hint="010-0000-0000" />
                         <input name="email" type="email" aria-label="이메일" placeholder="이메일  example@company.com" className={fieldClass} />
                     </div>
                     <textarea name="message" aria-label="현장 및 문의 내용" placeholder="현장 및 문의 내용&#10;현장 위치, 설비 종류, 요청 작업을 간단히 입력해주세요." className={`${fieldClass} h-[87px] resize-none py-[8px]`} />

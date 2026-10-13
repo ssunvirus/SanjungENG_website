@@ -15,7 +15,7 @@ const projects: {
     { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png", href: "/projects/wonsam-nonghyup" },
     { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png", href: "/projects/gurye-pool" },
     { title: "반도체 공장 공냉식 냉동기 교체공사", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png", href: "/projects/semiconductor-chiller" },
-    { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png" },
+    { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png", href: "/projects/seoanseong-maintenance" },
 ];
 
 const CARD_STEP = 536.25;

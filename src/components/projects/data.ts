@@ -65,6 +65,7 @@ export const projects: Project[] = [
   },
   {
     id: "seoanseong-maintenance",
+    href: "/projects/seoanseong-maintenance",
     category: "냉동공조",
     tag: "냉동기",
     title: "서안성 냉동창고 정기점검",

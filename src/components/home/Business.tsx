@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle } from "lucide-react";
+import BusinessWorkflow from "./BusinessWorkflow";
 
 const businessCards = [
     {
@@ -8,7 +9,7 @@ const businessCards = [
         title: "냉동공조",
         description: "현장에 맞는 설계, 설치, 교체",
         services: "냉동기 / 항온항습기 / 냉각탑",
-        image: "/images/home-refresh/business-hvac.png",
+        image: "/images/home-refresh/business-hvac-card.png",
         imageAlt: "산업용 냉동공조 설비",
         href: "/solutions",
     },
@@ -34,7 +35,7 @@ const businessCards = [
         number: "04",
         title: "유지보수",
         description: "안정적인 가동을 위한 정기점검",
-        services: "정기점검 / 예방정비 / 설비관리",
+        services: "정기점검 / 예방정비 / 수리 / 오버홀",
         image: "/images/business/maintenance-card.png",
         imageAlt: "냉동공조 설비 유지보수 현장",
         href: "/solutions#maintenance",
@@ -105,17 +106,7 @@ function BusinessOverview() {
                 ))}
             </ol>
 
-            <div className="absolute top-[980px] left-[512px] flex items-center text-[30px] font-semibold leading-9 text-[#243447]">
-                <span>상담 &amp; 현장확인</span>
-                <span className="ml-[50px] mr-[88px] flex items-center" aria-hidden="true">
-                    <Image src="/images/business/workflow-arrow.svg" alt="" width={90} height={15} />
-                </span>
-                <span>설치 &amp; 시공</span>
-                <span className="ml-[90px] mr-[58px] flex items-center" aria-hidden="true">
-                    <Image src="/images/business/workflow-arrow.svg" alt="" width={90} height={15} />
-                </span>
-                <span>사후관리</span>
-            </div>
+            <div className="absolute top-[950px] left-1/2 -translate-x-1/2"><BusinessWorkflow /></div>
         </section>
     );
 }
@@ -130,7 +121,7 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
                     fill
                     sizes="266px"
                     quality={card.image.includes("business-cold-storage") ? 75 : 100}
-                    unoptimized={card.image === "/images/home-refresh/business-hvac.png"}
+                    unoptimized={card.image === "/images/home-refresh/business-hvac-card.png"}
                     className="object-cover"
                 />
             </div>

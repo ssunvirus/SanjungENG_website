@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, ClipboardCheck, Snowflake, Wrench, Wind } from "lucide-react";
 import Eyebrow from "./Eyebrow";
+import BusinessWorkflow from "../BusinessWorkflow";
 
 const business = [
   { title: "냉동기", description: "안정적인 냉방 설계, 설치, 교체", image: "/images/home-refresh/business-hvac.png", href: "/solutions" },
@@ -33,7 +34,7 @@ export default function MobileBusiness() {
         <div className="relative mt-4 aspect-[1.6] w-full">
           <Image src="/images/business/overview-background.png" alt="산업 시설 냉동공조 설계 및 시공" fill sizes="(max-width: 600px) 100vw, 600px" className="object-cover object-bottom" />
         </div>
-        <p className="flex items-center justify-between gap-2 px-5 py-5 text-xs font-semibold"><span>상담 및 현장확인</span><ArrowRight size={18} aria-hidden="true" /><span>설치 & 시공</span><ArrowRight size={18} aria-hidden="true" /><span>사후관리</span></p>
+        <div className="hidden px-5 py-7 lg:block"><BusinessWorkflow /></div>
       </section>
 
       <section className="mx-auto max-w-[600px] px-5 py-8">
