@@ -25,7 +25,7 @@ type ProjectOverviewProps = {
 
 export default function ProjectOverview({
   title = "농협 저온저장고 냉동설비 설치",
-  description = "저온저장고의 안정적인 저장환경을 위한 냉동설비 설치현장입니다.",
+  description = "저온저장고의 안정적인 저장환경을 위한 냉동설비 설치 현장입니다.",
   category = "저온저장고",
   work = "CDU / 유니트 쿨러 설치",
   location = "경기도 용인",

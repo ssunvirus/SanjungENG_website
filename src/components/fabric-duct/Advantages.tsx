@@ -4,14 +4,14 @@ import SectionHeading from "./SectionHeading";
 const advantages = [
   {
     title: "균일한 공기분배",
-    description: ["공간 전체에 공기를 고르게 분산시켜", "핫존, 콜드존과 같은 온도편차를 줄입니다."],
+    description: ["공간 전체에 공기를 고르게 분산시켜", "핫존, 콜드존과 같은 온도 편차를 줄입니다."],
     image: "distribution-icon.png",
     slot: "h-[77px] w-[107px]",
     crop: "h-[188.52%] w-[135.29%] left-[-17.65%] top-[-27.87%]",
   },
   {
-    title: "다양한 공간 적용가능",
-    description: ["저온저장고, 물류창고, 스마트팜, 생산시설 등", "다양한 공간에 맞춤 적용가능합니다."],
+    title: "다양한 공간 적용 가능",
+    description: ["저온저장고, 물류창고, 스마트팜, 생산시설 등", "다양한 공간에 맞춤 적용 가능합니다."],
     image: "applications-icon.png",
     slot: "h-[43px] w-[113px]",
     crop: "h-[113.73%] w-[130.34%] left-[-14.61%] top-[-12.75%]",
@@ -41,8 +41,8 @@ export default function Advantages() {
             </>
           }
         >
-          <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템으로,</p>
-          <p>
+          <p className="hidden lg:block">섬유덕트는 섬유 소재로 제작된 공기 분배 시스템으로,</p>
+          <p className="hidden lg:block">
             공간 전체에 공기를 균일하게 배분하여 특정 구역에 냉기나 열기가 집중되는 현상을 줄이고,
             보다 균일한 실내 환경을 만듭니다.
           </p>

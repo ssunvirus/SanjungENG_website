@@ -56,7 +56,7 @@ export default function Applications() {
     >
       <div className="h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="APPLICATION" title="다양한 공간에 적용됩니다.">
-          <p>
+          <p className="hidden lg:block">
             섬유덕트는 저온저장고, 식품 생산시설, 물류센터, 스마트팜, 체육시설, 상업/공공시설 등에
             적용할 수 있습니다.
           </p>
@@ -150,7 +150,7 @@ export default function Applications() {
             </div>
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-[#DFEEF5] text-[16px] lg:text-[25px] text-[#102D4A]/60">
-              준비중입니다.
+              준비 중입니다.
             </div>
           )}
           <div

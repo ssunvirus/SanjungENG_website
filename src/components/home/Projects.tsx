@@ -12,7 +12,7 @@ const projects: {
     image: string;
     href?: string;
 }[] = [
-    { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니클 쿨러 설치", image: "/images/projects/cold-storage.png", href: "/projects/wonsam-nonghyup" },
+    { title: "농협 저온저장고 냉동설비 설치", tag: "저온저장고", description: "CDU / 유니트쿨러 설치", image: "/images/projects/cold-storage.png", href: "/projects/wonsam-nonghyup" },
     { title: "구례 실내 수영장 섬유덕트 설치", tag: "섬유덕트", description: "섬유덕트 설계 / 설치", image: "/images/projects/pool-fabric-duct.png", href: "/projects/gurye-pool" },
     { title: "반도체 공장 칠러 시스템 구축", tag: "냉동기", description: "공냉식 냉동기 교체", image: "/images/home-refresh/business-hvac.png", href: "/projects/semiconductor-chiller" },
     { title: "서안성 냉동창고 정기점검", tag: "유지보수", description: "정기점검 / 유지보수", image: "/images/projects/warehouse-maintenance.png", href: "/projects/seoanseong-maintenance" },
@@ -57,7 +57,7 @@ export default function Projects() {
                 </div>
                 <h2 id="projects-heading" className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]">시공사례</h2>
                 <p className="mt-[25px] text-[19px] font-semibold leading-[29px] text-[#243447]">
-                    냉동공조 부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
+                    냉동공조부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
                 </p>
                 <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-[#243447]">
                     <button type="button" aria-label="이전 시공사례" aria-controls="project-cards" disabled={currentSlide === 0} onClick={() => move(-1)} className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]">

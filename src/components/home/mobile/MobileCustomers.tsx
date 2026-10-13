@@ -25,6 +25,8 @@ export default function MobileCustomers() {
               src={
                 file === "hwaseong"
                   ? "/images/home-refresh/customer-hwaseong-updated.png"
+                  : ["orion", "pkc", "bbq"].includes(file)
+                    ? `/images/home-refresh/customer-${file}-transparent.png`
                   : `/images/home-refresh/customer-${file}.png`
               }
               alt={name}

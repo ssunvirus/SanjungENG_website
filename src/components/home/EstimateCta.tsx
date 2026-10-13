@@ -65,7 +65,7 @@ export default function EstimateCta() {
                         <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
                     </div>
                     <h2 id="estimate-heading" className="text-[44px] font-bold leading-[57px]">
-                        현장에 필요한 답을,<br />빠르고 정확하게 제안합니다.
+                        현장에 필요한 답을,<br /><span className="text-[#00ADDB]">빠르고 정확하게</span> 제안합니다.
                     </h2>
                     <p className="text-[16px] leading-[26px] text-[#4F6173]">
                         냉동공조 설비부터 섬유덕트, 유지보수까지<br />
@@ -99,12 +99,12 @@ export default function EstimateCta() {
                     <div className="relative w-full">
                         <select required name="category" aria-label="문의 분야" value={category} onChange={(event) => setCategory(event.target.value)} className={`${fieldClass} w-full appearance-none pr-[38px]`}>
                             <option value="" disabled>문의 분야를 선택해주세요</option>
-                            <option>냉동설비</option><option>공조설비</option><option>섬유덕트</option><option>유지보수</option>
+                            <option>냉동공조</option><option>섬유덕트</option>
                         </select>
                         {!category && (
                             <span aria-hidden="true" className="pointer-events-none absolute inset-y-px left-px right-[35px] flex min-w-0 items-center overflow-hidden rounded-l-[7px] bg-[#F7FBFD] pl-[13px] text-[14px] text-[#102D4A]">
                                 <span className="shrink-0">문의 분야 <span className="ml-1 text-red-600">*</span></span>
-                                <span className="ml-3 min-w-0 truncate">냉동설비 · 공조설비 · 섬유덕트 · 유지보수</span>
+                                <span className="ml-3 min-w-0 truncate">냉동공조 / 섬유덕트</span>
                             </span>
                         )}
                         <ChevronDown

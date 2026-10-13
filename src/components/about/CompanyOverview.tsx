@@ -3,7 +3,7 @@ import Image from "next/image";
 const companyDetails = [
   { term: "회사명", lines: ["주식회사 산정엔지니어링"], height: "lg:min-h-[70px]" },
   { term: "대표자", lines: ["김윤환"], height: "lg:min-h-[70px]" },
-  { term: "설립년도", lines: ["1993년"], height: "lg:min-h-[70px]" },
+  { term: "설립연도", lines: ["1993년"], height: "lg:min-h-[70px]" },
   { term: "주요사업", lines: ["냉동공조 설비, 섬유덕트"], height: "lg:min-h-[70px]" },
   { term: "소재지", lines: ["서울시 금천구 시흥대로 97, 6-213", "(시흥동, 시흥산업 용재 유통센터)"], height: "lg:min-h-[89px]" },
   { term: "연락처", lines: ["010-5340-1728", "sanjungeng@naver.com"], height: "lg:min-h-[68px]" },

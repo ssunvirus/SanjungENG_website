@@ -7,7 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "서안성 냉동창 정기점검 | 산정엔지니어링",
+  title: "서안성 냉동창고 정기점검 | 산정엔지니어링",
   description: "냉동창고의 안정적인 온도 유지를 위한 냉동설비 정기점검 현장입니다.",
 };
 

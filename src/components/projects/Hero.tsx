@@ -28,7 +28,7 @@ export default function Hero() {
           <span aria-current="page">시공사례</span>
         </nav>
         <h1 className="text-[30px] font-bold leading-normal lg:mt-[34px] lg:text-[80px] lg:leading-[96px]">시공사례</h1>
-        <p className="mt-5 text-[15px] text-white/80 font-medium leading-7 lg:mt-[34px] lg:text-[33.75px] lg:leading-13">
+        <p className="mt-5 text-[20px] text-white/80 font-medium leading-7 lg:mt-[34px] lg:text-[33.75px] lg:leading-13">
           냉동공조부터 섬유덕트까지
           <br />
           산정엔지니어링의 현장을 소개합니다.

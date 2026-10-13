@@ -5,13 +5,13 @@ import { ArrowRight, FileText, Settings, Wrench } from "lucide-react";
 const details = [
   { icon: Settings, title: "작업 내용", description: <>저온저장고 CDU, 유니트쿨러 신규 설치</> },
   { icon: Wrench, title: "주요 작업", description: <>CDU, 유니트쿨러 냉매배관, 보온 시공, 연결<br />기밀시험, 진공 작업 및 냉매 충전</> },
-  { icon: FileText, title: "작업 결과", description: <>새로운 냉동기 설치 및 냉방성능 향상</> },
+  { icon: FileText, title: "작업 결과", description: <>새로운 냉동기 설치 및 냉동 성능 향상</> },
 ];
 
 export default function CaseStudy() {
   return (
     <section className="mx-auto h-auto lg:min-h-[769px] w-full lg:w-[1440px] bg-[#EFF7FB] px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
-      <header className="flex flex-col lg:flex-row h-auto lg:h-[88px] w-full lg:w-[1295px] items-start lg:items-end gap-[28px] lg:gap-[500px]">
+      <header className="flex flex-col lg:flex-row h-auto lg:h-[88px] w-full lg:w-[1295px] items-start lg:items-end gap-[10px] lg:gap-[500px]">
         <div>
           <p className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">CASE STUDY <span className="h-[2px] w-[46px] bg-current" /></p>
           <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2px] text-[#102D4A]">시공사례</h2>

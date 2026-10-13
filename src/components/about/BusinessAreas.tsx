@@ -11,10 +11,10 @@ export default function BusinessAreas() {
   return (
     <section aria-labelledby="about-business-heading" className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-20">
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
-        <div className="flex items-center gap-[16px] lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
-          <img src="/images/about/business-heading-left.svg" alt="" aria-hidden="true" />
-          <p>BUSINESS AREA</p>
-          <img src="/images/about/business-heading-right.svg" alt="" aria-hidden="true" />
+        <div className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
+          <img src="/images/about/business-heading-left.svg" alt="" aria-hidden="true" className="min-w-0 w-8 sm:w-20 lg:w-auto" />
+          <p className="shrink-0 whitespace-nowrap">BUSINESS AREA</p>
+          <img src="/images/about/business-heading-right.svg" alt="" aria-hidden="true" className="min-w-0 w-8 sm:w-20 lg:w-auto" />
         </div>
         <h2 id="about-business-heading" className="text-[28px] lg:text-[50px] font-bold leading-[36px] lg:leading-[60px] tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">사업영역</h2>
       </header>

@@ -36,7 +36,7 @@ export default function Hero() {
           공간에 맞춘 설계로, 온도 편차를 줄입니다.
         </p>
         <p className="text-[11px] leading-5 lg:text-[22.5px] lg:leading-[1.2]">
-          CFD설계&nbsp; | &nbsp; 섬유덕트 공급&nbsp; | &nbsp; 설치/시공
+          CFD 설계&nbsp; | &nbsp; 섬유덕트 공급&nbsp; | &nbsp; 설치/시공
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">
           <Link

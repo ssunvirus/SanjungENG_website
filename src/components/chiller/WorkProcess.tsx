@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const steps = [
-  { number: "01", title: "현장 확인", description: "설비상태, 공간, 운전 조건 검토", image: "/images/chiller/process-site-inspection.png" },
+  { number: "01", title: "현장 확인", description: "설비 상태, 공간, 운전 조건 검토", image: "/images/chiller/process-site-inspection.png" },
   { number: "02", title: "장비, 작업 계획", description: "용량, 공정, 일정 협의", image: "/images/chiller/process-work-planning.png" },
   { number: "03", title: "철거 & 설치", description: "기존 설비 철거 및 신규 장비 입고", image: "/images/chiller/process-removal-installation.png" },
   { number: "04", title: "시운전 & 인계", description: "운전 확인 및 관리사항 안내", image: "/images/chiller/process-commissioning-handover.png" },

@@ -141,25 +141,28 @@ export default function Header() {
                         {menus.map((menu) => (
                             <li key={menu.href} className="border-b border-[#D1DFE8]">
                                 <div className="flex items-center justify-between">
-                                    <Link
-                                        href={menu.href}
-                                        onClick={closeMobileMenu}
-                                        aria-current={isMenuActive(menu.href) ? "page" : undefined}
-                                        className={`flex min-h-14 flex-1 items-center text-lg font-bold ${isMenuActive(menu.href) ? "text-[#006EB8] underline decoration-[#00ADDB] underline-offset-8" : "text-[#243447]"}`}
-                                    >
-                                        {menu.label}
-                                    </Link>
-                                    {menu.submenu && (
+                                    {menu.submenu ? (
                                         <button
                                             type="button"
-                                            aria-label={`${menu.label} 하위 메뉴`}
                                             aria-expanded={expandedMenu === menu.href}
                                             aria-controls={`mobile-submenu-${menu.href.slice(1)}`}
                                             onClick={() => setExpandedMenu(expandedMenu === menu.href ? null : menu.href)}
-                                            className="flex size-11 cursor-pointer items-center justify-center rounded text-[#102D4A] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+                                            className={`flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-lg font-bold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${isMenuActive(menu.href) ? "text-[#006EB8]" : "text-[#243447]"}`}
                                         >
-                                            <ChevronDown aria-hidden="true" className={expandedMenu === menu.href ? "rotate-180" : ""} />
+                                            <span className={isMenuActive(menu.href) ? "underline decoration-[#00ADDB] underline-offset-8" : ""}>{menu.label}</span>
+                                            <span className="flex size-11 items-center justify-center text-[#102D4A]">
+                                                <ChevronDown aria-hidden="true" className={expandedMenu === menu.href ? "rotate-180" : ""} />
+                                            </span>
                                         </button>
+                                    ) : (
+                                        <Link
+                                            href={menu.href}
+                                            onClick={closeMobileMenu}
+                                            aria-current={isMenuActive(menu.href) ? "page" : undefined}
+                                            className={`flex min-h-14 flex-1 items-center text-lg font-bold ${isMenuActive(menu.href) ? "text-[#006EB8] underline decoration-[#00ADDB] underline-offset-8" : "text-[#243447]"}`}
+                                        >
+                                            {menu.label}
+                                        </Link>
                                     )}
                                 </div>
                                 {menu.submenu && (

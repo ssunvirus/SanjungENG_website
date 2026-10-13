@@ -7,7 +7,7 @@ export default function AirFlowDesign() {
       <div className="ml-[6px] h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="AIR FLOW DESIGN" title="공기흐름을 계산하고 분배합니다.">
           <p>
-            CFD시뮬레이션을 통한 공기 흐름과 온도 분포를 사전에 검토해, 공간 조건에 맞는 섬유덕트
+            CFD 시뮬레이션을 통한 공기 흐름과 온도 분포를 사전에 검토해, 공간 조건에 맞는 섬유덕트
             배치와 공기 분배 방식을 설계합니다.
           </p>
         </SectionHeading>
@@ -26,7 +26,7 @@ export default function AirFlowDesign() {
                   quality={100}
                   className="object-fill"
                 />
-                <span className="absolute bottom-[4px] right-[63px] text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
+                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
                   (출처:Klimagiel)
                 </span>
               </div>
@@ -46,7 +46,7 @@ export default function AirFlowDesign() {
                     className="object-fill"
                   />
                 </div>
-                <span className="absolute bottom-[4px] right-[62px] text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
+                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
                   (출처:Klimagiel)
                 </span>
               </div>
@@ -59,7 +59,7 @@ export default function AirFlowDesign() {
             CFD 시뮬레이션은 공기가 어떻게 흐르고, 온도가 어떻게 분포하는지, 계산하여 실제 환경에
             가까운 시뮬레이션을 수행합니다.
             <br />
-            이를 통해 공간의 각 지점에서 온도와 풍속를 평가할 수 있습니다.
+            이를 통해 공간의 각 지점에서 온도와 풍속을 평가할 수 있습니다.
           </p>
         </div>
         <div className="relative h-auto lg:h-[244px] w-full bg-[#00ADDB]/10 px-[20px] lg:px-[44px] py-[36px] lg:py-[41px]">

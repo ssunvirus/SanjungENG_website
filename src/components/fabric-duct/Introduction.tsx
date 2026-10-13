@@ -14,7 +14,7 @@ export default function Introduction() {
     <section className="mx-auto h-auto lg:h-[866px] w-full lg:w-[1920px] bg-white pl-[20px] pb-7 lg:pl-[280px] pr-[20px] lg:pr-[178px] pt-[24px] lg:pt-[69px]">
       <div className="grid grid-cols-1 lg:grid-cols-[739px_683px] gap-5 lg:gap-[40px]">
         <div>
-          <div className="h-auto lg:h-[218px]">
+          <div className="h-auto  lg:h-[218px]">
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
               <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.</p>
               <p>
@@ -67,7 +67,7 @@ export default function Introduction() {
               ))}
             </tbody>
           </table>
-          <div className="relative mt-[10px] lg:mt-[15px] h-[240px] lg:h-[255px] overflow-hidden">
+          <div className="relative hidden lg:block lg:mt-[15px] lg:h-[255px] overflow-hidden">
             <div className="absolute hidden lg:block top-[-27.63%] h-[178.58%] w-full">
               <Image
                 src="/images/fabric-duct/comparison.png"

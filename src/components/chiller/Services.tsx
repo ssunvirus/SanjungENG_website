@@ -125,7 +125,7 @@ export default function Services() {
             className="hidden lg:block mx-[38px] h-[27px] w-px bg-[#00ADDB]"
           />
           <span className="text-[#243447]/80">
-            설비상태에 따라 열교환기 세관, 냉동유, 필터 교체를 진행합니다.
+            설비 상태에 따라 열교환기 세관, 냉동유, 필터 교체를 진행합니다.
           </span>
         </div>
       </div>
@@ -152,7 +152,7 @@ function ServiceDetail({
     <article
       className={`relative h-auto lg:h-[210px] ${bordered ? "lg:border-l border-[#B7C6CF] lg:pl-[20px]" : ""}`}
     >
-      <div className="absolute right-[20px] top-0 hidden lg:block text-[#1D1B20]">
+      <div aria-hidden="true" className="absolute right-[20px] top-0 hidden lg:block text-[#1D1B20]">
         {icon}
       </div>
       <div className="w-full lg:w-[397px]">

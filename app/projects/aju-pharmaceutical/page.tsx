@@ -7,7 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "아주약품 터보동기 설치공사 | 산정엔지니어링",
+  title: "아주약품 터보냉동기 설치공사 | 산정엔지니어링",
   description: "시설의 효율적인 냉방 시스템 구축을 위해 터보냉동기를 설치한 현장입니다.",
 };
 
@@ -21,7 +21,7 @@ export default function AjuPharmaceuticalPage() {
       />
       <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
-          title="아주약품 터보동기 설치공사"
+          title="아주약품 터보냉동기 설치공사"
           description="시설의 효율적인 냉방 시스템 구축을 위해 터보냉동기를 설치한 현장입니다."
           category="냉동기"
           work="터보냉동기 교체"

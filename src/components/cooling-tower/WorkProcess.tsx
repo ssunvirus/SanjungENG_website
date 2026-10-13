@@ -28,7 +28,7 @@ export default function WorkProcess() {
               {number !== "04" && <span aria-hidden="true" className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-[#00ADDB]" />}
               <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[20px] lg:text-[30px] font-bold text-white">{number}</span>
               <h3 className="mt-[10px] lg:mt-[25px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-semibold text-[#243447]">{title}</h3>
-              <p className="mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">{description}</p>
+              <p className="hidden lg:block mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">{description}</p>
             </div>
           </article>
         ))}
