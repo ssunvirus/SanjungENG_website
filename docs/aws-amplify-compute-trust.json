@@ -4,13 +4,7 @@
     {
       "Effect": "Allow",
       "Principal": { "Service": "amplify.amazonaws.com" },
-      "Action": "sts:AssumeRole",
-      "Condition": {
-        "StringEquals": { "aws:SourceAccount": "235390156511" },
-        "ArnLike": {
-          "aws:SourceArn": "arn:aws:amplify:ap-southeast-2:235390156511:apps/dl6h0cf9vpgpu"
-        }
-      }
+      "Action": "sts:AssumeRole"
     }
   ]
 }
