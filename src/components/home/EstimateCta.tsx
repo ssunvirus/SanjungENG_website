@@ -5,12 +5,12 @@ import { FormEvent, useRef, useState } from "react";
 
 const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[14px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
 
-function RequiredInput({ name, label, hint, type = "text" }: { name: string; label: string; hint: string; type?: string }) {
+function RequiredInput({ name, label, hint, type = "text", required = true }: { name: string; label: string; hint: string; type?: string; required?: boolean }) {
     return (
         <label className="relative min-w-0">
-            <input required name={name} type={type} aria-label={label} placeholder=" " className={`${fieldClass} peer w-full`} />
+            <input required={required} name={name} type={type} aria-label={label} placeholder=" " className={`${fieldClass} peer w-full`} />
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 hidden items-center gap-1 px-[14px] text-[14px] text-[#6E7D8C] peer-placeholder-shown:flex">
-                <span>{label} <span className="text-red-600">*</span></span>
+                <span>{label} {required && <span className="text-red-600">*</span>}</span>
                 <span>{hint}</span>
             </span>
         </label>
@@ -93,7 +93,7 @@ export default function EstimateCta() {
                         <p className="mt-1 text-[14px] leading-[20px] text-[#637382]">필수 정보만 남겨주시면 담당자가 확인 후 연락드립니다.</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                        <RequiredInput name="company" label="업체명" hint="회사명을 입력해주세요" />
+                        <RequiredInput name="company" label="업체명" hint="회사명을 입력해주세요" required={false} />
                         <RequiredInput name="manager" label="담당자명" hint="성함을 입력해주세요" />
                     </div>
                     <div className="relative w-full">
@@ -118,7 +118,7 @@ export default function EstimateCta() {
                         <RequiredInput name="phone" type="tel" label="연락처" hint="010-0000-0000" />
                         <input name="email" type="email" aria-label="이메일" placeholder="이메일  example@company.com" className={fieldClass} />
                     </div>
-                    <textarea name="message" aria-label="현장 및 문의 내용" placeholder="현장 및 문의 내용&#10;현장 위치, 설비 종류, 요청 작업을 간단히 입력해주세요." className={`${fieldClass} h-[87px] resize-none py-[8px]`} />
+                    <textarea required maxLength={3000} name="message" aria-label="현장 및 문의 내용" placeholder="현장 및 문의 내용&#10;현장 위치, 설비 종류, 요청 작업을 간단히 입력해주세요." className={`${fieldClass} h-[87px] resize-none py-[8px]`} />
                     <label className="flex cursor-pointer items-center gap-2 text-[13px] leading-[18px] text-[#637382]">
                         <input required name="privacy" type="checkbox" className="size-[15px] accent-[#00ADDB]" />
                         개인정보 수집 및 이용에 동의합니다.

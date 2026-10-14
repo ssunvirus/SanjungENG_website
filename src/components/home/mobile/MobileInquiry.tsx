@@ -39,7 +39,7 @@ export default function MobileInquiry() {
       <h3 className="text-[22px] font-bold">간편 견적 문의</h3>
       <p className="mt-2 text-sm leading-6 text-[#637382]">빠른 상담을 위해 아래 내용을 입력해 주세요.</p>
       <div className="mt-6 space-y-5 text-sm font-semibold">
-        <label className="block">회사명<input required name="company" autoComplete="organization" maxLength={100} placeholder="회사명을 입력해주세요" className={field} /></label>
+        <label className="block">회사명<input name="company" autoComplete="organization" maxLength={100} placeholder="회사명을 입력해주세요" className={field} /></label>
         <label className="block">이름 <span className="text-red-600">*</span><input required name="manager" autoComplete="name" maxLength={100} placeholder="이름을 입력해주세요" className={field} /></label>
         <label className="block">연락처 <span className="text-red-600">*</span><input required name="phone" type="tel" autoComplete="tel" placeholder="연락처를 입력해주세요" className={field} /></label>
         <label className="block">문의 분야 <span className="text-red-600">*</span>
