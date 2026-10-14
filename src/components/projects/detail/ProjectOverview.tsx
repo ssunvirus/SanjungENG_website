@@ -33,8 +33,12 @@ export default function ProjectOverview({
   return (
     <>
       <header className="text-center">
-        <p className="text-xs lg:text-sm lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">PROJECTS DETAILS</p>
-        <h2 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">{title}</h2>
+        <p className="text-xs lg:text-sm lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+          PROJECTS DETAILS
+        </p>
+        <h2 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
+          {title}
+        </h2>
         <p className="mt-3 lg:mt-[21px] text-[15px] lg:text-[20px] leading-[24px] text-[#102D4A]/80">
           {description}
         </p>
@@ -51,7 +55,9 @@ export default function ProjectOverview({
           />
           <div className="min-w-0 flex-1 lg:flex-none lg:w-[152px]">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">공사구분</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">{category}</dd>
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+              {category}
+            </dd>
           </div>
         </div>
         <Divider />
@@ -59,7 +65,9 @@ export default function ProjectOverview({
           <Settings size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
           <div className="min-w-0 flex-1 lg:flex-none lg:w-[332px]">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">주요 작업</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">{work}</dd>
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+              {work}
+            </dd>
           </div>
         </div>
         <Divider />
@@ -67,7 +75,9 @@ export default function ProjectOverview({
           <MapPin size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
           <div className="min-w-0 flex-1 lg:flex-none lg:min-w-[160px] lg:whitespace-nowrap">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">현장 위치</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">{location}</dd>
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+              {location}
+            </dd>
           </div>
         </div>
       </dl>

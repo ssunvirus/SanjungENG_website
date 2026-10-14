@@ -9,7 +9,7 @@ export default function Services() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <div className="mx-auto w-full lg:w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[47px]">
+      <div className="mx-auto w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[47px]">
         <header className="text-center">
           <p className="text-[12px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
             CHILLER SERVICE
@@ -18,15 +18,14 @@ export default function Services() {
             냉동기 주요 서비스
           </h2>
           <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-[#243447]/60">
-            설치 &amp; 교체부터 수리 &amp; 오버홀, 정기점검까지 책임 있게
-            진행합니다.
+            설치 &amp; 교체부터 수리 &amp; 오버홀, 정기점검까지 책임 있게 진행합니다.
           </p>
         </header>
 
         <div className="mx-auto mt-[24px] lg:mt-[50px] flex flex-col lg:flex-row w-full lg:w-[960px] gap-6 lg:gap-[60px]">
           <div className="relative h-[240px] lg:h-[318px] w-full lg:w-[500px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
             <Image
-              src="/images/chiller/service-installation.png"
+              src="/images/chiller/service-installation.jpg"
               alt="냉동기 배관 설치 현장"
               fill
               sizes="500px"
@@ -61,10 +60,7 @@ export default function Services() {
                   className="flex min-h-[25px] lg:h-[25px] items-center gap-[12px] lg:gap-[10px]"
                 >
                   <span className="hidden lg:flex shrink-0 size-[25px] items-center justify-center rounded-full bg-[#00ADDB] text-white">
-                    <Check
-                      size={17}
-                      strokeWidth={3}
-                    />
+                    <Check size={17} strokeWidth={3} />
                   </span>
                   {text}
                 </li>
@@ -74,12 +70,7 @@ export default function Services() {
         </div>
         <div className="mx-auto mt-8 lg:mt-[50px] grid h-auto lg:h-[210px] w-full lg:w-[960px] grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-[80px]">
           <ServiceDetail
-            icon={
-              <Settings
-                size={48}
-                className="size-8 lg:size-12"
-              />
-            }
+            icon={<Settings size={48} className="size-8 lg:size-12" />}
             number="02"
             title="냉동기 수리 & 오버홀"
             details="고장 진단, 주요 부품교체, 분해/정비"
@@ -92,12 +83,7 @@ export default function Services() {
             }
           />
           <ServiceDetail
-            icon={
-              <Clipboard
-                size={48}
-                className="size-8 lg:size-12"
-              />
-            }
+            icon={<Clipboard size={48} className="size-8 lg:size-12" />}
             number="03"
             title="냉동기 정기점검"
             details="운전압력 확인, 온도점검, 진동/소음 점검"
@@ -152,7 +138,10 @@ function ServiceDetail({
     <article
       className={`relative h-auto lg:h-[210px] ${bordered ? "lg:border-l border-[#B7C6CF] lg:pl-[20px]" : ""}`}
     >
-      <div aria-hidden="true" className="absolute right-[20px] top-0 hidden lg:block text-[#1D1B20]">
+      <div
+        aria-hidden="true"
+        className="absolute right-[20px] top-0 hidden lg:block text-[#1D1B20]"
+      >
         {icon}
       </div>
       <div className="w-full lg:w-[397px]">

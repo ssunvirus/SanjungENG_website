@@ -30,7 +30,7 @@ const maintenanceServices = [
 
 export default function Maintenance() {
   return (
-    <section className="mx-auto w-full lg:w-[1440px] overflow-hidden px-[20px] lg:px-[63px] py-[36px] lg:py-[60px]">
+    <section className="mx-auto w-full lg:max-w-[1440px] overflow-hidden px-[20px] lg:px-[63px] py-[36px] lg:py-[60px]">
       <header>
         <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
           MAINTENANCE
@@ -46,7 +46,11 @@ export default function Maintenance() {
 
       <div className="mt-[24px] lg:mt-8 flex flex-col lg:flex-row items-start gap-[28px] lg:gap-[50px]">
         {maintenanceServices.map((service) => (
-          <article key={service.number} style={{ "--card-width": `${service.width}px` } as CSSProperties} className="w-full lg:w-[var(--card-width)] shrink-0">
+          <article
+            key={service.number}
+            style={{ "--card-width": `${service.width}px` } as CSSProperties}
+            className="w-full lg:w-[var(--card-width)] shrink-0"
+          >
             <div className="relative h-[240px] lg:h-[300px]">
               <Image
                 src={service.image}
@@ -62,7 +66,9 @@ export default function Maintenance() {
                   {service.number}
                 </span>
                 <span aria-hidden="true" className="h-[27px] w-[3px] bg-[#00ADDB]" />
-                <h3 className="text-[20px] lg:text-[30px] font-semibold text-[#243447]">{service.title}</h3>
+                <h3 className="text-[20px] lg:text-[30px] font-semibold text-[#243447]">
+                  {service.title}
+                </h3>
               </div>
               <p className="mt-[12px] lg:mt-[20px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[30px] text-[#243447]/80">
                 {service.description}

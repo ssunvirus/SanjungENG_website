@@ -19,7 +19,7 @@ export default function WarehousePrecisionPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
+      <article className="mx-auto w-full px-5 py-9 lg:max-w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
           title="S 기업 물류창고 항온항습기 설치"
           description="공간에 필요한 온/습도 환경을 안정적으로 유지하기 위한 항온항습기 설치 현장입니다."

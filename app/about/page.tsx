@@ -7,14 +7,15 @@ import Introduction from "../../src/components/about/Introduction";
 
 export const metadata: Metadata = {
   title: "회사소개 | 산정엔지니어링",
-  description: "30년의 현장 경험과 기술을 바탕으로 냉동공조 솔루션을 제공하는 산정엔지니어링을 소개합니다.",
+  description:
+    "30년의 현장 경험과 기술을 바탕으로 냉동공조 솔루션을 제공하는 산정엔지니어링을 소개합니다.",
 };
 
 export default function AboutPage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
       <Hero />
-      <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+      <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
       <Introduction />
       <Highlights />
       <CompanyOverview />

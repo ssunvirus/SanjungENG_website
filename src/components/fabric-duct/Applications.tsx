@@ -21,9 +21,8 @@ const slides: { title: string; image: string | null; description: string }[] = [
   },
   {
     title: "오리온 생산설비",
-    image: "/images/fabric-duct/application-production.png",
-    description:
-      "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성합니다.",
+    image: "/images/fabric-duct/application-production.jpg",
+    description: "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성합니다.",
   },
   {
     title: "상업시설",
@@ -33,7 +32,7 @@ const slides: { title: string; image: string | null; description: string }[] = [
   },
   {
     title: "구례 실내수영장",
-    image: "/images/fabric-duct/hero.png",
+    image: "/images/fabric-duct/hero.jpg",
     description:
       "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 섬유덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
   },
@@ -52,7 +51,7 @@ export default function Applications() {
   return (
     <section
       id="fabric-case"
-      className="mx-auto h-auto w-full lg:w-[1440px] mb-9 lg:mb-[100px] scroll-mt-[110px] px-5 lg:px-0 lg:pl-[46px] pt-[24px] lg:pt-[36.12px]"
+      className="mx-auto h-auto w-full lg:max-w-[1440px] mb-9 lg:mb-[100px] scroll-mt-[110px] px-5 lg:px-0 lg:pl-[46px] pt-[24px] lg:pt-[36.12px]"
     >
       <div className="h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="APPLICATION" title="다양한 공간에 적용됩니다.">

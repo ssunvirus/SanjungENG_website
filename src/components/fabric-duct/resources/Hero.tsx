@@ -7,7 +7,7 @@ export default function ResourcesHero() {
     <section className="relative mx-auto h-[320px] lg:h-[600px] w-full max-w-[1920px] overflow-hidden px-7 pt-[45px] lg:px-[245px] lg:pt-[108px] text-white">
       <div className="absolute inset-x-0 top-0 h-full lg:top-[-158.04px] lg:h-[1080px]">
         <Image
-          src="/images/fabric-duct/resources/hero.png"
+          src="/images/fabric-duct/resources/hero.jpg"
           alt="생산시설에 설치된 섬유덕트"
           fill
           priority
@@ -31,7 +31,9 @@ export default function ResourcesHero() {
           <ChevronRight size={38} aria-hidden="true" />
           <span aria-current="page">인증서, 카탈로그</span>
         </nav>
-        <h1 className="text-[30px] lg:text-[45px] font-extrabold leading-[1.2]">인증서, 카탈로그</h1>
+        <h1 className="text-[30px] lg:text-[45px] font-extrabold leading-[1.2]">
+          인증서, 카탈로그
+        </h1>
         <p className="text-[15px] lg:text-[33.75px] font-medium leading-[1.2]">
           소재와 성능을 확인할 수 있는
           <br />
@@ -45,13 +47,15 @@ export default function ResourcesHero() {
             href="/projects"
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-[#00ADDB] text-lg lg:text-[30px] font-semibold"
           >
-            시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" /><ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
+            시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
+            <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
           </Link>
           <Link
             href="/contact"
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] border border-white lg:border-0 lg:bg-white/30 text-lg lg:text-[30px] font-semibold"
           >
-            견적문의 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" /><ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
+            견적문의 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
+            <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
           </Link>
         </div>
       </div>

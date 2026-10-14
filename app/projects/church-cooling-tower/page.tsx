@@ -19,7 +19,7 @@ export default function ChurchCoolingTowerPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
+      <article className="mx-auto w-full px-5 py-9 lg:max-w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
           title="감리교회 냉각탑 유지보수"
           description="냉각탑의 원활한 열교환과 냉각 성능 유지를 위한 충진물 교체 현장입니다."

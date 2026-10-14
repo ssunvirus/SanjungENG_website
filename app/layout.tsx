@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "../src/components/layout/Header";
 import Footer from "../src/components/layout/Footer";
+import { siteUrl } from "../src/lib/site-url";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sanjung-eng-website.vercel.app"),
+  metadataBase: siteUrl,
   title: "산정엔지니어링",
   description: "냉동공조 설계부터 설치, 유지보수까지",
   openGraph: {
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className="h-full antialiased">
-      <body className="min-h-full min-w-0 overflow-x-auto bg-[#EFF7FB] flex flex-col lg:min-w-[1920px]">
+      <body className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-[#EFF7FB]">
         <Header />
         {children}
         <Footer />

@@ -11,14 +11,15 @@ const rows = [
 
 export default function Introduction() {
   return (
-    <section className="mx-auto h-auto lg:h-[866px] w-full lg:w-[1920px] bg-white pl-[20px] pb-7 lg:pl-[280px] pr-[20px] lg:pr-[178px] pt-[24px] lg:pt-[69px]">
-      <div className="grid grid-cols-1 lg:grid-cols-[739px_683px] gap-5 lg:gap-[40px]">
+    <section className="mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-[clamp(40px,8vw,160px)] lg:pt-[69px] min-[1920px]:h-[866px] min-[1920px]:pl-[280px] min-[1920px]:pr-[178px]">
+      <div className="grid grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
         <div>
           <div className="h-auto  lg:h-[218px]">
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
               <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.</p>
               <p>
-                공조설비에서 공급된 공기를 통기성 원단이나 타공부/노즐을 통해 공간에 빈틈없이 분배합니다.
+                공조설비에서 공급된 공기를 통기성 원단이나 타공부/노즐을 통해 공간에 빈틈없이
+                분배합니다.
               </p>
             </SectionHeading>
           </div>
@@ -37,7 +38,7 @@ export default function Introduction() {
           <h3 className="ml-[15px] text-[21px] lg:text-[40px] font-bold leading-[24px] lg:leading-[48px] tracking-[1px] lg:tracking-[2px] text-[#006EB8]">
             금속덕트와 차이점
           </h3>
-          <table className="mt-[24px] lg:mt-[33px] h-auto lg:h-[337px] w-full lg:w-[681px] table-fixed border-separate border-spacing-0 text-center text-[14px] lg:text-[20px] tracking-[1px] lg:tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
+          <table className="mt-[24px] lg:mt-[33px] h-auto lg:h-[337px] w-full max-w-[681px] table-fixed border-separate border-spacing-0 text-center text-[14px] lg:text-[20px] tracking-[1px] lg:tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
             <colgroup>
               <col className="w-1/5" />
               <col className="w-2/5" />
@@ -70,7 +71,7 @@ export default function Introduction() {
           <div className="relative hidden lg:block lg:mt-[15px] lg:h-[255px] overflow-hidden">
             <div className="absolute hidden lg:block top-[-27.63%] h-[178.58%] w-full">
               <Image
-                src="/images/fabric-duct/comparison.png"
+                src="/images/fabric-duct/comparison.jpg"
                 alt="천장에 설치된 덕트와 공조설비"
                 fill
                 sizes="683px"

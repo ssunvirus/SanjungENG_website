@@ -4,7 +4,6 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { useState } from "react";
 
-// 실제 자료가 준비되면 해당 항목의 file에 /documents/...pdf 경로를 입력합니다.
 type ResourceDocument = {
   title: string;
   file: string | null;
@@ -157,7 +156,7 @@ export default function DownloadCenter() {
 
   return (
     <section
-      className="mx-auto mt-1 w-full px-5 py-9 lg:min-h-[1416px] lg:w-[1440px] lg:px-0 lg:pt-[30px] lg:pb-[60px]"
+      className="mx-auto mt-1 w-full px-5 py-9 lg:min-h-[1416px] lg:max-w-[1440px] lg:px-0 lg:pt-[30px] lg:pb-[60px]"
       aria-labelledby="download-title"
     >
       <header className="ml-0 mt-0 lg:ml-[78px] lg:mt-[30px]">
@@ -182,7 +181,11 @@ export default function DownloadCenter() {
         </p>
       </header>
       <div className="relative mt-7 ml-0 w-full lg:mt-[50px] lg:ml-[78px] lg:w-[1294px]">
-        <div role="tablist" aria-label="자료 종류" className="flex gap-4 lg:h-[56px] lg:gap-[204px]">
+        <div
+          role="tablist"
+          aria-label="자료 종류"
+          className="flex gap-4 lg:h-[56px] lg:gap-[204px]"
+        >
           {tabs.map((tab, index) => (
             <button
               key={tab}

@@ -14,14 +14,20 @@ function subscribeHash(onChange: () => void) {
   return () => window.removeEventListener("hashchange", onChange);
 }
 
-function getHash() { return window.location.hash.slice(1); }
-function getServerHash() { return ""; }
+function getHash() {
+  return window.location.hash.slice(1);
+}
+function getServerHash() {
+  return "";
+}
 
 export default function ProjectGallery() {
   const [category, setCategory] = useState<(typeof categories)[number]>("전체");
   const [selectedPage, setPage] = useState<number | null>(null);
   const targetId = useSyncExternalStore(subscribeHash, getHash, getServerHash);
-  const filtered = projects.filter((project) => category === "전체" || project.category === category);
+  const filtered = projects.filter(
+    (project) => category === "전체" || project.category === category,
+  );
   const targetIndex = filtered.findIndex((project) => project.id === targetId);
   const page = selectedPage ?? (targetIndex >= 0 ? Math.floor(targetIndex / pageSize) + 1 : 1);
   const visible = filtered.slice((page - 1) * pageSize, page * pageSize);
@@ -33,9 +39,14 @@ export default function ProjectGallery() {
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
 
   return (
-    <section aria-labelledby="projects-list-heading" className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:w-[1440px] lg:px-0 lg:pt-[81px]">
+    <section
+      aria-labelledby="projects-list-heading"
+      className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:max-w-[1440px] lg:px-0 lg:pt-[81px]"
+    >
       <div className="flex items-center gap-[20px]">
-        <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">PROJECTS</p>
+        <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+          PROJECTS
+        </p>
         <Image
           src="/images/projects-page/heading-line.svg"
           width={46.3058}
@@ -44,7 +55,12 @@ export default function ProjectGallery() {
           aria-hidden="true"
         />
       </div>
-      <h2 id="projects-list-heading" className="mt-3 lg:mt-[16px] text-[28px] lg:text-[45px] font-extrabold leading-normal lg:leading-[54px]">시공사례</h2>
+      <h2
+        id="projects-list-heading"
+        className="mt-3 lg:mt-[16px] text-[28px] lg:text-[45px] font-extrabold leading-normal lg:leading-[54px]"
+      >
+        시공사례
+      </h2>
       <div
         role="group"
         aria-label="시공사례 분류"
@@ -56,7 +72,10 @@ export default function ProjectGallery() {
             type="button"
             aria-pressed={category === value}
             aria-controls="projects-list"
-            onClick={() => { setCategory(value); setPage(1); }}
+            onClick={() => {
+              setCategory(value);
+              setPage(1);
+            }}
             className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] border-b-2 pb-3 lg:border-0 lg:pb-0 cursor-pointer self-start whitespace-nowrap text-center lg:text-left text-base lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${category === value ? "text-[#00ADDB] border-[#00ADDB]" : "text-[#102D4A]/60 border-[#B7C6CF]"}`}
           >
             {value}
@@ -83,7 +102,9 @@ export default function ProjectGallery() {
       <div id="projects-list" aria-live="polite" className="mt-6 lg:mt-[55px] lg:min-h-[912px]">
         {visible.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-x-[22.5px] lg:gap-y-[48px]">
-            {visible.map((project) => <ProjectCard key={project.id} project={project} />)}
+            {visible.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
           </div>
         ) : (
           <p className="flex min-h-[432px] items-center justify-center bg-white text-[25px] text-[#102D4A]/60">
@@ -91,7 +112,10 @@ export default function ProjectGallery() {
           </p>
         )}
       </div>
-      <nav aria-label="시공사례 페이지" className="mt-9 lg:mt-[86px] flex h-[48px] items-center justify-center gap-[5px] pb-[50px] box-content">
+      <nav
+        aria-label="시공사례 페이지"
+        className="mt-9 lg:mt-[86px] flex h-[48px] items-center justify-center gap-[5px] pb-[50px] box-content"
+      >
         <button
           type="button"
           aria-label="이전 페이지"

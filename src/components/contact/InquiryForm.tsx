@@ -3,25 +3,21 @@
 import Image from "next/image";
 import { ArrowRight, Paperclip } from "lucide-react";
 import { type FormEvent, useRef, useState } from "react";
+import { submitEstimate } from "@/src/lib/submit-estimate";
 
 const inputClass =
   "text-base lg:text-[20px] mt-[10px] block h-[50px] w-full border-2 border-[#102D4A]/10 bg-white px-3 lg:px-[19px] font-semibold placeholder:text-[#102D4A]/20 focus:border-[#00ADDB] focus:outline-none";
 const categories = ["냉동공조", "섬유덕트"] as const;
 
 function attachmentError(files: File[]) {
-  if (
-    files.length > 3 ||
-    files.reduce((total, file) => total + file.size, 0) > 3 * 1024 * 1024
-  ) {
+  if (files.length > 3 || files.reduce((total, file) => total + file.size, 0) > 3 * 1024 * 1024) {
     return "첨부파일은 최대 3개, 전체 3MB 이내로 선택해주세요.";
   }
   if (
     files.some(
       (file) =>
         !/\.(jpe?g|png|webp|pdf)$/i.test(file.name) ||
-        !["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(
-          file.type,
-        ),
+        !["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(file.type),
     )
   ) {
     return "JPG, PNG, WEBP 또는 PDF 파일을 선택해주세요.";
@@ -47,9 +43,7 @@ function Field({
   return (
     <label className="block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
       {label}
-      {required && name !== "company" && (
-        <span className="ml-1 text-red-600">*</span>
-      )}
+      {required && name !== "company" && <span className="ml-1 text-red-600">*</span>}
       <input
         name={name}
         type={type}
@@ -74,12 +68,9 @@ function Field({
 }
 
 export default function InquiryForm() {
-  const [category, setCategory] =
-    useState<(typeof categories)[number]>("냉동공조");
+  const [category, setCategory] = useState<(typeof categories)[number]>("냉동공조");
   const [fileNames, setFileNames] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [notice, setNotice] = useState("");
   const sending = useRef(false);
 
@@ -88,14 +79,7 @@ export default function InquiryForm() {
     if (sending.current) return;
     const form = event.currentTarget;
     const fields = new FormData(form);
-    for (const key of [
-      "company",
-      "manager",
-      "phone",
-      "email",
-      "location",
-      "message",
-    ]) {
+    for (const key of ["company", "manager", "phone", "email", "location", "message"]) {
       const value = fields.get(key);
       if (typeof value === "string") fields.set(key, value.trim());
     }
@@ -105,8 +89,7 @@ export default function InquiryForm() {
     const phone = String(fields.get("phone") ?? "");
     const validationError = !fields.get("manager")
       ? "담당자명을 입력해주세요."
-      : !/^[+\d()\s-]{8,30}$/.test(phone) ||
-        phone.replace(/\D/g, "").length < 8
+      : !/^[+\d()\s-]{8,30}$/.test(phone) || phone.replace(/\D/g, "").length < 8
         ? "연락처를 확인해주세요."
         : !fields.get("message")
           ? "문의 내용을 입력해주세요."
@@ -120,18 +103,7 @@ export default function InquiryForm() {
     setStatus("sending");
     setNotice("문의를 전송하고 있습니다.");
     try {
-      const response = await fetch("/api/estimate", {
-        method: "POST",
-        body: fields,
-      });
-      const result = await response.json().catch(() => null);
-      if (!response.ok || !result) {
-        throw new Error(
-          typeof result?.message === "string"
-            ? result.message
-            : "전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
-        );
-      }
+      await submitEstimate(fields, true);
       setStatus("success");
       setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
       form.reset();
@@ -139,11 +111,7 @@ export default function InquiryForm() {
       setFileNames("");
     } catch (error) {
       setStatus("error");
-      setNotice(
-        error instanceof Error
-          ? error.message
-          : "연결을 확인하고 다시 시도해주세요.",
-      );
+      setNotice(error instanceof Error ? error.message : "연결을 확인하고 다시 시도해주세요.");
     } finally {
       sending.current = false;
     }
@@ -156,6 +124,14 @@ export default function InquiryForm() {
       aria-busy={status === "sending"}
       className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18.0px] lg:pt-[18px]"
     >
+      <input
+        name="website"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px]"
+      />
       <div className="relative ml-0 lg:-ml-[14px] w-full lg:w-[735px]">
         <h2
           id="inquiry-form-heading"
@@ -175,10 +151,7 @@ export default function InquiryForm() {
           className="mt-[12px] lg:mt-[19px]"
         />
       </div>
-      <fieldset
-        className="mt-[24px] lg:mt-[26px]"
-        disabled={status === "sending"}
-      >
+      <fieldset className="mt-[24px] lg:mt-[26px]" disabled={status === "sending"}>
         <legend className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
           문의 분야 <span className="text-red-600">*</span>
         </legend>
@@ -216,17 +189,8 @@ export default function InquiryForm() {
       >
         <legend className="sr-only">담당자 및 현장 정보</legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 lg:gap-x-[68px] lg:gap-y-[35px]">
-          <Field
-            name="company"
-            label="회사명"
-            placeholder="회사명을 입력해 주세요"
-          />
-          <Field
-            name="manager"
-            label="담당자명"
-            placeholder="성함을 입력해 주세요"
-            required
-          />
+          <Field name="company" label="회사명" placeholder="회사명을 입력해 주세요" />
+          <Field name="manager" label="담당자명" placeholder="성함을 입력해 주세요" required />
           <Field
             name="phone"
             label="연락처"
@@ -269,11 +233,7 @@ export default function InquiryForm() {
             첨부파일
           </label>
           <div className="mt-[12px] lg:mt-[10px] flex flex-wrap lg:flex-nowrap min-h-[75px] py-3 lg:py-0 items-center gap-[12px] lg:gap-[20px] border-2 border-[#102D4A]/10 px-[16px] lg:px-[19px]">
-            <Paperclip
-              size={30}
-              className="shrink-0 text-[#102D4A]/20"
-              aria-hidden="true"
-            />
+            <Paperclip size={30} className="shrink-0 text-[#102D4A]/20" aria-hidden="true" />
             <label className="relative shrink-0 cursor-pointer border border-[#102D4A]/10 bg-[#243447]/10 px-[16px] lg:px-[16px] py-[16px] lg:py-[11px] text-[14px] lg:text-[20px] font-semibold text-[#102D4A]/80 focus-within:outline-2 focus-within:outline-[#00ADDB]">
               파일 선택
               <input
@@ -312,10 +272,22 @@ export default function InquiryForm() {
         <div className="mt-[12px] lg:mt-[17px] text-[#102D4A]">
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-[24px] lg:text-[18px]">
             <label className="flex cursor-pointer items-center gap-2">
-              <input type="checkbox" name="privacy" required className="size-[18px] shrink-0 accent-[#00ADDB]" />
+              <input
+                type="checkbox"
+                name="privacy"
+                required
+                className="size-[18px] shrink-0 accent-[#00ADDB]"
+              />
               개인정보 수집 및 이용에 동의합니다.
             </label>
-            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#007FA5] underline underline-offset-2">처리방침 보기</a>
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#007FA5] underline underline-offset-2"
+            >
+              처리방침 보기
+            </a>
           </div>
         </div>
         <button
@@ -324,11 +296,7 @@ export default function InquiryForm() {
           className="relative mt-[12px] lg:mt-[23px] flex h-[58px] w-full items-center justify-center rounded-[5px] bg-[#102D4A] text-[16px] lg:text-[25px] font-semibold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB] disabled:cursor-wait disabled:opacity-60"
         >
           {status === "sending" ? "전송 중…" : "견적문의 보내기"}
-          <ArrowRight
-            size={30}
-            className="absolute right-[28px]"
-            aria-hidden="true"
-          />
+          <ArrowRight size={30} className="absolute right-[28px]" aria-hidden="true" />
         </button>
       </fieldset>
       {notice && (

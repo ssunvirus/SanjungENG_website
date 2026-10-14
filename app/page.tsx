@@ -20,11 +20,11 @@ export default function Home() {
         <MobileEstimate />
       </div>
       <div className="hidden lg:block">
-      <Hero />
-      <Business />
-      <Projects />
-      <Customers />
-      <EstimateCta />
+        <Hero />
+        <Business />
+        <Projects />
+        <Customers />
+        <EstimateCta />
       </div>
     </main>
   );

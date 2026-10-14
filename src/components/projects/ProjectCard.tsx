@@ -21,7 +21,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
       <div className="px-[17px] pt-[10px] pb-5 lg:pb-0">
-        <p className="text-sm font-semibold leading-[24px] text-[#00ADDB] lg:text-[20px]">{project.tag}</p>
+        <p className="text-sm font-semibold leading-[24px] text-[#00ADDB] lg:text-[20px]">
+          {project.tag}
+        </p>
         <h3 className="mt-[9px] text-lg font-bold leading-[27px] lg:whitespace-nowrap lg:text-[22.5px]">
           {project.title}
         </h3>
@@ -41,7 +43,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         >
           {content}
         </Link>
-      ) : content}
+      ) : (
+        content
+      )}
     </article>
   );
 }

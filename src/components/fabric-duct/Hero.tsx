@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative mx-auto h-[320px] lg:h-[600px] w-full max-w-[1920px] overflow-hidden px-7 pt-[45px] lg:px-[245px] lg:pt-[108px] text-white">
       <div className="absolute inset-x-0 top-0 h-full lg:h-[1080px]">
         <Image
-          src="/images/fabric-duct/hero.png"
+          src="/images/fabric-duct/hero.jpg"
           alt="실내 천장에 설치된 섬유덕트"
           fill
           priority
@@ -43,13 +43,15 @@ export default function Hero() {
             href="/projects"
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-[#00ADDB] text-lg lg:text-[30px] font-semibold"
           >
-            시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" /><ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
+            시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
+            <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
           </Link>
           <Link
             href="/contact"
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] border border-white lg:border-0 lg:bg-white/30 text-lg lg:text-[30px] font-semibold"
           >
-            견적문의 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" /><ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
+            견적문의 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
+            <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
           </Link>
         </div>
       </div>

@@ -19,7 +19,7 @@ export default function OrionProductionPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
+      <article className="mx-auto w-full px-5 py-9 lg:max-w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
           title="오리온 생산설비 섬유덕트 설치"
           description="공장의 생산환경에 적합한 공조 시스템 구축을 위한 섬유덕트 설치 현장입니다."

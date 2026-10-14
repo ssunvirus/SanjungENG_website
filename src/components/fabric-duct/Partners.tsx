@@ -5,7 +5,7 @@ export default function Partners() {
   return (
     <section
       aria-label="섬유덕트 공급 파트너"
-      className="relative mx-auto h-auto lg:h-[700px] w-full lg:w-[1440px] bg-white px-5 pb-9 pt-[24px] lg:px-0 lg:pb-0 lg:pt-[36.12px]"
+      className="relative mx-auto h-auto lg:h-[700px] w-full lg:max-w-[1440px] bg-white px-5 pb-9 pt-[24px] lg:px-0 lg:pb-0 lg:pt-[36.12px]"
     >
       <div className="ml-0 lg:ml-[46px]">
         <SectionHeading eyebrow="PARTNERS" title="파트너">
@@ -21,7 +21,10 @@ export default function Partners() {
           sizes="400px"
           className="h-auto lg:h-[267px] max-w-[280px] lg:max-w-none w-full lg:w-[400px] shrink-0 object-cover"
         />
-        <div aria-hidden="true" className="hidden lg:block relative h-[240px] lg:h-[294px] w-0 shrink-0">
+        <div
+          aria-hidden="true"
+          className="hidden lg:block relative h-[240px] lg:h-[294px] w-0 shrink-0"
+        >
           <Image
             src="/images/fabric-duct/partners-divider.svg"
             alt=""

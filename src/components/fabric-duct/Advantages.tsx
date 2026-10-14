@@ -4,14 +4,20 @@ import SectionHeading from "./SectionHeading";
 const advantages = [
   {
     title: "균일한 공기분배",
-    description: ["공간 전체에 공기를 고르게 분산시켜", "핫존, 콜드존과 같은 온도 편차를 줄입니다."],
+    description: [
+      "공간 전체에 공기를 고르게 분산시켜",
+      "핫존, 콜드존과 같은 온도 편차를 줄입니다.",
+    ],
     image: "distribution-icon.png",
     slot: "h-[77px] w-[107px]",
     crop: "h-[188.52%] w-[135.29%] left-[-17.65%] top-[-27.87%]",
   },
   {
     title: "다양한 공간 적용 가능",
-    description: ["저온저장고, 물류창고, 스마트팜, 생산시설 등", "다양한 공간에 맞춤 적용 가능합니다."],
+    description: [
+      "저온저장고, 물류창고, 스마트팜, 생산시설 등",
+      "다양한 공간에 맞춤 적용 가능합니다.",
+    ],
     image: "applications-icon.png",
     slot: "h-[43px] w-[113px]",
     crop: "h-[113.73%] w-[130.34%] left-[-14.61%] top-[-12.75%]",
@@ -30,14 +36,16 @@ const advantages = [
 
 export default function Advantages() {
   return (
-    <section className="mx-auto w-full lg:w-[1440px] px-[20px] lg:px-[51px] py-[36px] lg:py-[70px]">
+    <section className="mx-auto w-full lg:max-w-[1440px] px-[20px] lg:px-[51px] py-[36px] lg:py-[70px]">
       <div className="h-auto lg:h-[170.882px]">
         <SectionHeading
           eyebrow="ADVANTAGES"
           title={
             <>
               섬유덕트의{" "}
-              <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-[#00ADDB]">주요 장점</span>
+              <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-[#00ADDB]">
+                주요 장점
+              </span>
             </>
           }
         >
@@ -66,7 +74,9 @@ export default function Advantages() {
               className={`flex h-auto lg:h-[158px] w-full lg:w-[539px] items-center gap-4 lg:gap-[33px] rounded-[20px] bg-white/60 px-4 lg:px-[47px] py-4 lg:py-[14px] ${index ? "ml-[4px]" : ""}`}
             >
               <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-[#00ADDB]/10">
-                <div className={`relative scale-[0.55] lg:scale-100 overflow-hidden ${advantage.slot}`}>
+                <div
+                  className={`relative scale-[0.55] lg:scale-100 overflow-hidden ${advantage.slot}`}
+                >
                   <div className={`absolute ${advantage.crop}`}>
                     <Image
                       src={`/images/fabric-duct/${advantage.image}`}

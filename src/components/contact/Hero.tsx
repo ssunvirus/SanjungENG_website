@@ -29,7 +29,9 @@ export default function Hero() {
           <ChevronRight size={38} aria-hidden="true" />
           <span aria-current="page">견적문의</span>
         </nav>
-        <h1 className="mt-0 lg:mt-[34px] text-[30px] lg:text-[80px] font-extrabold leading-normal lg:leading-[96px]">견적문의</h1>
+        <h1 className="mt-0 lg:mt-[34px] text-[30px] lg:text-[80px] font-extrabold leading-normal lg:leading-[96px]">
+          견적문의
+        </h1>
         <p className="mt-5 lg:mt-[34px] text-[20px] text-white/80 lg:text-[33.75px] font-medium leading-7 lg:leading-15">
           냉동공조부터 섬유덕트까지
           <br />

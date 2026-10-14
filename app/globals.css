@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* The desktop layouts need the full content width; use the compact layout on laptops. */
+@theme {
+  --breakpoint-lg: 90rem;
+  --breakpoint-xl: 100rem;
+}
+
 @font-face {
   font-family: "Pretendard";
   src: url("/fonts/Pretendard-Thin.woff2") format("woff2");

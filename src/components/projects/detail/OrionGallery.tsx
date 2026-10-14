@@ -27,7 +27,10 @@ export default function OrionGallery() {
       </Link>
       <div className="flex flex-col gap-4 lg:gap-[30px]">
         {photos.map((photo, index) => (
-          <figure key={photo} className="relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden">
+          <figure
+            key={photo}
+            className="relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden"
+          >
             <Image
               src={`/images/projects/orion-production/${photo}.jpg`}
               alt={`오리온 생산설비 섬유덕트 설치 현장 사진 ${index + 1}`}

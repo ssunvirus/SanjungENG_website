@@ -18,7 +18,7 @@ export default function FabricDuctPage() {
       <Hero />
       <div
         aria-hidden="true"
-        className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+        className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
       <div className="h-[4px]" aria-hidden="true" />
       <Introduction />

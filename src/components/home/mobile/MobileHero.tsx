@@ -62,9 +62,9 @@ export default function MobileHero() {
         if (Math.abs(deltaX) < 50 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
         if (event.cancelable) event.preventDefault();
 
-        setHeroIndex((index) => (
-          index + (deltaX < 0 ? 1 : -1) + heroSlides.length
-        ) % heroSlides.length);
+        setHeroIndex(
+          (index) => (index + (deltaX < 0 ? 1 : -1) + heroSlides.length) % heroSlides.length,
+        );
       }}
       onTouchCancel={() => {
         touchStart.current = null;
@@ -91,9 +91,7 @@ export default function MobileHero() {
           <br />
           {slide.title[1]}
         </h1>
-        <p className="mt-3 text-base font-semibold leading-7">
-          {slide.description}
-        </p>
+        <p className="mt-3 text-base font-semibold leading-7">{slide.description}</p>
         <div className="mt-6 flex max-w-[210px] flex-col gap-3">
           <Link
             href="/projects"
@@ -122,8 +120,9 @@ export default function MobileHero() {
                 className="flex size-11 items-center justify-center"
               >
                 <span
-                  className={`h-[6px] w-6 rounded-full ${heroIndex === index ? "bg-[#00ADDB]" : "bg-white/40"
-                    }`}
+                  className={`h-[6px] w-6 rounded-full ${
+                    heroIndex === index ? "bg-[#00ADDB]" : "bg-white/40"
+                  }`}
                 />
               </button>
             ))}

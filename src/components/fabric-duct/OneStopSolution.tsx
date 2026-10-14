@@ -6,7 +6,7 @@ const steps = [
     number: "01",
     title: "냉동/공조설비 설치",
     description: "현장에 맞는 설비 설치",
-    image: "/images/fabric-duct/one-stop-installation.png",
+    image: "/images/fabric-duct/one-stop-installation.jpg",
     line: "/images/fabric-duct/one-stop-line-1.svg",
     lineWidth: 188,
     lineHeight: 3,
@@ -18,7 +18,7 @@ const steps = [
     number: "02",
     title: "섬유덕트 설계/설치",
     description: "공간에 맞춘 기류 설계와 공기분배",
-    image: "/images/fabric-duct/one-stop-design.png",
+    image: "/images/fabric-duct/one-stop-design.jpg",
     line: "/images/fabric-duct/one-stop-line-2.svg",
     lineWidth: 193,
     lineHeight: 3.00041,
@@ -44,7 +44,7 @@ export default function OneStopSolution() {
   return (
     <section
       aria-labelledby="one-stop-heading"
-      className="mx-auto grid pb-6 px-5 lg:px-0 lg:pl-[65px] h-auto lg:h-[817px] w-full lg:w-[1440px] grid-cols-1 lg:grid-cols-[485px_734px] gap-[28px] lg:gap-[52px] pt-[24px] lg:pt-[47.12px]"
+      className="mx-auto grid pb-6 px-5 lg:px-0 lg:pl-[65px] h-auto lg:h-[817px] w-full lg:max-w-[1440px] grid-cols-1 lg:grid-cols-[485px_734px] gap-[28px] lg:gap-[52px] pt-[24px] lg:pt-[47.12px]"
     >
       <div>
         <p className="text-[14px] lg:text-[20px] font-bold leading-[24.0px] lg:leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">

@@ -9,26 +9,48 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto h-auto w-full lg:w-[1440px] bg-[#00ADDB]/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
+    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-[#00ADDB]/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header>
         <div className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
           WORK PROCESS <span className="h-[2px] w-[46px] bg-current" />
         </div>
-        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">냉각탑, 이렇게 점검하고 정비합니다.</h2>
-        <p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">설비 상태 확인부터 부품 교체와 시운전까지 현장에 맞춰 진행합니다.</p>
+        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+          냉각탑, 이렇게 점검하고 정비합니다.
+        </h2>
+        <p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">
+          설비 상태 확인부터 부품 교체와 시운전까지 현장에 맞춰 진행합니다.
+        </p>
       </header>
 
-      <div className="mt-[24px] lg:mt-[60px] grid w-full lg:w-[1257px] grid-cols-2 lg:grid-cols-[repeat(4,300px)] gap-[16px] lg:gap-[19px]">
+      <div className="mt-[24px] lg:mt-[60px] grid w-full grid-cols-2 gap-[16px] lg:grid-cols-4 lg:gap-[19px]">
         {steps.map(([number, title, description, image]) => (
           <article key={number} className="text-center">
-            <div className="relative h-[180px] sm:h-[260px] lg:h-[400px] w-full lg:w-[300px] overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
-              <Image src={`/images/cooling-tower/${image}`} alt={`${title} 작업 현장`} fill sizes="300px" quality={100} className="object-cover" />
+            <div className="relative h-[180px] sm:h-[260px] lg:h-[400px] w-full overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+              <Image
+                src={`/images/cooling-tower/${image}`}
+                alt={`${title} 작업 현장`}
+                fill
+                sizes="300px"
+                quality={100}
+                className="object-cover"
+              />
             </div>
             <div className="relative mt-[24px] lg:mt-[40px]">
-              {number !== "04" && <span aria-hidden="true" className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-[#00ADDB]" />}
-              <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[20px] lg:text-[30px] font-bold text-white">{number}</span>
-              <h3 className="mt-[10px] lg:mt-[25px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-semibold text-[#243447]">{title}</h3>
-              <p className="hidden lg:block mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">{description}</p>
+              {number !== "04" && (
+                <span
+                  aria-hidden="true"
+                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-[#00ADDB]"
+                />
+              )}
+              <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[20px] lg:text-[30px] font-bold text-white">
+                {number}
+              </span>
+              <h3 className="mt-[10px] lg:mt-[25px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-semibold text-[#243447]">
+                {title}
+              </h3>
+              <p className="hidden lg:block mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">
+                {description}
+              </p>
             </div>
           </article>
         ))}

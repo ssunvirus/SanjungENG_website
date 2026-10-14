@@ -14,7 +14,7 @@ export default function CoolingTowerPage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
       <Hero />
-      <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
+      <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
       <Services />
       <Maintenance />
       <WorkProcess />

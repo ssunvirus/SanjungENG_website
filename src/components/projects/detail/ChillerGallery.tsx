@@ -24,7 +24,10 @@ export default function ChillerGallery() {
       </Link>
       <div className="flex flex-col gap-4 lg:gap-[30px]">
         {photos.map((photo) => (
-          <figure key={photo.src} className="relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden">
+          <figure
+            key={photo.src}
+            className="relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden"
+          >
             <Image
               src={`/images/projects/semiconductor-chiller/${photo.src}`}
               alt={photo.alt}

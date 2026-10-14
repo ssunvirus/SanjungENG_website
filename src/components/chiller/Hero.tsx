@@ -19,16 +19,25 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#042750] via-[#102D4A]/70 to-transparent lg:bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
       />
       <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px]">
-        <nav aria-label="현재 위치" className="hidden lg:flex h-[12px] items-center text-[9px] font-bold text-[#00ADDB] lg:h-auto lg:text-[22.5px]">
+        <nav
+          aria-label="현재 위치"
+          className="hidden lg:flex h-[12px] items-center text-[9px] font-bold text-[#00ADDB] lg:h-auto lg:text-[22.5px]"
+        >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" className="size-[12px] lg:size-[38px]" />
           <Link href="/solutions">냉동공조</Link>
           <ChevronRight size={38} aria-hidden="true" className="size-[12px] lg:size-[38px]" />
           <Link href="/solutions">냉동기</Link>
         </nav>
-        <h1 className="mt-0 text-[30px] font-extrabold leading-normal lg:mt-[34px] lg:text-[45px]">냉동기 솔루션</h1>
-        <p className="mt-5 text-[15px] font-medium leading-normal lg:mt-[34px] lg:text-[34px] lg:leading-normal">현장 진단부터 설치, 유지보수까지</p>
-        <p className="mt-5 text-[11px] leading-5 lg:mt-[24px] lg:text-[22.5px] lg:leading-normal">설치 · 교체&nbsp;&nbsp; | &nbsp;&nbsp;수리 · 오버홀&nbsp;&nbsp; | &nbsp;&nbsp;정기점검</p>
+        <h1 className="mt-0 text-[30px] font-extrabold leading-normal lg:mt-[34px] lg:text-[45px]">
+          냉동기 솔루션
+        </h1>
+        <p className="mt-5 text-[15px] font-medium leading-normal lg:mt-[34px] lg:text-[34px] lg:leading-normal">
+          현장 진단부터 설치, 유지보수까지
+        </p>
+        <p className="mt-5 text-[11px] leading-5 lg:mt-[24px] lg:text-[22.5px] lg:leading-normal">
+          설치 · 교체&nbsp;&nbsp; | &nbsp;&nbsp;수리 · 오버홀&nbsp;&nbsp; | &nbsp;&nbsp;정기점검
+        </p>
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link
             href="/projects"

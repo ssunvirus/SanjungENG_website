@@ -19,7 +19,7 @@ export default function SemiconductorChillerPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <article className="mx-auto w-full px-5 py-9 lg:w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
+      <article className="mx-auto w-full px-5 py-9 lg:max-w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview
           title="반도체 공장 칠러 시스템 구축"
           description="반도체 공장의 안정적인 냉각환경 조성을 위한 공냉식 냉동기 교체 현장입니다"

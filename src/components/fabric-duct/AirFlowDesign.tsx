@@ -3,7 +3,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function AirFlowDesign() {
   return (
-    <section className="mx-auto h-auto lg:h-[1276px] w-full lg:w-[1440px] bg-white pb-7 px-5 lg:px-0 lg:pl-[57px] pt-[24px] lg:pt-[48.12px]">
+    <section className="mx-auto h-auto lg:h-[1276px] w-full lg:max-w-[1440px] bg-white pb-7 px-5 lg:px-0 lg:pl-[57px] pt-[24px] lg:pt-[48.12px]">
       <div className="ml-[6px] h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="AIR FLOW DESIGN" title="공기흐름을 계산하고 분배합니다.">
           <p>
@@ -14,7 +14,9 @@ export default function AirFlowDesign() {
       </div>
       <div className="mt-[24px] lg:mt-[68.118px] flex w-full lg:w-[1258px] flex-col items-center gap-[28px] lg:gap-[83px]">
         <div className="relative flex w-full lg:w-[816px] flex-col gap-[28px] lg:gap-[35px] font-semibold">
-          <h3 className="text-center text-[21px] lg:text-[40px] leading-[24px] lg:leading-[48px]">CFD(전산유체공학) 설계</h3>
+          <h3 className="text-center text-[21px] lg:text-[40px] leading-[24px] lg:leading-[48px]">
+            CFD(전산유체공학) 설계
+          </h3>
           <div className="flex flex-col lg:flex-row items-end gap-[16px] lg:gap-[11px]">
             <figure className="w-full lg:w-[400px] shrink-0">
               <div className="relative aspect-[400/436] h-auto lg:aspect-auto lg:h-[436px]">
