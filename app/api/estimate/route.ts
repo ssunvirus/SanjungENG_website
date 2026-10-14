@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { getSmtpPassword } from "../../../src/lib/estimate-smtp";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -82,9 +83,16 @@ export async function POST(request: Request) {
     }
 
     const user = process.env.NAVER_SMTP_USER;
-    const password = process.env.NAVER_SMTP_PASSWORD;
     const to = process.env.ESTIMATE_TO_EMAIL;
-    if (!user || !password || !to) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
+    if (!user || !to) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
+    let password: string | undefined;
+    try {
+        password = await getSmtpPassword();
+    } catch (error) {
+        console.error("SMTP secret lookup failed:", error instanceof Error ? error.name : "UnknownError");
+        return fail("메일 발송 설정을 확인하지 못했습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.", 503);
+    }
+    if (!password) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
 
     const transporter = nodemailer.createTransport({
         host: "smtp.naver.com",

@@ -1,0 +1,10 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "ssm:GetParameter",
+      "Resource": "arn:aws:ssm:ap-southeast-2:235390156511:parameter/amplify/shared/dl6h0cf9vpgpu/NAVER_SMTP_PASSWORD"
+    }
+  ]
+}
