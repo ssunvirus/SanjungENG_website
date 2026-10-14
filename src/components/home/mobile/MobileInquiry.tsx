@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 
 export default function MobileInquiry() {
   const [sending, setSending] = useState(false);
@@ -49,10 +50,15 @@ export default function MobileInquiry() {
           </select>
         </label>
         <label className="block">문의 사항 <span className="text-red-600">*</span><textarea required name="message" maxLength={3000} rows={3} placeholder="예) 냉동기 설치, 섬유덕트, 유지보수 등" className={`${field} py-3`} /></label>
-        <label className="flex items-start gap-2 text-xs font-normal leading-5 text-[#637382]">
-          <input required type="checkbox" name="privacy" className="mt-1 size-4 shrink-0 accent-[#00ADDB]" />
-          개인정보 수집 및 이용에 동의합니다.
-        </label>
+        <div className="text-xs font-normal leading-5 text-[#637382]">
+          <div className="flex flex-wrap items-start gap-x-2 gap-y-1">
+            <label className="flex items-start gap-2">
+              <input required type="checkbox" name="privacy" className="mt-1 size-4 shrink-0 accent-[#00ADDB]" />
+              개인정보 수집 및 이용에 동의합니다.
+            </label>
+            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#007FA5] underline">처리방침 보기</Link>
+          </div>
+        </div>
       </div>
       <button disabled={sending} className="mt-6 flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-[#00ADDB] text-base font-bold text-white disabled:opacity-60">
         {sending ? "전송 중…" : "무료 견적 요청하기"}<ArrowRight size={20} aria-hidden="true" />

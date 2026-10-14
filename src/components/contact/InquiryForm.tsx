@@ -104,13 +104,13 @@ export default function InquiryForm() {
       .filter((file): file is File => file instanceof File && file.size > 0);
     const phone = String(fields.get("phone") ?? "");
     const validationError = !fields.get("manager")
-        ? "담당자명을 입력해주세요."
-        : !/^[+\d()\s-]{8,30}$/.test(phone) ||
-            phone.replace(/\D/g, "").length < 8
-          ? "연락처를 확인해주세요."
-          : !fields.get("message")
-            ? "문의 내용을 입력해주세요."
-            : attachmentError(files);
+      ? "담당자명을 입력해주세요."
+      : !/^[+\d()\s-]{8,30}$/.test(phone) ||
+        phone.replace(/\D/g, "").length < 8
+        ? "연락처를 확인해주세요."
+        : !fields.get("message")
+          ? "문의 내용을 입력해주세요."
+          : attachmentError(files);
     if (validationError) {
       setStatus("error");
       setNotice(validationError);
@@ -309,15 +309,15 @@ export default function InquiryForm() {
             JPG, PNG, WEBP, PDF · 최대 3개 / 전체 3MB
           </p>
         </div>
-        <label className="mt-[12px] lg:mt-[17px] flex cursor-pointer items-center gap-2 text-[14px] lg:text-[20px] font-medium leading-[24px] lg:leading-[24px]">
-          <input
-            type="checkbox"
-            name="privacy"
-            required
-            className="size-[18px] shrink-0 accent-[#00ADDB]"
-          />
-          개인정보 수집 및 이용에 동의합니다.
-        </label>
+        <div className="mt-[12px] lg:mt-[17px] text-[#102D4A]">
+          <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-[24px] lg:text-[18px]">
+            <label className="flex cursor-pointer items-center gap-2">
+              <input type="checkbox" name="privacy" required className="size-[18px] shrink-0 accent-[#00ADDB]" />
+              개인정보 수집 및 이용에 동의합니다.
+            </label>
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#007FA5] underline underline-offset-2">처리방침 보기</a>
+          </div>
+        </div>
         <button
           type="submit"
           disabled={status === "sending"}

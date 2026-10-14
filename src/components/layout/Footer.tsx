@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="h-auto w-full bg-[#102D4A] py-10 text-white xl:h-[340px] xl:py-[22px]">
+        <footer className="min-h-[340px] w-full bg-[#102D4A] py-10 text-white xl:py-[22px]">
             <div className="mx-auto w-full max-w-[1080px] px-5 xl:px-0">
                 <div className="flex flex-col items-center gap-6 text-center md:items-start md:text-left md:flex-row md:flex-wrap xl:h-[181px] xl:flex-nowrap xl:gap-[80px]">
                     <section className="w-[260px] shrink-0">
@@ -54,6 +54,10 @@ export default function Footer() {
                     <span aria-hidden="true" className="h-[9px] w-px bg-white/15" />
                     <span>대표자 : 김윤환</span>
                 </div>
+                <nav aria-label="정책 안내" className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[13px] text-white/75 xl:text-[11px]">
+                    <Link href="/privacy" className="hover:text-white">개인정보 처리방침</Link>
+                    <Link href="/email-collection" className="hover:text-white">이메일 무단수집 거부</Link>
+                </nav>
                 <p className="mt-2 text-center text-[11px] font-light text-white/50 md:text-left">© 2026 (주) 산정엔지니어링. All Rights Reserved</p>
                 <a href="#" aria-label="페이지 맨 위로 이동" className="mx-auto mt-5 flex size-12 items-center justify-center rounded-full bg-white text-xs font-bold text-[#102D4A] md:hidden">↑ TOP</a>
             </div>

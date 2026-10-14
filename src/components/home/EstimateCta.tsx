@@ -2,6 +2,7 @@
 
 import { ChevronDown, Mail, PhoneCall } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
+import Link from "next/link";
 
 const fieldClass = "h-[50px] rounded-[8px] border border-[#D1DFE8] bg-[#F7FBFD] px-[14px] text-[14px] text-[#102D4A] outline-none transition-colors placeholder:text-[#6E7D8C] focus:border-[#00ADDB]";
 
@@ -57,8 +58,8 @@ export default function EstimateCta() {
     }
 
     return (
-        <section id="contact" aria-labelledby="estimate-heading" className="mx-auto h-[696px] w-[1440px] bg-[#EFF7FB] px-[105px] py-[75px]">
-            <div className="flex h-full w-[1230px] items-center justify-center gap-[60px]">
+        <section id="contact" aria-labelledby="estimate-heading" className="mx-auto min-h-[696px] w-[1440px] bg-[#EFF7FB] px-[105px] py-[75px]">
+            <div className="flex min-h-[546px] w-[1230px] items-center justify-center gap-[60px]">
                 <div className="flex w-[525px] shrink-0 flex-col items-start gap-[21px] text-[#102D4A]">
                     <div className="flex h-6 items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-[#00ADDB]/60">
                         <span>SOLUTION</span>
@@ -87,7 +88,7 @@ export default function EstimateCta() {
                     </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex size-[570px] shrink-0 flex-col gap-[15px] rounded-[15px] bg-white px-[39px] py-[34px] shadow-[0_14px_34px_rgba(16,45,74,0.12)]">
+                <form onSubmit={handleSubmit} className="flex min-h-[570px] w-[570px] shrink-0 flex-col gap-[15px] rounded-[15px] bg-white px-[39px] py-[34px] shadow-[0_14px_34px_rgba(16,45,74,0.12)]">
                     <div>
                         <h3 className="text-[26px] font-bold leading-[34px] text-[#102D4A]">간편 견적 문의</h3>
                         <p className="mt-1 text-[14px] leading-[20px] text-[#637382]">필수 정보만 남겨주시면 담당자가 확인 후 연락드립니다.</p>
@@ -119,10 +120,15 @@ export default function EstimateCta() {
                         <input name="email" type="email" aria-label="이메일" placeholder="이메일  example@company.com" className={fieldClass} />
                     </div>
                     <textarea required maxLength={3000} name="message" aria-label="현장 및 문의 내용" placeholder="현장 및 문의 내용&#10;현장 위치, 설비 종류, 요청 작업을 간단히 입력해주세요." className={`${fieldClass} h-[87px] resize-none py-[8px]`} />
-                    <label className="flex cursor-pointer items-center gap-2 text-[13px] leading-[18px] text-[#637382]">
-                        <input required name="privacy" type="checkbox" className="size-[15px] accent-[#00ADDB]" />
-                        개인정보 수집 및 이용에 동의합니다.
-                    </label>
+                    <div className="text-[12px] leading-[18px] text-[#637382]">
+                        <div className="mt-1 flex items-center gap-2">
+                            <label className="flex cursor-pointer items-center gap-2">
+                                <input required name="privacy" type="checkbox" className="size-[15px] accent-[#00ADDB]" />
+                                개인정보 수집 및 이용에 동의합니다.
+                            </label>
+                            <Link href="/privacy" target="_blank" rel="noopener noreferrer" className="shrink-0 text-[#007FA5] underline">처리방침 보기</Link>
+                        </div>
+                    </div>
                     <button type="submit" disabled={status === "sending"} className="h-[51px] shrink-0 rounded-[8px] bg-[#00ADDB] text-[17px] font-bold text-white transition-colors hover:bg-[#0098c2] disabled:cursor-wait disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#102D4A]">
                         {status === "sending" ? "전송 중…" : "무료 견적 요청하기　→"}
                     </button>
