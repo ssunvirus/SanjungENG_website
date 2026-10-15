@@ -7,6 +7,7 @@ import Services from "../../src/components/chiller/Services";
 import WorkProcess from "../../src/components/chiller/WorkProcess";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/solutions" },
   title: "냉동공조 | 산정엔지니어링",
   description: "냉동기 설치와 교체, 수리와 오버홀, 정기점검 서비스를 소개합니다.",
 };

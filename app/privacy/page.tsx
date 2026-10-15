@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "개인정보 처리방침 | 산정엔지니어링",
   description: "산정엔지니어링의 견적문의 개인정보 처리방침입니다.",
 };

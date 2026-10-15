@@ -7,6 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/gurye-pool" },
   title: "구례 실내수영장 섬유덕트 설치 | 산정엔지니어링",
   description: "실내수영장의 균일한 공기 분배를 위한 섬유덕트 설치 현장입니다.",
 };

@@ -6,6 +6,7 @@ import Highlights from "../../src/components/about/Highlights";
 import Introduction from "../../src/components/about/Introduction";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "회사소개 | 산정엔지니어링",
   description:
     "30년의 현장 경험과 기술을 바탕으로 냉동공조 솔루션을 제공하는 산정엔지니어링을 소개합니다.",

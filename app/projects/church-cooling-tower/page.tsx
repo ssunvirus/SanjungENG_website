@@ -7,6 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/church-cooling-tower" },
   title: "감리교회 냉각탑 유지보수 | 산정엔지니어링",
   description: "냉각탑의 원활한 열교환과 냉각 성능 유지를 위한 충진물 교체 현장입니다.",
 };

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/wonsam-nonghyup" },
   title: "원삼농협 저온저장고 냉동설비 설치 | 산정엔지니어링",
   description: "경기도 용인 원삼농협 저온저장고의 CDU 및 유니트 쿨러 설치 현장을 소개합니다.",
 };

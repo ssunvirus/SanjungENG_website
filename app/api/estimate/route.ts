@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { getSmtpPassword } from "../../../src/lib/estimate-smtp";
 import { takeEstimateSlot } from "../../../src/lib/estimate-rate-limit";
+import { isSupportedAttachment } from "../../../src/lib/estimate-attachments";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -82,7 +83,11 @@ export async function POST(request: Request) {
   if (!manager || manager.length > 100) return fail("담당자명을 입력해주세요. (100자 이내)", 400);
   if (!/^[+\d()\s-]{8,30}$/.test(phone) || phone.replace(/\D/g, "").length < 8)
     return fail("연락처를 확인해주세요.", 400);
-  if (email && (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)))
+  if (
+    email &&
+    (email.length > 254 ||
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/.test(email))
+  )
     return fail("이메일 주소를 확인해주세요.", 400);
   if (!categories.includes(category)) return fail("문의 분야를 선택해주세요.", 400);
   if (!message) return fail("문의 내용을 입력해주세요.", 400);
@@ -92,13 +97,7 @@ export async function POST(request: Request) {
   if (files.length > 3 || files.reduce((total, file) => total + file.size, 0) > 3 * 1024 * 1024) {
     return fail("첨부파일은 최대 3개, 전체 3MB 이내로 선택해주세요.", 400);
   }
-  if (
-    files.some(
-      (file) =>
-        !/\.(jpe?g|png|webp|pdf)$/i.test(file.name) ||
-        !["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(file.type),
-    )
-  ) {
+  if ((await Promise.all(files.map(isSupportedAttachment))).some((supported) => !supported)) {
     return fail("JPG, PNG, WEBP 또는 PDF 파일을 선택해주세요.", 400);
   }
 

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/aju-pharmaceutical" },
   title: "아주약품 터보냉동기 설치공사 | 산정엔지니어링",
   description: "시설의 효율적인 냉방 시스템 구축을 위해 터보냉동기를 설치한 현장입니다.",
 };

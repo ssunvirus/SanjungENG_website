@@ -5,6 +5,7 @@ import Hero from "../../../src/components/cold-storage/Hero";
 import WorkProcess from "../../../src/components/cold-storage/WorkProcess";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/solutions/cold-storage" },
   title: "저온저장고 | 산정엔지니어링",
   description: "저온저장고 CDU와 유니트쿨러 설치, 냉매 배관 및 제어설비 시공 서비스를 소개합니다.",
 };

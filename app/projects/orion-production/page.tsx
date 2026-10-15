@@ -7,6 +7,7 @@ import OrionGallery from "../../../src/components/projects/detail/OrionGallery";
 import BlogBanner from "../../../src/components/projects/detail/BlogBanner";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/orion-production" },
   title: "오리온 생산설비 섬유덕트 설치 | 산정엔지니어링",
   description: "공장의 생산환경에 적합한 공조 시스템 구축을 위한 섬유덕트 설치 현장입니다.",
 };

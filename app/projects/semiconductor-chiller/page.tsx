@@ -7,6 +7,7 @@ import Link from "next/link";
 import { List } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/projects/semiconductor-chiller" },
   title: "반도체 공장 칠러 시스템 구축 | 산정엔지니어링",
   description: "반도체 공장의 안정적인 냉각환경 조성을 위한 공냉식 냉동기 교체 현장입니다",
 };

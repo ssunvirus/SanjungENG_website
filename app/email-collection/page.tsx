@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/email-collection" },
   title: "이메일 무단수집 거부 | 산정엔지니어링",
 };
 
