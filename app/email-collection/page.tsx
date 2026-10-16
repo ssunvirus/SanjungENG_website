@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   alternates: { canonical: "/email-collection" },
   title: "이메일 무단수집 거부 | 산정엔지니어링",
+  description: "산정엔지니어링 홈페이지에 게시된 이메일 주소의 무단수집 거부 안내입니다.",
 };
 
 export default function EmailCollectionPage() {
