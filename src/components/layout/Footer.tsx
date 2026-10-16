@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="min-h-[340px] w-full bg-[#102D4A] py-10 text-white xl:py-[22px]">
+    <footer className="min-h-[340px] w-full bg-brand-navy py-10 text-white xl:py-[22px]">
       <div className="mx-auto w-full max-w-[1080px] px-5 xl:px-0">
         <div className="flex flex-col items-center gap-6 text-center md:items-start md:text-left md:flex-row md:flex-wrap xl:h-[181px] xl:flex-nowrap xl:gap-[80px]">
           <section className="w-[260px] shrink-0">
@@ -28,16 +28,16 @@ export default function Footer() {
           />
           <address className="w-full not-italic md:w-[250px] xl:w-[194px] xl:shrink-0">
             <p className="text-[11px] font-light text-white/75">상담 및 문의</p>
-            <a href="tel:01053401728" className="mt-[9px] block text-[19px] font-Medium">
+            <a href="tel:01053401728" className="mt-[9px] block text-[19px] font-medium">
               010-5340-1728
             </a>
             <dl className="mx-auto mt-[9px] grid w-fit grid-cols-[48px_1fr] gap-y-[9px] text-left text-[14px] md:mx-0 xl:text-[11px]">
               <dt className="font-light text-white/75">Tel</dt>
-              <dd className="font-Medium">
+              <dd className="font-medium">
                 <a href="tel:028911728">02-891-1728</a>
               </dd>
               <dt className="font-light text-white/75">E-mail</dt>
-              <dd className="font-Medium">
+              <dd className="font-medium">
                 <a href="mailto:sanjungeng@naver.com">sanjungeng@naver.com</a>
               </dd>
             </dl>
@@ -121,7 +121,7 @@ export default function Footer() {
         <a
           href="#"
           aria-label="페이지 맨 위로 이동"
-          className="mx-auto mt-5 flex size-12 items-center justify-center rounded-full bg-white text-xs font-bold text-[#102D4A] md:hidden"
+          className="mx-auto mt-5 flex size-12 items-center justify-center rounded-full bg-white text-xs font-bold text-brand-navy md:hidden"
         >
           ↑ TOP
         </a>

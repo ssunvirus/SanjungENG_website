@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type ResourceDocument = {
   title: string;
-  file: string | null;
+  file: string;
   image?: string;
   format?: string;
   manufacturer?: string;
@@ -143,7 +143,6 @@ const pageSize = 8;
 
 export default function DownloadCenter() {
   const [activeTab, setActiveTab] = useState(0);
-  const [message, setMessage] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const tabDocuments = activeTab === 1 ? documents.slice(0, 2) : certificateDocuments;
   const pageCount = Math.ceil(tabDocuments.length / pageSize);
@@ -151,7 +150,6 @@ export default function DownloadCenter() {
 
   function selectPage(page: number) {
     setCurrentPage(Math.max(1, Math.min(pageCount, page)));
-    setMessage("");
   }
 
   return (
@@ -160,7 +158,7 @@ export default function DownloadCenter() {
       aria-labelledby="download-title"
     >
       <header className="ml-0 mt-0 lg:ml-[78px] lg:mt-[30px]">
-        <p className="flex items-center gap-3 text-[10px] font-semibold tracking-[2px] lg:gap-[20px] lg:text-[20px] lg:tracking-[6px] text-[#00ADDB]/60">
+        <p className="flex items-center gap-3 text-[10px] font-semibold tracking-[2px] lg:gap-[20px] lg:text-[20px] lg:tracking-[6px] text-brand-blue/60">
           CERTIFICATIONS & CATALOGS
           <Image
             src={`${assetRoot}/heading-line.svg`}
@@ -172,7 +170,7 @@ export default function DownloadCenter() {
         </p>
         <h2
           id="download-title"
-          className="mt-[10px] text-[28px] lg:text-[55px] font-bold leading-[1.2] tracking-[1px] lg:tracking-[2.75px] text-[#102D4A]"
+          className="mt-[10px] text-[28px] lg:text-[55px] font-bold leading-[1.2] tracking-[1px] lg:tracking-[2.75px] text-brand-navy"
         >
           자료실
         </h2>
@@ -198,7 +196,6 @@ export default function DownloadCenter() {
               onClick={() => {
                 setActiveTab(index);
                 setCurrentPage(1);
-                setMessage("");
               }}
               onKeyDown={(event) => {
                 if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
@@ -206,23 +203,18 @@ export default function DownloadCenter() {
                 const next = event.key === "Home" ? 0 : event.key === "End" ? 1 : 1 - index;
                 setActiveTab(next);
                 setCurrentPage(1);
-                setMessage("");
                 document.getElementById(`resource-tab-${next}`)?.focus();
               }}
-              className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] cursor-pointer self-start border-b-2 pb-3 lg:border-0 lg:pb-0 text-left text-[16px] lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${activeTab === index ? "text-[#00ADDB] border-[#00ADDB]" : "text-[#102D4A]/60 border-[#B7C6CF]"}`}
+              className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] cursor-pointer self-start border-b-2 pb-3 lg:border-0 lg:pb-0 text-left text-[16px] lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-brand-blue ${activeTab === index ? "text-brand-blue border-brand-blue" : "text-brand-navy/60 border-[#B7C6CF]"}`}
             >
               {tab}
             </button>
           ))}
         </div>
         <div aria-hidden="true" className="relative hidden lg:block">
-          <Image src={`${assetRoot}/tab-line.svg`} width={1294} height={2} alt="" />
-          <Image
-            src={`${assetRoot}/tab-active-line.svg`}
-            width={219}
-            height={2}
-            alt=""
-            className="absolute top-0 transition-transform"
+          <div className="h-[2px] w-[1294px] bg-brand-navy/20" />
+          <div
+            className="absolute top-0 h-[2px] w-[219px] bg-brand-blue transition-transform"
             style={{ transform: `translateX(${activeTab * 423}px)` }}
           />
         </div>
@@ -255,54 +247,34 @@ export default function DownloadCenter() {
                 </span>
               </div>
               <div className="relative flex min-h-[210px] flex-col px-3 py-3 lg:block lg:min-h-0 lg:h-[166.08px] lg:px-[29.16px] lg:pt-[12.15px] lg:pb-0">
-                <p className="text-[12.15px] font-semibold text-[#00ADDB]">
+                <p className="text-[12.15px] font-semibold text-brand-blue">
                   {activeTab === 1 ? "카탈로그" : "인증서/시험성적서"}
                 </p>
-                <h3 className="mt-[10px] break-words text-sm lg:break-keep lg:text-[16.2px] font-bold leading-[22px] tracking-[0.81px] text-[#102D4A]">
+                <h3 className="mt-[10px] break-words text-sm lg:break-keep lg:text-[16.2px] font-bold leading-[22px] tracking-[0.81px] text-brand-navy">
                   {item.title}
                 </h3>
-                <p className="mt-[8px] text-[14.58px] font-semibold leading-[20px] tracking-[0.73px] text-[#102D4A]/80">
-                  {item.manufacturer ?? (activeTab === 0 && item.file ? "MultiXair" : "")}
+                <p className="mt-[8px] text-[14.58px] font-semibold leading-[20px] tracking-[0.73px] text-brand-navy/80">
+                  {item.manufacturer ?? (activeTab === 0 ? "MultiXair" : "")}
                 </p>
-                <Image
-                  src={`${assetRoot}/card-line.svg`}
-                  width={217.082}
-                  height={0.81}
-                  alt=""
+                <div
                   aria-hidden="true"
-                  className="hidden lg:block absolute left-[29.97px] top-[120.72px]"
+                  className="hidden lg:block absolute left-[29.97px] top-[120.72px] h-[0.81px] w-[217.082px] bg-brand-navy/20"
                 />
-                {item.file ? (
-                  <a
-                    href={item.file}
-                    download
-                    className="mt-auto flex min-h-11 justify-end border-t border-[#D1DFE8] pt-2 lg:mt-0 lg:absolute lg:left-[165.24px] lg:top-[128.82px] lg:min-h-0 lg:h-[24.3px] lg:border-0 lg:pt-0 items-center gap-[5px] text-[14.58px] font-bold text-[#00ADDB]"
-                  >
-                    다운로드
-                    <Download size={19.44} aria-hidden="true" />
-                  </a>
-                ) : (
-                  <button
-                    type="button"
-                    aria-label={`${item.title} 다운로드 (준비 중)`}
-                    onClick={() =>
-                      setMessage(
-                        "자료 파일을 준비 중입니다. 필요한 자료는 견적문의로 요청해 주세요.",
-                      )
-                    }
-                    className="mt-auto flex min-h-11 justify-end border-t border-[#D1DFE8] pt-2 lg:mt-0 lg:absolute lg:left-[165.24px] lg:top-[128.82px] lg:min-h-0 lg:h-[24.3px] lg:border-0 lg:pt-0 cursor-pointer items-center gap-[5px] text-[14.58px] font-bold text-[#00ADDB]"
-                  >
-                    다운로드
-                    <Download size={19.44} aria-hidden="true" />
-                  </button>
-                )}
+                <a
+                  href={item.file}
+                  download
+                  className="mt-auto flex min-h-11 justify-end border-t border-[#D1DFE8] pt-2 lg:mt-0 lg:absolute lg:left-[165.24px] lg:top-[128.82px] lg:min-h-0 lg:h-[24.3px] lg:border-0 lg:pt-0 items-center gap-[5px] text-[14.58px] font-bold text-brand-blue"
+                >
+                  다운로드
+                  <Download size={19.44} aria-hidden="true" />
+                </a>
               </div>
             </article>
           ))}
         </div>
         <nav
           aria-label="자료 페이지"
-          className="mt-9 lg:mt-[77px] flex h-[48px] items-center justify-center gap-[5px] text-[30px] text-[#102D4A]/65"
+          className="mt-9 lg:mt-[77px] flex h-[48px] items-center justify-center gap-[5px] text-[30px] text-brand-navy/65"
         >
           <button
             type="button"
@@ -324,13 +296,9 @@ export default function DownloadCenter() {
                 className="relative flex h-[40px] w-[30px] cursor-pointer items-center justify-center"
               >
                 {page === currentPage && (
-                  <Image
-                    src={`${assetRoot}/page-active.svg`}
-                    width={40}
-                    height={40}
-                    alt=""
+                  <span
                     aria-hidden="true"
-                    className="absolute left-1/2 max-w-none -translate-x-1/2"
+                    className="absolute left-1/2 size-10 rounded-full bg-brand-blue/60 -translate-x-1/2"
                   />
                 )}
                 <span className={`relative ${page === currentPage ? "text-white" : ""}`}>
@@ -349,9 +317,8 @@ export default function DownloadCenter() {
             <ChevronRight size={48} aria-hidden="true" />
           </button>
         </nav>
-        <p role="status" className="mt-[16px] min-h-[28px] text-center text-[18px] text-[#102D4A]">
-          {message}
-        </p>
+
+        <div aria-hidden="true" className="mt-[16px] min-h-[28px]" />
       </div>
     </section>
   );

@@ -1,32 +1,24 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import type { FormEvent } from "react";
 import Link from "next/link";
-import { submitEstimate } from "@/src/lib/submit-estimate";
+import { useEstimateForm } from "@/src/hooks/use-estimate-form";
+import { estimateCategories, estimateLimits } from "@/src/lib/estimate-rules";
 
 export default function MobileInquiry() {
-  const [sending, setSending] = useState(false);
-  const [notice, setNotice] = useState("");
+  const { status, notice, send } = useEstimateForm();
+  const sending = status === "sending";
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (sending) return;
     const form = event.currentTarget;
     const fields = new FormData(form);
-    setSending(true);
-    setNotice("");
-    try {
-      await submitEstimate(fields);
-      setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
+    if (await send(fields)) {
       form.reset();
-    } catch (error) {
-      setNotice(error instanceof Error ? error.message : "연결을 확인하고 다시 시도해주세요.");
-    } finally {
-      setSending(false);
     }
   }
   const field =
-    "mt-2 min-h-12 w-full rounded-lg border border-[#D1DFE8] bg-[#F7FBFD] px-3 text-base font-normal outline-none focus:border-[#00ADDB]";
+    "mt-2 min-h-12 w-full rounded-lg border border-[#D1DFE8] bg-[#F7FBFD] px-3 text-base font-normal outline-none focus:border-brand-blue";
   return (
     <form onSubmit={submit} className="mt-8 rounded-[20px] bg-white p-6">
       <input
@@ -47,7 +39,7 @@ export default function MobileInquiry() {
           <input
             name="company"
             autoComplete="organization"
-            maxLength={100}
+            maxLength={estimateLimits.company}
             placeholder="회사명을 입력해주세요"
             className={field}
           />
@@ -58,7 +50,7 @@ export default function MobileInquiry() {
             required
             name="manager"
             autoComplete="name"
-            maxLength={100}
+            maxLength={estimateLimits.manager}
             placeholder="이름을 입력해주세요"
             className={field}
           />
@@ -80,8 +72,9 @@ export default function MobileInquiry() {
             <option value="" disabled>
               문의 분야를 선택해주세요
             </option>
-            <option>냉동공조</option>
-            <option>섬유덕트</option>
+            {estimateCategories.map((value) => (
+              <option key={value}>{value}</option>
+            ))}
           </select>
         </label>
         <label className="block">
@@ -89,7 +82,7 @@ export default function MobileInquiry() {
           <textarea
             required
             name="message"
-            maxLength={3000}
+            maxLength={estimateLimits.message}
             rows={3}
             placeholder="예) 냉동기 설치, 섬유덕트, 유지보수 등"
             className={`${field} py-3`}
@@ -102,7 +95,7 @@ export default function MobileInquiry() {
                 required
                 type="checkbox"
                 name="privacy"
-                className="mt-1 size-4 shrink-0 accent-[#00ADDB]"
+                className="mt-1 size-4 shrink-0 accent-brand-blue"
               />
               개인정보 수집 및 이용에 동의합니다.
             </label>
@@ -119,7 +112,7 @@ export default function MobileInquiry() {
       </div>
       <button
         disabled={sending}
-        className="mt-6 flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-[#00ADDB] text-base font-bold text-white disabled:opacity-60"
+        className="mt-6 flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-brand-blue text-base font-bold text-white disabled:opacity-60"
       >
         {sending ? "전송 중…" : "무료 견적 요청하기"}
         <ArrowRight size={20} aria-hidden="true" />

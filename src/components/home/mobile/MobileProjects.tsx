@@ -1,41 +1,10 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
-import Eyebrow from "./Eyebrow";
-
-const cases = [
-  {
-    title: "농협 저온저장고 냉동설비 설치",
-    description: "CDU / 유니트 쿨러 설치",
-    tag: "저온저장고 시공",
-    image: "/images/projects/cold-storage.jpg",
-    href: "/projects/wonsam-nonghyup",
-  },
-  {
-    title: "구례 실내수영장 섬유덕트 설치",
-    description: "섬유덕트 설계 / 설치",
-    tag: "섬유덕트 시공",
-    image: "/images/projects/pool-fabric-duct.jpg",
-    href: "/projects/gurye-pool",
-  },
-  {
-    title: "반도체 공장 칠러 시스템 구축",
-    description: "공냉식 냉동기 교체",
-    tag: "냉동기 교체",
-    image: "/images/home-refresh/business-hvac.jpg",
-    href: "/projects/semiconductor-chiller",
-  },
-  {
-    title: "감리교회 냉각탑 유지보수",
-    description: "냉각탑 충진물 교체",
-    tag: "냉각탑 정비",
-    image: "/images/projects-page/cooling-tower.jpg",
-    href: "/projects/church-cooling-tower",
-  },
-];
+import Eyebrow from "@/src/components/shared/SectionEyebrow";
+import { mobileFeaturedProjects as cases } from "@/src/components/projects/data";
 
 export default function MobileProjects() {
   const [caseIndex, setCaseIndex] = useState(0);
@@ -44,7 +13,7 @@ export default function MobileProjects() {
   const project = cases[caseIndex];
   return (
     <section className="mx-auto max-w-[600px] px-5 py-8">
-      <Eyebrow>PROJECTS</Eyebrow>
+      <Eyebrow variant="compact">PROJECTS</Eyebrow>
       <div className="mt-3 flex items-center justify-between">
         <h2 className="text-[28px] font-extrabold">시공사례</h2>
         <Link href="/projects" className="flex min-h-11 items-center gap-2 text-sm">
@@ -91,7 +60,7 @@ export default function MobileProjects() {
       >
         <div className="relative aspect-[1.7]">
           <Image
-            src={project.image}
+            src={project.homeImage ?? project.image}
             alt={project.title}
             fill
             sizes="(max-width: 600px) 100vw, 600px"

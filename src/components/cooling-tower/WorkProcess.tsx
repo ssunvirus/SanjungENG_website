@@ -9,12 +9,12 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-[#00ADDB]/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
+    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-brand-blue/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header>
-        <div className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+        <div className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           WORK PROCESS <span className="h-[2px] w-[46px] bg-current" />
         </div>
-        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+        <h2 className="mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
           냉각탑, 이렇게 점검하고 정비합니다.
         </h2>
         <p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">
@@ -39,16 +39,16 @@ export default function WorkProcess() {
               {number !== "04" && (
                 <span
                   aria-hidden="true"
-                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-[#00ADDB]"
+                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-brand-blue"
                 />
               )}
-              <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[20px] lg:text-[30px] font-bold text-white">
+              <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-brand-blue text-[20px] lg:text-[30px] font-bold text-white">
                 {number}
               </span>
-              <h3 className="mt-[10px] lg:mt-[25px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-semibold text-[#243447]">
+              <h3 className="mt-[10px] lg:mt-[25px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-semibold text-brand-text">
                 {title}
               </h3>
-              <p className="hidden lg:block mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">
+              <p className="hidden lg:block mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-brand-text/80">
                 {description}
               </p>
             </div>

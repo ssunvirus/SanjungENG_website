@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { projects } from "./data";
@@ -44,16 +43,10 @@ export default function ProjectGallery() {
       className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:max-w-[1440px] lg:px-0 lg:pt-[81px]"
     >
       <div className="flex items-center gap-[20px]">
-        <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+        <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           PROJECTS
         </p>
-        <Image
-          src="/images/projects-page/heading-line.svg"
-          width={46.3058}
-          height={2}
-          alt=""
-          aria-hidden="true"
-        />
+        <span aria-hidden="true" className="h-[2px] w-[46.3058px] bg-brand-blue/60" />
       </div>
       <h2
         id="projects-list-heading"
@@ -76,26 +69,16 @@ export default function ProjectGallery() {
               setCategory(value);
               setPage(1);
             }}
-            className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] border-b-2 pb-3 lg:border-0 lg:pb-0 cursor-pointer self-start whitespace-nowrap text-center lg:text-left text-base lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${category === value ? "text-[#00ADDB] border-[#00ADDB]" : "text-[#102D4A]/60 border-[#B7C6CF]"}`}
+            className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] border-b-2 pb-3 lg:border-0 lg:pb-0 cursor-pointer self-start whitespace-nowrap text-center lg:text-left text-base lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-brand-blue ${category === value ? "text-brand-blue border-brand-blue" : "text-brand-navy/60 border-[#B7C6CF]"}`}
           >
             {value}
           </button>
         ))}
       </div>
       <div aria-hidden="true" className="relative hidden lg:block">
-        <Image
-          src="/images/projects-page/tabs-line.svg"
-          width={1472}
-          height={2.03808}
-          alt=""
-          aria-hidden="true"
-        />
-        <Image
-          src="/images/fabric-duct/resources/tab-active-line.svg"
-          width={219}
-          height={2}
-          alt=""
-          className="absolute top-0 transition-transform"
+        <div className="h-[2.03808px] w-[1472px] bg-brand-navy/20" />
+        <div
+          className="absolute top-0 h-[2px] w-[219px] bg-brand-blue transition-transform"
           style={{ transform: `translateX(${categories.indexOf(category) * 379}px)` }}
         />
       </div>
@@ -107,7 +90,7 @@ export default function ProjectGallery() {
             ))}
           </div>
         ) : (
-          <p className="flex min-h-[432px] items-center justify-center bg-white text-[25px] text-[#102D4A]/60">
+          <p className="flex min-h-[432px] items-center justify-center bg-white text-[25px] text-brand-navy/60">
             시공사례를 준비 중입니다.
           </p>
         )}
@@ -121,7 +104,7 @@ export default function ProjectGallery() {
           aria-label="이전 페이지"
           onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className="flex size-[48px] cursor-pointer items-center justify-center text-[#102D4A]/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+          className="flex size-[48px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
         >
           <ChevronLeft size={48} aria-hidden="true" />
         </button>
@@ -133,16 +116,12 @@ export default function ProjectGallery() {
               aria-label={`${number}페이지`}
               aria-current={page === number ? "page" : undefined}
               onClick={() => setPage(number)}
-              className={`relative flex size-[40px] cursor-pointer items-center justify-center text-[30px] leading-[36px] tracking-[1.5px] focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${page === number ? "text-white" : "text-[#102D4A]/65"}`}
+              className={`relative flex size-[40px] cursor-pointer items-center justify-center text-[30px] leading-[36px] tracking-[1.5px] focus-visible:outline-2 focus-visible:outline-brand-blue ${page === number ? "text-white" : "text-brand-navy/65"}`}
             >
               {page === number && (
-                <Image
-                  src="/images/projects-page/page-active.svg"
-                  width={40}
-                  height={40}
-                  alt=""
+                <span
                   aria-hidden="true"
-                  className="absolute inset-0"
+                  className="absolute inset-0 rounded-full bg-brand-blue/60"
                 />
               )}
               <span className="relative">{number}</span>
@@ -154,7 +133,7 @@ export default function ProjectGallery() {
           aria-label="다음 페이지"
           onClick={() => setPage(page + 1)}
           disabled={page === pageCount}
-          className="flex size-[48px] cursor-pointer items-center justify-center text-[#102D4A]/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
+          className="flex size-[48px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
         >
           <ChevronRight size={48} aria-hidden="true" />
         </button>

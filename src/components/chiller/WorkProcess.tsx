@@ -30,10 +30,10 @@ const steps = [
 export default function WorkProcess() {
   return (
     <section className="mx-auto w-full bg-[#E3F6FC] px-5 py-9 lg:max-w-[1440px] lg:px-[120px] lg:py-[50px]">
-      <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-[#00ADDB]/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]">
-        WORK PROCESS <span className="h-[2px] w-[46px] bg-[#00ADDB]/60" />
+      <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]">
+        WORK PROCESS <span className="h-[2px] w-[46px] bg-brand-blue/60" />
       </p>
-      <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-[#102D4A] lg:mt-[10px] lg:text-[50px] lg:tracking-[2.5px]">
+      <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-brand-navy lg:mt-[10px] lg:text-[50px] lg:tracking-[2.5px]">
         설치 &amp; 교체, 이렇게 진행합니다.
       </h2>
       <p className="mt-3 text-[15px] font-semibold lg:mt-[25px] lg:text-[19px]">
@@ -57,16 +57,16 @@ export default function WorkProcess() {
               {index < 3 && (
                 <span
                   aria-hidden="true"
-                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden h-[2px] bg-[#00ADDB] lg:block"
+                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden h-[2px] bg-brand-blue lg:block"
                 />
               )}
-              <span className="relative z-10 mx-auto flex size-11 items-center justify-center rounded-full bg-[#00ADDB] text-lg font-bold text-white lg:size-[76px] lg:text-[30px]">
+              <span className="relative z-10 mx-auto flex size-11 items-center justify-center rounded-full bg-brand-blue text-lg font-bold text-white lg:size-[76px] lg:text-[30px]">
                 {step.number}
               </span>
               <h3 className="mt-3 text-lg font-semibold lg:mt-[25px] lg:text-[30px]">
                 {step.title}
               </h3>
-              <p className="mt-2 text-sm font-semibold text-[#243447]/80 lg:mt-[15px] lg:whitespace-nowrap lg:text-[22px]">
+              <p className="mt-2 text-sm font-semibold text-brand-text/80 lg:mt-[15px] lg:whitespace-nowrap lg:text-[22px]">
                 {step.description}
               </p>
             </div>

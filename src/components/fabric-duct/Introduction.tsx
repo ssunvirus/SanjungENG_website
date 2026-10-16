@@ -38,7 +38,7 @@ export default function Introduction() {
           <h3 className="ml-[15px] text-[21px] lg:text-[40px] font-bold leading-[24px] lg:leading-[48px] tracking-[1px] lg:tracking-[2px] text-[#006EB8]">
             금속덕트와 차이점
           </h3>
-          <table className="mt-[24px] lg:mt-[33px] h-auto lg:h-[337px] w-full max-w-[681px] table-fixed border-separate border-spacing-0 text-center text-[14px] lg:text-[20px] tracking-[1px] lg:tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
+          <table className="mt-[24px] lg:mt-[33px] h-auto lg:h-[337px] w-full max-w-[681px] table-fixed border-separate border-spacing-0 text-center text-[14px] lg:text-[20px] tracking-[1px] [&_th:not(:last-child)]:border-r-[5px] [&_td:not(:last-child)]:border-r-[5px] [&_th]:border-transparent [&_td]:border-transparent [&_th]:bg-clip-padding [&_td]:bg-clip-padding [&_tbody_th]:border-t-[10px] [&_tbody_td]:border-t-[10px]">
             <colgroup>
               <col className="w-1/5" />
               <col className="w-2/5" />
@@ -49,7 +49,7 @@ export default function Introduction() {
                 {rows[0].map((cell, index) => (
                   <th
                     key={cell}
-                    className={`h-[48px] lg:h-[59.4px] text-sm lg:text-[25px] font-bold ${index === 2 ? "bg-[#00ADDB]/60 text-white" : "bg-[#F0F1F3] text-[#102D4A]"}`}
+                    className={`h-[48px] lg:h-[59.4px] text-sm lg:text-[25px] font-bold ${index === 2 ? "bg-brand-blue/60 text-white" : "bg-[#F0F1F3] text-brand-navy"}`}
                   >
                     {cell}
                   </th>
@@ -59,11 +59,11 @@ export default function Introduction() {
             <tbody>
               {rows.slice(1).map((row) => (
                 <tr key={row[0]}>
-                  <th scope="row" className="h-[69.4px] bg-[#6E7D8C]/5 font-bold text-[#102D4A]">
+                  <th scope="row" className="h-[69.4px] bg-[#6E7D8C]/5 font-bold text-brand-navy">
                     {row[0]}
                   </th>
-                  <td className="bg-[#6E7D8C]/5 font-medium text-[#102D4A]/60">{row[1]}</td>
-                  <td className="bg-[#00ADDB]/15 font-semibold text-[#102D4A]/80">{row[2]}</td>
+                  <td className="bg-[#6E7D8C]/5 font-medium text-brand-navy/60">{row[1]}</td>
+                  <td className="bg-brand-blue/15 font-semibold text-brand-navy/80">{row[2]}</td>
                 </tr>
               ))}
             </tbody>

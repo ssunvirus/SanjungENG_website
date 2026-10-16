@@ -21,7 +21,7 @@ export default function Hero() {
       <div className="relative mx-auto w-full px-7 pt-[45px] lg:w-[1430px] lg:px-0 lg:pt-[108px]">
         <nav
           aria-label="현재 위치"
-          className="hidden items-center text-[22.5px] font-bold text-[#00ADDB] lg:flex"
+          className="hidden items-center text-[22.5px] font-bold text-brand-blue lg:flex"
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" />

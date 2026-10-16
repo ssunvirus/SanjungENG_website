@@ -1,12 +1,18 @@
 import nodemailer from "nodemailer";
-import { getSmtpPassword } from "../../../src/lib/estimate-smtp";
-import { takeEstimateSlot } from "../../../src/lib/estimate-rate-limit";
-import { isSupportedAttachment } from "../../../src/lib/estimate-attachments";
+import { getSmtpPassword } from "@/src/lib/estimate-smtp";
+import { takeEstimateSlot } from "@/src/lib/estimate-rate-limit";
+import { isSupportedAttachment } from "@/src/lib/estimate-attachments";
+import {
+  estimateLimits,
+  attachmentTypeError,
+  readEstimateFields,
+  validateAttachments,
+  validateEstimateFields,
+} from "@/src/lib/estimate-rules";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-const categories = ["냉동공조", "섬유덕트"];
 const fail = (message: string, status: number) => Response.json({ message }, { status });
 
 export async function POST(request: Request) {
@@ -35,7 +41,7 @@ export async function POST(request: Request) {
   let data: Record<string, unknown>;
   let files: File[] = [];
   try {
-    const limit = multipart ? 4 * 1024 * 1024 : 16000;
+    const limit = multipart ? estimateLimits.multipartBytes : estimateLimits.jsonBytes;
     const reader = request.body?.getReader();
     if (!reader) return fail("입력 내용을 확인해주세요.", 400);
     const chunks: Uint8Array[] = [];
@@ -69,36 +75,14 @@ export async function POST(request: Request) {
   } catch {
     return fail("입력 내용을 확인해주세요.", 400);
   }
-  const get = (key: string) => (typeof data[key] === "string" ? (data[key] as string).trim() : "");
-  const company = get("company");
-  const manager = get("manager");
-  const phone = get("phone");
-  const email = get("email");
-  const category = get("category");
-  const message = get("message");
-  const location = get("location");
+  const fields = readEstimateFields(data);
+  const { company, manager, phone, email, category, message, location } = fields;
   // Bots often fill every text input, including this off-screen field.
-  if (get("website")) return Response.json({ message: "문의가 접수되었습니다." });
-  if (company.length > 100) return fail("회사명은 100자 이내로 입력해주세요.", 400);
-  if (!manager || manager.length > 100) return fail("담당자명을 입력해주세요. (100자 이내)", 400);
-  if (!/^[+\d()\s-]{8,30}$/.test(phone) || phone.replace(/\D/g, "").length < 8)
-    return fail("연락처를 확인해주세요.", 400);
-  if (
-    email &&
-    (email.length > 254 ||
-      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$/.test(email))
-  )
-    return fail("이메일 주소를 확인해주세요.", 400);
-  if (!categories.includes(category)) return fail("문의 분야를 선택해주세요.", 400);
-  if (!message) return fail("문의 내용을 입력해주세요.", 400);
-  if (message.length > 3000) return fail("문의 내용은 3000자 이내로 입력해주세요.", 400);
-  if (location.length > 300) return fail("현장 위치는 300자 이내로 입력해주세요.", 400);
-  if (data.privacy !== true) return fail("개인정보 수집 및 이용에 동의해주세요.", 400);
-  if (files.length > 3 || files.reduce((total, file) => total + file.size, 0) > 3 * 1024 * 1024) {
-    return fail("첨부파일은 최대 3개, 전체 3MB 이내로 선택해주세요.", 400);
-  }
+  if (fields.website) return Response.json({ message: "문의가 접수되었습니다." });
+  const validationError = validateEstimateFields(fields) || validateAttachments(files);
+  if (validationError) return fail(validationError, 400);
   if ((await Promise.all(files.map(isSupportedAttachment))).some((supported) => !supported)) {
-    return fail("JPG, PNG, WEBP 또는 PDF 파일을 선택해주세요.", 400);
+    return fail(attachmentTypeError, 400);
   }
 
   const retryAfter = takeEstimateSlot(request.headers, phone);
@@ -146,7 +130,7 @@ export async function POST(request: Request) {
       files.map(async (file) => ({
         filename: file.name.replace(/[\r\n/\\]/g, "_").slice(0, 150),
         content: Buffer.from(await file.arrayBuffer()),
-        contentType: file.type,
+        contentType: file.name.toLowerCase().endsWith(".zip") ? "application/zip" : file.type,
       })),
     );
     const result = await transporter.sendMail({

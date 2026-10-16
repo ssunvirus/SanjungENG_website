@@ -1,26 +1,40 @@
 import type { Metadata } from "next";
-import Hero from "../src/components/home/Hero";
-import Business from "../src/components/home/Business";
-import Projects from "../src/components/home/Projects";
-import Customers from "../src/components/home/Customers";
-import EstimateCta from "../src/components/home/EstimateCta";
-import MobileHero from "../src/components/home/mobile/MobileHero";
-import MobileBusiness from "../src/components/home/mobile/MobileBusiness";
-import MobileProjects from "../src/components/home/mobile/MobileProjects";
-import MobileCustomers from "../src/components/home/mobile/MobileCustomers";
-import MobileEstimate from "../src/components/home/mobile/MobileEstimate";
+import Hero from "@/src/components/home/Hero";
+import Business from "@/src/components/home/Business";
+import Projects from "@/src/components/home/Projects";
+import Customers from "@/src/components/home/Customers";
+import EstimateCta from "@/src/components/home/EstimateCta";
+import MobileHero from "@/src/components/home/mobile/MobileHero";
+import MobileBusiness from "@/src/components/home/mobile/MobileBusiness";
+import MobileProjects from "@/src/components/home/mobile/MobileProjects";
+import MobileCustomers from "@/src/components/home/mobile/MobileCustomers";
+import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
+import { siteDescription, siteName } from "@/src/lib/site-metadata";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "냉동공조·섬유덕트 설계 및 시공 | 산정엔지니어링",
-  description:
-    "산정엔지니어링은 냉동기·항온항습기·저온저장고 등 냉동공조 설비와 섬유덕트의 설계, 설치 및 유지보수를 제공합니다.",
+  description: siteDescription,
 };
 
 export default function Home() {
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteName,
+    url: "https://www.sanjungeng.co.kr",
+    sameAs: ["https://blog.naver.com/sanjungeng"],
+  };
+
   return (
     <main id="page-top" className="min-w-0 flex-1">
-      <div className="w-full min-w-0 bg-gradient-to-b from-[#EFF7FB] to-[#F3FBFE] text-[#102D4A] lg:hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
+        }}
+      />
+      <div className="w-full min-w-0 bg-gradient-to-b from-[#EFF7FB] to-[#F3FBFE] text-brand-navy lg:hidden">
         <MobileHero />
         <MobileBusiness />
         <MobileProjects />

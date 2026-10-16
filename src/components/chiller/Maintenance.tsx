@@ -32,14 +32,14 @@ export default function Maintenance() {
   return (
     <section className="mx-auto w-full lg:max-w-[1440px] overflow-hidden px-[20px] lg:px-[63px] py-[36px] lg:py-[60px]">
       <header>
-        <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+        <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           MAINTENANCE
-          <span aria-hidden="true" className="h-[2px] w-[46px] bg-[#00ADDB]/60" />
+          <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
         </p>
-        <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+        <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
           유지보수 &amp; 정기점검
         </h2>
-        <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[19px] font-semibold text-[#243447]">
+        <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[19px] font-semibold text-brand-text">
           운전 상태와 주요 부품을 점검하고, 설비 상태에 맞춰 필요한 정비를 진행합니다.
         </p>
       </header>
@@ -62,15 +62,15 @@ export default function Maintenance() {
             </div>
             <div className="mt-[12px] lg:mt-[20px]">
               <div className="flex items-center gap-[12px] lg:gap-[19px]">
-                <span className="text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[3px] text-[#00ADDB]">
+                <span className="text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[3px] text-brand-blue">
                   {service.number}
                 </span>
-                <span aria-hidden="true" className="h-[27px] w-[3px] bg-[#00ADDB]" />
-                <h3 className="text-[20px] lg:text-[30px] font-semibold text-[#243447]">
+                <span aria-hidden="true" className="h-[27px] w-[3px] bg-brand-blue" />
+                <h3 className="text-[20px] lg:text-[30px] font-semibold text-brand-text">
                   {service.title}
                 </h3>
               </div>
-              <p className="mt-[12px] lg:mt-[20px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[30px] text-[#243447]/80">
+              <p className="mt-[12px] lg:mt-[20px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[30px] text-brand-text/80">
                 {service.description}
               </p>
             </div>

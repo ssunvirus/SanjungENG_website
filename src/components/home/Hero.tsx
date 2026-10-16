@@ -2,49 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
-const slides = [
-  {
-    image: "/images/hero/hvac-slide.png",
-    imageAlt: "산업용 냉동공조 설비가 설치된 현장",
-    category: "냉동공조 솔루션",
-    title: ["냉동기 설치부터", "유지보수까지"],
-    subtitle: "현장에 맞는 솔루션을 제공합니다",
-    details: "설치 ◦ 교체   |   수리 ◦ 오버홀   |   정기점검",
-  },
-  {
-    image: "/images/hero/fabric-duct-slide.png",
-    imageAlt: "섬유덕트가 설치된 산업 시설 내부",
-    category: "섬유덕트 솔루션",
-    title: ["공간에 맞춘 설계", "고르게 퍼지는 공기"],
-    subtitle: "섬유덕트 설계부터 시공까지 함께",
-    details: "CFD 설계   |   제품 공급   |   설치 & 시공",
-  },
-];
+import { heroSlides as slides } from "./hero-slides";
+import { useHeroCarousel } from "@/src/hooks/use-hero-carousel";
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-
-  useEffect(() => {
-    if (!isPlaying) return;
-
-    const timer = window.setTimeout(() => {
-      setCurrentSlide((current) => (current + 1) % slides.length);
-    }, 6000);
-
-    return () => window.clearTimeout(timer);
-  }, [currentSlide, isPlaying]);
+  const { currentSlide, setCurrentSlide, isPlaying, setIsPlaying, move } = useHeroCarousel(
+    slides.length,
+    true,
+  );
 
   const showPreviousSlide = () => {
     setIsPlaying(false);
-    setCurrentSlide((current) => (current - 1 + slides.length) % slides.length);
+    move(-1);
   };
 
   const showNextSlide = () => {
     setIsPlaying(false);
-    setCurrentSlide((current) => (current + 1) % slides.length);
+    move(1);
   };
 
   const showSlide = (index: number) => {
@@ -56,7 +30,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-[#102D4A] text-white"
+      className="relative isolate mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-brand-navy text-white"
       aria-roledescription="carousel"
       aria-label="산정엔지니어링 주요 서비스"
     >
@@ -79,7 +53,7 @@ export default function Hero() {
         className="absolute top-[178px] left-[239px] z-10 animate-[hero-content_700ms_ease-out]"
         aria-live="polite"
       >
-        <p className="text-[23px] font-bold leading-[29px] text-[#00ADDB]">{slide.category}</p>
+        <p className="text-[23px] font-bold leading-[29px] text-brand-blue">{slide.category}</p>
 
         <h1 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
           {slide.title[0]}
@@ -96,7 +70,7 @@ export default function Hero() {
         <div className="mt-[34px] flex gap-[26px]">
           <Link
             href="/projects"
-            className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-[#00ADDB] text-[30px] font-semibold"
+            className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-brand-blue text-[30px] font-semibold"
           >
             시공사례&nbsp; →
           </Link>
@@ -132,7 +106,7 @@ export default function Hero() {
               <span
                 aria-hidden="true"
                 className={`h-[3px] w-full transition-colors ${
-                  index === currentSlide ? "bg-[#00ADDB]" : "bg-white/75"
+                  index === currentSlide ? "bg-brand-blue" : "bg-white/75"
                 }`}
               />
             </button>

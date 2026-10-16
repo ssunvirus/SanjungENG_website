@@ -61,14 +61,14 @@ export default function BusinessAreas() {
       className="mx-auto w-full lg:max-w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-20"
     >
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
-        <div className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
-          <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-[#00ADDB] sm:w-20" />
+        <div className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
+          <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-brand-blue sm:w-20" />
           <p className="shrink-0 whitespace-nowrap">BUSINESS AREA</p>
-          <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-[#00ADDB] sm:w-20" />
+          <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-brand-blue sm:w-20" />
         </div>
         <h2
           id="about-business-heading"
-          className="text-[28px] lg:text-[50px] font-bold leading-[36px] lg:leading-[60px] tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]"
+          className="text-[28px] lg:text-[50px] font-bold leading-[36px] lg:leading-[60px] tracking-[1px] lg:tracking-[2.5px] text-brand-navy"
         >
           사업영역
         </h2>
@@ -101,12 +101,12 @@ export default function BusinessAreas() {
                 className="absolute bottom-0 h-[44px] w-full bg-gradient-to-b from-transparent to-white"
               />
             </div>
-            <div className="flex h-auto lg:h-[248px] px-5 lg:px-0 w-full lg:w-[215px] flex-col gap-[16px] lg:gap-[16px]">
-              <h3 className="text-center text-[20px] lg:text-[30px] font-bold leading-[24px] lg:leading-[36px] tracking-[0px] lg:tracking-[-3px] text-[#102D4A]">
+            <div className="flex h-auto lg:h-[248px] px-5 lg:px-0 w-full lg:w-[215px] flex-col gap-[16px]">
+              <h3 className="text-center text-[20px] lg:text-[30px] font-bold leading-[24px] lg:leading-[36px] tracking-[0px] lg:tracking-[-3px] text-brand-navy">
                 {area.title}
               </h3>
-              <span aria-hidden="true" className="h-0.5 w-full bg-[#00ADDB]/40" />
-              <ul className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[30px] text-[#243447]/60">
+              <span aria-hidden="true" className="h-0.5 w-full bg-brand-blue/40" />
+              <ul className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[30px] text-brand-text/60">
                 {area.lines.map((line) => (
                   <li key={line}>{line}</li>
                 ))}

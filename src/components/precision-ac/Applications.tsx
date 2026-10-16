@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SectionEyebrow from "./SectionEyebrow";
+import SectionEyebrow from "@/src/components/shared/SectionEyebrow";
 
 const applications = [
   ["01", "전산실 / 서버실", "장비 운전 환경에 맞춘 온/습도 관리", "space-server-current.png"],
@@ -16,7 +16,7 @@ export default function Applications() {
   return (
     <section className="mx-auto h-auto lg:h-[538px] w-full lg:max-w-[1440px] px-[20px] lg:px-[120px] py-[24px] lg:py-[60px]">
       <SectionEyebrow>APPLICATIONS</SectionEyebrow>
-      <h2 className="mt-[10px] lg:mt-[9px] text-[28px] lg:text-[51px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+      <h2 className="mt-[10px] lg:mt-[9px] text-[28px] lg:text-[51px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
         항온항습기가 필요한 공간
       </h2>
       <p className="mt-[10px] lg:mt-[22px] text-[14px] lg:text-[17px] font-semibold">
@@ -38,14 +38,12 @@ export default function Applications() {
                   className="object-cover"
                 />
               </div>
-              <span className="text-[14px] lg:text-[19px] font-bold text-[#00ADDB]">{number}</span>
+              <span className="text-[14px] lg:text-[19px] font-bold text-brand-blue">{number}</span>
             </div>
-            <h3 className="mt-[10px] lg:mt-[11px] text-[21px] lg:text-[26px] font-bold text-[#102D4A]">
+            <h3 className="mt-[10px] lg:mt-[11px] text-[21px] lg:text-[26px] font-bold text-brand-navy">
               {title}
             </h3>
-            <p className="mt-[10px] lg:mt-[10px] text-[14px] lg:text-[18px] text-[#526075]">
-              {description}
-            </p>
+            <p className="mt-[10px] text-[14px] lg:text-[18px] text-[#526075]">{description}</p>
           </article>
         ))}
       </div>

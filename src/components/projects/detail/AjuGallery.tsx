@@ -1,6 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import ProjectPhotoGallery from "./ProjectPhotoGallery";
 
 const photos = [
   { number: 0, alt: "기존 터보냉동기 분해 및 이동 작업" },
@@ -14,29 +12,13 @@ const photos = [
 
 export default function AjuGallery() {
   return (
-    <div className="mx-auto mt-[20px] w-full lg:w-[1000px]">
-      <Link
-        href="/projects"
-        className="mb-[20px] flex h-[40px] w-fit items-center gap-[5px] text-base lg:text-[25px] font-medium hover:text-[#00ADDB] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
-      >
-        <ArrowLeft size={40} aria-hidden="true" className="size-6 lg:size-10" />
-        목록으로 돌아가기
-      </Link>
-      <div className="flex flex-col gap-4 lg:gap-[30px]">
-        {photos.map((photo) => (
-          <figure key={photo.number}>
-            <Image
-              src={`/images/projects/aju-pharmaceutical/${photo.number}.jpg`}
-              alt={photo.alt}
-              width={photo.portrait ? 720 : 960}
-              height={photo.portrait ? 960 : 720}
-              sizes="(max-width: 1023px) 100vw, 1000px"
-              quality={100}
-              className="h-auto w-full"
-            />
-          </figure>
-        ))}
-      </div>
-    </div>
+    <ProjectPhotoGallery
+      photos={photos.map((photo) => ({
+        src: `/images/projects/aju-pharmaceutical/${photo.number}.jpg`,
+        alt: photo.alt,
+        width: photo.portrait ? 720 : 960,
+        height: photo.portrait ? 960 : 720,
+      }))}
+    />
   );
 }

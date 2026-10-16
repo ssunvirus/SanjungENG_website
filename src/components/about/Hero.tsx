@@ -14,11 +14,11 @@ export default function Hero() {
         quality={100}
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#102D4A] via-[#102D4A]/70 via-[40%] to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/70 via-[40%] to-transparent" />
       <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px] flex flex-col items-start gap-5 lg:gap-[34px]">
         <nav
           aria-label="현재 위치"
-          className="hidden lg:flex items-center text-[22.5px] font-bold text-[#00ADDB]"
+          className="hidden lg:flex items-center text-[22.5px] font-bold text-brand-blue"
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" />

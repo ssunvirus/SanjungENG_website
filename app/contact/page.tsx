@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Hero from "../../src/components/contact/Hero";
-import ContactInfo from "../../src/components/contact/ContactInfo";
-import InquiryForm from "../../src/components/contact/InquiryForm";
+import Hero from "@/src/components/contact/Hero";
+import ContactInfo from "@/src/components/contact/ContactInfo";
+import InquiryForm from "@/src/components/contact/InquiryForm";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#102D4A]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />
       <div
         aria-hidden="true"

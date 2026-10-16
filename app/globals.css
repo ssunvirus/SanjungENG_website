@@ -84,6 +84,9 @@
 }
 
 @theme inline {
+  --color-brand-navy: #102d4a;
+  --color-brand-blue: #00addb;
+  --color-brand-text: #243447;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: "Pretendard", Arial, sans-serif;

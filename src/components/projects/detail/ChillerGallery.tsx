@@ -1,6 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import ProjectPhotoGallery from "./ProjectPhotoGallery";
 
 const photos = [
   { src: "source-1.jpg", alt: "교체 전 기존 공냉식 냉동기" },
@@ -14,31 +12,11 @@ const photos = [
 
 export default function ChillerGallery() {
   return (
-    <div className="mx-auto mt-[20px] w-full lg:w-[1000px]">
-      <Link
-        href="/projects"
-        className="mb-[20px] flex h-[40px] w-fit items-center gap-[5px] text-base lg:text-[25px] font-medium hover:text-[#00ADDB] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
-      >
-        <ArrowLeft size={40} aria-hidden="true" className="size-6 lg:size-10" />
-        목록으로 돌아가기
-      </Link>
-      <div className="flex flex-col gap-4 lg:gap-[30px]">
-        {photos.map((photo) => (
-          <figure
-            key={photo.src}
-            className="relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden"
-          >
-            <Image
-              src={`/images/projects/semiconductor-chiller/${photo.src}`}
-              alt={photo.alt}
-              fill
-              sizes="(max-width: 1023px) 100vw, 1000px"
-              quality={100}
-              className="object-cover"
-            />
-          </figure>
-        ))}
-      </div>
-    </div>
+    <ProjectPhotoGallery
+      photos={photos.map((photo) => ({
+        src: `/images/projects/semiconductor-chiller/${photo.src}`,
+        alt: photo.alt,
+      }))}
+    />
   );
 }

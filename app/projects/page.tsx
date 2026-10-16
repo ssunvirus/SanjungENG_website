@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Hero from "../../src/components/projects/Hero";
-import ProjectGallery from "../../src/components/projects/ProjectGallery";
+import Hero from "@/src/components/projects/Hero";
+import ProjectGallery from "@/src/components/projects/ProjectGallery";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/projects" },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#102D4A]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />
       <div
         aria-hidden="true"

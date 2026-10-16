@@ -21,10 +21,10 @@ export default function ChillerTypes() {
           />
         </div>
         <div className="order-1 w-full lg:order-2 lg:w-auto">
-          <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
-            CHILLER <span className="h-[2px] w-[46px] bg-[#00ADDB]/60" />
+          <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
+            CHILLER <span className="h-[2px] w-[46px] bg-brand-blue/60" />
           </p>
-          <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2px] text-[#102D4A]">
+          <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2px] text-brand-navy">
             주요 취급 냉동기
           </h2>
           <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[19px] font-semibold leading-[30px]">

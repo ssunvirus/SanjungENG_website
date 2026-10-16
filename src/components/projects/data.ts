@@ -7,7 +7,9 @@ export type Project = {
   image: string;
   imageTop: string;
   imageLeft?: string;
-  href?: string;
+  href: string;
+  homeImage?: string;
+  mobileTag?: string;
 };
 
 export const projects: Project[] = [
@@ -33,6 +35,8 @@ export const projects: Project[] = [
   },
   {
     id: "nonghyup-cold-storage",
+    homeImage: "/images/projects/cold-storage.jpg",
+    mobileTag: "저온저장고 시공",
     href: "/projects/wonsam-nonghyup",
     category: "냉동공조",
     tag: "저온저장고",
@@ -43,6 +47,8 @@ export const projects: Project[] = [
   },
   {
     id: "gurye-pool",
+    homeImage: "/images/projects/pool-fabric-duct.jpg",
+    mobileTag: "섬유덕트 시공",
     href: "/projects/gurye-pool",
     category: "섬유덕트",
     tag: "섬유덕트",
@@ -54,6 +60,8 @@ export const projects: Project[] = [
   },
   {
     id: "semiconductor-chiller",
+    homeImage: "/images/home-refresh/business-hvac.jpg",
+    mobileTag: "냉동기 교체",
     href: "/projects/semiconductor-chiller",
     category: "냉동공조",
     tag: "냉동기",
@@ -65,6 +73,7 @@ export const projects: Project[] = [
   },
   {
     id: "seoanseong-maintenance",
+    homeImage: "/images/projects/warehouse-maintenance.jpg",
     href: "/projects/seoanseong-maintenance",
     category: "냉동공조",
     tag: "냉동기",
@@ -75,6 +84,7 @@ export const projects: Project[] = [
   },
   {
     id: "church-cooling-tower",
+    mobileTag: "냉각탑 정비",
     href: "/projects/church-cooling-tower",
     category: "냉동공조",
     tag: "냉각탑",
@@ -95,3 +105,25 @@ export const projects: Project[] = [
     imageLeft: "-0.02%",
   },
 ];
+
+function selectProjects(ids: string[]): Project[] {
+  return ids.map((id) => {
+    const project = projects.find((item) => item.id === id);
+    if (!project) throw new Error(`Unknown project: ${id}`);
+    return project;
+  });
+}
+
+export const desktopFeaturedProjects = selectProjects([
+  "nonghyup-cold-storage",
+  "gurye-pool",
+  "semiconductor-chiller",
+  "seoanseong-maintenance",
+]);
+
+export const mobileFeaturedProjects = selectProjects([
+  "nonghyup-cold-storage",
+  "gurye-pool",
+  "semiconductor-chiller",
+  "church-cooling-tower",
+]);

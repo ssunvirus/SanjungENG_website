@@ -1,18 +1,16 @@
+import { readEstimateFields } from "./estimate-rules";
+
 type EstimateResult = { message?: string };
 
 export async function submitEstimate(fields: FormData, multipart = false): Promise<void> {
   const body = multipart
     ? fields
-    : JSON.stringify({
-        company: fields.get("company"),
-        manager: fields.get("manager"),
-        phone: fields.get("phone"),
-        email: fields.get("email") ?? "",
-        category: fields.get("category"),
-        message: fields.get("message"),
-        website: fields.get("website"),
-        privacy: fields.get("privacy") === "on",
-      });
+    : JSON.stringify(
+        readEstimateFields({
+          ...Object.fromEntries(fields),
+          privacy: fields.get("privacy") === "on",
+        }),
+      );
 
   const response = await fetch("/api/estimate", {
     method: "POST",

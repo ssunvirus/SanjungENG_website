@@ -28,11 +28,11 @@ export default function AirFlowDesign() {
                   quality={100}
                   className="object-fill"
                 />
-                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
+                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25px] text-brand-navy/50">
                   (출처:Klimagiel)
                 </span>
               </div>
-              <figcaption className="mt-[10px] lg:mt-[10px] text-center text-[14px] lg:text-[16.544px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]">
+              <figcaption className="mt-[10px] text-center text-[14px] lg:text-[16.544px] leading-[25px] text-brand-navy">
                 CFD 풍속 해석 예시
               </figcaption>
             </figure>
@@ -48,26 +48,26 @@ export default function AirFlowDesign() {
                     className="object-fill"
                   />
                 </div>
-                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
+                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25px] text-brand-navy/50">
                   (출처:Klimagiel)
                 </span>
               </div>
-              <figcaption className="mt-[10px] lg:mt-[5px] text-center text-[14px] lg:text-[16.544px] leading-[25.0px] lg:leading-[25px] text-[#102D4A]">
+              <figcaption className="mt-[10px] lg:mt-[5px] text-center text-[14px] lg:text-[16.544px] leading-[25px] text-brand-navy">
                 CFD 온도 해석 적용 예시
               </figcaption>
             </figure>
           </div>
-          <p className="ml-[7px] lg:whitespace-nowrap text-[14px] lg:text-[16.544px] leading-[25.0px] lg:leading-[25px]">
+          <p className="ml-[7px] lg:whitespace-nowrap text-[14px] lg:text-[16.544px] leading-[25px]">
             CFD 시뮬레이션은 공기가 어떻게 흐르고, 온도가 어떻게 분포하는지, 계산하여 실제 환경에
             가까운 시뮬레이션을 수행합니다.
             <br />
             이를 통해 공간의 각 지점에서 온도와 풍속을 평가할 수 있습니다.
           </p>
         </div>
-        <div className="relative h-auto lg:h-[244px] w-full bg-[#00ADDB]/10 px-[20px] lg:px-[44px] py-[36px] lg:py-[41px]">
+        <div className="relative h-auto lg:h-[244px] w-full bg-brand-blue/10 px-[20px] lg:px-[44px] py-[36px] lg:py-[41px]">
           <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-start justify-between">
             <div className="flex w-full lg:w-[318px] flex-col gap-[16px] lg:gap-[19px]">
-              <h3 className="lg:whitespace-nowrap text-[14px] lg:text-[20px] font-bold leading-[24.0px] lg:leading-[24px]">
+              <h3 className="lg:whitespace-nowrap text-[14px] lg:text-[20px] font-bold leading-[24px]">
                 공간 전체의 기류를 계산하고 검토합니다.
               </h3>
               <Image
@@ -78,7 +78,7 @@ export default function AirFlowDesign() {
                 aria-hidden="true"
                 className="self-start"
               />
-              <p className="lg:whitespace-nowrap text-[14px] lg:text-[18px] font-semibold leading-[25.0px] lg:leading-[25px] text-[#243447]/80">
+              <p className="lg:whitespace-nowrap text-[14px] lg:text-[18px] font-semibold leading-[25px] text-brand-text/80">
                 공간의 각 지점에서 온도와 풍속을
                 <br />
                 평가하여 효율적인 공기 분배를 설계합니다.
@@ -97,7 +97,7 @@ export default function AirFlowDesign() {
               </div>
             </div>
           </div>
-          <p className="relative mt-3 text-right lg:absolute lg:mt-0 lg:bottom-[10px] lg:right-[44px] text-[14px] lg:text-[16.544px] font-semibold leading-[25.0px] lg:leading-[25px] text-[#102D4A]/50">
+          <p className="relative mt-3 text-right lg:absolute lg:mt-0 lg:bottom-[10px] lg:right-[44px] text-[14px] lg:text-[16.544px] font-semibold leading-[25px] text-brand-navy/50">
             CFD 해석 예시(출처:Klimagiel)
           </p>
         </div>

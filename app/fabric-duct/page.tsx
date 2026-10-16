@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Hero from "../../src/components/fabric-duct/Hero";
-import Introduction from "../../src/components/fabric-duct/Introduction";
-import Advantages from "../../src/components/fabric-duct/Advantages";
-import Applications from "../../src/components/fabric-duct/Applications";
-import AirFlowDesign from "../../src/components/fabric-duct/AirFlowDesign";
-import OneStopSolution from "../../src/components/fabric-duct/OneStopSolution";
-import Partners from "../../src/components/fabric-duct/Partners";
+import Hero from "@/src/components/fabric-duct/Hero";
+import Introduction from "@/src/components/fabric-duct/Introduction";
+import Advantages from "@/src/components/fabric-duct/Advantages";
+import Applications from "@/src/components/fabric-duct/Applications";
+import AirFlowDesign from "@/src/components/fabric-duct/AirFlowDesign";
+import OneStopSolution from "@/src/components/fabric-duct/OneStopSolution";
+import Partners from "@/src/components/fabric-duct/Partners";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function FabricDuctPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
       <div
         aria-hidden="true"

@@ -16,12 +16,12 @@ export default function Hero() {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#042750] via-[#102D4A]/70 to-transparent lg:bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#042750] via-brand-navy/70 to-transparent lg:bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
       />
       <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px]">
         <nav
           aria-label="현재 위치"
-          className="hidden lg:flex h-[12px] items-center text-[9px] font-bold text-[#00ADDB] lg:h-auto lg:text-[22.5px]"
+          className="hidden lg:flex h-[12px] items-center text-[9px] font-bold text-brand-blue lg:h-auto lg:text-[22.5px]"
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" className="size-[12px] lg:size-[38px]" />
@@ -41,7 +41,7 @@ export default function Hero() {
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link
             href="/projects"
-            className="flex h-10 w-[180px] items-center justify-center gap-2 rounded-[9px] bg-[#00ADDB] text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:text-[30px]"
+            className="flex h-10 w-[180px] items-center justify-center gap-2 rounded-[9px] bg-brand-blue text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:text-[30px]"
           >
             <span className="lg:hidden">시공사례</span>
             <span className="hidden lg:inline">시공사례</span>

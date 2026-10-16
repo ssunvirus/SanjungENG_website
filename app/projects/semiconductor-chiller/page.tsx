@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Hero from "../../../src/components/projects/Hero";
-import ProjectOverview from "../../../src/components/projects/detail/ProjectOverview";
-import ChillerGallery from "../../../src/components/projects/detail/ChillerGallery";
-import BlogBanner from "../../../src/components/projects/detail/BlogBanner";
+import Hero from "@/src/components/projects/Hero";
+import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
+import ChillerGallery from "@/src/components/projects/detail/ChillerGallery";
+import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function SemiconductorChillerPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#102D4A]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />
       <div
         aria-hidden="true"
@@ -31,7 +31,7 @@ export default function SemiconductorChillerPage() {
         <ChillerGallery />
         <Link
           href="/projects"
-          className="mx-auto mt-[33px] flex h-[48px] w-[208px] items-center justify-center gap-[12px] rounded-[5px] bg-[#102D4A] text-lg lg:text-[25px] font-medium text-white hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB]"
+          className="mx-auto mt-[33px] flex h-[48px] w-[208px] items-center justify-center gap-[12px] rounded-[5px] bg-brand-navy text-lg lg:text-[25px] font-medium text-white hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
         >
           <List size={30} aria-hidden="true" />
           목록으로

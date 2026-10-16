@@ -2,28 +2,19 @@
 
 import Image from "next/image";
 import { ArrowRight, Paperclip } from "lucide-react";
-import { type FormEvent, useRef, useState } from "react";
-import { submitEstimate } from "@/src/lib/submit-estimate";
+import { type FormEvent, useState } from "react";
+import { useEstimateForm } from "@/src/hooks/use-estimate-form";
+import {
+  attachmentAccept,
+  estimateCategories,
+  estimateLimits,
+  readEstimateFields,
+  validateAttachments,
+  validateEstimateFields,
+} from "@/src/lib/estimate-rules";
 
 const inputClass =
-  "text-base lg:text-[20px] mt-[10px] block h-[50px] w-full border-2 border-[#102D4A]/10 bg-white px-3 lg:px-[19px] font-semibold placeholder:text-[#102D4A]/20 focus:border-[#00ADDB] focus:outline-none";
-const categories = ["냉동공조", "섬유덕트"] as const;
-
-function attachmentError(files: File[]) {
-  if (files.length > 3 || files.reduce((total, file) => total + file.size, 0) > 3 * 1024 * 1024) {
-    return "첨부파일은 최대 3개, 전체 3MB 이내로 선택해주세요.";
-  }
-  if (
-    files.some(
-      (file) =>
-        !/\.(jpe?g|png|webp|pdf)$/i.test(file.name) ||
-        !["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(file.type),
-    )
-  ) {
-    return "JPG, PNG, WEBP 또는 PDF 파일을 선택해주세요.";
-  }
-  return "";
-}
+  "text-base lg:text-[20px] mt-[10px] block h-[50px] w-full border-2 border-brand-navy/10 bg-white px-3 lg:px-[19px] font-semibold placeholder:text-brand-navy/20 focus:border-brand-blue focus:outline-none";
 
 function Field({
   name,
@@ -31,7 +22,7 @@ function Field({
   placeholder,
   required = false,
   type = "text",
-  maxLength = 100,
+  maxLength = estimateLimits.company,
 }: {
   name: string;
   label: string;
@@ -41,9 +32,9 @@ function Field({
   maxLength?: number;
 }) {
   return (
-    <label className="block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
+    <label className="block text-[14px] lg:text-[20px] font-semibold leading-[24px]">
       {label}
-      {required && name !== "company" && <span className="ml-1 text-red-600">*</span>}
+      {required && <span className="ml-1 text-red-600">*</span>}
       <input
         name={name}
         type={type}
@@ -68,15 +59,12 @@ function Field({
 }
 
 export default function InquiryForm() {
-  const [category, setCategory] = useState<(typeof categories)[number]>("냉동공조");
+  const [category, setCategory] = useState<(typeof estimateCategories)[number]>("냉동공조");
   const [fileNames, setFileNames] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [notice, setNotice] = useState("");
-  const sending = useRef(false);
+  const { status, notice, send, showError, clearNotice } = useEstimateForm();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (sending.current) return;
     const form = event.currentTarget;
     const fields = new FormData(form);
     for (const key of ["company", "manager", "phone", "email", "location", "message"]) {
@@ -86,34 +74,19 @@ export default function InquiryForm() {
     const files = fields
       .getAll("attachments")
       .filter((file): file is File => file instanceof File && file.size > 0);
-    const phone = String(fields.get("phone") ?? "");
-    const validationError = !fields.get("manager")
-      ? "담당자명을 입력해주세요."
-      : !/^[+\d()\s-]{8,30}$/.test(phone) || phone.replace(/\D/g, "").length < 8
-        ? "연락처를 확인해주세요."
-        : !fields.get("message")
-          ? "문의 내용을 입력해주세요."
-          : attachmentError(files);
+    const input = readEstimateFields({
+      ...Object.fromEntries(fields),
+      privacy: fields.get("privacy") === "on",
+    });
+    const validationError = validateEstimateFields(input) || validateAttachments(files);
     if (validationError) {
-      setStatus("error");
-      setNotice(validationError);
+      showError(validationError);
       return;
     }
-    sending.current = true;
-    setStatus("sending");
-    setNotice("문의를 전송하고 있습니다.");
-    try {
-      await submitEstimate(fields, true);
-      setStatus("success");
-      setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
+    if (await send(fields, true)) {
       form.reset();
       setCategory("냉동공조");
       setFileNames("");
-    } catch (error) {
-      setStatus("error");
-      setNotice(error instanceof Error ? error.message : "연결을 확인하고 다시 시도해주세요.");
-    } finally {
-      sending.current = false;
     }
   }
 
@@ -122,7 +95,7 @@ export default function InquiryForm() {
       onSubmit={handleSubmit}
       aria-labelledby="inquiry-form-heading"
       aria-busy={status === "sending"}
-      className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18.0px] lg:pt-[18px]"
+      className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18px]"
     >
       <input
         name="website"
@@ -139,7 +112,7 @@ export default function InquiryForm() {
         >
           문의 내용 작성
         </h2>
-        <p className="relative mt-2 lg:mt-0 lg:absolute lg:right-0 lg:top-[38px] text-right text-[14px] lg:text-[20px] leading-[24px] lg:leading-[24px] text-[#102D4A]/80">
+        <p className="relative mt-2 lg:mt-0 lg:absolute lg:right-0 lg:top-[38px] text-right text-[14px] lg:text-[20px] leading-[24px] text-brand-navy/80">
           <span className="mr-2 text-red-600">*</span>필수 입력
         </p>
         <Image
@@ -152,11 +125,11 @@ export default function InquiryForm() {
         />
       </div>
       <fieldset className="mt-[24px] lg:mt-[26px]" disabled={status === "sending"}>
-        <legend className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
+        <legend className="text-[14px] lg:text-[20px] font-semibold leading-[24px]">
           문의 분야 <span className="text-red-600">*</span>
         </legend>
         <div className="mt-[12px] lg:mt-[16px] flex gap-[20px] lg:gap-[66px]">
-          {categories.map((value) => (
+          {estimateCategories.map((value) => (
             <label
               key={value}
               className="relative flex cursor-pointer items-center gap-[12px] lg:gap-[8px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[30px]"
@@ -176,7 +149,7 @@ export default function InquiryForm() {
                 height={24.7}
                 alt=""
                 aria-hidden="true"
-                className="peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-[#00ADDB]"
+                className="peer-focus-visible:outline-2 peer-focus-visible:outline-offset-4 peer-focus-visible:outline-brand-blue"
               />
               {value}
             </label>
@@ -197,14 +170,14 @@ export default function InquiryForm() {
             placeholder="연락 가능한 번호"
             required
             type="tel"
-            maxLength={30}
+            maxLength={estimateLimits.phone}
           />
           <Field
             name="email"
             label="이메일"
             placeholder="이메일 주소"
             type="email"
-            maxLength={254}
+            maxLength={estimateLimits.email}
           />
         </div>
         <div className="mt-[24px] lg:mt-[29px]">
@@ -212,15 +185,15 @@ export default function InquiryForm() {
             name="location"
             label="현장 위치"
             placeholder="시/군/구 또는 현장 주소"
-            maxLength={300}
+            maxLength={estimateLimits.location}
           />
         </div>
-        <label className="mt-[24px] lg:mt-[44px] block text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]">
+        <label className="mt-[24px] lg:mt-[44px] block text-[14px] lg:text-[20px] font-semibold leading-[24px]">
           문의 내용 <span className="text-red-600">*</span>
           <textarea
             required
             name="message"
-            maxLength={3000}
+            maxLength={estimateLimits.message}
             placeholder="설비 종류, 필요한 작업, 현장 상황을 알려주세요."
             className={`${inputClass} h-[232px] resize-y py-[19px] leading-[30px]`}
           />
@@ -228,55 +201,56 @@ export default function InquiryForm() {
         <div className="mt-[24px] lg:mt-[44px]">
           <label
             htmlFor="inquiry-files"
-            className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[24px]"
+            className="text-[14px] lg:text-[20px] font-semibold leading-[24px]"
           >
             첨부파일
           </label>
-          <div className="mt-[12px] lg:mt-[10px] flex flex-wrap lg:flex-nowrap min-h-[75px] py-3 lg:py-0 items-center gap-[12px] lg:gap-[20px] border-2 border-[#102D4A]/10 px-[16px] lg:px-[19px]">
-            <Paperclip size={30} className="shrink-0 text-[#102D4A]/20" aria-hidden="true" />
-            <label className="relative shrink-0 cursor-pointer border border-[#102D4A]/10 bg-[#243447]/10 px-[16px] lg:px-[16px] py-[16px] lg:py-[11px] text-[14px] lg:text-[20px] font-semibold text-[#102D4A]/80 focus-within:outline-2 focus-within:outline-[#00ADDB]">
+          <div className="mt-[12px] lg:mt-[10px] flex flex-wrap lg:flex-nowrap min-h-[75px] py-3 lg:py-0 items-center gap-[12px] lg:gap-[20px] border-2 border-brand-navy/10 px-[16px] lg:px-[19px]">
+            <Paperclip size={30} className="shrink-0 text-brand-navy/20" aria-hidden="true" />
+            <label className="relative shrink-0 cursor-pointer border border-brand-navy/10 bg-brand-text/10 px-[16px] py-[16px] lg:py-[11px] text-[14px] lg:text-[20px] font-semibold text-brand-navy/80 focus-within:outline-2 focus-within:outline-brand-blue">
               파일 선택
               <input
                 id="inquiry-files"
                 name="attachments"
                 type="file"
-                accept=".jpg,.jpeg,.png,.webp,.pdf"
+                accept={attachmentAccept}
                 multiple
                 onChange={(event) => {
                   const files = Array.from(event.target.files ?? []);
-                  const error = attachmentError(files);
+                  const error = validateAttachments(files);
                   if (error) {
                     event.target.value = "";
                     setFileNames("");
-                    setStatus("error");
-                    setNotice(error);
+                    showError(error);
                     return;
                   }
                   setFileNames(files.map((file) => file.name).join(", "));
-                  setStatus("idle");
-                  setNotice("");
+                  clearNotice();
                 }}
                 className="absolute inset-0 w-full cursor-pointer opacity-0"
               />
             </label>
             <span
-              className={`min-w-0 break-all text-sm lg:text-[20px] font-semibold ${fileNames ? "text-[#102D4A]/80" : "text-[#102D4A]/20"}`}
+              className={`min-w-0 break-all text-sm lg:text-[20px] font-semibold ${fileNames ? "text-brand-navy/80" : "text-brand-navy/20"}`}
             >
               {fileNames || "현장 사진 / 설비 명판 / 도면 등 (선택)"}
             </span>
           </div>
-          <p className="mt-2 text-[14px] lg:text-[14px] text-[#102D4A]/60">
-            JPG, PNG, WEBP, PDF · 최대 3개 / 전체 3MB
+          <p className="mt-2 text-[14px] text-brand-navy/60">
+            JPG, PNG, WEBP, PDF, ZIP · 최대 3개 / 전체 3MB
+          </p>
+          <p className="mt-1 text-[14px] text-brand-navy/60">
+            사진이 많으면 ZIP 파일로 압축해 첨부해주세요.
           </p>
         </div>
-        <div className="mt-[12px] lg:mt-[17px] text-[#102D4A]">
+        <div className="mt-[12px] lg:mt-[17px] text-brand-navy">
           <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-[24px] lg:text-[18px]">
             <label className="flex cursor-pointer items-center gap-2">
               <input
                 type="checkbox"
                 name="privacy"
                 required
-                className="size-[18px] shrink-0 accent-[#00ADDB]"
+                className="size-[18px] shrink-0 accent-brand-blue"
               />
               개인정보 수집 및 이용에 동의합니다.
             </label>
@@ -293,7 +267,7 @@ export default function InquiryForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="relative mt-[12px] lg:mt-[23px] flex h-[58px] w-full items-center justify-center rounded-[5px] bg-[#102D4A] text-[16px] lg:text-[25px] font-semibold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB] disabled:cursor-wait disabled:opacity-60"
+          className="relative mt-[12px] lg:mt-[23px] flex h-[58px] w-full items-center justify-center rounded-[5px] bg-brand-navy text-[16px] lg:text-[25px] font-semibold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue disabled:cursor-wait disabled:opacity-60"
         >
           {status === "sending" ? "전송 중…" : "견적문의 보내기"}
           <ArrowRight size={30} className="absolute right-[28px]" aria-hidden="true" />

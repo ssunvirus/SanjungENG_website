@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import ResourcesHero from "../../../src/components/fabric-duct/resources/Hero";
-import DownloadCenter from "../../../src/components/fabric-duct/resources/DownloadCenter";
+import ResourcesHero from "@/src/components/fabric-duct/resources/Hero";
+import DownloadCenter from "@/src/components/fabric-duct/resources/DownloadCenter";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct/resources" },
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ResourcesPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <ResourcesHero />
       <div
         aria-hidden="true"

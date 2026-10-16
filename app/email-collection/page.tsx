@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function EmailCollectionPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] px-5 py-16 text-[#102D4A] lg:py-24">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] px-5 py-16 text-brand-navy lg:py-24">
       <article className="mx-auto max-w-4xl rounded-2xl bg-white px-6 py-10 shadow-sm sm:px-10 lg:px-16 lg:py-14">
         <h1 className="text-3xl font-bold">이메일 무단수집 거부</h1>
         <p className="mt-6 leading-7 text-[#405468]">

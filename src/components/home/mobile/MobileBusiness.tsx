@@ -8,8 +8,8 @@ import {
   Wrench,
   Wind,
 } from "lucide-react";
-import Eyebrow from "./Eyebrow";
-import BusinessWorkflow from "../BusinessWorkflow";
+import Eyebrow from "@/src/components/shared/SectionEyebrow";
+import BusinessWorkflow from "@/src/components/home/BusinessWorkflow";
 
 const business = [
   {
@@ -42,7 +42,7 @@ export default function MobileBusiness() {
   return (
     <>
       <section className="mx-auto max-w-[600px] pt-8 text-center">
-        <p className="text-xs tracking-[3px] font-semibold text-[#00ADDB]">BUSINESS AREA</p>
+        <p className="text-xs tracking-[3px] font-semibold text-brand-blue">BUSINESS AREA</p>
         <h2 className="mt-5 text-[28px] font-extrabold">냉동공조 설계 &amp; 시공</h2>
         <p className="mt-3 px-5 text-base font-medium leading-7">
           냉동기부터 섬유덕트까지
@@ -75,7 +75,7 @@ export default function MobileBusiness() {
                 size={38}
                 strokeWidth={1.5}
                 aria-hidden="true"
-                className="mb-2 text-[#00ADDB]"
+                className="mb-2 text-brand-blue"
               />
               <h3 className="text-base font-bold">{service.title}</h3>
               <p className="text-sm">{service.text}</p>
@@ -97,7 +97,7 @@ export default function MobileBusiness() {
       </section>
 
       <section className="mx-auto max-w-[600px] px-5 py-8">
-        <Eyebrow>OUR BUSINESS</Eyebrow>
+        <Eyebrow variant="compact">OUR BUSINESS</Eyebrow>
         <div className="mt-3 flex items-center justify-between">
           <h2 className="text-[28px] font-extrabold">사업영역</h2>
           <Link href="/solutions" className="flex min-h-11 items-center gap-2 text-sm">

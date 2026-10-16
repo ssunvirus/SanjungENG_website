@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Applications from "../../../src/components/precision-ac/Applications";
-import CaseStudy from "../../../src/components/precision-ac/CaseStudy";
-import Hero from "../../../src/components/precision-ac/Hero";
-import Products from "../../../src/components/precision-ac/Products";
-import Services from "../../../src/components/precision-ac/Services";
-import WorkProcess from "../../../src/components/precision-ac/WorkProcess";
+import Applications from "@/src/components/precision-ac/Applications";
+import CaseStudy from "@/src/components/precision-ac/CaseStudy";
+import Hero from "@/src/components/precision-ac/Hero";
+import Products from "@/src/components/precision-ac/Products";
+import Services from "@/src/components/precision-ac/Services";
+import WorkProcess from "@/src/components/precision-ac/WorkProcess";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/precision-ac" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PrecisionAcPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
       <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
       <Services />

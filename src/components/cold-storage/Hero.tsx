@@ -14,11 +14,11 @@ export default function Hero() {
         quality={100}
         className="object-cover"
       />
-      <div className="absolute inset-y-0 left-0 w-full lg:w-[1119px] bg-gradient-to-r from-[#042750] via-[#102D4A]/70 to-transparent" />
+      <div className="absolute inset-y-0 left-0 w-full lg:w-[1119px] bg-gradient-to-r from-[#042750] via-brand-navy/70 to-transparent" />
       <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px]">
         <nav
           aria-label="현재 위치"
-          className="hidden lg:flex items-center text-[22.5px] font-bold text-[#00ADDB]"
+          className="hidden lg:flex items-center text-[22.5px] font-bold text-brand-blue"
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" />
@@ -39,7 +39,7 @@ export default function Hero() {
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link
             href="/projects"
-            className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[23px] bg-[#00ADDB] text-lg lg:text-[30px] font-semibold"
+            className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[23px] bg-brand-blue text-lg lg:text-[30px] font-semibold"
           >
             시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
             <ArrowRightCircle size={32} aria-hidden="true" className="hidden lg:block" />

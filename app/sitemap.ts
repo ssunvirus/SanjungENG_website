@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { projects } from "../src/components/projects/data";
-import { siteUrl } from "../src/lib/site-url";
+import { projects } from "@/src/components/projects/data";
+import { siteUrl } from "@/src/lib/site-url";
 
 const pages = [
   "/",
@@ -18,8 +18,7 @@ const pages = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    ...pages,
-    ...projects.map((project) => project.href).filter((href): href is string => Boolean(href)),
-  ].map((path) => ({ url: new URL(path, siteUrl).toString() }));
+  return [...pages, ...projects.map((project) => project.href)].map((path) => ({
+    url: new URL(path, siteUrl).toString(),
+  }));
 }

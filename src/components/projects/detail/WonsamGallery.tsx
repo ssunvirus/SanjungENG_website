@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { ProjectGalleryLayout } from "./ProjectPhotoGallery";
 import { ArrowLeft } from "lucide-react";
 
 const photos = [
@@ -17,50 +17,41 @@ const photos = [
 
 export default function WonsamGallery() {
   return (
-    <div className="mx-auto mt-[20px] w-full lg:w-[1000px]">
-      <Link
-        href="/projects"
-        className="mb-[20px] flex h-[40px] w-fit items-center gap-[5px] text-base lg:text-[25px] font-medium hover:text-[#00ADDB] focus-visible:outline-2 focus-visible:outline-[#00ADDB]"
-      >
-        <ArrowLeft size={40} aria-hidden="true" className="size-6 lg:size-10" />
-        목록으로 돌아가기
-      </Link>
-      <div className="flex flex-col gap-4 lg:gap-[30px]">
-        {photos.map((photo, index) => (
-          <figure
-            key={photo.src}
-            className={`relative overflow-hidden lg:h-[563px] ${index === 5 ? "aspect-[3/4] lg:aspect-auto" : "aspect-[4/3] lg:aspect-auto"}`}
+    <ProjectGalleryLayout>
+      {photos.map((photo, index) => (
+        <figure
+          key={photo.src}
+          className={`relative overflow-hidden lg:h-[563px] ${index === 5 ? "aspect-[3/4] lg:aspect-auto" : "aspect-[4/3] lg:aspect-auto"}`}
+        >
+          <div
+            className={
+              index === 5
+                ? "absolute inset-0 lg:inset-auto lg:top-[-39.47%] lg:h-[236.83%] w-full"
+                : "absolute inset-0"
+            }
           >
-            <div
-              className={
-                index === 5
-                  ? "absolute inset-0 lg:inset-auto lg:top-[-39.47%] lg:h-[236.83%] w-full"
-                  : "absolute inset-0"
+            <Image
+              src={
+                photo.src.startsWith("/")
+                  ? photo.src
+                  : `/images/projects/wonsam-nonghyup/${photo.src}`
               }
-            >
-              <Image
-                src={
-                  photo.src.startsWith("/")
-                    ? photo.src
-                    : `/images/projects/wonsam-nonghyup/${photo.src}`
-                }
-                alt={photo.alt}
-                fill
-                sizes="(max-width: 1023px) 100vw, 1000px"
-                quality={100}
-                className={index === 5 ? "object-cover lg:object-fill" : "object-cover"}
-              />
-            </div>
-            {index === 4 && (
-              <ArrowLeft
-                size={40}
-                aria-hidden="true"
-                className="absolute bottom-[34px] left-1/2 -translate-x-1/2 text-[#1D1B20]"
-              />
-            )}
-          </figure>
-        ))}
-      </div>
-    </div>
+              alt={photo.alt}
+              fill
+              sizes="(max-width: 1023px) 100vw, 1000px"
+              quality={100}
+              className={index === 5 ? "object-cover lg:object-fill" : "object-cover"}
+            />
+          </div>
+          {index === 4 && (
+            <ArrowLeft
+              size={40}
+              aria-hidden="true"
+              className="absolute bottom-[34px] left-1/2 -translate-x-1/2 text-[#1D1B20]"
+            />
+          )}
+        </figure>
+      ))}
+    </ProjectGalleryLayout>
   );
 }

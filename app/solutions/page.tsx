@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import CaseStudy from "../../src/components/chiller/CaseStudy";
-import ChillerTypes from "../../src/components/chiller/ChillerTypes";
-import Hero from "../../src/components/chiller/Hero";
-import Maintenance from "../../src/components/chiller/Maintenance";
-import Services from "../../src/components/chiller/Services";
-import WorkProcess from "../../src/components/chiller/WorkProcess";
+import CaseStudy from "@/src/components/chiller/CaseStudy";
+import ChillerTypes from "@/src/components/chiller/ChillerTypes";
+import Hero from "@/src/components/chiller/Hero";
+import Maintenance from "@/src/components/chiller/Maintenance";
+import Services from "@/src/components/chiller/Services";
+import WorkProcess from "@/src/components/chiller/WorkProcess";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions" },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <main className="flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
       <Services />
       <WorkProcess />

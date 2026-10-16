@@ -28,13 +28,13 @@ export default function Services() {
   return (
     <section className="mx-auto flex h-auto w-full lg:max-w-[1920px] flex-col items-center gap-[28px] lg:gap-[67px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header className="text-center">
-        <p className="text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
+        <p className="text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
           AIR CONDITIONER SERVICE
         </p>
-        <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+        <h2 className="mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
           항온항습기 주요 서비스
         </h2>
-        <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-[#243447]/60">
+        <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-brand-text/60">
           항온항습기 설치부터 유지관리까지
         </p>
       </header>
@@ -63,13 +63,13 @@ export default function Services() {
                   />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-[#00ADDB]">
+                  <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
                     {number}
                   </p>
-                  <h3 className="mt-[10px] lg:mt-[10px] lg:whitespace-nowrap text-[21px] lg:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-[#102D4A]">
+                  <h3 className="mt-[10px] lg:whitespace-nowrap text-[21px] lg:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-brand-navy">
                     {title}
                   </h3>
-                  <p className="mt-[10px] lg:mt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-[#243447]/80">
+                  <p className="mt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-brand-text/80">
                     {line1}
                     <br />
                     {line2}
@@ -77,7 +77,7 @@ export default function Services() {
                 </div>
               </article>
               {index < services.length - 1 && (
-                <div className="hidden lg:block h-[2px] my-4 w-full bg-[#00ADDB]/30" />
+                <div className="hidden lg:block h-[2px] my-4 w-full bg-brand-blue/30" />
               )}
             </div>
           ))}

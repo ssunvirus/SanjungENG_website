@@ -21,13 +21,13 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
       <div className="px-[17px] pt-[10px] pb-5 lg:pb-0">
-        <p className="text-sm font-semibold leading-[24px] text-[#00ADDB] lg:text-[20px]">
+        <p className="text-sm font-semibold leading-[24px] text-brand-blue lg:text-[20px]">
           {project.tag}
         </p>
         <h3 className="mt-[9px] text-lg font-bold leading-[27px] lg:whitespace-nowrap lg:text-[22.5px]">
           {project.title}
         </h3>
-        <p className="mt-[9px] text-[15px] font-medium leading-[18px] text-[#102D4A]/50">
+        <p className="mt-[9px] text-[15px] font-medium leading-[18px] text-brand-navy/50">
           {project.description}
         </p>
       </div>
@@ -36,16 +36,12 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article id={project.id} className="min-w-0 scroll-mt-24 overflow-hidden bg-white lg:h-[432px]">
-      {project.href ? (
-        <Link
-          href={project.href}
-          className="block h-full focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#00ADDB]"
-        >
-          {content}
-        </Link>
-      ) : (
-        content
-      )}
+      <Link
+        href={project.href}
+        className="block h-full focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]"
+      >
+        {content}
+      </Link>
     </article>
   );
 }

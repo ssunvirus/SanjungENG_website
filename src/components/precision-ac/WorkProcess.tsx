@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SectionEyebrow from "./SectionEyebrow";
+import SectionEyebrow from "@/src/components/shared/SectionEyebrow";
 
 const process = [
   ["01", "운전 상태 확인", "설정 온/습도 실제 측정값, 알람 확인", "process-inspection-card.jpg"],
@@ -10,9 +10,9 @@ const process = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto h-auto lg:h-[941px] w-full lg:max-w-[1440px] bg-[#00ADDB]/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
+    <section className="mx-auto h-auto lg:h-[941px] w-full lg:max-w-[1440px] bg-brand-blue/5 px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <SectionEyebrow>WORK PROCESS</SectionEyebrow>
-      <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+      <h2 className="mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
         항온항습기, 이렇게 점검하고 정비합니다.
       </h2>
       <p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">
@@ -21,15 +21,15 @@ export default function WorkProcess() {
       <div className="relative mt-[24px] lg:mt-[60px] grid grid-cols-2 lg:flex gap-[16px] lg:gap-[19px]">
         <span
           aria-hidden="true"
-          className="hidden lg:block absolute left-[209px] top-[484px] h-[2px] w-[200px] bg-[#00ADDB]"
+          className="hidden lg:block absolute left-[209px] top-[484px] h-[2px] w-[200px] bg-brand-blue"
         />
         <span
           aria-hidden="true"
-          className="hidden lg:block absolute left-[528px] top-[484px] h-[2px] w-[200px] bg-[#00ADDB]"
+          className="hidden lg:block absolute left-[528px] top-[484px] h-[2px] w-[200px] bg-brand-blue"
         />
         <span
           aria-hidden="true"
-          className="hidden lg:block absolute left-[847px] top-[484px] h-[2px] w-[200px] bg-[#00ADDB]"
+          className="hidden lg:block absolute left-[847px] top-[484px] h-[2px] w-[200px] bg-brand-blue"
         />
         {process.map(([number, title, description, image]) => (
           <article
@@ -47,13 +47,13 @@ export default function WorkProcess() {
               />
             </div>
             <div className="flex flex-col items-center text-center">
-              <span className="flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-[#00ADDB] text-[21px] lg:text-[30px] font-bold text-white">
+              <span className="flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-brand-blue text-[21px] lg:text-[30px] font-bold text-white">
                 {number}
               </span>
               <h3 className="mt-[10px] lg:mt-[25px] text-[21px] lg:text-[30px] font-semibold">
                 {title}
               </h3>
-              <p className="mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-[#243447]/80">
+              <p className="mt-[10px] lg:mt-[15px] lg:whitespace-nowrap text-[15px] lg:text-[22px] font-semibold leading-[24px] lg:leading-[28px] text-brand-text/80">
                 {description}
               </p>
             </div>

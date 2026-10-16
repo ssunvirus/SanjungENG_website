@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description: "산정엔지니어링의 견적문의 개인정보 처리방침입니다.",
 };
 
-const heading = "mt-10 text-xl font-bold text-[#102D4A]";
+const heading = "mt-10 text-xl font-bold text-brand-navy";
 const body = "mt-3 leading-7 text-[#405468]";
 
 export default function PrivacyPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] px-5 py-16 text-[#102D4A] lg:py-24">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] px-5 py-16 text-brand-navy lg:py-24">
       <article className="mx-auto max-w-4xl rounded-2xl bg-white px-6 py-10 shadow-sm sm:px-10 lg:px-16 lg:py-14">
         <h1 className="text-3xl font-bold">개인정보 처리방침</h1>
         <p className={body}>

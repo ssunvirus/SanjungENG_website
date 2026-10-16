@@ -17,7 +17,7 @@ const customerLogos = [
 export default function MobileCustomers() {
   return (
     <section className="mx-auto max-w-[600px] px-5 py-8 text-center">
-      <p className="text-xs font-semibold tracking-[4px] text-[#00ADDB]">CUSTOMER</p>
+      <p className="text-xs font-semibold tracking-[4px] text-brand-blue">CUSTOMER</p>
       <h2 className="mt-4 text-[25px] font-bold">산정이 작업한 주요 현장</h2>
       <div className="mt-7 grid grid-cols-2 items-center gap-6">
         {customerLogos.map(([file, name]) => (

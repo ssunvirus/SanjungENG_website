@@ -45,8 +45,8 @@ const businessCards = [
 function SectionEyebrow() {
   return (
     <div className="flex items-center gap-[14px]">
-      <span className="h-[3px] w-12 bg-[#00ADDB]" />
-      <span className="text-[20px] font-medium leading-6 text-[#00ADDB]">OUR BUSINESS</span>
+      <span className="h-[3px] w-12 bg-brand-blue" />
+      <span className="text-[20px] font-medium leading-6 text-brand-blue">OUR BUSINESS</span>
     </div>
   );
 }
@@ -64,10 +64,10 @@ function BusinessOverview() {
 
       <div className="absolute top-[51px] left-[240px]">
         <SectionEyebrow />
-        <h2 className="mt-[54px] text-[60px] font-extrabold leading-[72px] text-[#102D4A]">
+        <h2 className="mt-[54px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
           냉동기부터 섬유덕트까지
         </h2>
-        <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-[#00ADDB]">
+        <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-brand-blue">
           냉동공조 설계 &amp; 시공.
         </p>
       </div>
@@ -129,13 +129,13 @@ function BusinessOverview() {
               <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
                 {service.title}
               </h3>
-              <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-[#243447]">
+              <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
                 {service.description}
               </p>
             </div>
             <span
               style={{ left: 8 - service.offset }}
-              className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-[#00ADDB] text-[20px] font-semibold text-[#243447]"
+              className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-brand-blue text-[20px] font-semibold text-brand-text"
             >
               {index + 1}
             </span>
@@ -166,21 +166,21 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
       </div>
 
       <div className="px-[12px] pt-[19px] pb-[15px]">
-        <p className="text-[15px] font-medium leading-5 text-[#00ADDB]">{card.number}</p>
-        <h3 className="mt-[18px] whitespace-nowrap text-[34px] font-extrabold leading-[42px] text-[#102D4A]">
+        <p className="text-[15px] font-medium leading-5 text-brand-blue">{card.number}</p>
+        <h3 className="mt-[18px] whitespace-nowrap text-[34px] font-extrabold leading-[42px] text-brand-navy">
           {card.title}
         </h3>
-        <p className="mt-[19px] whitespace-nowrap text-[18px] font-semibold leading-[26px] text-[#243447]">
+        <p className="mt-[19px] whitespace-nowrap text-[18px] font-semibold leading-[26px] text-brand-text">
           {card.description}
         </p>
         <div className="mx-[5px] mt-[18px] border-t border-black/15 pt-[15px]">
-          <p className="whitespace-nowrap text-[15px] leading-5 text-[#243447]/80">
+          <p className="whitespace-nowrap text-[15px] leading-5 text-brand-text/80">
             {card.services}
           </p>
         </div>
         <Link
           href={card.href}
-          className="mx-[5px] mt-[16px] flex items-center justify-between border-t border-black/15 px-[2px] pt-[15px] text-[15px] font-medium leading-5 text-[#243447]"
+          className="mx-[5px] mt-[16px] flex items-center justify-between border-t border-black/15 px-[2px] pt-[15px] text-[15px] font-medium leading-5 text-brand-text"
         >
           <span>자세히 보기</span>
           <ArrowRightCircle size={36} strokeWidth={2} aria-hidden="true" />
@@ -194,11 +194,11 @@ function BusinessAreas() {
   return (
     <section className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
       <div className="mx-auto w-[1200px]">
-        <div className="flex h-6 items-center gap-[20px] text-[#00ADDB]/60">
+        <div className="flex h-6 items-center gap-[20px] text-brand-blue/60">
           <span className="text-[20px] font-medium tracking-[6px]">OUR BUSINESS</span>
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>
-        <h2 className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]">
+        <h2 className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-brand-navy">
           사업영역
         </h2>
         <div className="mt-[57px] flex w-[1200px] justify-center gap-[35px]">

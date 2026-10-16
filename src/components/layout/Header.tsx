@@ -84,7 +84,7 @@ export default function Header() {
             if (mobileOpen) closeMobileMenu();
             else setMobileOpen(true);
           }}
-          className="flex size-11 cursor-pointer items-center justify-center rounded text-[#102D4A] focus-visible:outline-2 focus-visible:outline-[#00ADDB] lg:hidden"
+          className="flex size-11 cursor-pointer items-center justify-center rounded text-brand-navy focus-visible:outline-2 focus-visible:outline-brand-blue lg:hidden"
         >
           {mobileOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
@@ -97,10 +97,10 @@ export default function Header() {
                   <Link
                     href={menu.href}
                     onClick={(event) => event.currentTarget.blur()}
-                    className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-[#00ADDB] after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
+                    className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-brand-blue after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
                       isMenuActive(menu.href)
                         ? "text-[#006EB8] after:w-full"
-                        : "text-[#243447] after:w-0"
+                        : "text-brand-text after:w-0"
                     }`}
                   >
                     {menu.label}
@@ -115,7 +115,7 @@ export default function Header() {
                           <Link
                             href={submenu.href}
                             onClick={(event) => event.currentTarget.blur()}
-                            className="flex h-[61px] items-center px-[8px] text-[20px] font-bold tracking-[-0.5px] text-[#243447]/80 transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
+                            className="flex h-[61px] items-center px-[8px] text-[20px] font-bold tracking-[-0.5px] text-brand-text/80 transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
                           >
                             {submenu.label}
                           </Link>
@@ -130,7 +130,7 @@ export default function Header() {
 
           <Link
             href="/contact"
-            className="flex h-[90px] w-[clamp(200px,21.2vw,407px)] items-center justify-center gap-[12px] bg-[#102D4A] text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
+            className="flex h-[90px] w-[clamp(200px,21.2vw,407px)] items-center justify-center gap-[12px] bg-brand-navy text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
           >
             <Search size={30} strokeWidth={2.5} aria-hidden="true" />
             <span className="whitespace-nowrap">견적문의</span>
@@ -153,18 +153,18 @@ export default function Header() {
                       aria-expanded={expandedMenu === menu.href}
                       aria-controls={`mobile-submenu-${menu.href.slice(1)}`}
                       onClick={() => setExpandedMenu(expandedMenu === menu.href ? null : menu.href)}
-                      className={`flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-lg font-bold focus-visible:outline-2 focus-visible:outline-[#00ADDB] ${isMenuActive(menu.href) ? "text-[#006EB8]" : "text-[#243447]"}`}
+                      className={`flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-lg font-bold focus-visible:outline-2 focus-visible:outline-brand-blue ${isMenuActive(menu.href) ? "text-[#006EB8]" : "text-brand-text"}`}
                     >
                       <span
                         className={
                           isMenuActive(menu.href)
-                            ? "underline decoration-[#00ADDB] underline-offset-8"
+                            ? "underline decoration-brand-blue underline-offset-8"
                             : ""
                         }
                       >
                         {menu.label}
                       </span>
-                      <span className="flex size-11 items-center justify-center text-[#102D4A]">
+                      <span className="flex size-11 items-center justify-center text-brand-navy">
                         <ChevronDown
                           aria-hidden="true"
                           className={expandedMenu === menu.href ? "rotate-180" : ""}
@@ -176,7 +176,7 @@ export default function Header() {
                       href={menu.href}
                       onClick={closeMobileMenu}
                       aria-current={isMenuActive(menu.href) ? "page" : undefined}
-                      className={`flex min-h-14 flex-1 items-center text-lg font-bold ${isMenuActive(menu.href) ? "text-[#006EB8] underline decoration-[#00ADDB] underline-offset-8" : "text-[#243447]"}`}
+                      className={`flex min-h-14 flex-1 items-center text-lg font-bold ${isMenuActive(menu.href) ? "text-[#006EB8] underline decoration-brand-blue underline-offset-8" : "text-brand-text"}`}
                     >
                       {menu.label}
                     </Link>
@@ -194,7 +194,7 @@ export default function Header() {
                           href={submenu.href}
                           onClick={closeMobileMenu}
                           aria-current={pathname === submenu.href ? "page" : undefined}
-                          className={`flex min-h-11 items-center text-base font-medium ${pathname === submenu.href ? "text-[#006EB8]" : "text-[#243447]"}`}
+                          className={`flex min-h-11 items-center text-base font-medium ${pathname === submenu.href ? "text-[#006EB8]" : "text-brand-text"}`}
                         >
                           {submenu.label}
                         </Link>
@@ -208,7 +208,7 @@ export default function Header() {
           <Link
             href="/contact"
             onClick={closeMobileMenu}
-            className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded bg-[#102D4A] text-lg font-bold text-white"
+            className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded bg-brand-navy text-lg font-bold text-white"
           >
             <Search size={22} aria-hidden="true" />
             견적문의

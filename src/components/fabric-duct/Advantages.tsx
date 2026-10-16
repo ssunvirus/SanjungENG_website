@@ -43,7 +43,7 @@ export default function Advantages() {
           title={
             <>
               섬유덕트의{" "}
-              <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-[#00ADDB]">
+              <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-brand-blue">
                 주요 장점
               </span>
             </>
@@ -56,7 +56,7 @@ export default function Advantages() {
           </p>
         </SectionHeading>
       </div>
-      <div className="mt-[24px] lg:mt-[41px] flex flex-col lg:flex-row w-full lg:w-[1276px] items-center gap-[16px] lg:gap-[16px]">
+      <div className="mt-[24px] lg:mt-[41px] flex flex-col lg:flex-row w-full lg:w-[1276px] items-center gap-[16px]">
         <div className="relative h-[240px] lg:h-[528px] w-full lg:w-[717px] shrink-0">
           <Image
             src="/images/fabric-duct/advantages.png"
@@ -73,7 +73,7 @@ export default function Advantages() {
               key={advantage.title}
               className={`flex h-auto lg:h-[158px] w-full lg:w-[539px] items-center gap-4 lg:gap-[33px] rounded-[20px] bg-white/60 px-4 lg:px-[47px] py-4 lg:py-[14px] ${index ? "ml-[4px]" : ""}`}
             >
-              <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-[#00ADDB]/10">
+              <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-brand-blue/10">
                 <div
                   className={`relative scale-[0.55] lg:scale-100 overflow-hidden ${advantage.slot}`}
                 >
@@ -89,8 +89,8 @@ export default function Advantages() {
                 </div>
               </div>
               <div className="min-w-0 flex-1 lg:flex-none w-full lg:w-[278px] font-bold leading-[1.45]">
-                <h3 className="text-[16px] lg:text-[25px] text-[#102D4A]">{advantage.title}</h3>
-                <p className="mt-[10px] lg:mt-[9px] text-[14px] lg:text-[15px] text-[#102D4A]/80">
+                <h3 className="text-[16px] lg:text-[25px] text-brand-navy">{advantage.title}</h3>
+                <p className="mt-[10px] lg:mt-[9px] text-[14px] lg:text-[15px] text-brand-navy/80">
                   {advantage.description[0]}
                   <br />
                   {advantage.description[1]}

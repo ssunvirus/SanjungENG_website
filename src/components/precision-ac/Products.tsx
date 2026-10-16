@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SectionEyebrow from "./SectionEyebrow";
+import SectionEyebrow from "@/src/components/shared/SectionEyebrow";
 
 export default function Products() {
   return (
@@ -16,7 +16,7 @@ export default function Products() {
         </div>
         <div className="order-1 lg:order-2 w-full lg:w-auto">
           <SectionEyebrow>AIR CONDITIONER</SectionEyebrow>
-          <h2 className="mt-[10px] lg:mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2.25px] text-[#102D4A]">
+          <h2 className="mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2.25px] text-brand-navy">
             주요 항온항습기
           </h2>
           <p className="mt-[10px] lg:mt-[25px] text-[14px] lg:text-[19px] font-semibold">

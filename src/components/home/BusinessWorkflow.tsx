@@ -43,7 +43,7 @@ export default function BusinessWorkflow() {
             className="mt-[3px] shrink-0"
           />
           <div className="min-w-0">
-            <h3 className="text-[18px] font-extrabold leading-[30px] text-[#102D4A] lg:whitespace-nowrap lg:text-[25px]">
+            <h3 className="text-[18px] font-extrabold leading-[30px] text-brand-navy lg:whitespace-nowrap lg:text-[25px]">
               {step.title}
             </h3>
             <p className="mt-2 text-[14px] font-semibold leading-[21px] text-[#627284]/80 lg:mt-[13px] lg:whitespace-nowrap lg:text-[18px]">

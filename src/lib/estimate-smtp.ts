@@ -1,7 +1,7 @@
 import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm";
 
 export async function getSmtpPassword(): Promise<string | undefined> {
-  // Local development and Vercel can provide the secret directly.
+  // Environments that support server-side secret variables can supply it directly.
   if (process.env.NAVER_SMTP_PASSWORD) return process.env.NAVER_SMTP_PASSWORD;
 
   const name = process.env.NAVER_SMTP_PASSWORD_PARAMETER;

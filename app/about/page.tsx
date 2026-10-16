@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import CompanyOverview from "../../src/components/about/CompanyOverview";
-import BusinessAreas from "../../src/components/about/BusinessAreas";
-import Hero from "../../src/components/about/Hero";
-import Highlights from "../../src/components/about/Highlights";
-import Introduction from "../../src/components/about/Introduction";
+import CompanyOverview from "@/src/components/about/CompanyOverview";
+import BusinessAreas from "@/src/components/about/BusinessAreas";
+import Hero from "@/src/components/about/Hero";
+import Highlights from "@/src/components/about/Highlights";
+import Introduction from "@/src/components/about/Introduction";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-[#243447]">
+    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
       <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
       <Introduction />

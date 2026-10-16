@@ -8,7 +8,7 @@ export default function BlogBanner() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="산정엔지니어링 공식 블로그에서 작업 과정 확인하기 (새 창)"
-      className="relative mx-auto mt-[21px] block h-auto w-full p-5 lg:p-0 lg:h-[268px] lg:w-[1268px] overflow-hidden rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB]"
+      className="relative mx-auto mt-[21px] block h-auto w-full p-5 lg:p-0 lg:h-[268px] lg:w-[1268px] overflow-hidden rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
     >
       <div
         aria-hidden="true"
@@ -42,13 +42,13 @@ export default function BlogBanner() {
             />
           </div>
         </div>
-        <p className="relative min-w-0 lg:absolute lg:left-[164px] lg:top-[43px] text-[16px] lg:text-[30px] font-bold leading-6 lg:leading-[36px] text-[#00ADDB]/80">
+        <p className="relative min-w-0 lg:absolute lg:left-[164px] lg:top-[43px] text-[16px] lg:text-[30px] font-bold leading-6 lg:leading-[36px] text-brand-blue/80">
           산정엔지니어링 공식 블로그
         </p>
         <LinkIcon
           size={40}
           aria-hidden="true"
-          className="size-5 shrink-0 lg:size-10 lg:absolute lg:left-[504px] lg:top-[41px] text-[#00ADDB]"
+          className="size-5 shrink-0 lg:size-10 lg:absolute lg:left-[504px] lg:top-[41px] text-brand-blue"
         />
       </div>
       <p className="relative mt-5 lg:mt-0 lg:absolute lg:left-[65px] lg:top-[125px] text-lg lg:text-[30px] font-semibold leading-7 lg:leading-[36px] text-white">

@@ -3,15 +3,10 @@ import { MapPin, Settings } from "lucide-react";
 
 function Divider() {
   return (
-    <div aria-hidden="true" className="hidden lg:block relative h-[117px] w-[2px] shrink-0">
-      <Image
-        src="/images/projects/wonsam-nonghyup/info-divider.svg"
-        width={117}
-        height={2}
-        alt=""
-        className="absolute left-1/2 top-1/2 max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90"
-      />
-    </div>
+    <div
+      aria-hidden="true"
+      className="hidden lg:block h-[117px] w-[2px] shrink-0 bg-brand-navy/20"
+    />
   );
 }
 
@@ -33,13 +28,13 @@ export default function ProjectOverview({
   return (
     <>
       <header className="text-center">
-        <p className="text-xs lg:text-sm lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]/60">
+        <p className="text-xs lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           PROJECTS DETAILS
         </p>
         <h2 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
           {title}
         </h2>
-        <p className="mt-3 lg:mt-[21px] text-[15px] lg:text-[20px] leading-[24px] text-[#102D4A]/80">
+        <p className="mt-3 lg:mt-[21px] text-[15px] lg:text-[20px] leading-[24px] text-brand-navy/80">
           {description}
         </p>
       </header>
@@ -55,7 +50,7 @@ export default function ProjectOverview({
           />
           <div className="min-w-0 flex-1 lg:flex-none lg:w-[152px]">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">공사구분</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
               {category}
             </dd>
           </div>
@@ -65,7 +60,7 @@ export default function ProjectOverview({
           <Settings size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
           <div className="min-w-0 flex-1 lg:flex-none lg:w-[332px]">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">주요 작업</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
               {work}
             </dd>
           </div>
@@ -75,7 +70,7 @@ export default function ProjectOverview({
           <MapPin size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
           <div className="min-w-0 flex-1 lg:flex-none lg:min-w-[160px] lg:whitespace-nowrap">
             <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">현장 위치</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-[#00ADDB]">
+            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
               {location}
             </dd>
           </div>

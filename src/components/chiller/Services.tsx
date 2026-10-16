@@ -11,13 +11,13 @@ export default function Services() {
       />
       <div className="mx-auto w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[47px]">
         <header className="text-center">
-          <p className="text-[12px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
+          <p className="text-[12px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
             CHILLER SERVICE
           </p>
-          <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-[#102D4A]">
+          <h2 className="mt-[12px] lg:mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
             냉동기 주요 서비스
           </h2>
-          <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-[#243447]/60">
+          <p className="mt-[12px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-brand-text/60">
             설치 &amp; 교체부터 수리 &amp; 오버홀, 정기점검까지 책임 있게 진행합니다.
           </p>
         </header>
@@ -38,13 +38,13 @@ export default function Services() {
               className="absolute right-0 top-0 hidden lg:block size-8 text-[#1D1B20] lg:size-12"
               size={48}
             />
-            <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-[#00ADDB]">
+            <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
               01
             </p>
-            <h3 className="mt-2 lg:mt-[10px] text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[1.5px] text-[#102D4A]">
+            <h3 className="mt-2 lg:mt-[10px] text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[1.5px] text-brand-navy">
               냉동기 설치 &amp; 교체
             </h3>
-            <p className="mt-2 lg:mt-[10px] text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[30px] tracking-[1px] lg:tracking-[1px] text-[#243447]/80">
+            <p className="mt-2 lg:mt-[10px] text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[30px] tracking-[1px] text-brand-text/80">
               현장 조건과 운전 목적에 맞춰
               <br />
               장비 선정부터 시운전까지 진행합니다.
@@ -55,11 +55,8 @@ export default function Services() {
                 "기존 장비 철거 및 신규 장비 반입",
                 "배관, 전기 연결 및 시운전",
               ].map((text) => (
-                <li
-                  key={text}
-                  className="flex min-h-[25px] lg:h-[25px] items-center gap-[12px] lg:gap-[10px]"
-                >
-                  <span className="hidden lg:flex shrink-0 size-[25px] items-center justify-center rounded-full bg-[#00ADDB] text-white">
+                <li key={text} className="flex min-h-[25px] items-center gap-[12px] lg:gap-[10px]">
+                  <span className="hidden lg:flex shrink-0 size-[25px] items-center justify-center rounded-full bg-brand-blue text-white">
                     <Check size={17} strokeWidth={3} />
                   </span>
                   {text}
@@ -101,16 +98,16 @@ export default function Services() {
           <Droplet
             size={29}
             fill="#00ADDB"
-            className="hidden lg:block shrink-0 lg:mr-[38px] text-[#00ADDB]"
+            className="hidden lg:block shrink-0 lg:mr-[38px] text-brand-blue"
           />
-          <strong className="text-[15px] lg:text-[24px] tracking-[1px] lg:tracking-[1.2px] text-[#102D4A]">
+          <strong className="text-[15px] lg:text-[24px] tracking-[1px] lg:tracking-[1.2px] text-brand-navy">
             세관 &amp; 소모품 정비
           </strong>
           <span
             aria-hidden="true"
-            className="hidden lg:block mx-[38px] h-[27px] w-px bg-[#00ADDB]"
+            className="hidden lg:block mx-[38px] h-[27px] w-px bg-brand-blue"
           />
-          <span className="text-[#243447]/80">
+          <span className="text-brand-text/80">
             설비 상태에 따라 열교환기 세관, 냉동유, 필터 교체를 진행합니다.
           </span>
         </div>
@@ -145,16 +142,16 @@ function ServiceDetail({
         {icon}
       </div>
       <div className="w-full lg:w-[397px]">
-        <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-[#00ADDB]">
+        <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
           {number}
         </p>
-        <h3 className="mt-2 lg:mt-[15px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[1.5px] text-[#102D4A]">
+        <h3 className="mt-2 lg:mt-[15px] lg:whitespace-nowrap text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[1.5px] text-brand-navy">
           {title}
         </h3>
-        <p className="mt-2 lg:mt-[10px] text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[30px] tracking-[1px] lg:tracking-[1px] text-[#243447]/80">
+        <p className="mt-2 lg:mt-[10px] text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[30px] tracking-[1px] text-brand-text/80">
           {description}
         </p>
-        <div className="mt-[12px] lg:mt-[15px] lg:border-t-2 border-[#D1DFE8] lg:pt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[40px] tracking-[1px] lg:tracking-[1px] text-[#243447]/80">
+        <div className="mt-[12px] lg:mt-[15px] lg:border-t-2 border-[#D1DFE8] lg:pt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[20px] font-semibold leading-6 lg:leading-[40px] tracking-[1px] text-brand-text/80">
           {details}
         </div>
       </div>

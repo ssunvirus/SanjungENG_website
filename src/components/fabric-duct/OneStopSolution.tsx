@@ -47,21 +47,21 @@ export default function OneStopSolution() {
       className="mx-auto grid pb-6 px-5 lg:px-0 lg:pl-[65px] h-auto lg:h-[817px] w-full lg:max-w-[1440px] grid-cols-1 lg:grid-cols-[485px_734px] gap-[28px] lg:gap-[52px] pt-[24px] lg:pt-[47.12px]"
     >
       <div>
-        <p className="text-[14px] lg:text-[20px] font-bold leading-[24.0px] lg:leading-[24px] tracking-[3px] lg:tracking-[6px] text-[#00ADDB]">
+        <p className="text-[14px] lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue">
           ONE-STOP SOLUTION
         </p>
         <h2
           id="one-stop-heading"
-          className="mt-[24px] lg:mt-[41px] lg:whitespace-nowrap text-[28px] lg:text-[45px] font-bold leading-10 lg:leading-[60px] tracking-[1px] lg:tracking-[2.25px] text-[#102D4A]"
+          className="mt-[24px] lg:mt-[41px] lg:whitespace-nowrap text-[28px] lg:text-[45px] font-bold leading-10 lg:leading-[60px] tracking-[1px] lg:tracking-[2.25px] text-brand-navy"
         >
           냉동설비부터
           <br />
           섬유덕트까지,
           <br />
           설치부터 관리까지
-          <span className="ml-[11px] text-[#00ADDB]">한 번에</span>
+          <span className="ml-[11px] text-brand-blue">한 번에</span>
         </h2>
-        <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-[#243447]/60">
+        <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-brand-text/60">
           산정엔지니어링은
           <br />
           냉동/공조설비부터 섬유덕트 설치,
@@ -96,7 +96,7 @@ export default function OneStopSolution() {
                 }}
               />
               <span
-                className="absolute flex size-[56px] items-center justify-center rounded-full border border-[#00ADDB] bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-[#00ADDB]"
+                className="absolute flex size-[56px] items-center justify-center rounded-full border border-brand-blue bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-brand-blue"
                 style={{ top: step.circleTop, left: index === 0 ? 1 : 0 }}
               >
                 {step.number}
@@ -105,7 +105,7 @@ export default function OneStopSolution() {
                 <ChevronDown
                   size={48}
                   strokeWidth={2}
-                  className="absolute left-[5px] text-[#00ADDB]"
+                  className="absolute left-[5px] text-brand-blue"
                   style={{ top: step.arrowTop }}
                 />
               )}
@@ -127,11 +127,11 @@ export default function OneStopSolution() {
               </div>
             </div>
             <div className="flex flex-col gap-[16px] lg:gap-[10px] font-semibold">
-              <span className="text-[#00ADDB] lg:hidden">{step.number}</span>
-              <h3 className="lg:whitespace-nowrap text-[21px] lg:text-[35px] leading-[24px] lg:leading-[40px] text-[#243447]">
+              <span className="text-brand-blue lg:hidden">{step.number}</span>
+              <h3 className="lg:whitespace-nowrap text-[21px] lg:text-[35px] leading-[24px] lg:leading-[40px] text-brand-text">
                 {step.title}
               </h3>
-              <p className="whitespace-pre-line lg:whitespace-pre text-[14px] lg:text-[20px] leading-[24px] lg:leading-[40px] text-[#243447]/60">
+              <p className="whitespace-pre-line lg:whitespace-pre text-[14px] lg:text-[20px] leading-[24px] lg:leading-[40px] text-brand-text/60">
                 {step.description}
               </p>
             </div>

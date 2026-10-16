@@ -1,57 +1,18 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-const projects: {
-  title: string;
-  tag: string;
-  description: string;
-  image: string;
-  href?: string;
-}[] = [
-  {
-    title: "농협 저온저장고 냉동설비 설치",
-    tag: "저온저장고",
-    description: "CDU / 유니트쿨러 설치",
-    image: "/images/projects/cold-storage.jpg",
-    href: "/projects/wonsam-nonghyup",
-  },
-  {
-    title: "구례 실내 수영장 섬유덕트 설치",
-    tag: "섬유덕트",
-    description: "섬유덕트 설계 / 설치",
-    image: "/images/projects/pool-fabric-duct.jpg",
-    href: "/projects/gurye-pool",
-  },
-  {
-    title: "반도체 공장 칠러 시스템 구축",
-    tag: "냉동기",
-    description: "공냉식 냉동기 교체",
-    image: "/images/home-refresh/business-hvac.jpg",
-    href: "/projects/semiconductor-chiller",
-  },
-  {
-    title: "서안성 냉동창고 정기점검",
-    tag: "유지보수",
-    description: "정기점검 / 유지보수",
-    image: "/images/projects/warehouse-maintenance.jpg",
-    href: "/projects/seoanseong-maintenance",
-  },
-];
+import { desktopFeaturedProjects as projects } from "@/src/components/projects/data";
 
 const CARD_STEP = 536.25;
 const LAST_SLIDE = projects.length - 2;
 
 export default function Projects() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const scrollEndTimerRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [selected, setSelected] = useState(projects[0]);
 
   useEffect(
     () => () => {
@@ -84,27 +45,27 @@ export default function Projects() {
       className="relative mx-auto h-[929px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
     >
       <div className="mx-auto w-[1192px]">
-        <div className="flex h-6 items-center gap-[20px] text-[#00ADDB]/60">
+        <div className="flex h-6 items-center gap-[20px] text-brand-blue/60">
           <span className="text-[20px] font-medium tracking-[6px]">PROJECTS</span>
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>
         <h2
           id="projects-heading"
-          className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-[#102D4A]"
+          className="mt-[10px] text-[60px] font-bold leading-[72px] tracking-[3px] text-brand-navy"
         >
           시공사례
         </h2>
-        <p className="mt-[25px] text-[19px] font-semibold leading-[29px] text-[#243447]">
+        <p className="mt-[25px] text-[19px] font-semibold leading-[29px] text-brand-text">
           냉동공조부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
         </p>
-        <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-[#243447]">
+        <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-brand-text">
           <button
             type="button"
             aria-label="이전 시공사례"
             aria-controls="project-cards"
             disabled={currentSlide === 0}
             onClick={() => move(-1)}
-            className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]"
+            className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-brand-navy"
           >
             <ChevronLeft size={28} strokeWidth={2.5} aria-hidden="true" />
           </button>
@@ -114,7 +75,7 @@ export default function Projects() {
             aria-controls="project-cards"
             disabled={currentSlide === LAST_SLIDE}
             onClick={() => move(1)}
-            className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-[#102D4A] text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-[#102D4A]"
+            className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white focus-visible:outline-2 focus-visible:outline-[#006EB8] disabled:cursor-default disabled:bg-[#AEBFCB] disabled:text-brand-navy"
           >
             <ChevronRight size={28} strokeWidth={2.5} aria-hidden="true" />
           </button>
@@ -153,7 +114,7 @@ export default function Projects() {
               <>
                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                   <Image
-                    src={project.image}
+                    src={project.homeImage ?? project.image}
                     alt={project.title}
                     fill
                     sizes="503px"
@@ -161,17 +122,17 @@ export default function Projects() {
                   />
                 </div>
                 <div className="relative px-[21px] pt-[23px] pr-[70px]">
-                  <h3 className="whitespace-nowrap text-[23px] font-bold leading-[29px] text-[#102D4A]">
+                  <h3 className="whitespace-nowrap text-[23px] font-bold leading-[29px] text-brand-navy">
                     {project.title}
                   </h3>
-                  <p className="mt-[11px] text-[19px] font-medium leading-6 text-[#102D4A]/50">
+                  <p className="mt-[11px] text-[19px] font-medium leading-6 text-brand-navy/50">
                     {project.description}
                   </p>
                   <ArrowRightCircle
                     size={42}
                     strokeWidth={2}
                     aria-hidden="true"
-                    className="absolute top-[30px] right-[20px] text-[#102D4A]"
+                    className="absolute top-[30px] right-[20px] text-brand-navy"
                   />
                 </div>
               </>
@@ -182,74 +143,27 @@ export default function Projects() {
                 key={project.image}
                 className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white"
               >
-                {project.href ? (
-                  <Link href={project.href} className={cardClassName}>
-                    {content}
-                  </Link>
-                ) : (
-                  <button
-                    type="button"
-                    aria-label={`${project.title} ?? ?? ??`}
-                    aria-haspopup="dialog"
-                    onClick={() => {
-                      setSelected(project);
-                      dialogRef.current?.showModal();
-                    }}
-                    className={cardClassName}
-                  >
-                    {content}
-                  </button>
-                )}
+                <Link href={project.href} className={cardClassName}>
+                  {content}
+                </Link>
               </article>
             );
           })}
         </div>
         <div aria-hidden="true" className="mt-[26px] h-[2px] w-[1114px] bg-[#CBD3D7]">
           <div
-            className="h-full w-[143px] bg-[#00ADDB]"
+            className="h-full w-[143px] bg-brand-blue"
             style={{ transform: `translateX(${progress * 971}px)` }}
           />
         </div>
         <a
           href="/projects"
-          className="mx-auto mt-[49px] flex h-[53px] w-[267px] items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-[#102D4A] bg-[#102D4A] text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#00ADDB]"
+          className="mx-auto mt-[49px] flex h-[53px] w-[267px] items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-brand-navy bg-brand-navy text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
         >
           시공사례 더 보기
           <ArrowRight size={34} strokeWidth={2.4} aria-hidden="true" />
         </a>
       </div>
-      <dialog
-        ref={dialogRef}
-        aria-labelledby="project-dialog-heading"
-        onClick={(event) => {
-          if (event.target === event.currentTarget) event.currentTarget.close();
-        }}
-        className="fixed inset-0 m-auto max-h-[90vh] w-[1100px] max-w-[90vw] overflow-auto rounded-xl bg-white p-8 text-[#102D4A] backdrop:bg-[#102D4A]/70"
-      >
-        <div className="mb-6 flex items-center justify-between gap-6">
-          <h2 id="project-dialog-heading" className="text-3xl font-bold">
-            {selected.title}
-          </h2>
-          <button
-            type="button"
-            aria-label="시공사례 사진 닫기"
-            onClick={() => dialogRef.current?.close()}
-            className="flex size-12 shrink-0 cursor-pointer items-center justify-center rounded focus-visible:outline-2"
-          >
-            <X size={32} aria-hidden="true" />
-          </button>
-        </div>
-        <div className="relative h-[60vh]">
-          <Image
-            src={selected.image}
-            alt={selected.title}
-            fill
-            sizes="1100px"
-            className="object-contain"
-          />
-        </div>
-        <p className="mt-6 text-xl">{selected.description}</p>
-      </dialog>
     </section>
   );
 }
