@@ -6,6 +6,9 @@ import { siteUrl } from "../src/lib/site-url";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  other: {
+    "naver-site-verification": "5f80201cf9d38969a9b7f584e3f15a4bb4397202",
+  },
   title: "산정엔지니어링",
   description:
     "산정엔지니어링은 냉동기·항온항습기·저온저장고 등 냉동공조 설비와 섬유덕트의 설계, 설치 및 유지보수를 제공합니다.",

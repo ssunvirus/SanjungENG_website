@@ -12,6 +12,9 @@ import MobileEstimate from "../src/components/home/mobile/MobileEstimate";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  title: "냉동공조·섬유덕트 설계 및 시공 | 산정엔지니어링",
+  description:
+    "산정엔지니어링은 냉동기·항온항습기·저온저장고 등 냉동공조 설비와 섬유덕트의 설계, 설치 및 유지보수를 제공합니다.",
 };
 
 export default function Home() {

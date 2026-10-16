@@ -4,8 +4,9 @@ import ProjectGallery from "../../src/components/projects/ProjectGallery";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/projects" },
-  title: "시공사례 | 산정엔지니어링",
-  description: "냉동공조 설비와 섬유덕트 설치, 교체 및 유지보수 시공사례를 소개합니다.",
+  title: "냉동공조·섬유덕트 시공사례 | 산정엔지니어링",
+  description:
+    "냉동기, 저온저장고, 항온항습기, 냉각탑 및 섬유덕트 설치·유지보수 현장을 소개합니다.",
 };
 
 export default function ProjectsPage() {

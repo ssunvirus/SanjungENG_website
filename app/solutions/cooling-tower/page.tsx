@@ -7,8 +7,8 @@ import WorkProcess from "../../../src/components/cooling-tower/WorkProcess";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cooling-tower" },
-  title: "냉각탑 | 산정엔지니어링",
-  description: "냉각탑 설치와 교체, 충진물 및 부품 교체, 세척과 정비 서비스를 소개합니다.",
+  title: "냉각탑 설치·교체·정비 | 산정엔지니어링",
+  description: "냉각탑 설치와 교체, 충진물·부품 교체, 세척 및 정비 서비스를 소개합니다.",
 };
 
 export default function CoolingTowerPage() {

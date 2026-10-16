@@ -8,8 +8,8 @@ import WorkProcess from "../../src/components/chiller/WorkProcess";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions" },
-  title: "냉동공조 | 산정엔지니어링",
-  description: "냉동기 설치와 교체, 수리와 오버홀, 정기점검 서비스를 소개합니다.",
+  title: "냉동기 설치·수리·유지보수 | 산정엔지니어링",
+  description: "냉동기 설치와 교체부터 수리, 오버홀, 정기점검까지 냉동공조 서비스를 소개합니다.",
 };
 
 export default function SolutionsPage() {
