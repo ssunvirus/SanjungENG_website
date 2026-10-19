@@ -1,8 +1,8 @@
 import { readEstimateFields } from "./estimate-rules";
 
-type EstimateResult = { message?: string };
+type EstimateResult = { message?: string; received?: boolean };
 
-export async function submitEstimate(fields: FormData, multipart = false): Promise<void> {
+export async function submitEstimate(fields: FormData, multipart = false): Promise<boolean> {
   const body = multipart
     ? fields
     : JSON.stringify(
@@ -26,4 +26,5 @@ export async function submitEstimate(fields: FormData, multipart = false): Promi
         : "전송에 실패했습니다. 잠시 후 다시 시도해주세요.",
     );
   }
+  return result.received === true;
 }

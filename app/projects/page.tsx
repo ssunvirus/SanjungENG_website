@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
-      <Hero />
+      <Hero headingTag="h1" />
       <div
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
-export default function Hero() {
+export default function Hero({ headingTag: Heading = "p" }: { headingTag?: "h1" | "p" }) {
   return (
     <section className="relative mx-auto h-[320px] w-full max-w-[1920px] overflow-hidden text-white lg:h-[600px]">
       <Image
@@ -27,9 +27,9 @@ export default function Hero() {
           <ChevronRight size={38} aria-hidden="true" />
           <span aria-current="page">시공사례</span>
         </nav>
-        <h1 className="text-[30px] font-bold leading-normal lg:mt-[34px] lg:text-[80px] lg:leading-[96px]">
+        <Heading className="text-[30px] font-bold leading-normal lg:mt-[34px] lg:text-[80px] lg:leading-[96px]">
           시공사례
-        </h1>
+        </Heading>
         <p className="mt-5 text-[20px] text-white/80 font-medium leading-7 lg:mt-[34px] lg:text-[33.75px] lg:leading-13">
           냉동공조부터 섬유덕트까지
           <br />

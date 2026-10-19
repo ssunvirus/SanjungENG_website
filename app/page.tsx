@@ -28,6 +28,7 @@ export default function Home() {
 
   return (
     <main id="page-top" className="min-w-0 flex-1">
+      <h1 className="sr-only">냉동공조·섬유덕트 설계 및 시공 | 산정엔지니어링</h1>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

@@ -31,9 +31,9 @@ export default function ProjectOverview({
         <p className="text-xs lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           PROJECTS DETAILS
         </p>
-        <h2 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
+        <h1 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
           {title}
-        </h2>
+        </h1>
         <p className="mt-3 lg:mt-[21px] text-[15px] lg:text-[20px] leading-[24px] text-brand-navy/80">
           {description}
         </p>

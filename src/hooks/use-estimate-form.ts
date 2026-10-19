@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { submitEstimate } from "@/src/lib/submit-estimate";
 
 export function useEstimateForm() {
@@ -24,7 +25,15 @@ export function useEstimateForm() {
     setStatus("sending");
     setNotice("문의를 전송하고 있습니다.");
     try {
-      await submitEstimate(fields, multipart);
+      const received = await submitEstimate(fields, multipart);
+      if (received) {
+        // Analytics must never turn an accepted inquiry into a submission error.
+        try {
+          sendGAEvent("event", "generate_lead");
+        } catch {
+          // Keep the successful submission even when analytics is unavailable.
+        }
+      }
       setStatus("success");
       setNotice("문의가 접수되었습니다. 담당자가 확인 후 연락드립니다.");
       return true;

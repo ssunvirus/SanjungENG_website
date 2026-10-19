@@ -63,11 +63,11 @@ export default function MobileHero() {
       />
       <div className="mx-auto w-full max-w-[600px]">
         <p className="text-base font-bold text-brand-blue">{slide.category}</p>
-        <h1 className="mt-6 text-[34px] font-extrabold leading-[1.3]">
+        <h2 className="mt-6 text-[34px] font-extrabold leading-[1.3]">
           {slide.title[0]}
           <br />
           {slide.title[1]}
-        </h1>
+        </h2>
         <p className="mt-3 text-base font-semibold leading-7">{slide.mobileDescription}</p>
         <div className="mt-6 flex max-w-[210px] flex-col gap-3">
           <Link

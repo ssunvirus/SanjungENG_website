@@ -9,8 +9,9 @@ import Partners from "@/src/components/fabric-duct/Partners";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct" },
-  title: "섬유덕트 설계·시공 | 산정엔지니어링",
-  description: "공간에 맞춘 섬유덕트 설계와 설치, CFD를 활용한 공기 분배 설계 솔루션을 소개합니다.",
+  title: "섬유덕트·페브릭덕트 설계·시공 | 산정엔지니어링",
+  description:
+    "공간에 맞춘 섬유덕트(페브릭덕트) 설계와 설치, CFD를 활용한 공기 분배 설계 솔루션을 소개합니다.",
 };
 
 export default function FabricDuctPage() {

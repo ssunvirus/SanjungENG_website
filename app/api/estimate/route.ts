@@ -159,7 +159,7 @@ export async function POST(request: Request) {
     });
     if (!result.accepted.length || result.rejected.length)
       return fail("메일을 보내지 못했습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.", 502);
-    return Response.json({ message: "문의가 접수되었습니다." });
+    return Response.json({ message: "문의가 접수되었습니다.", received: true });
   } catch {
     return fail("전송 중 연결 문제가 발생했습니다. 잠시 후 다시 시도해주세요.", 502);
   } finally {

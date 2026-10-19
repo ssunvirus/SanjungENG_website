@@ -55,11 +55,11 @@ export default function Hero() {
       >
         <p className="text-[23px] font-bold leading-[29px] text-brand-blue">{slide.category}</p>
 
-        <h1 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
+        <h2 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
           {slide.title[0]}
           <br />
           {slide.title[1]}
-        </h1>
+        </h2>
 
         <p className="mt-[34px] text-[34px] font-medium leading-[42px]">{slide.subtitle}</p>
 
