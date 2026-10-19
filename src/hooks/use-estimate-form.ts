@@ -27,11 +27,19 @@ export function useEstimateForm() {
     try {
       const received = await submitEstimate(fields, multipart);
       if (received) {
-        // Analytics must never turn an accepted inquiry into a submission error.
-        try {
-          sendGAEvent("event", "generate_lead");
-        } catch {
-          // Keep the successful submission even when analytics is unavailable.
+        // Isolate each destination so one tracking failure cannot block the other.
+        for (const report of [
+          () => sendGAEvent("event", "generate_lead"),
+          () =>
+            sendGAEvent("event", "conversion", {
+              send_to: "AW-18414772395/jv5YCNvb76EdEKvB7MxE",
+            }),
+        ]) {
+          try {
+            report();
+          } catch {
+            // Tracking is best-effort and must not affect the accepted inquiry.
+          }
         }
       }
       setStatus("success");

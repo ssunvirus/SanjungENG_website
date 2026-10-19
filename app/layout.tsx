@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/src/components/layout/Header";
 import Footer from "@/src/components/layout/Footer";
@@ -45,6 +46,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
       </body>
       <GoogleAnalytics gaId="G-H64WF985Q8" />
+      <Script id="google-ads-config" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          (function () {
+            function gtag() { window.dataLayer.push(arguments); }
+            gtag('config', 'AW-18414772395');
+          })();
+        `}
+      </Script>
     </html>
   );
 }
