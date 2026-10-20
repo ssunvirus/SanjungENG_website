@@ -3,13 +3,7 @@
 import Script from "next/script";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
-type NaverWindow = Window & {
-  wcs_add?: { wa?: string };
-  _nasa?: Record<string, unknown>;
-  wcs?: { inflow: () => void };
-  wcs_do?: () => void;
-};
+import { naverAccountId, type NaverWindow } from "@/src/lib/naver-analytics";
 
 export default function NaverAnalytics() {
   const pathname = usePathname();
@@ -28,7 +22,7 @@ export default function NaverAnalytics() {
 
     try {
       naver.wcs_add = naver.wcs_add || {};
-      naver.wcs_add.wa = "s_3311cae277b0";
+      naver.wcs_add.wa = naverAccountId;
       naver._nasa = naver._nasa || {};
       naver.wcs.inflow();
       naver.wcs_do();

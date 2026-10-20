@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 import { submitEstimate } from "@/src/lib/submit-estimate";
+import { sendNaverLead } from "@/src/lib/naver-analytics";
 
 export function useEstimateForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -34,6 +35,7 @@ export function useEstimateForm() {
             sendGAEvent("event", "conversion", {
               send_to: "AW-18414772395/jv5YCNvb76EdEKvB7MxE",
             }),
+          sendNaverLead,
         ]) {
           try {
             report();

@@ -22,6 +22,14 @@ function setup(submit, trackError) {
         };
       }
       if (name === "@/src/lib/submit-estimate") return { submitEstimate: submit };
+      if (name === "@/src/lib/naver-analytics") {
+        return {
+          sendNaverLead() {
+            events.push(["naver", "lead"]);
+            if (trackError?.("lead")) throw new Error("Naver unavailable");
+          },
+        };
+      }
       if (name === "@next/third-parties/google") {
         return {
           sendGAEvent(...args) {
@@ -37,19 +45,22 @@ function setup(submit, trackError) {
   return { form: sandbox.exports.useEstimateForm(), events, states };
 }
 
-test("accepted inquiries send exactly one GA4 and Ads event with no personal fields", async () => {
+test("accepted inquiries send GA4, Ads and Naver once with no personal fields", async () => {
   for (const multipart of [false, true]) {
     const { form, events } = setup(async () => true);
     const fields = new FormData();
     fields.set("manager", "Private name");
     fields.set("email", "private@example.com");
     assert.equal(await form.send(fields, multipart), true);
-    assert.equal(events.length, 2);
+    assert.equal(events.length, 3);
     assert.equal(events[0][1], "generate_lead");
     assert.equal(events[0].length, 2);
     assert.equal(events[1][1], "conversion");
     assert.equal(events[1][2].send_to, "AW-18414772395/jv5YCNvb76EdEKvB7MxE");
     assert.deepEqual(Object.keys(events[1][2]), ["send_to"]);
+    assert.equal(events[2][0], "naver");
+    assert.equal(events[2][1], "lead");
+    assert.equal(events[2].length, 2);
   }
 });
 
@@ -68,7 +79,7 @@ test("submission failures send no tracking and permit a later retry", async () =
   assert.equal(await form.send(new FormData()), false);
   assert.equal(events.length, 0);
   assert.equal(await form.send(new FormData()), true);
-  assert.equal(events.length, 2);
+  assert.equal(events.length, 3);
 });
 
 test("double submit while pending neither sends another request nor duplicate events", async () => {
@@ -86,18 +97,35 @@ test("double submit while pending neither sends another request nor duplicate ev
   assert.equal(events.length, 0);
   resolve(true);
   assert.equal(await first, true);
-  assert.equal(events.length, 2);
+  assert.equal(events.length, 3);
 });
 
 test("each tracking destination is attempted even when either or both throw", async () => {
-  for (const failure of ["generate_lead", "conversion", "both"]) {
+  for (const failure of ["generate_lead", "conversion", "lead", "both"]) {
     const { form, events, states } = setup(
       async () => true,
       (event) => failure === "both" || event === failure,
     );
     assert.equal(await form.send(new FormData()), true);
-    assert.equal(events.length, 2);
+    assert.equal(events.length, 3);
     assert.ok(states.includes("success"));
     assert.ok(!states.includes("error"));
   }
+});
+
+test("Naver sends only lead and uses the supplied account without loading another script", () => {
+  const naverSource = ts.transpileModule(
+    readFileSync(new URL("../src/lib/naver-analytics.ts", import.meta.url), "utf8"),
+    { compilerOptions: { module: ts.ModuleKind.CommonJS } },
+  ).outputText;
+  const calls = [];
+  const window = { wcs: { trans: (data) => calls.push(data) } };
+  const sandbox = { exports: {}, window };
+  runInNewContext(naverSource, sandbox);
+  sandbox.exports.sendNaverLead();
+  assert.equal(window.wcs_add.wa, "s_3311cae277b0");
+  assert.equal(JSON.stringify(calls), '[{"type":"lead"}]');
+  delete window.wcs;
+  assert.doesNotThrow(() => sandbox.exports.sendNaverLead());
+  assert.equal(calls.length, 1);
 });
