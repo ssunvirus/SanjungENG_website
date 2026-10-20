@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import Header from "@/src/components/layout/Header";
 import Footer from "@/src/components/layout/Footer";
+import NaverAnalytics from "@/src/components/layout/NaverAnalytics";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteUrl } from "@/src/lib/site-url";
 import { siteName, siteDescription, siteShareImage } from "@/src/lib/site-metadata";
@@ -44,6 +46,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <Suspense fallback={null}>
+          <NaverAnalytics />
+        </Suspense>
       </body>
       <GoogleAnalytics gaId="G-H64WF985Q8" />
       <Script id="google-ads-config" strategy="afterInteractive">
