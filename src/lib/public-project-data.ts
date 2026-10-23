@@ -20,18 +20,22 @@ export function mergePublicProjects(existing: Project[], saved: ProjectRecord[])
   });
   return [
     ...saved
-      .filter((item) => !existing.some((base) => base.id === item.id))
+      .filter((item) => !item.deleted && !existing.some((base) => base.id === item.id))
       .sort((a, b) => a.id.localeCompare(b.id))
       .map((item) => toCard(item)),
-    ...existing.map((base) => {
-      const record = saved.find((item) => item.id === base.id);
-      return record ? toCard(record, base) : base;
-    }),
+    ...existing
+      .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
+      .map((base) => {
+        const record = saved.find((item) => item.id === base.id);
+        return record ? toCard(record, base) : base;
+      }),
   ];
 }
 
 export function hasPublishedPhoto(records: ProjectRecord[], key: string) {
-  return records.some((record) =>
-    record.photos.some((photo) => photo.src === `/api/admin/project-images/${key}`),
+  return records.some(
+    (record) =>
+      !record.deleted &&
+      record.photos.some((photo) => photo.src === `/api/admin/project-images/${key}`),
   );
 }

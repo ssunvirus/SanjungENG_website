@@ -19,6 +19,14 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  return mutate(request, false);
+}
+
+export async function DELETE(request: Request) {
+  return mutate(request, true);
+}
+
+async function mutate(request: Request, deleting: boolean) {
   if (request.headers.get("origin") !== adminAuthConfig().origin)
     return reply({ error: "허용되지 않은 요청입니다." }, 403);
   if (!(await getAdminSession()))
@@ -43,6 +51,7 @@ export async function POST(request: Request) {
       chunks.push(value);
     }
     project = parseProject(JSON.parse(Buffer.concat(chunks).toString("utf8")));
+    if (project.deleted) throw new Error("InvalidProject");
   } catch {
     return reply(
       {
@@ -53,7 +62,7 @@ export async function POST(request: Request) {
     );
   }
   try {
-    const saved = await saveProject(project);
+    const saved = await saveProject(deleting ? { ...project, deleted: true } : project);
     // A cache failure must not report an already committed DB write as failed.
     try {
       revalidateTag("public-projects", { expire: 0 });
@@ -68,7 +77,11 @@ export async function POST(request: Request) {
         409,
       );
     return reply(
-      { error: "저장하지 못했습니다. DB 설정과 PutItem 쓰기 권한을 확인해주세요." },
+      {
+        error: deleting
+          ? "삭제하지 못했습니다. 잠시 후 다시 시도해주세요."
+          : "저장하지 못했습니다. DB 설정과 PutItem 쓰기 권한을 확인해주세요.",
+      },
       503,
     );
   }

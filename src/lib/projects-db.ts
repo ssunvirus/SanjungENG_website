@@ -61,19 +61,21 @@ export async function saveProject(input: ProjectRecord): Promise<ProjectRecord> 
           id: { S: saved.id },
           entityType: { S: "project" },
           version: { N: String(saved.version) },
+          deleted: { BOOL: saved.deleted === true },
           document: { S: JSON.stringify(saved) },
           updatedAt: { S: new Date().toISOString() },
         },
         ConditionExpression:
           project.version === 0
             ? "attribute_not_exists(id)"
-            : "#version = :version AND entityType = :type",
+            : "#version = :version AND entityType = :type AND (attribute_not_exists(deleted) OR deleted = :false)",
         ...(project.version
           ? {
               ExpressionAttributeNames: { "#version": "version" },
               ExpressionAttributeValues: {
                 ":version": { N: String(project.version) },
                 ":type": { S: "project" },
+                ":false": { BOOL: false },
               },
             }
           : {}),

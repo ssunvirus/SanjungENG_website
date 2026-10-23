@@ -97,6 +97,18 @@ test("invalid input never reaches DynamoDB", async () => {
   assert.equal(db.calls.length, 0);
 });
 
+test("deletion uses PutItem with concurrency and anti-resurrection conditions", async () => {
+  const db = setup(config, {});
+  const removed = await db.saveProject({ ...project, version: 3, deleted: true });
+  assert.equal(removed.deleted, true);
+  assert.equal(removed.version, 4);
+  assert.equal(db.calls[0].Item.deleted.BOOL, true);
+  assert.equal(JSON.parse(db.calls[0].Item.document.S).deleted, true);
+  assert.equal(db.calls[0].ExpressionAttributeValues[":version"].N, "3");
+  assert.equal(db.calls[0].ExpressionAttributeValues[":false"].BOOL, false);
+  assert.ok(db.calls[0].ConditionExpression.includes("attribute_not_exists(deleted)"));
+});
+
 test("list filters diagnostic records and reads all pages", async () => {
   const db = setup(config, [
     { LastEvaluatedKey: { id: { S: "page-1" } }, Items: [] },

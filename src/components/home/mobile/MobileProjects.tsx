@@ -4,13 +4,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useRef, useState } from "react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
-import { mobileFeaturedProjects as cases } from "@/src/components/projects/data";
+import { mobileFeaturedProjects, type Project } from "@/src/components/projects/data";
 
-export default function MobileProjects() {
+export default function MobileProjects({ cases = mobileFeaturedProjects }: { cases?: Project[] }) {
   const [caseIndex, setCaseIndex] = useState(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const swipeHandled = useRef(false);
-  const project = cases[caseIndex];
+  const project = cases[Math.min(caseIndex, cases.length - 1)];
+  if (!project) return null;
   return (
     <section className="mx-auto max-w-[600px] px-5 py-8">
       <Eyebrow variant="compact">PROJECTS</Eyebrow>

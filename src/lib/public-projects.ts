@@ -2,6 +2,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import type { Metadata } from "next";
 import { connection } from "next/server";
+import { notFound } from "next/navigation";
 import { projects } from "@/src/components/projects/data";
 import { listProjects } from "./projects-db";
 import { mergePublicProjects } from "./public-project-data";
@@ -30,16 +31,15 @@ export async function publicProjectCards() {
       "Public projects unavailable",
       error instanceof Error ? error.name : "UnknownError",
     );
-    return projects;
+    // Do not resurrect deleted legacy cases when the deletion records cannot be read.
+    return [];
   }
 }
 
 export async function publicProject(id: string) {
-  try {
-    return (await publicProjectRecords()).find((record) => record.id === id) || null;
-  } catch {
-    return null;
-  }
+  const record = (await publicProjectRecords()).find((item) => item.id === id) || null;
+  if (record?.deleted) notFound();
+  return record;
 }
 
 export async function publicProjectMetadata(id: string, fallback: Metadata): Promise<Metadata> {

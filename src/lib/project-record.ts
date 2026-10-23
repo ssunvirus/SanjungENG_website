@@ -9,6 +9,7 @@ export type ProjectRecord = {
   status: "공개";
   photos: { src: string; alt: string }[];
   version: number;
+  deleted?: true;
 };
 
 export function parseProject(value: unknown): ProjectRecord {
@@ -52,5 +53,13 @@ export function parseProject(value: unknown): ProjectRecord {
     status: "공개",
     photos,
     version: p.version as number,
+    ...(p.deleted === true ? { deleted: true as const } : {}),
   };
+}
+
+export function mergeAdminProjects(existing: ProjectRecord[], saved: ProjectRecord[]) {
+  return [
+    ...saved.filter((item) => !item.deleted),
+    ...existing.filter((item) => !saved.some((record) => record.id === item.id)),
+  ];
 }

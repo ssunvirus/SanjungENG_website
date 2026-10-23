@@ -33,6 +33,6 @@ Amplify 컴퓨팅 역할 `SanjungAmplifyComputeRole`에 아래 인라인 정책�
 - 최대 요청 64KiB, 제목 150자, 내용 5000자, 사진 30장. 임시 blob URL, 외부 URL은 거절합니다.
 - 신규 ID는 브라우저에서 한 번 생성합니다. 조건부 PutItem으로 동일 ID 중복 생성과 버전 충돌을 차단합니다.
 - 통신이 끊겨 저장 결과가 불명확하면 새로고침해 저장 여부를 확인합니다.
-- 삭제 기능은 없으며 DeleteItem 권한도 필요하지 않습니다.
+- 목록의 삭제 버튼은 확인 후 삭제 상태(`deleted: true`)를 기록합니다. 물리 삭제가 아닌 기존 PutItem 권한으로 동작하므로 DeleteItem 권한은 필요하지 않습니다. 새로고침 후에도 기존 사례가 다시 나타나지 않게 삭제 기록을 유지합니다.
 - id만 있는 현재 테이블은 페이지별 Scan을 사용합니다. 데이터가 많아지면 목록 인덱스와 페이지네이션을 추가합니다.
 - 저장 형식: id, entityType(project), version, document(JSON), updatedAt(UTC).

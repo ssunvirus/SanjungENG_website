@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { desktopFeaturedProjects as projects } from "@/src/components/projects/data";
+import { desktopFeaturedProjects, type Project } from "@/src/components/projects/data";
 
 const CARD_STEP = 536.25;
-const LAST_SLIDE = projects.length - 2;
 
-export default function Projects() {
+export default function Projects({ projects = desktopFeaturedProjects }: { projects?: Project[] }) {
+  const LAST_SLIDE = Math.max(0, projects.length - 2);
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollEndTimerRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
@@ -38,6 +38,7 @@ export default function Projects() {
     setCurrentSlide(nextSlide);
   }
 
+  if (!projects.length) return null;
   return (
     <section
       id="projects"

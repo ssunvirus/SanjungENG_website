@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import test from "node:test";
 import ts from "typescript";
+import { mergeAdminProjects } from "../src/lib/project-record.ts";
 import {
   mergePublicProjects,
   publicPhotoPath,
@@ -55,7 +56,17 @@ test("public photos expose only paths referenced by saved records", () => {
   assert.equal(mergePublicProjects([], [{ ...saved, photos: [] }])[0].image, "");
 });
 
-test("public DB failures preserve legacy cards while raw photo lookup fails closed", async () => {
+test("deleted cases stay excluded from both lists and public photo access after reload", () => {
+  const removed = { ...saved, deleted: true };
+  const legacyRemoved = { ...removed, id: "existing" };
+  assert.deepEqual(mergePublicProjects(existing, [removed, legacyRemoved]), []);
+  assert.deepEqual(mergeAdminProjects(existing, [removed, legacyRemoved]), []);
+  assert.equal(hasPublishedPhoto([removed], key), false);
+  assert.equal(hasPublishedPhoto([removed, { ...saved, id: "other" }], key), true);
+});
+
+test("DB failures never resurrect legacy cases, and deleted detail routes return not-found", async () => {
+  let fail = true;
   const source = ts.transpileModule(
     readFileSync(new URL("../src/lib/public-projects.ts", import.meta.url), "utf8"),
     {
@@ -71,21 +82,30 @@ test("public DB failures preserve legacy cards while raw photo lookup fails clos
       if (name === "server-only" || name === "next") return {};
       if (name === "next/cache") return { unstable_cache: (fn) => fn };
       if (name === "next/server") return { connection: async () => {} };
+      if (name === "next/navigation")
+        return {
+          notFound() {
+            throw new Error("NEXT_NOT_FOUND");
+          },
+        };
       if (name.endsWith("projects/data")) return { projects: existing };
       if (name === "./public-project-data") return { mergePublicProjects };
       if (name === "./projects-db")
         return {
           listProjects: async () => {
-            throw new Error("Unavailable");
+            if (fail) throw new Error("Unavailable");
+            return [{ ...saved, deleted: true }];
           },
         };
       throw new Error(name);
     },
   };
   runInNewContext(source, sandbox);
-  assert.deepEqual(await sandbox.exports.publicProjectCards(), existing);
-  assert.equal(await sandbox.exports.publicProject("new-case"), null);
+  assert.deepEqual(Array.from(await sandbox.exports.publicProjectCards()), []);
+  await assert.rejects(sandbox.exports.publicProject("new-case"));
   await assert.rejects(sandbox.exports.publicProjectRecords());
+  fail = false;
+  await assert.rejects(sandbox.exports.publicProject("new-case"), /NEXT_NOT_FOUND/);
 });
 
 function imageRoute(records, fail = false) {

@@ -10,6 +10,9 @@ import MobileProjects from "@/src/components/home/mobile/MobileProjects";
 import MobileCustomers from "@/src/components/home/mobile/MobileCustomers";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 import { siteDescription, siteName } from "@/src/lib/site-metadata";
+import { connection } from "next/server";
+import { publicProjectCards } from "@/src/lib/public-projects";
+import { desktopFeaturedProjects, mobileFeaturedProjects } from "@/src/components/projects/data";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -17,7 +20,11 @@ export const metadata: Metadata = {
   description: siteDescription,
 };
 
-export default function Home() {
+export default async function Home() {
+  await connection();
+  const visibleIds = new Set((await publicProjectCards()).map((project) => project.id));
+  const desktopCases = desktopFeaturedProjects.filter((project) => visibleIds.has(project.id));
+  const mobileCases = mobileFeaturedProjects.filter((project) => visibleIds.has(project.id));
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -38,14 +45,14 @@ export default function Home() {
       <div className="w-full min-w-0 bg-gradient-to-b from-[#EFF7FB] to-[#F3FBFE] text-brand-navy lg:hidden">
         <MobileHero />
         <MobileBusiness />
-        <MobileProjects />
+        <MobileProjects cases={mobileCases} />
         <MobileCustomers />
         <MobileEstimate />
       </div>
       <div className="hidden lg:block">
         <Hero />
         <Business />
-        <Projects />
+        <Projects projects={desktopCases} />
         <Customers />
         <EstimateCta />
       </div>

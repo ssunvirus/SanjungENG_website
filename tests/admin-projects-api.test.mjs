@@ -11,6 +11,7 @@ const source = ts.transpileModule(
 ).outputText;
 function setup(authenticated = true, conflict = false) {
   const calls = [];
+  const writes = [];
   const sandbox = {
     exports: {},
     Response,
@@ -32,6 +33,7 @@ function setup(authenticated = true, conflict = false) {
           },
           saveProject: async (p) => {
             calls.push("write");
+            writes.push(p);
             if (conflict) {
               const e = new Error();
               e.name = "ConditionalCheckFailedException";
@@ -44,7 +46,7 @@ function setup(authenticated = true, conflict = false) {
     },
   };
   runInNewContext(source, sandbox);
-  return { ...sandbox.exports, calls };
+  return { ...sandbox.exports, calls, writes };
 }
 const project = {
   id: "test",
@@ -86,4 +88,26 @@ test("authenticated valid save succeeds with no-store and conflicts return 409",
   assert.equal((await response.json()).project.version, 1);
   assert.deepEqual(api.calls, ["write"]);
   assert.equal((await setup(true, true).POST(request())).status, 409);
+});
+
+test("delete requires admin, same origin, valid body and records a versioned tombstone", async () => {
+  const anonymous = setup(false);
+  assert.equal((await anonymous.DELETE(request())).status, 401);
+  assert.deepEqual(anonymous.calls, []);
+  const api = setup();
+  assert.equal((await api.DELETE(request(project, "https://foreign.com"))).status, 403);
+  assert.equal((await api.DELETE(request({ ...project, id: "../bad" }))).status, 400);
+  assert.deepEqual(api.calls, []);
+  const response = await api.DELETE(request({ ...project, version: 2 }));
+  assert.equal(response.status, 200);
+  assert.equal(api.writes[0].deleted, true);
+  assert.equal(api.writes[0].version, 2);
+  assert.equal((await response.json()).project.version, 3);
+  assert.equal((await setup(true, true).DELETE(request())).status, 409);
+});
+
+test("normal save cannot submit a client-supplied deletion marker", async () => {
+  const api = setup();
+  assert.equal((await api.POST(request({ ...project, deleted: true }))).status, 400);
+  assert.deepEqual(api.calls, []);
 });
