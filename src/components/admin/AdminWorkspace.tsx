@@ -30,6 +30,7 @@ const initialEntries: Entry[] = projects.map((project) => ({
   category: project.tag,
   location: "",
   description: project.description,
+  summary: project.description.slice(0, 50),
   status: "공개",
   version: 0,
   photos: [{ src: project.image, alt: project.title }],
@@ -41,6 +42,7 @@ const emptyEntry = (): Entry => ({
   category: "냉동기",
   location: "",
   description: "",
+  summary: "",
   status: "공개",
   version: 0,
   photos: [],
@@ -391,7 +393,11 @@ export default function AdminWorkspace() {
                               </div>
                               <div>
                                 <strong>{entry.title}</strong>
-                                <small>{entry.description || "작업 내용을 추가해주세요."}</small>
+                                <small>
+                                  {entry.summary ||
+                                    entry.description ||
+                                    "한 줄 소개를 추가해주세요."}
+                                </small>
                               </div>
                             </div>
                           </td>
@@ -484,6 +490,18 @@ export default function AdminWorkspace() {
                         />
                       </label>
                     </div>
+                    <label>
+                      한 줄 소개
+                      <input
+                        value={editor.summary ?? ""}
+                        maxLength={50}
+                        placeholder="예: 페브릭덕트 설계 및 설치"
+                        onChange={(event) => update({ summary: event.target.value })}
+                      />
+                      <small className={styles.fieldHint}>
+                        목록에서 제목 아래에 표시됩니다. {(editor.summary ?? "").length}/50자
+                      </small>
+                    </label>
                     <label>
                       작업 내용
                       <textarea

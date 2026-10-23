@@ -12,7 +12,7 @@ export function mergePublicProjects(existing: Project[], saved: ProjectRecord[])
     title: record.title,
     category: record.category === "섬유덕트" ? "섬유덕트" : "냉동공조",
     tag: record.category,
-    description: record.description,
+    description: record.summary?.trim() || record.description,
     image: record.photos[0] ? publicPhotoPath(record.photos[0].src) : "",
     imageTop: "0%",
     imageLeft: "0%",

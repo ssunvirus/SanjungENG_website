@@ -6,6 +6,7 @@ export type ProjectRecord = {
   category: string;
   location: string;
   description: string;
+  summary?: string;
   status: "공개";
   photos: { src: string; alt: string }[];
   version: number;
@@ -50,6 +51,7 @@ export function parseProject(value: unknown): ProjectRecord {
     category,
     location: field("location", 100),
     description: field("description", 5000),
+    summary: p.summary === undefined ? "" : field("summary", 50).replace(/\s+/g, " "),
     status: "공개",
     photos,
     version: p.version as number,

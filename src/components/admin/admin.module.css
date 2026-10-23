@@ -533,6 +533,13 @@
   color: #2a97b3;
   margin-left: 5px;
 }
+.fieldHint {
+  display: block;
+  margin-top: 8px;
+  color: #6c8193;
+  font-size: 14px;
+  font-weight: 400;
+}
 .formPanel input:not([type="file"]),
 .formPanel textarea,
 .formPanel select {
