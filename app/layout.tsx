@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
-import Header from "@/src/components/layout/Header";
-import Footer from "@/src/components/layout/Footer";
+import SiteFrame from "@/src/components/layout/SiteFrame";
 import NaverAnalytics from "@/src/components/layout/NaverAnalytics";
 import PhoneConversionTracking from "@/src/components/layout/PhoneConversionTracking";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -44,9 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className="h-full antialiased">
       <body className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-[#EFF7FB]">
-        <Header />
-        {children}
-        <Footer />
+        <SiteFrame>{children}</SiteFrame>
         <PhoneConversionTracking />
         <Suspense fallback={null}>
           <NaverAnalytics />

@@ -115,9 +115,15 @@ export default function Footer() {
             이메일 무단수집 거부
           </Link>
         </nav>
-        <p className="mt-2 text-center text-[11px] font-light text-white/50 md:text-left">
-          © 2026 (주) 산정엔지니어링. All Rights Reserved
-        </p>
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[11px] font-light text-white/50 md:justify-between">
+          <p>© 2026 (주) 산정엔지니어링. All Rights Reserved</p>
+          <Link
+            href="/admin"
+            className="py-2 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
+          >
+            관리자
+          </Link>
+        </div>
         <a
           href="#"
           aria-label="페이지 맨 위로 이동"

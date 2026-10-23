@@ -6,7 +6,14 @@ const defaults = {
   NAVER_SMTP_PASSWORD_PARAMETER: "/amplify/shared/dl6h0cf9vpgpu/NAVER_SMTP_PASSWORD",
   SMTP_SECRET_REGION: "ap-southeast-2",
 };
-const keys = ["SITE_URL", "NAVER_SMTP_USER", "ESTIMATE_TO_EMAIL", ...Object.keys(defaults)];
+const keys = [
+  "SITE_URL",
+  "NAVER_SMTP_USER",
+  "ESTIMATE_TO_EMAIL",
+  "PROJECTS_TABLE_NAME",
+  "PROJECTS_AWS_REGION",
+  ...Object.keys(defaults),
+];
 const lines = keys.flatMap((key) => {
   const value = process.env[key] || defaults[key];
   if (!value) return [];
