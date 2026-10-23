@@ -84,14 +84,20 @@ export function adminCookieName(purpose: "session" | "flow") {
   return `${adminAuthConfig().secure ? "__Host-" : ""}sanjung-admin-${purpose}`;
 }
 
-export async function requireAdmin() {
+export async function getAdminSession() {
   const value = (await cookies()).get(adminCookieName("session"))?.value;
-  if (!value) redirect("/admin/login");
+  if (!value) return null;
   try {
     const payload = await openAdminCookie(value, await getAdminSecret(), "session");
     if (payload.role === "Admins" && typeof payload.sub === "string") return { id: payload.sub };
   } catch {
     // Invalid, expired or unavailable authentication always fails closed.
   }
-  redirect("/admin/login?error=session");
+  return null;
+}
+
+export async function requireAdmin() {
+  const session = await getAdminSession();
+  if (!session) redirect("/admin/login");
+  return session;
 }

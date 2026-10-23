@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
+import { parseProject } from "../src/lib/project-record.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../src/lib/projects-db.ts", import.meta.url), "utf8"),
@@ -17,6 +18,7 @@ function setup(env, result, fail = false) {
     process: { env },
     console: { error() {} },
     require(name) {
+      if (name === "./project-record") return { parseProject };
       if (name === "server-only") return {};
       if (name === "@aws-sdk/client-dynamodb")
         return {
@@ -24,7 +26,7 @@ function setup(env, result, fail = false) {
             async send(command) {
               calls.push(command.input);
               if (fail) throw new Error("Denied");
-              return result;
+              return Array.isArray(result) ? result[calls.length - 1] : result;
             }
             destroy() {
               destroyed = true;
@@ -35,18 +37,84 @@ function setup(env, result, fail = false) {
               this.input = input;
             }
           },
+          ScanCommand: class {
+            constructor(input) {
+              this.input = input;
+            }
+          },
+          PutItemCommand: class {
+            constructor(input) {
+              this.input = input;
+            }
+          },
         };
       throw new Error(name);
     },
   };
   runInNewContext(source, sandbox);
-  return { check: sandbox.exports.checkProjectsConnection, calls, destroyed: () => destroyed };
+  return {
+    ...sandbox.exports,
+    check: sandbox.exports.checkProjectsConnection,
+    calls,
+    destroyed: () => destroyed,
+  };
 }
 
 test("missing configuration makes no database request", async () => {
   const db = setup({}, {});
   assert.equal(await db.check(), "unconfigured");
   assert.equal(db.calls.length, 0);
+});
+
+const project = {
+  id: "test-project",
+  title: "Test",
+  category: "기타",
+  location: "",
+  description: "",
+  status: "공개",
+  photos: [],
+  version: 0,
+};
+const config = { PROJECTS_TABLE_NAME: "test", PROJECTS_AWS_REGION: "ap-southeast-2" };
+
+test("create requires absent id and update requires matching version", async () => {
+  const db = setup(config, {});
+  assert.equal((await db.saveProject(project)).version, 1);
+  assert.equal(db.calls[0].ConditionExpression, "attribute_not_exists(id)");
+  await db.saveProject({ ...project, version: 2 });
+  assert.equal(db.calls[1].ExpressionAttributeValues[":version"].N, "2");
+  assert.equal(JSON.parse(db.calls[1].Item.document.S).version, 3);
+  assert.equal(db.destroyed(), true);
+});
+
+test("invalid input never reaches DynamoDB", async () => {
+  const db = setup(config, {});
+  await assert.rejects(db.saveProject({ ...project, title: "" }));
+  await assert.rejects(
+    db.saveProject({ ...project, photos: [{ src: "blob:temporary", alt: "" }] }),
+  );
+  assert.equal(db.calls.length, 0);
+});
+
+test("list filters diagnostic records and reads all pages", async () => {
+  const db = setup(config, [
+    { LastEvaluatedKey: { id: { S: "page-1" } }, Items: [] },
+    {
+      Items: [
+        {
+          id: { S: project.id },
+          version: { N: "1" },
+          document: { S: JSON.stringify({ ...project, version: 1 }) },
+        },
+      ],
+    },
+  ]);
+  assert.equal((await db.listProjects())[0].id, project.id);
+  assert.equal(db.calls[0].ExpressionAttributeValues[":type"].S, "project");
+  assert.equal(db.calls[0].ConsistentRead, true);
+  assert.equal(db.calls.length, 2);
+  assert.equal(db.calls[1].ExclusiveStartKey.id.S, "page-1");
 });
 
 test("empty table is connected; fixed probe reads only id and never lists content", async () => {

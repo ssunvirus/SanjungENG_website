@@ -18,19 +18,11 @@ import {
   X,
 } from "lucide-react";
 import { projects } from "@/src/components/projects/data";
+import type { ProjectRecord } from "@/src/lib/project-record";
 import type { ProjectsConnection } from "@/src/lib/projects-db";
 import styles from "./admin.module.css";
 
-type Photo = { src: string; alt: string };
-type Entry = {
-  id: string;
-  title: string;
-  category: string;
-  location: string;
-  description: string;
-  status: "공개";
-  photos: Photo[];
-};
+type Entry = ProjectRecord;
 const initialEntries: Entry[] = projects.map((project) => ({
   id: project.id,
   title: project.title,
@@ -38,6 +30,7 @@ const initialEntries: Entry[] = projects.map((project) => ({
   location: "",
   description: project.description,
   status: "공개",
+  version: 0,
   photos: [{ src: project.image, alt: project.title }],
 }));
 const categories = ["냉동기", "항온항습기", "냉각탑", "저온저장고", "섬유덕트", "기타"];
@@ -48,22 +41,81 @@ const emptyEntry = (): Entry => ({
   location: "",
   description: "",
   status: "공개",
+  version: 0,
   photos: [],
 });
 
 export default function AdminWorkspace({ dbConnection }: { dbConnection: ProjectsConnection }) {
-  const entries = initialEntries;
+  const [entries, setEntries] = useState(initialEntries);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const savingRef = useRef(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("전체");
   const [editor, setEditor] = useState<Entry | null>(null);
   const [notice, setNotice] = useState("");
-  const urls = useRef<string[]>([]);
-  const input = useRef<HTMLInputElement>(null);
-  useEffect(() => () => urls.current.forEach((url) => URL.revokeObjectURL(url)), []);
+  useEffect(() => {
+    let active = true;
+    fetch("/api/admin/projects", { cache: "no-store" })
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+        if (active) {
+          const saved: Entry[] = data.projects;
+          setEntries([
+            ...saved,
+            ...initialEntries.filter((entry) => !saved.some((item) => item.id === entry.id)),
+          ]);
+        }
+      })
+      .catch((error) => {
+        if (active) setNotice(error instanceof Error ? error.message : "목록 불러오기 실패");
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  async function save() {
+    if (!editor || savingRef.current || loading) return;
+    if (!editor.title.trim()) {
+      setNotice("현장명을 입력해주세요.");
+      return;
+    }
+    savingRef.current = true;
+    setSaving(true);
+    const draft = { ...editor, id: editor.id || crypto.randomUUID() };
+    setEditor(draft);
+    try {
+      const response = await fetch("/api/admin/projects", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(draft),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      const saved: Entry = data.project;
+      setEntries((current) => [saved, ...current.filter((entry) => entry.id !== saved.id)]);
+      setEditor(saved);
+      setNotice("DB에 저장했습니다. 홈페이지 반영은 별도 연결이 필요합니다.");
+    } catch (error) {
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "저장 결과를 확인하지 못했습니다. 새로고침 후 확인해주세요.",
+      );
+    } finally {
+      savingRef.current = false;
+      setSaving(false);
+    }
+  }
 
   const visible = entries.filter(
     (entry) =>
-      (filter === "전체" || entry.status === filter) &&
+      (filter === "전체" || (filter === "DB 저장" ? entry.version > 0 : entry.version === 0)) &&
       `${entry.title} ${entry.category} ${entry.location}`.includes(query.trim()),
   );
   const update = (patch: Partial<Entry>) =>
@@ -71,30 +123,6 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
   function open(entry: Entry) {
     setEditor({ ...entry, photos: entry.photos.map((photo) => ({ ...photo })) });
     setNotice("");
-  }
-  function upload(files: FileList | null) {
-    if (!files || !editor) return;
-    const photos: Photo[] = [];
-    let rejected = false;
-    for (const file of Array.from(files)) {
-      if (
-        !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
-        file.size > 10 * 1024 * 1024
-      ) {
-        rejected = true;
-        continue;
-      }
-      const src = URL.createObjectURL(file);
-      urls.current.push(src);
-      photos.push({ src, alt: "" });
-    }
-    update({ photos: [...editor.photos, ...photos] });
-    setNotice(
-      rejected
-        ? "JPG·PNG·WEBP, 사진당 10MB 이하만 추가할 수 있어요."
-        : "사진을 추가했어요. 사진 설명도 입력해주세요.",
-    );
-    if (input.current) input.current.value = "";
   }
 
   return (
@@ -111,6 +139,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         </Link>
         <p className={styles.navLabel}>워크스페이스</p>
         <button
+          disabled={saving}
           className={styles.activeNav}
           onClick={() => {
             setEditor(null);
@@ -126,7 +155,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         <div className={styles.sidebarBottom}>
           <ShieldCheck size={20} />
           <div>
-            관리자 UI 체험<small>로그인·서버 저장 연결 전</small>
+            관리자 전용<small>인증된 계정으로 DB 관리</small>
           </div>
         </div>
       </aside>
@@ -149,8 +178,8 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         </header>
         <div className={styles.content}>
           <div className={styles.demo}>
-            <span>UI PREVIEW</span>실제 홈페이지와 연결되지 않은 체험 화면입니다. 변경 내용은
-            새로고침하면 초기화됩니다.
+            <span>DB 관리</span>저장 내용은 DB에 보관됩니다. 홈페이지 반영과 새 사진 업로드는 다음
+            연결 단계입니다.
           </div>
           <p className="mt-3 text-xs text-slate-600" role="status">
             {dbConnection === "test-found"
@@ -199,9 +228,9 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                     icon: <LayoutGrid size={19} />,
                   },
                   {
-                    label: "공개",
-                    count: entries.filter((entry) => entry.status === "공개").length,
-                    detail: "기존 공개 사례 참고 데이터",
+                    label: "DB 저장",
+                    count: entries.filter((entry) => entry.version > 0).length,
+                    detail: "DB에 저장된 시공사례",
                     icon: <FolderOpen size={19} />,
                   },
                 ].map((stat) => (
@@ -221,7 +250,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
               <section className={styles.panel} aria-label="시공사례 목록">
                 <div className={styles.tools}>
                   <div className={styles.tabs}>
-                    {["전체", "공개"].map((tab) => (
+                    {["전체", "DB 저장", "기존 사례"].map((tab) => (
                       <button
                         key={tab}
                         aria-pressed={filter === tab}
@@ -282,7 +311,9 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                             <span className={styles.category}>{entry.category}</span>
                           </td>
                           <td>
-                            <span className={styles.published}>{entry.status}</span>
+                            <span className={styles.published}>
+                              {entry.version > 0 ? "DB 저장" : "기존 사례"}
+                            </span>
                           </td>
                           <td>
                             <button
@@ -307,12 +338,13 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                   </div>
                 )}
                 <div className={styles.listFooter}>
-                  총 {visible.length}건<span>기존 사례를 바탕으로 한 UI 체험</span>
+                  총 {visible.length}건
+                  <span>기존 사례는 저장 버튼을 눌렀을 때 DB에 등록됩니다.</span>
                 </div>
               </section>
             </>
           ) : (
-            <>
+            <fieldset disabled={saving} className="min-w-0 border-0 p-0">
               <div className={styles.editorActions}>
                 <button
                   className={styles.textButton}
@@ -377,20 +409,13 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                     <h2>
                       <span>02</span>현장 사진
                     </h2>
-                    <input
-                      ref={input}
-                      className={styles.srOnly}
-                      id="admin-photos"
-                      type="file"
-                      accept="image/jpeg,image/png,image/webp"
-                      multiple
-                      onChange={(event) => upload(event.target.files)}
-                    />
-                    <label htmlFor="admin-photos" className={styles.upload}>
+                    <div className={styles.upload}>
                       <ImagePlus size={28} />
-                      <strong>사진 선택하기</strong>
-                      <small>여러 장 선택 가능 · JPG, PNG, WEBP · 사진당 10MB 이하</small>
-                    </label>
+                      <strong>새 사진 업로드 준비 중</strong>
+                      <small>
+                        S3 연결 후 업로드할 수 있습니다. 기존 사진 설명과 순서는 저장할 수 있어요.
+                      </small>
+                    </div>
                     <div className={styles.photoList}>
                       {editor.photos.map((photo, index) => (
                         <div key={photo.src + index} className={styles.photoRow}>
@@ -409,6 +434,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                             </span>
                             <input
                               aria-label={`사진 ${index + 1} 대체 설명`}
+                              maxLength={300}
                               value={photo.alt}
                               placeholder="사진 설명(ALT)을 입력해주세요"
                               onChange={(event) =>
@@ -450,13 +476,13 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                 </div>
                 <aside className={styles.editorAside}>
                   <section className={styles.formPanel}>
-                    <h2>게시 설정</h2>
+                    <h2>DB 저장</h2>
                     <p>
-                      지금은 화면 체험 단계입니다. 입력한 내용과 사진은 저장되거나 서버에 전송되지
-                      않아요.
+                      글 정보와 기존 사진 정보를 저장합니다. 홈페이지에는 아직 자동 반영되지
+                      않습니다.
                     </p>
-                    <button disabled className={styles.publishDisabled}>
-                      홈페이지에 게시 · 연결 준비 중
+                    <button onClick={save} disabled={saving || loading} className={styles.primary}>
+                      {saving ? "저장 중…" : loading ? "목록 불러오는 중…" : "DB에 저장"}
                     </button>
                   </section>
                   <section className={styles.tips}>
@@ -467,7 +493,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                   </section>
                 </aside>
               </div>
-            </>
+            </fieldset>
           )}
           <footer className={styles.bottom}>
             SANJUNG ENGINEERING<span>콘텐츠 관리 워크스페이스</span>
