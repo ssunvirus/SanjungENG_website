@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { List } from "lucide-react";
@@ -6,13 +9,20 @@ import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
 import OrionGallery from "@/src/components/projects/detail/OrionGallery";
 import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/orion-production" },
   title: "오리온 생산설비 섬유덕트 설치 | 산정엔지니어링",
   description: "공장의 생산환경에 적합한 공조 시스템 구축을 위한 섬유덕트 설치 현장입니다.",
 };
 
-export default function OrionProductionPage() {
+export function generateMetadata() {
+  return publicProjectMetadata("orion-production", fallbackMetadata);
+}
+
+export default async function OrionProductionPage() {
+  await connection();
+  const saved = await publicProject("orion-production");
+  if (saved) return <SavedProjectDetail project={saved} legacyGallery={<OrionGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

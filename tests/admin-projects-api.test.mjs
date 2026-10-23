@@ -17,6 +17,7 @@ function setup(authenticated = true, conflict = false) {
     Error,
     Buffer,
     require(name) {
+      if (name === "next/cache") return { revalidateTag() {} };
       if (name.endsWith("admin-auth"))
         return {
           adminAuthConfig: () => ({ origin: "https://example.com" }),

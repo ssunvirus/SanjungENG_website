@@ -42,6 +42,7 @@ export default function ProjectPhotoGallery({ photos }: { photos: ProjectPhoto[]
             fill={photo.width === undefined}
             sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
             quality={100}
+            unoptimized={photo.src.startsWith("/api/")}
             className={photo.width === undefined ? "object-cover" : "h-auto w-full"}
           />
         </figure>

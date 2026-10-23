@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
@@ -6,13 +9,20 @@ import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/wonsam-nonghyup" },
   title: "원삼농협 저온저장고 냉동설비 설치 | 산정엔지니어링",
   description: "경기도 용인 원삼농협 저온저장고의 CDU 및 유니트 쿨러 설치 현장을 소개합니다.",
 };
 
-export default function WonsamNonghyupPage() {
+export function generateMetadata() {
+  return publicProjectMetadata("nonghyup-cold-storage", fallbackMetadata);
+}
+
+export default async function WonsamNonghyupPage() {
+  await connection();
+  const saved = await publicProject("nonghyup-cold-storage");
+  if (saved) return <SavedProjectDetail project={saved} legacyGallery={<WonsamGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

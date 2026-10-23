@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
@@ -6,13 +9,20 @@ import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/aju-pharmaceutical" },
   title: "아주약품 터보냉동기 설치공사 | 산정엔지니어링",
   description: "시설의 효율적인 냉방 시스템 구축을 위해 터보냉동기를 설치한 현장입니다.",
 };
 
-export default function AjuPharmaceuticalPage() {
+export function generateMetadata() {
+  return publicProjectMetadata("aju-pharmaceutical", fallbackMetadata);
+}
+
+export default async function AjuPharmaceuticalPage() {
+  await connection();
+  const saved = await publicProject("aju-pharmaceutical");
+  if (saved) return <SavedProjectDetail project={saved} legacyGallery={<AjuGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

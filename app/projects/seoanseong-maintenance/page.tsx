@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
@@ -6,13 +9,20 @@ import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/seoanseong-maintenance" },
   title: "서안성 냉동창고 정기점검 | 산정엔지니어링",
   description: "냉동창고의 안정적인 온도 유지를 위한 냉동설비 정기점검 현장입니다.",
 };
 
-export default function SeoanseongMaintenancePage() {
+export function generateMetadata() {
+  return publicProjectMetadata("seoanseong-maintenance", fallbackMetadata);
+}
+
+export default async function SeoanseongMaintenancePage() {
+  await connection();
+  const saved = await publicProject("seoanseong-maintenance");
+  if (saved) return <SavedProjectDetail project={saved} legacyGallery={<SeoanseongGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

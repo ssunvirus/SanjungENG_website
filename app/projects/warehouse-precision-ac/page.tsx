@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
@@ -6,13 +9,21 @@ import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/warehouse-precision-ac" },
   title: "S 기업 물류창고 항온항습기 설치 | 산정엔지니어링",
   description: "공간에 필요한 온/습도 환경을 안정적으로 유지하기 위한 항온항습기 설치 현장입니다.",
 };
 
-export default function WarehousePrecisionPage() {
+export function generateMetadata() {
+  return publicProjectMetadata("warehouse-precision-ac", fallbackMetadata);
+}
+
+export default async function WarehousePrecisionPage() {
+  await connection();
+  const saved = await publicProject("warehouse-precision-ac");
+  if (saved)
+    return <SavedProjectDetail project={saved} legacyGallery={<WarehousePrecisionGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

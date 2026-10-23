@@ -156,13 +156,13 @@ export default function Projects() {
             style={{ transform: `translateX(${progress * 971}px)` }}
           />
         </div>
-        <a
+        <Link
           href="/projects"
           className="mx-auto mt-[49px] flex h-[53px] w-[267px] items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-brand-navy bg-brand-navy text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
         >
           시공사례 더 보기
           <ArrowRight size={34} strokeWidth={2.4} aria-hidden="true" />
-        </a>
+        </Link>
       </div>
     </section>
   );

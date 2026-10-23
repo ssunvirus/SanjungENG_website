@@ -1,6 +1,7 @@
 import { adminAuthConfig, getAdminSession } from "@/src/lib/admin-auth";
 import { listProjects, saveProject } from "@/src/lib/projects-db";
 import { parseProject } from "@/src/lib/project-record";
+import { revalidateTag } from "next/cache";
 
 const reply = (body: unknown, status = 200) =>
   Response.json(body, {
@@ -52,7 +53,14 @@ export async function POST(request: Request) {
     );
   }
   try {
-    return reply({ project: await saveProject(project) });
+    const saved = await saveProject(project);
+    // A cache failure must not report an already committed DB write as failed.
+    try {
+      revalidateTag("public-projects", { expire: 0 });
+    } catch {
+      console.error("Public projects cache invalidation failed");
+    }
+    return reply({ project: saved });
   } catch (error) {
     if (error instanceof Error && error.name === "ConditionalCheckFailedException")
       return reply(

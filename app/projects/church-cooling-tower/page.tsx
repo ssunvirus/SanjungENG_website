@@ -1,3 +1,6 @@
+import { connection } from "next/server";
+import { publicProject, publicProjectMetadata } from "@/src/lib/public-projects";
+import SavedProjectDetail from "@/src/components/projects/detail/SavedProjectDetail";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "@/src/components/projects/detail/ProjectOverview";
@@ -6,13 +9,20 @@ import BlogBanner from "@/src/components/projects/detail/BlogBanner";
 import Link from "next/link";
 import { List } from "lucide-react";
 
-export const metadata: Metadata = {
+const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/church-cooling-tower" },
   title: "감리교회 냉각탑 유지보수 | 산정엔지니어링",
   description: "냉각탑의 원활한 열교환과 냉각 성능 유지를 위한 충진물 교체 현장입니다.",
 };
 
-export default function ChurchCoolingTowerPage() {
+export function generateMetadata() {
+  return publicProjectMetadata("church-cooling-tower", fallbackMetadata);
+}
+
+export default async function ChurchCoolingTowerPage() {
+  await connection();
+  const saved = await publicProject("church-cooling-tower");
+  if (saved) return <SavedProjectDetail project={saved} legacyGallery={<CoolingTowerGallery />} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

@@ -103,7 +103,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
       const saved: Entry = data.project;
       setEntries((current) => [saved, ...current.filter((entry) => entry.id !== saved.id)]);
       setEditor(saved);
-      setNotice("DB에 저장했습니다. 홈페이지 반영은 별도 연결이 필요합니다.");
+      setNotice("저장했습니다. 홈페이지 시공사례 목록과 상세 페이지에 반영됩니다.");
     } catch (error) {
       setNotice(
         error instanceof Error
@@ -232,8 +232,8 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         </header>
         <div className={styles.content}>
           <div className={styles.demo}>
-            <span>DB 관리</span>사진 업로드 후 DB에 저장을 눌러주세요. 홈페이지 반영은 다음 연결
-            단계입니다.
+            <span>시공사례 관리</span>사진 업로드 후 DB에 저장을 누르면 홈페이지 시공사례에
+            공개됩니다.
           </div>
           <p className="mt-3 text-xs text-slate-600" role="status">
             {dbConnection === "test-found"
@@ -538,10 +538,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                 <aside className={styles.editorAside}>
                   <section className={styles.formPanel}>
                     <h2>DB 저장</h2>
-                    <p>
-                      글 정보와 업로드한 사진 정보를 저장합니다. 홈페이지에는 아직 자동 반영되지
-                      않습니다.
-                    </p>
+                    <p>저장하면 글과 사진이 홈페이지 시공사례 목록과 상세 페이지에 공개됩니다.</p>
                     <button
                       onClick={save}
                       disabled={saving || uploading || loading}

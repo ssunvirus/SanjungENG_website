@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { projects } from "./data";
+import { projects as existingProjects, type Project } from "./data";
 import ProjectCard from "./ProjectCard";
 
 const categories = ["전체", "냉동공조", "섬유덕트"] as const;
@@ -20,7 +20,7 @@ function getServerHash() {
   return "";
 }
 
-export default function ProjectGallery() {
+export default function ProjectGallery({ projects = existingProjects }: { projects?: Project[] }) {
   const [category, setCategory] = useState<(typeof categories)[number]>("전체");
   const [selectedPage, setPage] = useState<number | null>(null);
   const targetId = useSyncExternalStore(subscribeHash, getHash, getServerHash);
