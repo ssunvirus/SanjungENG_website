@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/src/components/layout/Header";
 import Footer from "@/src/components/layout/Footer";
 import NaverAnalytics from "@/src/components/layout/NaverAnalytics";
+import PhoneConversionTracking from "@/src/components/layout/PhoneConversionTracking";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { siteUrl } from "@/src/lib/site-url";
 import { siteName, siteDescription, siteShareImage } from "@/src/lib/site-metadata";
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <PhoneConversionTracking />
         <Suspense fallback={null}>
           <NaverAnalytics />
         </Suspense>
