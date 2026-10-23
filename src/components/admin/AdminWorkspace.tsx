@@ -136,9 +136,16 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
           <span>
             산정엔지니어링 <b>/</b> 콘텐츠 관리
           </span>
-          <Link href="/" target="_blank" rel="noopener noreferrer">
-            홈페이지 보기 <ArrowUpRight size={16} />
-          </Link>
+          <div className="flex items-center gap-5">
+            <form action="/api/auth/logout" method="post">
+              <button className="cursor-pointer text-xs text-slate-500 hover:text-brand-navy">
+                로그아웃
+              </button>
+            </form>
+            <Link href="/" target="_blank" rel="noopener noreferrer">
+              홈페이지 보기 <ArrowUpRight size={16} />
+            </Link>
+          </div>
         </header>
         <div className={styles.content}>
           <div className={styles.demo}>

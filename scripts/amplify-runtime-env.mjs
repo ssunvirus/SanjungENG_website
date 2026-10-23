@@ -5,6 +5,12 @@ import fs from "node:fs";
 const defaults = {
   NAVER_SMTP_PASSWORD_PARAMETER: "/amplify/shared/dl6h0cf9vpgpu/NAVER_SMTP_PASSWORD",
   SMTP_SECRET_REGION: "ap-southeast-2",
+  COGNITO_REGION: "ap-southeast-2",
+  COGNITO_USER_POOL_ID: "ap-southeast-2_oiRW9cvWe",
+  COGNITO_CLIENT_ID: "1lit6l9itbtso074l9d9apl704",
+  COGNITO_DOMAIN: "https://ap-southeast-2oirw9cvwe.auth.ap-southeast-2.amazoncognito.com",
+  COGNITO_CLIENT_SECRET_PARAMETER: "/sanjung/admin/cognito-client-secret",
+  ADMIN_AUTH_URL: "https://www.sanjungeng.co.kr",
 };
 const keys = [
   "SITE_URL",

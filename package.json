@@ -16,9 +16,11 @@
     "@aws-sdk/client-dynamodb": "^3.1156.0",
     "@aws-sdk/client-ssm": "^3.1151.0",
     "@next/third-parties": "^16.4.2",
+    "jose": "^6.2.13",
     "lucide-react": "^1.44.0",
     "next": "^16.4.1",
     "nodemailer": "^10.1.0",
+    "openid-client": "^6.8.8",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "server-only": "^0.0.1"
