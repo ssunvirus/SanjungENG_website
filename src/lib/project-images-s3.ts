@@ -6,7 +6,11 @@ import { imageExtension, projectImageKeyPattern } from "./project-images";
 function storage() {
   const Bucket = process.env.PROJECTS_IMAGES_BUCKET;
   const region = process.env.PROJECTS_AWS_REGION;
-  if (!Bucket || !region) throw new Error("ImagesUnconfigured");
+  if (!Bucket?.trim() || !region?.trim()) {
+    const error = new Error("ImagesUnconfigured");
+    error.name = "ImagesUnconfigured";
+    throw error;
+  }
   return {
     Bucket,
     client: new S3Client({

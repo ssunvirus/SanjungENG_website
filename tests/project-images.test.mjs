@@ -68,6 +68,21 @@ test("images require allowed MIME, matching signature and bounded size", () => {
     null,
   );
 });
+
+test("upload diagnostics distinguish configuration, IAM, bucket and region without exposing secrets", () => {
+  for (const [name, code] of [
+    ["ImagesUnconfigured", "S3_CONFIG_MISSING"],
+    ["AccessDenied", "S3_ACCESS_DENIED"],
+    ["NoSuchBucket", "S3_BUCKET_NOT_FOUND"],
+    ["PermanentRedirect", "S3_REGION_MISMATCH"],
+    ["TimeoutError", "S3_UPLOAD_FAILED"],
+  ]) {
+    const result = images.imageUploadError({ name, message: "secret-do-not-expose" });
+    assert.equal(result.code, code);
+    assert.ok(!JSON.stringify(result).includes("secret-do-not-expose"));
+  }
+  assert.equal(images.imageUploadError(null).code, "S3_UPLOAD_FAILED");
+});
 test("saved photos accept only static or generated admin image paths", () => {
   const record = {
     id: "test",

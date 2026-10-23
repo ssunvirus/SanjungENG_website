@@ -1,5 +1,9 @@
 import { adminAuthConfig, getAdminSession } from "@/src/lib/admin-auth";
-import { imageExtension, MAX_PROJECT_IMAGE_BYTES } from "@/src/lib/project-images";
+import {
+  imageExtension,
+  imageUploadError,
+  MAX_PROJECT_IMAGE_BYTES,
+} from "@/src/lib/project-images";
 import { uploadProjectImage } from "@/src/lib/project-images-s3";
 
 const reply = (body: unknown, status: number) =>
@@ -34,10 +38,19 @@ export async function POST(request: Request) {
   if (!imageExtension(type, bytes)) return reply({ error: "사진 형식을 확인해주세요." }, 400);
   try {
     return reply({ src: await uploadProjectImage(bytes, type) }, 201);
-  } catch {
-    return reply(
-      { error: "사진 업로드에 실패했습니다. S3 버킷 설정과 쓰기 권한을 확인해주세요." },
-      503,
-    );
+  } catch (error) {
+    const failure = imageUploadError(error);
+    const awsError = error as {
+      name?: string;
+      $metadata?: { requestId?: string; httpStatusCode?: number };
+    } | null;
+    // Do not log credentials, request bodies, image bytes or raw AWS error messages.
+    console.error("S3 upload failed", {
+      code: failure.code,
+      name: awsError?.name,
+      requestId: awsError?.$metadata?.requestId,
+      status: awsError?.$metadata?.httpStatusCode,
+    });
+    return reply(failure, 503);
   }
 }
