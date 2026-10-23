@@ -44,7 +44,10 @@ export async function POST(request: Request) {
     project = parseProject(JSON.parse(Buffer.concat(chunks).toString("utf8")));
   } catch {
     return reply(
-      { error: "현장명과 입력 내용을 확인해주세요. 사진 업로드는 아직 지원하지 않습니다." },
+      {
+        error:
+          "현장명과 입력 내용을 확인해주세요. 사진은 관리자 사진 선택 기능으로 업로드해주세요.",
+      },
       400,
     );
   }

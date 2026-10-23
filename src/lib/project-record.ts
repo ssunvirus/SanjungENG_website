@@ -1,3 +1,5 @@
+import { projectImagePathPattern } from "./project-images.ts";
+
 export type ProjectRecord = {
   id: string;
   title: string;
@@ -31,7 +33,7 @@ export function parseProject(value: unknown): ProjectRecord {
     const { src, alt } = photo as Record<string, unknown>;
     if (
       typeof src !== "string" ||
-      !/^\/images\/[a-zA-Z0-9_./%-]+$/.test(src) ||
+      (!/^\/images\/[a-zA-Z0-9_./%-]+$/.test(src) && !projectImagePathPattern.test(src)) ||
       src.includes("..") ||
       /%2e|%2f|%5c/i.test(src) ||
       src.length > 500 ||

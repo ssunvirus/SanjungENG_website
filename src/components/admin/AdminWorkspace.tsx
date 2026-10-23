@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { projects } from "@/src/components/projects/data";
 import type { ProjectRecord } from "@/src/lib/project-record";
+import { MAX_PROJECT_IMAGE_BYTES } from "@/src/lib/project-images";
 import type { ProjectsConnection } from "@/src/lib/projects-db";
 import styles from "./admin.module.css";
 
@@ -49,6 +50,8 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
   const [entries, setEntries] = useState(initialEntries);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const photoInput = useRef<HTMLInputElement>(null);
   const savingRef = useRef(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("전체");
@@ -125,6 +128,57 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
     setNotice("");
   }
 
+  async function upload(files: FileList | null) {
+    if (!files?.length || !editor || savingRef.current) return;
+    const selected = Array.from(files);
+    if (selected.length + editor.photos.length > 30) {
+      setNotice("사진은 최대 30장까지 등록할 수 있어요.");
+      if (photoInput.current) photoInput.current.value = "";
+      return;
+    }
+    if (
+      selected.some(
+        (file) =>
+          !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
+          !file.size ||
+          file.size > MAX_PROJECT_IMAGE_BYTES,
+      )
+    ) {
+      setNotice("JPG·PNG·WEBP, 사진당 3MB 이하만 선택해주세요.");
+      if (photoInput.current) photoInput.current.value = "";
+      return;
+    }
+    savingRef.current = true;
+    setUploading(true);
+    let completed = 0;
+    try {
+      for (const file of selected) {
+        const response = await fetch("/api/admin/project-images", {
+          method: "POST",
+          headers: { "Content-Type": file.type },
+          body: file,
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+        setEditor((current) =>
+          current
+            ? { ...current, photos: [...current.photos, { src: data.src, alt: "" }] }
+            : current,
+        );
+        completed++;
+      }
+      setNotice(`${completed}장 업로드 완료. 사진 설명을 입력하고 DB에 저장을 눌러주세요.`);
+    } catch (error) {
+      setNotice(
+        `${completed}장 업로드 완료. ${error instanceof Error ? error.message : "업로드 결과를 확인하지 못했습니다."} 성공한 사진은 DB에 저장해주세요.`,
+      );
+    } finally {
+      savingRef.current = false;
+      setUploading(false);
+      if (photoInput.current) photoInput.current.value = "";
+    }
+  }
+
   return (
     <main className={styles.shell}>
       <aside className={styles.sidebar}>
@@ -139,7 +193,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         </Link>
         <p className={styles.navLabel}>워크스페이스</p>
         <button
-          disabled={saving}
+          disabled={saving || uploading}
           className={styles.activeNav}
           onClick={() => {
             setEditor(null);
@@ -178,8 +232,8 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
         </header>
         <div className={styles.content}>
           <div className={styles.demo}>
-            <span>DB 관리</span>저장 내용은 DB에 보관됩니다. 홈페이지 반영과 새 사진 업로드는 다음
-            연결 단계입니다.
+            <span>DB 관리</span>사진 업로드 후 DB에 저장을 눌러주세요. 홈페이지 반영은 다음 연결
+            단계입니다.
           </div>
           <p className="mt-3 text-xs text-slate-600" role="status">
             {dbConnection === "test-found"
@@ -295,7 +349,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                                     alt=""
                                     fill
                                     sizes="64px"
-                                    unoptimized={entry.photos[0].src.startsWith("blob:")}
+                                    unoptimized={entry.photos[0].src.startsWith("/api/")}
                                   />
                                 ) : (
                                   <ImagePlus size={20} />
@@ -344,7 +398,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
               </section>
             </>
           ) : (
-            <fieldset disabled={saving} className="min-w-0 border-0 p-0">
+            <fieldset disabled={saving || uploading} className="min-w-0 border-0 p-0">
               <div className={styles.editorActions}>
                 <button
                   className={styles.textButton}
@@ -409,13 +463,20 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                     <h2>
                       <span>02</span>현장 사진
                     </h2>
-                    <div className={styles.upload}>
+                    <input
+                      ref={photoInput}
+                      id="admin-photos"
+                      type="file"
+                      className={styles.srOnly}
+                      accept="image/jpeg,image/png,image/webp"
+                      multiple
+                      onChange={(event) => void upload(event.target.files)}
+                    />
+                    <label htmlFor="admin-photos" className={styles.upload}>
                       <ImagePlus size={28} />
-                      <strong>새 사진 업로드 준비 중</strong>
-                      <small>
-                        S3 연결 후 업로드할 수 있습니다. 기존 사진 설명과 순서는 저장할 수 있어요.
-                      </small>
-                    </div>
+                      <strong>{uploading ? "사진 업로드 중…" : "사진 선택하기"}</strong>
+                      <small>JPG·PNG·WEBP · 사진당 3MB 이하 · 최대 30장</small>
+                    </label>
                     <div className={styles.photoList}>
                       {editor.photos.map((photo, index) => (
                         <div key={photo.src + index} className={styles.photoRow}>
@@ -425,7 +486,7 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                               alt=""
                               fill
                               sizes="90px"
-                              unoptimized={photo.src.startsWith("blob:")}
+                              unoptimized={photo.src.startsWith("/api/")}
                             />
                           </div>
                           <div>
@@ -478,11 +539,21 @@ export default function AdminWorkspace({ dbConnection }: { dbConnection: Project
                   <section className={styles.formPanel}>
                     <h2>DB 저장</h2>
                     <p>
-                      글 정보와 기존 사진 정보를 저장합니다. 홈페이지에는 아직 자동 반영되지
+                      글 정보와 업로드한 사진 정보를 저장합니다. 홈페이지에는 아직 자동 반영되지
                       않습니다.
                     </p>
-                    <button onClick={save} disabled={saving || loading} className={styles.primary}>
-                      {saving ? "저장 중…" : loading ? "목록 불러오는 중…" : "DB에 저장"}
+                    <button
+                      onClick={save}
+                      disabled={saving || uploading || loading}
+                      className={styles.primary}
+                    >
+                      {uploading
+                        ? "사진 업로드 중…"
+                        : saving
+                          ? "저장 중…"
+                          : loading
+                            ? "목록 불러오는 중…"
+                            : "DB에 저장"}
                     </button>
                   </section>
                   <section className={styles.tips}>

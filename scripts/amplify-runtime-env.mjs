@@ -18,6 +18,7 @@ const keys = [
   "ESTIMATE_TO_EMAIL",
   "PROJECTS_TABLE_NAME",
   "PROJECTS_AWS_REGION",
+  "PROJECTS_IMAGES_BUCKET",
   ...Object.keys(defaults),
 ];
 const lines = keys.flatMap((key) => {
