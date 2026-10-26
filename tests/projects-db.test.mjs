@@ -4,6 +4,7 @@ import test from "node:test";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
 import { parseProject } from "../src/lib/project-record.ts";
+import { parseProjectOrder } from "../src/lib/project-order.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../src/lib/projects-db.ts", import.meta.url), "utf8"),
@@ -19,6 +20,7 @@ function setup(env, result, fail = false) {
     console: { error() {} },
     require(name) {
       if (name === "./project-record") return { parseProject };
+      if (name === "./project-order") return { parseProjectOrder };
       if (name === "server-only") return {};
       if (name === "@aws-sdk/client-dynamodb")
         return {
@@ -69,6 +71,19 @@ test("missing configuration makes no database request", async () => {
   const db = setup({}, {});
   assert.equal(await db.check(), "unconfigured");
   assert.equal(db.calls.length, 0);
+});
+
+test("order metadata defaults to zero and persists separately with optimistic concurrency", async () => {
+  const empty = setup(config, {});
+  assert.equal((await empty.getProjectOrder()).version, 0);
+  assert.equal(empty.calls[0].Key.id.S, "project-order");
+  const db = setup(config, {});
+  assert.equal((await db.saveProjectOrder({ ids: ["a", "b"], version: 0 })).version, 1);
+  assert.equal(db.calls[0].Item.entityType.S, "project-order");
+  assert.equal(db.calls[0].ConditionExpression, "attribute_not_exists(id)");
+  await db.saveProjectOrder({ ids: ["b", "a"], version: 1 });
+  assert.equal(db.calls[1].ExpressionAttributeValues[":version"].N, "1");
+  assert.deepEqual(JSON.parse(db.calls[1].Item.document.S).ids, ["b", "a"]);
 });
 
 const project = {

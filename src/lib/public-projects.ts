@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { notFound } from "next/navigation";
 import { projects } from "@/src/components/projects/data";
-import { listProjects } from "./projects-db";
+import { listProjects, getProjectOrder } from "./projects-db";
 import { mergePublicProjects } from "./public-project-data";
 
 export const PUBLIC_PROJECTS_TAG = "public-projects";
@@ -25,7 +25,13 @@ export async function publicProjectRecords() {
 
 export async function publicProjectCards() {
   try {
-    return mergePublicProjects(projects, await publicProjectRecords());
+    const [records, order] = await Promise.all([
+      publicProjectRecords(),
+      process.env.PROJECTS_TABLE_NAME && process.env.PROJECTS_AWS_REGION
+        ? cachedOrder(process.env.PROJECTS_TABLE_NAME, process.env.PROJECTS_AWS_REGION)
+        : Promise.resolve({ ids: [] }),
+    ]);
+    return mergePublicProjects(projects, records, order.ids);
   } catch (error) {
     console.error(
       "Public projects unavailable",
@@ -35,6 +41,15 @@ export async function publicProjectCards() {
     return [];
   }
 }
+
+const cachedOrder = unstable_cache(
+  async (table: string, region: string) => {
+    if (!table || !region) throw new Error("DatabaseUnconfigured");
+    return getProjectOrder();
+  },
+  ["public-project-order-v1"],
+  { revalidate: 60, tags: [PUBLIC_PROJECTS_TAG] },
+);
 
 export async function publicProject(id: string) {
   const record = (await publicProjectRecords()).find((item) => item.id === id) || null;

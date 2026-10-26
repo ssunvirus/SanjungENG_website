@@ -22,9 +22,15 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   await connection();
-  const visibleIds = new Set((await publicProjectCards()).map((project) => project.id));
-  const desktopCases = desktopFeaturedProjects.filter((project) => visibleIds.has(project.id));
-  const mobileCases = mobileFeaturedProjects.filter((project) => visibleIds.has(project.id));
+  const visibleIds = new Map(
+    (await publicProjectCards()).map((project, index) => [project.id, index]),
+  );
+  const desktopCases = desktopFeaturedProjects
+    .filter((project) => visibleIds.has(project.id))
+    .sort((a, b) => visibleIds.get(a.id)! - visibleIds.get(b.id)!);
+  const mobileCases = mobileFeaturedProjects
+    .filter((project) => visibleIds.has(project.id))
+    .sort((a, b) => visibleIds.get(a.id)! - visibleIds.get(b.id)!);
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",

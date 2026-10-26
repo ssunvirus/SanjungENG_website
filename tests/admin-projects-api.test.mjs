@@ -41,6 +41,7 @@ function setup(authenticated = true, conflict = false) {
       if (name.endsWith("project-record")) return { parseProject };
       if (name.endsWith("projects-db"))
         return {
+          getProjectOrder: async () => ({ ids: [], version: 0 }),
           listProjects: async () => {
             calls.push("read");
             return [];

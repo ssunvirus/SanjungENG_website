@@ -1,11 +1,16 @@
 import type { Project } from "@/src/components/projects/data";
 import type { ProjectRecord } from "./project-record";
+import { applyProjectOrder } from "./project-order.ts";
 
 export function publicPhotoPath(src: string) {
   return src.replace(/^\/api\/admin\/project-images\//, "/api/project-images/");
 }
 
-export function mergePublicProjects(existing: Project[], saved: ProjectRecord[]): Project[] {
+export function mergePublicProjects(
+  existing: Project[],
+  saved: ProjectRecord[],
+  order: string[] = [],
+): Project[] {
   const toCard = (record: ProjectRecord, base?: Project): Project => ({
     ...base,
     id: record.id,
@@ -18,18 +23,21 @@ export function mergePublicProjects(existing: Project[], saved: ProjectRecord[])
     imageLeft: "0%",
     href: base?.href || `/projects/${record.id}`,
   });
-  return [
-    ...saved
-      .filter((item) => !item.deleted && !existing.some((base) => base.id === item.id))
-      .sort((a, b) => a.id.localeCompare(b.id))
-      .map((item) => toCard(item)),
-    ...existing
-      .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
-      .map((base) => {
-        const record = saved.find((item) => item.id === base.id);
-        return record ? toCard(record, base) : base;
-      }),
-  ];
+  return applyProjectOrder(
+    [
+      ...saved
+        .filter((item) => !item.deleted && !existing.some((base) => base.id === item.id))
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((item) => toCard(item)),
+      ...existing
+        .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
+        .map((base) => {
+          const record = saved.find((item) => item.id === base.id);
+          return record ? toCard(record, base) : base;
+        }),
+    ],
+    order,
+  );
 }
 
 export function hasPublishedPhoto(records: ProjectRecord[], key: string) {

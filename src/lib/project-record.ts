@@ -1,4 +1,5 @@
 import { projectImagePathPattern } from "./project-images.ts";
+import { applyProjectOrder } from "./project-order.ts";
 
 export type ProjectRecord = {
   id: string;
@@ -23,7 +24,7 @@ export function parseProject(value: unknown): ProjectRecord {
     return v.trim();
   }
   const id = field("id", 100, true);
-  if (!/^[a-z0-9][a-z0-9-]*$/.test(id)) throw new Error("InvalidProject");
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(id) || id === "project-order") throw new Error("InvalidProject");
   const category = field("category", 30, true);
   if (!["냉동기", "항온항습기", "냉각탑", "저온저장고", "섬유덕트", "기타"].includes(category))
     throw new Error("InvalidProject");
@@ -59,9 +60,18 @@ export function parseProject(value: unknown): ProjectRecord {
   };
 }
 
-export function mergeAdminProjects(existing: ProjectRecord[], saved: ProjectRecord[]) {
-  return [
-    ...saved.filter((item) => !item.deleted),
-    ...existing.filter((item) => !saved.some((record) => record.id === item.id)),
+export function mergeAdminProjects(
+  existing: ProjectRecord[],
+  saved: ProjectRecord[],
+  order: string[] = [],
+) {
+  const merged = [
+    ...saved
+      .filter((item) => !item.deleted && !existing.some((base) => base.id === item.id))
+      .sort((a, b) => a.id.localeCompare(b.id)),
+    ...existing
+      .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
+      .map((base) => saved.find((item) => item.id === base.id) || base),
   ];
+  return applyProjectOrder(merged, order);
 }

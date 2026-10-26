@@ -6,6 +6,8 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowUpRight,
+  ArrowUp,
+  ArrowDown,
   Check,
   FileText,
   FolderOpen,
@@ -21,6 +23,7 @@ import {
 import { projects } from "@/src/components/projects/data";
 import { mergeAdminProjects, type ProjectRecord } from "@/src/lib/project-record";
 import { MAX_PROJECT_IMAGE_BYTES } from "@/src/lib/project-images";
+import { applyProjectOrder, moveProjectInList, type ProjectOrder } from "@/src/lib/project-order";
 import styles from "./admin.module.css";
 
 type Entry = ProjectRecord;
@@ -50,6 +53,8 @@ const emptyEntry = (): Entry => ({
 
 export default function AdminWorkspace() {
   const [entries, setEntries] = useState(initialEntries);
+  const [order, setOrder] = useState<ProjectOrder>({ ids: [], version: 0 });
+  const [ordering, setOrdering] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -61,6 +66,9 @@ export default function AdminWorkspace() {
   const [filter, setFilter] = useState("전체");
   const [editor, setEditor] = useState<Entry | null>(null);
   const [notice, setNotice] = useState("");
+  const [photoFeedback, setPhotoFeedback] = useState<{ message: string; error: boolean } | null>(
+    null,
+  );
   useEffect(() => {
     let active = true;
     fetch("/api/admin/projects", { cache: "no-store" })
@@ -69,7 +77,9 @@ export default function AdminWorkspace() {
         if (!response.ok) throw new Error(data.error);
         if (active) {
           const saved: Entry[] = data.projects;
-          setEntries(mergeAdminProjects(initialEntries, saved));
+          const savedOrder: ProjectOrder = data.order || { ids: [], version: 0 };
+          setOrder(savedOrder);
+          setEntries(mergeAdminProjects(initialEntries, saved, savedOrder.ids));
           setPendingDeletions(data.pendingDeletions || []);
         }
       })
@@ -103,7 +113,14 @@ export default function AdminWorkspace() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       const saved: Entry = data.project;
-      setEntries((current) => [saved, ...current.filter((entry) => entry.id !== saved.id)]);
+      setEntries((current) =>
+        applyProjectOrder(
+          current.some((item) => item.id === saved.id)
+            ? current.map((item) => (item.id === saved.id ? saved : item))
+            : [saved, ...current],
+          order.ids,
+        ),
+      );
       setEditor(saved);
       setNotice("저장했습니다. 홈페이지 시공사례 목록과 상세 페이지에 반영됩니다.");
     } catch (error) {
@@ -120,12 +137,7 @@ export default function AdminWorkspace() {
 
   async function remove(entry: Entry) {
     if (savingRef.current || loading) return;
-    if (
-      !window.confirm(
-        `‘${entry.title}’ 시공사례를 완전히 삭제할까요?\n다른 사례에서 사용하지 않는 S3 사진도 삭제되며 복원할 수 없습니다.`,
-      )
-    )
-      return;
+    if (!window.confirm(`‘${entry.title}’ 시공사례를 완전히 삭제할까요?`)) return;
     savingRef.current = true;
     setDeletingId(entry.id);
     try {
@@ -212,6 +224,32 @@ export default function AdminWorkspace() {
   function open(entry: Entry) {
     setEditor({ ...entry, photos: entry.photos.map((photo) => ({ ...photo })) });
     setNotice("");
+    setPhotoFeedback(null);
+  }
+
+  async function move(entry: Entry, direction: -1 | 1) {
+    if (savingRef.current || loading) return;
+    const next = moveProjectInList(entries, visible, entry.id, direction);
+    if (next === entries) return;
+    savingRef.current = true;
+    setOrdering(true);
+    try {
+      const response = await fetch("/api/admin/projects/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: next.map((item) => item.id), version: order.version }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error);
+      setOrder(data.order);
+      setEntries(next);
+      setNotice("순서를 저장했습니다. 홈페이지 목록에도 반영됩니다.");
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : "순서를 저장하지 못했습니다.");
+    } finally {
+      savingRef.current = false;
+      setOrdering(false);
+    }
   }
 
   async function upload(files: FileList | null) {
@@ -219,6 +257,7 @@ export default function AdminWorkspace() {
     const selected = Array.from(files);
     if (selected.length + editor.photos.length > 30) {
       setNotice("사진은 최대 30장까지 등록할 수 있어요.");
+      setPhotoFeedback({ message: "사진은 최대 30장까지 등록할 수 있어요.", error: true });
       if (photoInput.current) photoInput.current.value = "";
       return;
     }
@@ -231,21 +270,38 @@ export default function AdminWorkspace() {
       )
     ) {
       setNotice("JPG·PNG·WEBP, 사진당 3MB 이하만 선택해주세요.");
+      setPhotoFeedback({
+        message:
+          "사진이 추가되지 않았습니다. JPG·PNG·WEBP 형식인지, 사진 한 장이 3MB 이하인지 확인해주세요.",
+        error: true,
+      });
       if (photoInput.current) photoInput.current.value = "";
       return;
     }
     savingRef.current = true;
     setUploading(true);
     let completed = 0;
+    setPhotoFeedback({ message: `선택한 사진 ${selected.length}장을 업로드합니다.`, error: false });
     try {
       for (const file of selected) {
+        setPhotoFeedback({
+          message: `${selected.length}장 중 ${completed + 1}번째 사진 업로드 중…`,
+          error: false,
+        });
         const response = await fetch("/api/admin/project-images", {
           method: "POST",
           headers: { "Content-Type": file.type },
           body: file,
         });
-        const data = await response.json();
+        const data = await response.json().catch(() => ({
+          error:
+            response.status === 413
+              ? "사진 용량이 너무 큽니다. 3MB 이하 사진으로 다시 선택해주세요."
+              : "사진 전송 결과를 확인하지 못했습니다. 다시 로그인하거나 잠시 후 시도해주세요.",
+        }));
         if (!response.ok) throw new Error(data.error);
+        if (typeof data.src !== "string" || !data.src.startsWith("/api/admin/project-images/"))
+          throw new Error("업로드한 사진 경로를 확인하지 못했습니다. 다시 시도해주세요.");
         setEditor((current) =>
           current
             ? { ...current, photos: [...current.photos, { src: data.src, alt: "" }] }
@@ -256,7 +312,15 @@ export default function AdminWorkspace() {
       setNotice(
         `${completed}장 업로드 완료. 사진 설명을 입력하고 시공사례 등록 또는 수정사항 저장을 눌러주세요.`,
       );
+      setPhotoFeedback({
+        message: `${completed}장 추가했습니다. 아래 사진을 확인하고 수정사항 저장 또는 시공사례 등록을 눌러주세요.`,
+        error: false,
+      });
     } catch (error) {
+      setPhotoFeedback({
+        message: `${completed}장 업로드 완료. ${error instanceof Error ? error.message : "사진 업로드에 실패했습니다."}`,
+        error: true,
+      });
       setNotice(
         `${completed}장 업로드 완료. ${error instanceof Error ? error.message : "업로드 결과를 확인하지 못했습니다."} 성공한 사진은 등록 또는 수정사항 저장 버튼으로 반영해주세요.`,
       );
@@ -342,7 +406,7 @@ export default function AdminWorkspace() {
             ) : (
               <button
                 className={styles.primary}
-                disabled={!!deletingId || loading}
+                disabled={!!deletingId || ordering || loading}
                 onClick={() => open(emptyEntry())}
               >
                 <Plus size={18} />
@@ -365,7 +429,7 @@ export default function AdminWorkspace() {
               <button
                 type="button"
                 className={styles.deleteButton}
-                disabled={!!deletingId || loading}
+                disabled={!!deletingId || ordering || loading}
                 onClick={() => void cleanupDeleted()}
               >
                 {deletingId === "cleanup" ? "정리 중…" : "삭제 파일 정리"}
@@ -440,7 +504,7 @@ export default function AdminWorkspace() {
                       </tr>
                     </thead>
                     <tbody>
-                      {visible.map((entry) => (
+                      {visible.map((entry, index) => (
                         <tr key={entry.id}>
                           <td>
                             <div className={styles.projectCell}>
@@ -478,8 +542,33 @@ export default function AdminWorkspace() {
                           <td>
                             <div className={styles.rowActions}>
                               <button
+                                type="button"
+                                className={styles.orderButton}
+                                disabled={ordering || !!deletingId || loading || index === 0}
+                                onClick={() => void move(entry, -1)}
+                                aria-label={`${entry.title} 위로 이동`}
+                                title="위로 이동"
+                              >
+                                <ArrowUp size={18} aria-hidden="true" />
+                              </button>
+                              <button
+                                type="button"
+                                className={styles.orderButton}
+                                disabled={
+                                  ordering ||
+                                  !!deletingId ||
+                                  loading ||
+                                  index === visible.length - 1
+                                }
+                                onClick={() => void move(entry, 1)}
+                                aria-label={`${entry.title} 아래로 이동`}
+                                title="아래로 이동"
+                              >
+                                <ArrowDown size={18} aria-hidden="true" />
+                              </button>
+                              <button
                                 className={styles.editButton}
-                                disabled={!!deletingId || loading}
+                                disabled={!!deletingId || ordering || loading}
                                 onClick={() => open(entry)}
                                 aria-label={`${entry.title} 수정`}
                               >
@@ -489,7 +578,7 @@ export default function AdminWorkspace() {
                               <button
                                 type="button"
                                 className={styles.deleteButton}
-                                disabled={!!deletingId || loading}
+                                disabled={!!deletingId || ordering || loading}
                                 onClick={() => void remove(entry)}
                                 aria-label={`${entry.title} 삭제`}
                               >
@@ -512,7 +601,9 @@ export default function AdminWorkspace() {
                 )}
                 <div className={styles.listFooter}>
                   총 {visible.length}건
-                  <span>기존 사례도 관리자에서 수정하고 등록할 수 있습니다.</span>
+                  <span>
+                    {ordering ? "순서 저장 중…" : "↑·↓ 버튼으로 이동하면 순서가 자동 저장됩니다."}
+                  </span>
                 </div>
               </section>
             </>
@@ -583,20 +674,32 @@ export default function AdminWorkspace() {
                     <h2>
                       <span>02</span>현장 사진
                     </h2>
-                    <input
-                      ref={photoInput}
-                      id="admin-photos"
-                      type="file"
-                      className={styles.srOnly}
-                      accept="image/jpeg,image/png,image/webp"
-                      multiple
-                      onChange={(event) => void upload(event.target.files)}
-                    />
-                    <label htmlFor="admin-photos" className={styles.upload}>
+                    <div className={styles.upload}>
+                      <input
+                        ref={photoInput}
+                        id="admin-photos"
+                        type="file"
+                        className={styles.uploadInput}
+                        aria-label="시공사례 사진 추가"
+                        aria-describedby="photo-upload-feedback"
+                        accept="image/jpeg,image/png,image/webp"
+                        multiple
+                        onChange={(event) => void upload(event.target.files)}
+                      />
                       <ImagePlus size={28} />
                       <strong>{uploading ? "사진 업로드 중…" : "사진 선택하기"}</strong>
                       <small>JPG·PNG·WEBP · 사진당 3MB 이하 · 최대 30장</small>
-                    </label>
+                    </div>
+                    <p
+                      id="photo-upload-feedback"
+                      role={photoFeedback?.error ? "alert" : "status"}
+                      className={photoFeedback?.error ? styles.photoError : styles.photoStatus}
+                    >
+                      {photoFeedback?.message ||
+                        (editor.photos.length === 0
+                          ? "등록된 사진이 없습니다. 위에서 사진을 선택해 추가해주세요."
+                          : `현재 사진 ${editor.photos.length}장 · 사진을 더 추가할 수 있어요.`)}
+                    </p>
                     <div className={styles.photoList}>
                       {editor.photos.map((photo, index) => (
                         <div key={photo.src + index} className={styles.photoRow}>
@@ -678,7 +781,7 @@ export default function AdminWorkspace() {
                     </button>
                   </section>
                   <section className={styles.tips}>
-                    <h3>좋은 시공사례를 위한 팁</h3>
+                    <h3>시공사례 등록방법</h3>
                     <p>현장명에는 설비와 작업을 함께 적어주세요.</p>
                     <p>완공 사진을 대표 사진으로 선택하면 목록에서 보기 좋아요.</p>
                     <p>사진 설명에는 실제 설비와 작업 내용을 적어주세요.</p>

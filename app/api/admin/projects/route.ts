@@ -1,5 +1,5 @@
 import { adminAuthConfig, getAdminSession } from "@/src/lib/admin-auth";
-import { listProjects, saveProject } from "@/src/lib/projects-db";
+import { listProjects, saveProject, getProjectOrder } from "@/src/lib/projects-db";
 import { parseProject } from "@/src/lib/project-record";
 import { revalidateTag } from "next/cache";
 import { permanentlyDeleteProject, pendingProjectDeletion } from "@/src/lib/project-deletion";
@@ -13,8 +13,8 @@ const reply = (body: unknown, status = 200) =>
 export async function GET() {
   if (!(await getAdminSession())) return reply({ error: "로그인이 필요합니다." }, 401);
   try {
-    const projects = await listProjects();
-    return reply({ projects, pendingDeletions: projects.filter(pendingProjectDeletion) });
+    const [projects, order] = await Promise.all([listProjects(), getProjectOrder()]);
+    return reply({ projects, order, pendingDeletions: projects.filter(pendingProjectDeletion) });
   } catch {
     return reply({ error: "DB 목록을 불러오지 못했습니다. 설정과 읽기 권한을 확인해주세요." }, 503);
   }

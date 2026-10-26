@@ -8,6 +8,7 @@ import {
   type ScanCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { parseProject, type ProjectRecord } from "./project-record";
+import { parseProjectOrder, type ProjectOrder } from "./project-order";
 
 function database() {
   const TableName = process.env.PROJECTS_TABLE_NAME;
@@ -19,6 +20,60 @@ function database() {
     requestHandler: { connectionTimeout: 3000, requestTimeout: 5000 },
   });
   return { TableName, client };
+}
+
+export async function getProjectOrder(): Promise<ProjectOrder> {
+  const { TableName, client } = database();
+  try {
+    const result = await client.send(
+      new GetItemCommand({ TableName, Key: { id: { S: "project-order" } }, ConsistentRead: true }),
+    );
+    if (!result.Item) return { ids: [], version: 0 };
+    const order = parseProjectOrder(JSON.parse(result.Item.document.S!));
+    if (
+      result.Item.entityType.S !== "project-order" ||
+      order.version !== Number(result.Item.version.N)
+    )
+      throw new Error("InvalidStoredOrder");
+    return order;
+  } finally {
+    client.destroy();
+  }
+}
+
+export async function saveProjectOrder(input: ProjectOrder): Promise<ProjectOrder> {
+  const order = parseProjectOrder(input);
+  const { TableName, client } = database();
+  const saved = { ids: order.ids, version: order.version + 1 };
+  try {
+    await client.send(
+      new PutItemCommand({
+        TableName,
+        Item: {
+          id: { S: "project-order" },
+          entityType: { S: "project-order" },
+          version: { N: String(saved.version) },
+          document: { S: JSON.stringify(saved) },
+        },
+        ConditionExpression:
+          order.version === 0
+            ? "attribute_not_exists(id)"
+            : "#version = :version AND entityType = :type",
+        ...(order.version
+          ? {
+              ExpressionAttributeNames: { "#version": "version" },
+              ExpressionAttributeValues: {
+                ":version": { N: String(order.version) },
+                ":type": { S: "project-order" },
+              },
+            }
+          : {}),
+      }),
+    );
+    return saved;
+  } finally {
+    client.destroy();
+  }
 }
 
 export async function getProjectRecord(id: string): Promise<ProjectRecord | null> {
