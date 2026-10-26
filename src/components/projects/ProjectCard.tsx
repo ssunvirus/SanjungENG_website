@@ -18,7 +18,7 @@ export default function ProjectCard({ project }: { project: Project }) {
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 465px"
               quality={100}
               unoptimized={project.image.startsWith("/api/")}
-              className="object-cover lg:object-fill transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
+              className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
             />
           ) : (
             <div className="flex h-full items-center justify-center bg-slate-100 text-brand-navy/50">

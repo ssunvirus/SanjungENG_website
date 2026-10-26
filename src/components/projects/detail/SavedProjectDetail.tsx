@@ -4,6 +4,7 @@ import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "./ProjectOverview";
 import ProjectPhotoGallery from "./ProjectPhotoGallery";
 import BlogBanner from "./BlogBanner";
+import ProjectInquiryBanner from "./ProjectInquiryBanner";
 import type { ProjectRecord } from "@/src/lib/project-record";
 import { publicPhotoPath } from "@/src/lib/public-project-data";
 import { projects } from "@/src/components/projects/data";
@@ -58,6 +59,7 @@ export default function SavedProjectDetail({
         >
           목록으로
         </Link>
+        <ProjectInquiryBanner />
         <BlogBanner />
       </article>
     </main>

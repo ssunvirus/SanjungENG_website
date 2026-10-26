@@ -153,17 +153,23 @@ function BusinessOverview() {
 function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
   return (
     <article className="h-[632px] w-[266px] shrink-0 overflow-hidden rounded-[10px] bg-white">
-      <div className="relative h-[346px] overflow-hidden rounded-[10px]">
-        <Image
-          src={card.image}
-          alt={card.imageAlt}
-          fill
-          sizes="266px"
-          quality={card.image.includes("business-cold-storage") ? 75 : 100}
-          unoptimized={card.image === "/images/home-refresh/business-hvac-card.png"}
-          className="object-cover"
-        />
-      </div>
+      <Link
+        href={card.href}
+        aria-label={`${card.title} 자세히 보기`}
+        className="group/business-image relative block h-[346px] bg-[#EFF7FB] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue"
+      >
+        <div className="absolute inset-0 overflow-hidden rounded-[10px] transition-transform duration-300 ease-out motion-safe:group-hover/business-image:translate-y-[6px] motion-reduce:transition-none">
+          <Image
+            src={card.image}
+            alt={card.imageAlt}
+            fill
+            sizes="266px"
+            quality={card.image.includes("business-cold-storage") ? 75 : 100}
+            unoptimized={card.image === "/images/home-refresh/business-hvac-card.png"}
+            className="object-cover"
+          />
+        </div>
+      </Link>
 
       <div className="px-[12px] pt-[19px] pb-[15px]">
         <p className="text-[15px] font-medium leading-5 text-brand-blue">{card.number}</p>

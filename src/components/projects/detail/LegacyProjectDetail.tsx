@@ -7,6 +7,7 @@ import Hero from "@/src/components/projects/Hero";
 import ProjectOverview, { type ProjectOverviewProps } from "./ProjectOverview";
 import SavedProjectDetail from "./SavedProjectDetail";
 import BlogBanner from "./BlogBanner";
+import ProjectInquiryBanner from "./ProjectInquiryBanner";
 
 export default async function LegacyProjectDetail({
   id,
@@ -37,6 +38,7 @@ export default async function LegacyProjectDetail({
           <List size={30} aria-hidden="true" />
           목록으로
         </Link>
+        <ProjectInquiryBanner />
         <BlogBanner />
       </article>
     </main>
