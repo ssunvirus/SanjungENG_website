@@ -1,6 +1,11 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
-import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+  DeleteObjectCommand,
+} from "@aws-sdk/client-s3";
 import { imageExtension, projectImageKeyPattern } from "./project-images";
 
 function storage() {
@@ -19,6 +24,16 @@ function storage() {
       requestHandler: { connectionTimeout: 3000, requestTimeout: 15000 },
     }),
   };
+}
+
+export async function deleteProjectImage(key: string) {
+  if (!projectImageKeyPattern.test(key)) throw new Error("InvalidImageKey");
+  const { Bucket, client } = storage();
+  try {
+    await client.send(new DeleteObjectCommand({ Bucket, Key: `projects/${key}` }));
+  } finally {
+    client.destroy();
+  }
 }
 
 export async function uploadProjectImage(bytes: Uint8Array, contentType: string) {

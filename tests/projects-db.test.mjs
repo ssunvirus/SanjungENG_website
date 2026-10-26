@@ -47,6 +47,11 @@ function setup(env, result, fail = false) {
               this.input = input;
             }
           },
+          DeleteItemCommand: class {
+            constructor(input) {
+              this.input = input;
+            }
+          },
         };
       throw new Error(name);
     },
@@ -107,6 +112,20 @@ test("deletion uses PutItem with concurrency and anti-resurrection conditions", 
   assert.equal(db.calls[0].ExpressionAttributeValues[":version"].N, "3");
   assert.equal(db.calls[0].ExpressionAttributeValues[":false"].BOOL, false);
   assert.ok(db.calls[0].ConditionExpression.includes("attribute_not_exists(deleted)"));
+});
+
+test("final cleanup physically deletes new DB records and retains only a minimal legacy marker", async () => {
+  const db = setup(config, {});
+  const removed = { ...project, deleted: true, version: 4 };
+  await db.finalizeProjectDeletion(removed, false);
+  assert.equal(db.calls[0].Key.id.S, project.id);
+  assert.equal(db.calls[0].ExpressionAttributeValues[":version"].N, "4");
+  await db.finalizeProjectDeletion(removed, true);
+  const marker = JSON.parse(db.calls[1].Item.document.S);
+  assert.equal(marker.title, "Deleted project");
+  assert.equal(marker.description, "");
+  assert.deepEqual(marker.photos, []);
+  assert.equal(marker.deleted, true);
 });
 
 test("list filters diagnostic records and reads all pages", async () => {

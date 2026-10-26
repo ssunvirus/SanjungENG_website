@@ -2,6 +2,7 @@ import { adminAuthConfig, getAdminSession } from "@/src/lib/admin-auth";
 import { listProjects, saveProject } from "@/src/lib/projects-db";
 import { parseProject } from "@/src/lib/project-record";
 import { revalidateTag } from "next/cache";
+import { permanentlyDeleteProject, pendingProjectDeletion } from "@/src/lib/project-deletion";
 
 const reply = (body: unknown, status = 200) =>
   Response.json(body, {
@@ -12,7 +13,8 @@ const reply = (body: unknown, status = 200) =>
 export async function GET() {
   if (!(await getAdminSession())) return reply({ error: "로그인이 필요합니다." }, 401);
   try {
-    return reply({ projects: await listProjects() });
+    const projects = await listProjects();
+    return reply({ projects, pendingDeletions: projects.filter(pendingProjectDeletion) });
   } catch {
     return reply({ error: "DB 목록을 불러오지 못했습니다. 설정과 읽기 권한을 확인해주세요." }, 503);
   }
@@ -51,7 +53,7 @@ async function mutate(request: Request, deleting: boolean) {
       chunks.push(value);
     }
     project = parseProject(JSON.parse(Buffer.concat(chunks).toString("utf8")));
-    if (project.deleted) throw new Error("InvalidProject");
+    if (project.deleted && !deleting) throw new Error("InvalidProject");
   } catch {
     return reply(
       {
@@ -62,14 +64,16 @@ async function mutate(request: Request, deleting: boolean) {
     );
   }
   try {
-    const saved = await saveProject(deleting ? { ...project, deleted: true } : project);
+    const result = deleting
+      ? await permanentlyDeleteProject(project)
+      : { project: await saveProject(project) };
     // A cache failure must not report an already committed DB write as failed.
     try {
       revalidateTag("public-projects", { expire: 0 });
     } catch {
       console.error("Public projects cache invalidation failed");
     }
-    return reply({ project: saved });
+    return reply(result);
   } catch (error) {
     if (error instanceof Error && error.name === "ConditionalCheckFailedException")
       return reply(

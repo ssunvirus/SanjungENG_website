@@ -19,6 +19,20 @@ function setup(authenticated = true, conflict = false) {
     Buffer,
     require(name) {
       if (name === "next/cache") return { revalidateTag() {} };
+      if (name.endsWith("project-deletion"))
+        return {
+          pendingProjectDeletion: () => false,
+          permanentlyDeleteProject: async (p) => {
+            if (conflict) {
+              const error = new Error();
+              error.name = "ConditionalCheckFailedException";
+              throw error;
+            }
+            calls.push("delete");
+            writes.push(p);
+            return { cleanupPending: false };
+          },
+        };
       if (name.endsWith("admin-auth"))
         return {
           adminAuthConfig: () => ({ origin: "https://example.com" }),
@@ -90,7 +104,7 @@ test("authenticated valid save succeeds with no-store and conflicts return 409",
   assert.equal((await setup(true, true).POST(request())).status, 409);
 });
 
-test("delete requires admin, same origin, valid body and records a versioned tombstone", async () => {
+test("permanent delete requires admin, same origin and valid versioned input", async () => {
   const anonymous = setup(false);
   assert.equal((await anonymous.DELETE(request())).status, 401);
   assert.deepEqual(anonymous.calls, []);
@@ -100,9 +114,8 @@ test("delete requires admin, same origin, valid body and records a versioned tom
   assert.deepEqual(api.calls, []);
   const response = await api.DELETE(request({ ...project, version: 2 }));
   assert.equal(response.status, 200);
-  assert.equal(api.writes[0].deleted, true);
   assert.equal(api.writes[0].version, 2);
-  assert.equal((await response.json()).project.version, 3);
+  assert.equal((await response.json()).cleanupPending, false);
   assert.equal((await setup(true, true).DELETE(request())).status, 409);
 });
 

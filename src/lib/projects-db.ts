@@ -4,6 +4,7 @@ import {
   GetItemCommand,
   ScanCommand,
   PutItemCommand,
+  DeleteItemCommand,
   type ScanCommandOutput,
 } from "@aws-sdk/client-dynamodb";
 import { parseProject, type ProjectRecord } from "./project-record";
@@ -18,6 +19,69 @@ function database() {
     requestHandler: { connectionTimeout: 3000, requestTimeout: 5000 },
   });
   return { TableName, client };
+}
+
+export async function getProjectRecord(id: string): Promise<ProjectRecord | null> {
+  const { TableName, client } = database();
+  try {
+    const result = await client.send(
+      new GetItemCommand({ TableName, Key: { id: { S: id } }, ConsistentRead: true }),
+    );
+    if (!result.Item) return null;
+    const record = parseProject(JSON.parse(result.Item.document.S!));
+    if (record.id !== id || record.version !== Number(result.Item.version.N))
+      throw new Error("InvalidStoredProject");
+    return record;
+  } finally {
+    client.destroy();
+  }
+}
+
+export async function finalizeProjectDeletion(project: ProjectRecord, keepMarker: boolean) {
+  const { TableName, client } = database();
+  const condition = {
+    ConditionExpression: "#version = :version AND deleted = :deleted AND entityType = :type",
+    ExpressionAttributeNames: { "#version": "version" },
+    ExpressionAttributeValues: {
+      ":version": { N: String(project.version) },
+      ":deleted": { BOOL: true },
+      ":type": { S: "project" },
+    },
+  };
+  try {
+    if (keepMarker) {
+      const marker: ProjectRecord = {
+        id: project.id,
+        version: project.version + 1,
+        deleted: true,
+        title: "Deleted project",
+        category: "기타",
+        location: "",
+        description: "",
+        status: "공개",
+        photos: [],
+      };
+      await client.send(
+        new PutItemCommand({
+          TableName,
+          ...condition,
+          Item: {
+            id: { S: marker.id },
+            version: { N: String(marker.version) },
+            deleted: { BOOL: true },
+            entityType: { S: "project" },
+            document: { S: JSON.stringify(marker) },
+          },
+        }),
+      );
+    } else {
+      await client.send(
+        new DeleteItemCommand({ TableName, Key: { id: { S: project.id } }, ...condition }),
+      );
+    }
+  } finally {
+    client.destroy();
+  }
 }
 
 export async function listProjects(): Promise<ProjectRecord[]> {

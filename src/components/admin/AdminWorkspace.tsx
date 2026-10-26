@@ -54,6 +54,7 @@ export default function AdminWorkspace() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [pendingDeletions, setPendingDeletions] = useState<Entry[]>([]);
   const photoInput = useRef<HTMLInputElement>(null);
   const savingRef = useRef(false);
   const [query, setQuery] = useState("");
@@ -69,6 +70,7 @@ export default function AdminWorkspace() {
         if (active) {
           const saved: Entry[] = data.projects;
           setEntries(mergeAdminProjects(initialEntries, saved));
+          setPendingDeletions(data.pendingDeletions || []);
         }
       })
       .catch((error) => {
@@ -120,7 +122,7 @@ export default function AdminWorkspace() {
     if (savingRef.current || loading) return;
     if (
       !window.confirm(
-        `‘${entry.title}’ 시공사례를 삭제할까요?\n관리자 목록과 홈페이지에서 제외됩니다. 원본 사진 파일은 유지됩니다.`,
+        `‘${entry.title}’ 시공사례를 완전히 삭제할까요?\n다른 사례에서 사용하지 않는 S3 사진도 삭제되며 복원할 수 없습니다.`,
       )
     )
       return;
@@ -135,12 +137,63 @@ export default function AdminWorkspace() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error);
       setEntries((current) => current.filter((item) => item.id !== entry.id));
-      setNotice("시공사례를 삭제했습니다. 홈페이지에서도 제외됩니다.");
+      if (data.cleanupPending) {
+        setPendingDeletions((current) => [
+          ...current.filter((item) => item.id !== entry.id),
+          { ...entry, deleted: true },
+        ]);
+        setNotice(
+          "시공사례는 삭제했지만 파일 정리가 남았습니다. ‘삭제 파일 정리’로 다시 시도해주세요.",
+        );
+      } else {
+        setPendingDeletions((current) => current.filter((item) => item.id !== entry.id));
+        setNotice("시공사례와 사용하지 않는 S3 사진을 삭제했습니다.");
+      }
     } catch (error) {
       setNotice(
         error instanceof Error
           ? error.message
           : "삭제 결과를 확인하지 못했습니다. 새로고침 후 확인해주세요.",
+      );
+    } finally {
+      savingRef.current = false;
+      setDeletingId(null);
+    }
+  }
+
+  async function cleanupDeleted() {
+    if (savingRef.current || !pendingDeletions.length) return;
+    if (
+      !window.confirm(
+        "이전에 삭제한 시공사례의 남은 사진과 DB 기록을 정리할까요? 삭제한 사진은 복원할 수 없습니다.",
+      )
+    )
+      return;
+    savingRef.current = true;
+    setDeletingId("cleanup");
+    let remaining = 0;
+    try {
+      for (const entry of pendingDeletions) {
+        try {
+          const response = await fetch("/api/admin/projects", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(entry),
+          });
+          const data = await response.json();
+          if (!response.ok || data.cleanupPending) {
+            remaining++;
+            continue;
+          }
+          setPendingDeletions((current) => current.filter((item) => item.id !== entry.id));
+        } catch {
+          remaining++;
+        }
+      }
+      setNotice(
+        remaining
+          ? `${remaining}건의 파일 정리가 남았습니다. 서버 권한을 확인한 뒤 다시 시도해주세요.`
+          : "삭제된 사례의 파일 정리를 완료했습니다.",
       );
     } finally {
       savingRef.current = false;
@@ -303,6 +356,19 @@ export default function AdminWorkspace() {
               {notice}
               <button aria-label="알림 닫기" onClick={() => setNotice("")}>
                 <X size={16} />
+              </button>
+            </div>
+          )}
+          {!editor && pendingDeletions.length > 0 && (
+            <div className={styles.notice}>
+              <span>삭제된 사례 {pendingDeletions.length}건의 파일 정리가 남아 있습니다.</span>
+              <button
+                type="button"
+                className={styles.deleteButton}
+                disabled={!!deletingId || loading}
+                onClick={() => void cleanupDeleted()}
+              >
+                {deletingId === "cleanup" ? "정리 중…" : "삭제 파일 정리"}
               </button>
             </div>
           )}
