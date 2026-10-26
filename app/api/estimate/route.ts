@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { getSmtpPassword } from "@/src/lib/estimate-smtp";
-import { takeEstimateSlot } from "@/src/lib/estimate-rate-limit";
+import { takeEstimateSlot, releaseEstimateSlot } from "@/src/lib/estimate-rate-limit";
 import { isSupportedAttachment } from "@/src/lib/estimate-attachments";
 import {
   estimateLimits,
@@ -85,17 +85,6 @@ export async function POST(request: Request) {
     return fail(attachmentTypeError, 400);
   }
 
-  const retryAfter = takeEstimateSlot(request.headers, phone);
-  if (retryAfter !== null) {
-    return Response.json(
-      {
-        message:
-          "짧은 시간에 문의가 여러 번 접수되었습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.",
-      },
-      { status: 429, headers: { "Retry-After": String(retryAfter) } },
-    );
-  }
-
   const user = process.env.NAVER_SMTP_USER;
   const to = process.env.ESTIMATE_TO_EMAIL;
   if (!user || !to) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
@@ -114,18 +103,40 @@ export async function POST(request: Request) {
   }
   if (!password) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.naver.com",
-    port: 465,
-    secure: true,
-    auth: { user, pass: password },
-    connectionTimeout: 10000,
-    greetingTimeout: 10000,
-    socketTimeout: 20000,
-    disableFileAccess: true,
-    disableUrlAccess: true,
-  });
+  let slot: Awaited<ReturnType<typeof takeEstimateSlot>>;
   try {
+    slot = await takeEstimateSlot(request.headers, phone);
+  } catch {
+    console.error("Estimate rate limit unavailable");
+    return fail(
+      "문의 접수 상태를 확인하지 못했습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.",
+      503,
+    );
+  }
+  if ("retryAfter" in slot) {
+    return Response.json(
+      {
+        message:
+          "짧은 시간에 문의가 여러 번 접수되었습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.",
+      },
+      { status: 429, headers: { "Retry-After": String(slot.retryAfter) } },
+    );
+  }
+
+  let received = false;
+  let transporter: ReturnType<typeof nodemailer.createTransport> | undefined;
+  try {
+    transporter = nodemailer.createTransport({
+      host: "smtp.naver.com",
+      port: 465,
+      secure: true,
+      auth: { user, pass: password },
+      connectionTimeout: 10000,
+      greetingTimeout: 10000,
+      socketTimeout: 20000,
+      disableFileAccess: true,
+      disableUrlAccess: true,
+    });
     const attachments = await Promise.all(
       files.map(async (file) => ({
         filename: file.name.replace(/[\r\n/\\]/g, "_").slice(0, 150),
@@ -159,10 +170,21 @@ export async function POST(request: Request) {
     });
     if (!result.accepted.length || result.rejected.length)
       return fail("메일을 보내지 못했습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.", 502);
+    received = true;
     return Response.json({ message: "문의가 접수되었습니다.", received: true });
   } catch {
     return fail("전송 중 연결 문제가 발생했습니다. 잠시 후 다시 시도해주세요.", 502);
   } finally {
-    transporter.close();
+    try {
+      transporter?.close();
+    } finally {
+      if (!received) {
+        try {
+          await releaseEstimateSlot(slot.ticket);
+        } catch {
+          console.error("Estimate rate limit refund pending until expiry");
+        }
+      }
+    }
   }
 }

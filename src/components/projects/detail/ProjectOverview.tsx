@@ -10,7 +10,7 @@ function Divider() {
   );
 }
 
-type ProjectOverviewProps = {
+export type ProjectOverviewProps = {
   title?: string;
   description?: string;
   category?: string;

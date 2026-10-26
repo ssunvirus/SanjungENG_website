@@ -7,7 +7,7 @@ export default function ResourcesHero() {
     <section className="relative mx-auto h-[320px] lg:h-[600px] w-full max-w-[1920px] overflow-hidden px-7 pt-[45px] lg:px-[245px] lg:pt-[108px] text-white">
       <div className="absolute inset-x-0 top-0 h-full lg:top-[-158.04px] lg:h-[1080px]">
         <Image
-          src="/images/fabric-duct/resources/hero.jpg"
+          src="/images/projects/orion-production/cc_P5243334.jpg"
           alt="생산시설에 설치된 섬유덕트"
           fill
           priority

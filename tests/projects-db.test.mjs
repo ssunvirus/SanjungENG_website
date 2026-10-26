@@ -13,6 +13,8 @@ const source = ts.transpileModule(
 
 function setup(env, result, fail = false) {
   const calls = [];
+  const clientOptions = [];
+  const usedClients = [];
   let destroyed = false;
   const sandbox = {
     exports: {},
@@ -25,7 +27,11 @@ function setup(env, result, fail = false) {
       if (name === "@aws-sdk/client-dynamodb")
         return {
           DynamoDBClient: class {
+            constructor(options) {
+              clientOptions.push(options);
+            }
             async send(command) {
+              usedClients.push(this);
               calls.push(command.input);
               if (fail) throw new Error("Denied");
               return Array.isArray(result) ? result[calls.length - 1] : result;
@@ -61,15 +67,19 @@ function setup(env, result, fail = false) {
   runInNewContext(source, sandbox);
   return {
     ...sandbox.exports,
-    check: sandbox.exports.checkProjectsConnection,
     calls,
+    clientOptions,
+    usedClients,
+    fail: (value) => {
+      fail = value;
+    },
     destroyed: () => destroyed,
   };
 }
 
 test("missing configuration makes no database request", async () => {
   const db = setup({}, {});
-  assert.equal(await db.check(), "unconfigured");
+  await assert.rejects(db.listProjects(), /DatabaseUnconfigured/);
   assert.equal(db.calls.length, 0);
 });
 
@@ -105,7 +115,7 @@ test("create requires absent id and update requires matching version", async () 
   await db.saveProject({ ...project, version: 2 });
   assert.equal(db.calls[1].ExpressionAttributeValues[":version"].N, "2");
   assert.equal(JSON.parse(db.calls[1].Item.document.S).version, 3);
-  assert.equal(db.destroyed(), true);
+  assert.equal(db.destroyed(), false);
 });
 
 test("invalid input never reaches DynamoDB", async () => {
@@ -163,32 +173,46 @@ test("list filters diagnostic records and reads all pages", async () => {
   assert.equal(db.calls[1].ExclusiveStartKey.id.S, "page-1");
 });
 
-test("empty table is connected; fixed probe reads only id and never lists content", async () => {
+test("empty table returns an empty list without closing the shared client", async () => {
   const db = setup(
     { PROJECTS_TABLE_NAME: "test-table", PROJECTS_AWS_REGION: "ap-southeast-2" },
     {},
   );
-  assert.equal(await db.check(), "connected");
-  assert.equal(db.calls[0].Key.id.S, "db-connection-test");
-  assert.equal(db.calls[0].ProjectionExpression, "id");
+  assert.equal((await db.listProjects()).length, 0);
   assert.equal(db.calls[0].TableName, "test-table");
-  assert.equal(db.destroyed(), true);
+  assert.equal(db.destroyed(), false);
 });
 
-test("probe item is detected without exposing its content", async () => {
-  const db = setup(
-    { PROJECTS_TABLE_NAME: "test", PROJECTS_AWS_REGION: "ap-southeast-2" },
-    { Item: { id: { S: "db-connection-test" } } },
-  );
-  assert.equal(await db.check(), "test-found");
-});
-
-test("AWS failure returns a safe status and releases resources", async () => {
+test("AWS list failures propagate without destroying the client used by later requests", async () => {
   const db = setup(
     { PROJECTS_TABLE_NAME: "test", PROJECTS_AWS_REGION: "ap-southeast-2" },
     {},
     true,
   );
-  assert.equal(await db.check(), "error");
-  assert.equal(db.destroyed(), true);
+  await assert.rejects(db.listProjects(), /Denied/);
+  assert.equal(db.destroyed(), false);
+  db.fail(false);
+  assert.equal((await db.listProjects()).length, 0);
+  assert.equal(db.clientOptions.length, 1);
+});
+
+test("concurrent DB operations reuse one client and read each request's current table", async () => {
+  const env = { ...config };
+  const db = setup(env, {});
+  await Promise.all([db.listProjects(), db.getProjectOrder(), db.getProjectRecord("missing")]);
+  await db.saveProject(project);
+  env.PROJECTS_TABLE_NAME = "other-table";
+  await db.listProjects();
+  assert.equal(db.calls.at(-1).TableName, "other-table");
+  assert.equal(db.clientOptions.length, 1);
+  assert.equal(new Set(db.usedClients).size, 1);
+  assert.equal(db.clientOptions[0].maxAttempts, 2);
+  assert.equal(db.clientOptions[0].requestHandler.requestTimeout, 5000);
+  env.PROJECTS_AWS_REGION = "ap-northeast-2";
+  await db.listProjects();
+  assert.equal(db.clientOptions.length, 2);
+  env.PROJECTS_AWS_REGION = config.PROJECTS_AWS_REGION;
+  await db.listProjects();
+  assert.equal(db.clientOptions.length, 2);
+  assert.equal(db.destroyed(), false);
 });

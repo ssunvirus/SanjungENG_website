@@ -29,7 +29,7 @@ export default function CaseStudy() {
       <article className="relative mt-[24px] lg:mt-[61px] flex flex-col lg:flex-row h-auto lg:h-[489px] w-full lg:w-[1164px] items-center gap-[28px] lg:gap-[100px] overflow-hidden rounded-[5px] bg-white py-[20px] lg:py-[30px] pl-[20px] pr-[20px] lg:pr-[30px]">
         <div className="relative h-[240px] lg:h-[399px] w-full lg:w-[532px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image
-            src="/images/chiller/case-semiconductor-factory.jpg"
+            src="/images/projects/semiconductor-chiller/source-7.jpg"
             alt="반도체 공장 칠러 시스템 구축 사례"
             fill
             sizes="532px"

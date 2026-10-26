@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { runInNewContext } from "node:vm";
 import test from "node:test";
 import ts from "typescript";
+import { loadAdminApi } from "./helpers/load-admin-api.mjs";
 import * as images from "../src/lib/project-images.ts";
 import { parseProject } from "../src/lib/project-record.ts";
 
@@ -18,6 +19,7 @@ function load(path, modules) {
     Buffer,
     Error,
     require(name) {
+      if (name.endsWith("admin-api")) return loadAdminApi(modules["@/src/lib/admin-auth"]);
       if (name in modules) return modules[name];
       throw new Error(name);
     },

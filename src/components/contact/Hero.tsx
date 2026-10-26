@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative mx-auto h-[320px] lg:h-[600px] w-full max-w-[1920px] overflow-hidden text-white">
       <div className="absolute inset-0 lg:inset-auto lg:top-[-43.81%] lg:h-[240%] w-full">
         <Image
-          src="/images/contact/hero.jpg"
+          src="/images/projects/semiconductor-chiller/source-7.jpg"
           alt="옥상에 설치된 냉동공조 설비"
           fill
           priority

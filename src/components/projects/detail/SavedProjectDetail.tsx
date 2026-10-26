@@ -7,6 +7,7 @@ import BlogBanner from "./BlogBanner";
 import type { ProjectRecord } from "@/src/lib/project-record";
 import { publicPhotoPath } from "@/src/lib/public-project-data";
 import { projects } from "@/src/components/projects/data";
+import { hasDefaultLegacyPhotos, legacyPhotoDimensions } from "@/src/lib/legacy-project-photos";
 
 export default function SavedProjectDetail({
   project,
@@ -16,10 +17,8 @@ export default function SavedProjectDetail({
   legacyGallery?: ReactNode;
 }) {
   const base = projects.find((item) => item.id === project.id);
-  // The original admin UI seeded only the card photo. Preserve the full legacy
-  // gallery when that seed is unchanged rather than silently dropping its photos.
   const keepGallery =
-    legacyGallery && project.photos.length === 1 && project.photos[0].src === base?.image;
+    legacyGallery && base && hasDefaultLegacyPhotos(project, base.image, base.title);
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />
@@ -44,7 +43,13 @@ export default function SavedProjectDetail({
           legacyGallery
         ) : project.photos.length > 0 ? (
           <ProjectPhotoGallery
-            photos={project.photos.map((photo) => ({ ...photo, src: publicPhotoPath(photo.src) }))}
+            photos={project.photos.map((photo) =>
+              legacyPhotoDimensions(
+                { ...photo, src: publicPhotoPath(photo.src) },
+                project.id,
+                base?.image,
+              ),
+            )}
           />
         ) : null}
         <Link

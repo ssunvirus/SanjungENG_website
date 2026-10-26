@@ -114,19 +114,26 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
             const content = (
               <>
                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
-                  <Image
-                    src={project.homeImage ?? project.image}
-                    alt={project.title}
-                    fill
-                    sizes="503px"
-                    className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"
-                  />
+                  {(project.homeImage ?? project.image) ? (
+                    <Image
+                      src={project.homeImage ?? project.image}
+                      alt={project.title}
+                      fill
+                      sizes="503px"
+                      unoptimized={project.image.startsWith("/api/project-images/")}
+                      className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center bg-[#E3EDF3] text-brand-navy/50">
+                      사진 준비 중
+                    </div>
+                  )}
                 </div>
                 <div className="relative px-[21px] pt-[23px] pr-[70px]">
-                  <h3 className="whitespace-nowrap text-[23px] font-bold leading-[29px] text-brand-navy">
+                  <h3 className="truncate text-[23px] font-bold leading-[29px] text-brand-navy">
                     {project.title}
                   </h3>
-                  <p className="mt-[11px] text-[19px] font-medium leading-6 text-brand-navy/50">
+                  <p className="mt-[11px] line-clamp-2 text-[19px] font-medium leading-6 text-brand-navy/50">
                     {project.description}
                   </p>
                   <ArrowRightCircle
@@ -141,7 +148,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
 
             return (
               <article
-                key={project.image}
+                key={project.id}
                 className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white"
               >
                 <Link href={project.href} className={cardClassName}>

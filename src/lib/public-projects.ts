@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { projects } from "@/src/components/projects/data";
 import { listProjects, getProjectOrder } from "./projects-db";
 import { mergePublicProjects } from "./public-project-data";
+import { completeLegacyProject } from "./legacy-project-photos";
 
 export const PUBLIC_PROJECTS_TAG = "public-projects";
 // This project does not enable Cache Components; use the supported Data Cache API.
@@ -54,7 +55,9 @@ const cachedOrder = unstable_cache(
 export async function publicProject(id: string) {
   const record = (await publicProjectRecords()).find((item) => item.id === id) || null;
   if (record?.deleted) notFound();
-  return record;
+  return record
+    ? completeLegacyProject(record, projects.find((item) => item.id === id)?.image)
+    : null;
 }
 
 export async function publicProjectMetadata(id: string, fallback: Metadata): Promise<Metadata> {

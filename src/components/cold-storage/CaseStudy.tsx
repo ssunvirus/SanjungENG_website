@@ -40,7 +40,7 @@ export default function CaseStudy() {
       <article className="relative mt-[24px] lg:mt-[61px] flex flex-col lg:flex-row h-auto lg:min-h-[500px] w-full lg:w-[1164px] items-center gap-[28px] lg:gap-[100px] overflow-hidden rounded-[5px] bg-white py-5 lg:py-[30px] pl-[20px] pr-5 lg:pr-[30px]">
         <div className="relative h-[260px] lg:h-[399px] w-full lg:w-[532px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image
-            src="/images/cold-storage/case-cold-storage.jpg"
+            src="/images/projects-page/cold-storage.jpg"
             alt="농협 저온저장고 냉동설비 신설공사"
             fill
             sizes="532px"

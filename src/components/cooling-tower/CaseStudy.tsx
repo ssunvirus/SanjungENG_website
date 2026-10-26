@@ -33,7 +33,7 @@ export default function CaseStudy() {
       <article className="relative mt-[24px] lg:mt-[61px] flex flex-col lg:flex-row h-auto lg:min-h-[469px] w-full lg:w-[1164px] items-center gap-[28px] lg:gap-[100px] rounded-[5px] bg-white py-5 lg:py-[20px] pl-[20px] pr-5 lg:pr-[30px]">
         <div className="relative h-[240px] lg:h-[399px] w-full lg:w-[532px] shrink-0 overflow-hidden rounded-[10px]">
           <Image
-            src="/images/cooling-tower/case-study.jpg"
+            src="/images/projects/church-cooling-tower/photo-9.jpg"
             alt="교회 냉각탑 충진물 교체공사"
             fill
             sizes="532px"

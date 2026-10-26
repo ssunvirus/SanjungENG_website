@@ -4,6 +4,7 @@ import { runInNewContext } from "node:vm";
 import test from "node:test";
 import ts from "typescript";
 import { mergeAdminProjects } from "../src/lib/project-record.ts";
+import { completeLegacyProject } from "../src/lib/legacy-project-photos.ts";
 import {
   mergePublicProjects,
   publicPhotoPath,
@@ -56,6 +57,21 @@ test("public photos expose only paths referenced by saved records", () => {
   assert.equal(mergePublicProjects([], [{ ...saved, photos: [] }])[0].image, "");
 });
 
+test("saved featured cards use live title, summary and cover instead of the old home image", () => {
+  const base = { ...existing[0], homeImage: "/images/home-old.jpg" };
+  const [card] = mergePublicProjects(
+    [base],
+    [{ ...saved, id: base.id, title: "Edited title", summary: "Short introduction" }],
+  );
+  assert.equal(card.title, "Edited title");
+  assert.equal(card.description, "Short introduction");
+  assert.equal(card.homeImage ?? card.image, `/api/project-images/${key}`);
+  assert.equal(card.href, base.href);
+  assert.equal(mergePublicProjects([base], [])[0].homeImage, base.homeImage);
+  const [empty] = mergePublicProjects([base], [{ ...saved, id: base.id, photos: [] }]);
+  assert.equal(empty.homeImage ?? empty.image, "");
+});
+
 test("deleted cases stay excluded from both lists and public photo access after reload", () => {
   const removed = { ...saved, deleted: true };
   const legacyRemoved = { ...removed, id: "existing" };
@@ -90,6 +106,7 @@ test("DB failures never resurrect legacy cases, and deleted detail routes return
         };
       if (name.endsWith("projects/data")) return { projects: existing };
       if (name === "./public-project-data") return { mergePublicProjects };
+      if (name === "./legacy-project-photos") return { completeLegacyProject };
       if (name === "./projects-db")
         return {
           listProjects: async () => {
@@ -148,6 +165,10 @@ test("anonymous public photo route serves saved photos but rejects orphan and ma
   const missing = imageRoute([]);
   assert.equal((await missing.GET(null, { params: Promise.resolve({ key }) })).status, 404);
   assert.equal(
+    (await missing.GET(null, { params: Promise.resolve({ key }) })).headers.get("cache-control"),
+    "no-store",
+  );
+  assert.equal(
     (await missing.GET(null, { params: Promise.resolve({ key: "../secret" }) })).status,
     404,
   );
@@ -156,8 +177,24 @@ test("anonymous public photo route serves saved photos but rejects orphan and ma
   const response = await published.GET(null, { params: Promise.resolve({ key }) });
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("content-type"), "image/png");
+  assert.equal(response.headers.get("cache-control"), "private, max-age=60, must-revalidate");
   assert.deepEqual(published.calls, ["s3"]);
   const unavailable = imageRoute([], true);
   assert.equal((await unavailable.GET(null, { params: Promise.resolve({ key }) })).status, 503);
+  assert.equal(
+    (await unavailable.GET(null, { params: Promise.resolve({ key }) })).headers.get("cache-control"),
+    "no-store",
+  );
   assert.deepEqual(unavailable.calls, []);
+});
+
+test("a removed public photo is rejected on the next server request instead of serving cached bytes", async () => {
+  const records = [saved];
+  const route = imageRoute(records);
+  assert.equal((await route.GET(null, { params: Promise.resolve({ key }) })).status, 200);
+  records.splice(0);
+  const removed = await route.GET(null, { params: Promise.resolve({ key }) });
+  assert.equal(removed.status, 404);
+  assert.equal(removed.headers.get("cache-control"), "no-store");
+  assert.deepEqual(route.calls, ["s3"]);
 });

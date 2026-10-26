@@ -21,7 +21,7 @@ const slides: { title: string; image: string; description: string }[] = [
   },
   {
     title: "오리온 생산설비",
-    image: "/images/fabric-duct/application-production.jpg",
+    image: "/images/projects/orion-production/cc_P5243334.jpg",
     description: "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성합니다.",
   },
   {

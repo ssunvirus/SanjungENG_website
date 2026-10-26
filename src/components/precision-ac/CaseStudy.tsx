@@ -31,7 +31,7 @@ export default function CaseStudy() {
       <article className="relative mt-[24px] lg:mt-[61px] flex flex-col lg:flex-row h-auto lg:h-[469px] w-full lg:w-[1164px] items-center gap-[28px] lg:gap-[100px] overflow-hidden rounded-[5px] bg-white py-5 lg:py-[20px] pl-[20px] pr-5 lg:pr-[30px]">
         <div className="relative h-[240px] lg:h-[399px] w-full lg:w-[532px] shrink-0 overflow-hidden rounded-[10px]">
           <Image
-            src="/images/precision-ac/case-study-current.jpg"
+            src="/images/projects-page/precision-ac.jpg"
             alt="S 기업 물류창고 항온항습기 설치 현장"
             fill
             sizes="532px"

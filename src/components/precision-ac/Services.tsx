@@ -41,7 +41,7 @@ export default function Services() {
       <div className="flex flex-col lg:flex-row h-auto lg:h-[623px] w-full lg:w-[1159px] gap-[28px] lg:gap-[52px]">
         <div className="relative h-[240px] lg:h-[623px] w-full lg:w-[467px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image
-            src="/images/precision-ac/services-main-current.jpg"
+            src="/images/projects/warehouse-precision-ac/4.jpg"
             alt="항온항습기 내부 전기 설비"
             fill
             sizes="467px"

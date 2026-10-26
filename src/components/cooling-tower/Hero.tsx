@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative mx-auto h-[320px] w-full max-w-[1920px] lg:h-[627px] overflow-hidden text-white">
       <Image
-        src="/images/cooling-tower/hero.jpg"
+        src="/images/projects/church-cooling-tower/photo-4.jpg"
         alt="냉각탑 하부에서 설비를 점검하는 작업자"
         fill
         priority

@@ -1,5 +1,6 @@
 import { projectImagePathPattern } from "./project-images.ts";
 import { applyProjectOrder } from "./project-order.ts";
+import { completeLegacyProject } from "./legacy-project-photos.ts";
 
 export type ProjectRecord = {
   id: string;
@@ -12,6 +13,7 @@ export type ProjectRecord = {
   photos: { src: string; alt: string }[];
   version: number;
   deleted?: true;
+  photosVersion?: 1;
 };
 
 export function parseProject(value: unknown): ProjectRecord {
@@ -31,6 +33,7 @@ export function parseProject(value: unknown): ProjectRecord {
   if (!Number.isSafeInteger(p.version) || (p.version as number) < 0)
     throw new Error("InvalidProject");
   if (!Array.isArray(p.photos) || p.photos.length > 30) throw new Error("InvalidProject");
+  if (p.photosVersion !== undefined && p.photosVersion !== 1) throw new Error("InvalidProject");
   const photos = p.photos.map((photo: unknown) => {
     if (!photo || typeof photo !== "object") throw new Error("InvalidProject");
     const { src, alt } = photo as Record<string, unknown>;
@@ -57,6 +60,7 @@ export function parseProject(value: unknown): ProjectRecord {
     photos,
     version: p.version as number,
     ...(p.deleted === true ? { deleted: true as const } : {}),
+    ...(p.photosVersion === 1 ? { photosVersion: 1 as const } : {}),
   };
 }
 
@@ -71,7 +75,12 @@ export function mergeAdminProjects(
       .sort((a, b) => a.id.localeCompare(b.id)),
     ...existing
       .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
-      .map((base) => saved.find((item) => item.id === base.id) || base),
+      .map((base) =>
+        completeLegacyProject(
+          saved.find((item) => item.id === base.id) || base,
+          base.photos?.[0]?.src,
+        ),
+      ),
   ];
   return applyProjectOrder(merged, order);
 }

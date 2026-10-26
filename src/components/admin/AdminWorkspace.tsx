@@ -6,25 +6,23 @@ import Link from "next/link";
 import {
   ArrowLeft,
   ArrowUpRight,
-  ArrowUp,
-  ArrowDown,
   Check,
   FileText,
   FolderOpen,
-  ImagePlus,
-  LayoutGrid,
-  Pencil,
   Plus,
-  Search,
   ShieldCheck,
-  Trash2,
   X,
 } from "lucide-react";
 import { projects } from "@/src/components/projects/data";
 import { mergeAdminProjects, type ProjectRecord } from "@/src/lib/project-record";
 import { MAX_PROJECT_IMAGE_BYTES } from "@/src/lib/project-images";
+import { initialLegacyPhotos } from "@/src/lib/legacy-project-photos";
 import { applyProjectOrder, moveProjectInList, type ProjectOrder } from "@/src/lib/project-order";
 import styles from "./admin.module.css";
+import UnusedPhotoCleanup from "./UnusedPhotoCleanup";
+import ProjectList from "./ProjectList";
+import ProjectEditor from "./ProjectEditor";
+import type { PhotoFeedback } from "./ProjectPhotos";
 
 type Entry = ProjectRecord;
 const initialEntries: Entry[] = projects.map((project) => ({
@@ -36,9 +34,9 @@ const initialEntries: Entry[] = projects.map((project) => ({
   summary: project.description.slice(0, 50),
   status: "공개",
   version: 0,
-  photos: [{ src: project.image, alt: project.title }],
+  photos: initialLegacyPhotos(project.id, project.image, project.title),
+  photosVersion: 1,
 }));
-const categories = ["냉동기", "항온항습기", "냉각탑", "저온저장고", "섬유덕트", "기타"];
 const emptyEntry = (): Entry => ({
   id: "",
   title: "",
@@ -49,6 +47,7 @@ const emptyEntry = (): Entry => ({
   status: "공개",
   version: 0,
   photos: [],
+  photosVersion: 1,
 });
 
 export default function AdminWorkspace() {
@@ -66,9 +65,7 @@ export default function AdminWorkspace() {
   const [filter, setFilter] = useState("전체");
   const [editor, setEditor] = useState<Entry | null>(null);
   const [notice, setNotice] = useState("");
-  const [photoFeedback, setPhotoFeedback] = useState<{ message: string; error: boolean } | null>(
-    null,
-  );
+  const [photoFeedback, setPhotoFeedback] = useState<PhotoFeedback>(null);
   useEffect(() => {
     let active = true;
     fetch("/api/admin/projects", { cache: "no-store" })
@@ -222,6 +219,7 @@ export default function AdminWorkspace() {
   const update = (patch: Partial<Entry>) =>
     setEditor((current) => (current ? { ...current, ...patch } : current));
   function open(entry: Entry) {
+    if (savingRef.current) return;
     setEditor({ ...entry, photos: entry.photos.map((photo) => ({ ...photo })) });
     setNotice("");
     setPhotoFeedback(null);
@@ -437,358 +435,43 @@ export default function AdminWorkspace() {
             </div>
           )}
 
+          {!editor && (
+            <UnusedPhotoCleanup
+              disabled={!!deletingId || ordering || loading}
+              onBusy={(busy) => {
+                savingRef.current = busy;
+                setDeletingId(busy ? "unused-photos" : null);
+              }}
+            />
+          )}
+
           {!editor ? (
-            <>
-              <div className={styles.stats}>
-                {[
-                  {
-                    label: "전체 시공사례",
-                    count: entries.length,
-                    detail: "등록된 현장 이야기",
-                    icon: <LayoutGrid size={19} />,
-                  },
-                  {
-                    label: "등록 완료",
-                    count: entries.filter((entry) => entry.version > 0).length,
-                    detail: "관리자에서 등록한 시공사례",
-                    icon: <FolderOpen size={19} />,
-                  },
-                ].map((stat) => (
-                  <section key={stat.label} className={styles.stat}>
-                    <div>
-                      {stat.label}
-                      {stat.icon}
-                    </div>
-                    <strong>
-                      {stat.count}
-                      <small>건</small>
-                    </strong>
-                    <p>{stat.detail}</p>
-                  </section>
-                ))}
-              </div>
-              <section className={styles.panel} aria-label="시공사례 목록">
-                <div className={styles.tools}>
-                  <div className={styles.tabs}>
-                    {["전체", "냉동공조", "섬유덕트"].map((tab) => (
-                      <button
-                        key={tab}
-                        aria-pressed={filter === tab}
-                        className={filter === tab ? styles.selectedTab : ""}
-                        onClick={() => setFilter(tab)}
-                      >
-                        {tab}
-                      </button>
-                    ))}
-                  </div>
-                  <label className={styles.search}>
-                    <Search size={17} />
-                    <input
-                      aria-label="시공사례 검색"
-                      placeholder="현장명, 분야로 검색"
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                    />
-                  </label>
-                </div>
-                <div className={styles.tableScroll}>
-                  <table className={styles.table}>
-                    <thead>
-                      <tr>
-                        <th>현장명</th>
-                        <th>분야</th>
-                        <th>상태</th>
-                        <th>
-                          <span className={styles.srOnly}>편집</span>
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {visible.map((entry, index) => (
-                        <tr key={entry.id}>
-                          <td>
-                            <div className={styles.projectCell}>
-                              <div className={styles.thumbnail}>
-                                {entry.photos[0] ? (
-                                  <Image
-                                    src={entry.photos[0].src}
-                                    alt=""
-                                    fill
-                                    sizes="64px"
-                                    unoptimized={entry.photos[0].src.startsWith("/api/")}
-                                  />
-                                ) : (
-                                  <ImagePlus size={20} />
-                                )}
-                              </div>
-                              <div>
-                                <strong>{entry.title}</strong>
-                                <small>
-                                  {entry.summary ||
-                                    entry.description ||
-                                    "한 줄 소개를 추가해주세요."}
-                                </small>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <span className={styles.category}>{entry.category}</span>
-                          </td>
-                          <td>
-                            <span className={styles.published}>
-                              {entry.version > 0 ? "등록 완료" : "기존 사례"}
-                            </span>
-                          </td>
-                          <td>
-                            <div className={styles.rowActions}>
-                              <button
-                                type="button"
-                                className={styles.orderButton}
-                                disabled={ordering || !!deletingId || loading || index === 0}
-                                onClick={() => void move(entry, -1)}
-                                aria-label={`${entry.title} 위로 이동`}
-                                title="위로 이동"
-                              >
-                                <ArrowUp size={18} aria-hidden="true" />
-                              </button>
-                              <button
-                                type="button"
-                                className={styles.orderButton}
-                                disabled={
-                                  ordering ||
-                                  !!deletingId ||
-                                  loading ||
-                                  index === visible.length - 1
-                                }
-                                onClick={() => void move(entry, 1)}
-                                aria-label={`${entry.title} 아래로 이동`}
-                                title="아래로 이동"
-                              >
-                                <ArrowDown size={18} aria-hidden="true" />
-                              </button>
-                              <button
-                                className={styles.editButton}
-                                disabled={!!deletingId || ordering || loading}
-                                onClick={() => open(entry)}
-                                aria-label={`${entry.title} 수정`}
-                              >
-                                <Pencil size={15} />
-                                수정
-                              </button>
-                              <button
-                                type="button"
-                                className={styles.deleteButton}
-                                disabled={!!deletingId || ordering || loading}
-                                onClick={() => void remove(entry)}
-                                aria-label={`${entry.title} 삭제`}
-                              >
-                                <Trash2 size={16} aria-hidden="true" />
-                                {deletingId === entry.id ? "삭제 중…" : "삭제"}
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                {!visible.length && (
-                  <div className={styles.empty}>
-                    <Search size={28} />
-                    <strong>표시할 시공사례가 없어요.</strong>
-                    <p>검색어나 필터를 바꿔보세요.</p>
-                  </div>
-                )}
-                <div className={styles.listFooter}>
-                  총 {visible.length}건
-                  <span>
-                    {ordering ? "순서 저장 중…" : "↑·↓ 버튼으로 이동하면 순서가 자동 저장됩니다."}
-                  </span>
-                </div>
-              </section>
-            </>
+            <ProjectList
+              entries={entries}
+              visible={visible}
+              filter={filter}
+              query={query}
+              ordering={ordering}
+              deletingId={deletingId}
+              loading={loading}
+              setFilter={setFilter}
+              setQuery={setQuery}
+              move={move}
+              open={open}
+              remove={remove}
+            />
           ) : (
-            <fieldset disabled={saving || uploading} className="min-w-0 border-0 p-0">
-              <div className={styles.editorGrid}>
-                <div>
-                  <section className={styles.formPanel}>
-                    <h2>
-                      <span>01</span>기본 정보
-                    </h2>
-                    <label>
-                      현장명 <em>필수</em>
-                      <input
-                        autoFocus
-                        maxLength={150}
-                        value={editor.title}
-                        placeholder="예: 용인 ○○공장 냉각탑 교체"
-                        onChange={(event) => update({ title: event.target.value })}
-                      />
-                    </label>
-                    <div className={styles.twoFields}>
-                      <label>
-                        설비 분야
-                        <select
-                          value={editor.category}
-                          onChange={(event) => update({ category: event.target.value })}
-                        >
-                          {Array.from(new Set([...categories, editor.category])).map((category) => (
-                            <option key={category}>{category}</option>
-                          ))}
-                        </select>
-                      </label>
-                      <label>
-                        현장 위치
-                        <input
-                          value={editor.location}
-                          maxLength={100}
-                          placeholder="예: 경기도 용인"
-                          onChange={(event) => update({ location: event.target.value })}
-                        />
-                      </label>
-                    </div>
-                    <label>
-                      한 줄 소개
-                      <input
-                        value={editor.summary ?? ""}
-                        maxLength={50}
-                        placeholder="예: 페브릭덕트 설계 및 설치"
-                        onChange={(event) => update({ summary: event.target.value })}
-                      />
-                      <small className={styles.fieldHint}>
-                        목록에서 제목 아래에 표시됩니다. {(editor.summary ?? "").length}/50자
-                      </small>
-                    </label>
-                    <label>
-                      작업 내용
-                      <textarea
-                        rows={6}
-                        value={editor.description}
-                        maxLength={5000}
-                        placeholder="작업 배경, 설치 설비, 주요 공정 등을 작성해주세요."
-                        onChange={(event) => update({ description: event.target.value })}
-                      />
-                    </label>
-                  </section>
-                  <section className={styles.formPanel}>
-                    <h2>
-                      <span>02</span>현장 사진
-                    </h2>
-                    <div className={styles.upload}>
-                      <input
-                        ref={photoInput}
-                        id="admin-photos"
-                        type="file"
-                        className={styles.uploadInput}
-                        aria-label="시공사례 사진 추가"
-                        aria-describedby="photo-upload-feedback"
-                        accept="image/jpeg,image/png,image/webp"
-                        multiple
-                        onChange={(event) => void upload(event.target.files)}
-                      />
-                      <ImagePlus size={28} />
-                      <strong>{uploading ? "사진 업로드 중…" : "사진 선택하기"}</strong>
-                      <small>JPG·PNG·WEBP · 사진당 3MB 이하 · 최대 30장</small>
-                    </div>
-                    <p
-                      id="photo-upload-feedback"
-                      role={photoFeedback?.error ? "alert" : "status"}
-                      className={photoFeedback?.error ? styles.photoError : styles.photoStatus}
-                    >
-                      {photoFeedback?.message ||
-                        (editor.photos.length === 0
-                          ? "등록된 사진이 없습니다. 위에서 사진을 선택해 추가해주세요."
-                          : `현재 사진 ${editor.photos.length}장 · 사진을 더 추가할 수 있어요.`)}
-                    </p>
-                    <div className={styles.photoList}>
-                      {editor.photos.map((photo, index) => (
-                        <div key={photo.src + index} className={styles.photoRow}>
-                          <div className={styles.photoThumb}>
-                            <Image
-                              src={photo.src}
-                              alt=""
-                              fill
-                              sizes="90px"
-                              unoptimized={photo.src.startsWith("/api/")}
-                            />
-                          </div>
-                          <div>
-                            <span className={styles.photoLabel}>
-                              {index === 0 ? "대표 사진" : `현장 사진 ${index + 1}`}
-                            </span>
-                            <input
-                              aria-label={`사진 ${index + 1} 대체 설명`}
-                              maxLength={300}
-                              value={photo.alt}
-                              placeholder="사진 설명(ALT)을 입력해주세요"
-                              onChange={(event) =>
-                                update({
-                                  photos: editor.photos.map((item, i) =>
-                                    i === index ? { ...item, alt: event.target.value } : item,
-                                  ),
-                                })
-                              }
-                            />
-                            <div className={styles.photoActions}>
-                              {index > 0 && (
-                                <button
-                                  onClick={() =>
-                                    update({
-                                      photos: [
-                                        photo,
-                                        ...editor.photos.filter((_, i) => i !== index),
-                                      ],
-                                    })
-                                  }
-                                >
-                                  대표로 지정
-                                </button>
-                              )}
-                              <button
-                                onClick={() =>
-                                  update({ photos: editor.photos.filter((_, i) => i !== index) })
-                                }
-                              >
-                                삭제
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </section>
-                </div>
-                <aside className={styles.editorAside}>
-                  <section className={styles.formPanel}>
-                    <h2>{editor.version > 0 ? "시공사례 수정" : "시공사례 등록"}</h2>
-                    <p>저장하면 글과 사진이 홈페이지 시공사례 목록과 상세 페이지에 공개됩니다.</p>
-                    <button
-                      onClick={save}
-                      disabled={saving || uploading || loading}
-                      className={styles.primary}
-                    >
-                      {uploading
-                        ? "사진 업로드 중…"
-                        : saving
-                          ? editor.version > 0
-                            ? "수정사항 저장 중…"
-                            : "등록 중…"
-                          : loading
-                            ? "목록 불러오는 중…"
-                            : editor.version > 0
-                              ? "수정사항 저장"
-                              : "시공사례 등록"}
-                    </button>
-                  </section>
-                  <section className={styles.tips}>
-                    <h3>시공사례 등록방법</h3>
-                    <p>현장명에는 설비와 작업을 함께 적어주세요.</p>
-                    <p>완공 사진을 대표 사진으로 선택하면 목록에서 보기 좋아요.</p>
-                    <p>사진 설명에는 실제 설비와 작업 내용을 적어주세요.</p>
-                  </section>
-                </aside>
-              </div>
-            </fieldset>
+            <ProjectEditor
+              editor={editor}
+              saving={saving}
+              uploading={uploading}
+              loading={loading}
+              photoInput={photoInput}
+              photoFeedback={photoFeedback}
+              upload={upload}
+              update={update}
+              save={save}
+            />
           )}
           <footer className={styles.bottom}>
             SANJUNG ENGINEERING<span>콘텐츠 관리 워크스페이스</span>

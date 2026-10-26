@@ -6,7 +6,7 @@ export default function Hero({ headingTag: Heading = "p" }: { headingTag?: "h1" 
   return (
     <section className="relative mx-auto h-[320px] w-full max-w-[1920px] overflow-hidden text-white lg:h-[600px]">
       <Image
-        src="/images/projects-page/hero.jpg"
+        src="/images/about/hero.jpg"
         alt="작업자가 고소작업대에서 냉동공조 설비를 설치하는 현장"
         fill
         priority

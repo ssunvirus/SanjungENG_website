@@ -1,17 +1,12 @@
-import { adminAuthConfig, getAdminSession } from "@/src/lib/admin-auth";
+import { adminReply as reply, checkAdminRequest, readAdminJson } from "@/src/lib/admin-api";
 import { listProjects, saveProject, getProjectOrder } from "@/src/lib/projects-db";
 import { parseProject } from "@/src/lib/project-record";
 import { revalidateTag } from "next/cache";
 import { permanentlyDeleteProject, pendingProjectDeletion } from "@/src/lib/project-deletion";
 
-const reply = (body: unknown, status = 200) =>
-  Response.json(body, {
-    status,
-    headers: { "Cache-Control": "no-store" },
-  });
-
 export async function GET() {
-  if (!(await getAdminSession())) return reply({ error: "로그인이 필요합니다." }, 401);
+  const denied = await checkAdminRequest(undefined, "로그인이 필요합니다.");
+  if (denied) return denied;
   try {
     const [projects, order] = await Promise.all([listProjects(), getProjectOrder()]);
     return reply({ projects, order, pendingDeletions: projects.filter(pendingProjectDeletion) });
@@ -29,40 +24,23 @@ export async function DELETE(request: Request) {
 }
 
 async function mutate(request: Request, deleting: boolean) {
-  if (request.headers.get("origin") !== adminAuthConfig().origin)
-    return reply({ error: "허용되지 않은 요청입니다." }, 403);
-  if (!(await getAdminSession()))
-    return reply({ error: "로그인이 만료되었습니다. 다시 로그인해주세요." }, 401);
-  if (request.headers.get("content-type")?.split(";")[0] !== "application/json")
-    return reply({ error: "JSON 형식이 필요합니다." }, 415);
-  let project;
-  try {
-    // Bound the streamed request, including requests without Content-Length.
-    const reader = request.body?.getReader();
-    if (!reader) throw new Error("InvalidProject");
-    const chunks: Uint8Array[] = [];
-    let length = 0;
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      length += value.byteLength;
-      if (length > 65536) {
-        await reader.cancel();
-        return reply({ error: "입력 내용이 너무 큽니다." }, 413);
-      }
-      chunks.push(value);
-    }
-    project = parseProject(JSON.parse(Buffer.concat(chunks).toString("utf8")));
-    if (project.deleted && !deleting) throw new Error("InvalidProject");
-  } catch {
-    return reply(
-      {
-        error:
-          "현장명과 입력 내용을 확인해주세요. 사진은 관리자 사진 선택 기능으로 업로드해주세요.",
-      },
-      400,
-    );
-  }
+  const denied = await checkAdminRequest(request, "로그인이 만료되었습니다. 다시 로그인해주세요.");
+  if (denied) return denied;
+  const input = await readAdminJson(
+    request,
+    (value) => {
+      const project = parseProject(value);
+      if (project.deleted && !deleting) throw new Error("InvalidProject");
+      return project;
+    },
+    {
+      invalid:
+        "현장명과 입력 내용을 확인해주세요. 사진은 관리자 사진 선택 기능으로 업로드해주세요.",
+      tooLarge: "입력 내용이 너무 큽니다.",
+    },
+  );
+  if (input.response) return input.response;
+  const project = input.value;
   try {
     const result = deleting
       ? await permanentlyDeleteProject(project)

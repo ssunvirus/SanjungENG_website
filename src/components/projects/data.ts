@@ -35,7 +35,7 @@ export const projects: Project[] = [
   },
   {
     id: "nonghyup-cold-storage",
-    homeImage: "/images/projects/cold-storage.jpg",
+    homeImage: "/images/projects-page/cold-storage.jpg",
     mobileTag: "저온저장고 시공",
     href: "/projects/wonsam-nonghyup",
     category: "냉동공조",
@@ -60,13 +60,14 @@ export const projects: Project[] = [
   },
   {
     id: "semiconductor-chiller",
-    homeImage: "/images/home-refresh/business-hvac.jpg",
+    homeImage: "/images/projects/semiconductor-chiller/source-7.jpg",
     mobileTag: "냉동기 교체",
     href: "/projects/semiconductor-chiller",
     category: "냉동공조",
     tag: "냉동기",
     title: "반도체 공장 칠러 시스템 구축",
     description: "공냉식 냉동기 교체",
+    // Preserve the legacy cover identity used by older DB photo records.
     image: "/images/projects-page/chiller.jpg",
     imageTop: "0.02%",
     imageLeft: "0.16%",

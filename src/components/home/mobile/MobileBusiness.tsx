@@ -15,19 +15,19 @@ const business = [
   {
     title: "냉동기",
     description: "안정적인 냉방 설계, 설치, 교체",
-    image: "/images/home-refresh/business-hvac.jpg",
+    image: "/images/projects/semiconductor-chiller/source-7.jpg",
     href: "/solutions",
   },
   {
     title: "섬유덕트",
     description: "공간에 맞춘 공기 분배 설계",
-    image: "/images/business/fabric-duct-source.jpg",
+    image: "/images/about/business-fabric-duct.jpg",
     href: "/fabric-duct",
   },
   {
     title: "저온저장고",
     description: "저온 보관을 위한 설비 구축",
-    image: "/images/home-refresh/business-cold-storage.jpg",
+    image: "/images/cold-storage/process-unit-installation.jpg",
     href: "/solutions/cold-storage",
   },
   {

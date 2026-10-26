@@ -60,17 +60,24 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
         }}
       >
         <div className="relative aspect-[1.7]">
-          <Image
-            src={project.homeImage ?? project.image}
-            alt={project.title}
-            fill
-            sizes="(max-width: 600px) 100vw, 600px"
-            className="object-cover"
-          />
+          {(project.homeImage ?? project.image) ? (
+            <Image
+              src={project.homeImage ?? project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 600px) 100vw, 600px"
+              unoptimized={project.image.startsWith("/api/project-images/")}
+              className="object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-[#E3EDF3] text-[#637382]">
+              사진 준비 중
+            </div>
+          )}
         </div>
         <div className="p-5">
           <h3 className="text-lg font-bold">{project.title}</h3>
-          <p className="mt-2 text-sm text-[#637382]">{project.description}</p>
+          <p className="mt-2 line-clamp-2 text-sm text-[#637382]">{project.description}</p>
         </div>
       </Link>
       <div className="mt-3 flex justify-center gap-1">

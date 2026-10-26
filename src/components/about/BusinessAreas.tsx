@@ -3,7 +3,8 @@ import Image from "next/image";
 const areas = [
   {
     title: "냉동설비",
-    image: "business-refrigeration.jpg",
+    image: "/images/about/business-refrigeration.jpg",
+    quality: 75,
     top: "-35.91%",
     lines: [
       "냉동기 설치/교체",
@@ -16,7 +17,8 @@ const areas = [
   },
   {
     title: "섬유덕트",
-    image: "business-fabric-duct.jpg",
+    image: "/images/about/business-fabric-duct.jpg",
+    quality: 100,
     top: "-24.56%",
     lines: [
       "섬유덕트 설계/공급/설치",
@@ -28,7 +30,8 @@ const areas = [
   },
   {
     title: "저온저장고",
-    image: "business-cold-storage.jpg",
+    image: "/images/projects/wonsam-nonghyup/photo-4.jpg",
+    quality: 100,
     top: "-17.96%",
     lines: [
       "저온저장고 설비 설치",
@@ -41,7 +44,8 @@ const areas = [
   },
   {
     title: "수리 & 정기점검",
-    image: "business-maintenance.jpg",
+    image: "/images/projects/church-cooling-tower/photo-1.jpg",
+    quality: 75,
     top: "-20.52%",
     lines: [
       "냉동기 수리/오버홀",
@@ -83,16 +87,11 @@ export default function BusinessAreas() {
               <div className="absolute h-[136.05%] w-full" style={{ top: area.top }}>
                 {/* 4:3 사진이 높이 400px에 맞춰 약 534px 폭으로 확대된 뒤 잘립니다. */}
                 <Image
-                  src={`/images/about/${area.image}`}
+                  src={area.image}
                   alt={`${area.title} 설비 현장`}
                   fill
                   sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 534px"
-                  quality={
-                    area.image === "business-fabric-duct.jpg" ||
-                    area.image === "business-cold-storage.jpg"
-                      ? 100
-                      : 75
-                  }
+                  quality={area.quality}
                   className="object-cover"
                 />
               </div>

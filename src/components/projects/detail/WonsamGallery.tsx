@@ -1,19 +1,9 @@
+import { legacyProjectPhotos } from "@/src/lib/legacy-project-photos";
 import Image from "next/image";
 import { ProjectGalleryLayout } from "./ProjectPhotoGallery";
 import { ArrowLeft } from "lucide-react";
 
-const photos = [
-  { src: "photo-1.jpg", alt: "원삼농협 냉동설비 운반 및 반입 현장" },
-  { src: "photo-2.jpg", alt: "냉동설비 설치를 준비하는 저온저장고 내부" },
-  { src: "photo-3.jpg", alt: "고소작업대를 이용한 천장 유니트 쿨러 설치" },
-  { src: "photo-4.jpg", alt: "저온저장고 내부 냉동설비 설치 작업" },
-  { src: "photo-5.jpg", alt: "천장에 설치된 유니트 쿨러와 냉매 배관" },
-  { src: "photo-6.jpg", alt: "저온저장고 외부의 냉동설비 설치 공간" },
-  { src: "photo-7.jpg", alt: "저온저장고 외벽을 따라 시공한 배관" },
-  { src: "photo-8.jpg", alt: "외부에 설치된 CDU 냉동설비" },
-  { src: "photo-9.jpg", alt: "CDU 내부 냉동설비 점검" },
-  { src: "/images/projects-page/cold-storage.jpg", alt: "냉동설비 설치 후 저온저장고 내부 전경" },
-];
+const photos = legacyProjectPhotos["nonghyup-cold-storage"];
 
 export default function WonsamGallery() {
   return (

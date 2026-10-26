@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import ts from "typescript";
+import { loadAdminApi } from "./helpers/load-admin-api.mjs";
 import { parseProject } from "../src/lib/project-record.ts";
 
 const source = ts.transpileModule(
@@ -18,6 +19,7 @@ function setup(authenticated = true, conflict = false) {
     Error,
     Buffer,
     require(name) {
+      if (name.endsWith("admin-api")) return loadAdminApi(sandbox.require("@/src/lib/admin-auth"));
       if (name === "next/cache") return { revalidateTag() {} };
       if (name.endsWith("project-deletion"))
         return {

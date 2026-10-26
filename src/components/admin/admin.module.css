@@ -193,8 +193,7 @@
   margin-top: 9px;
   font-size: 16px;
 }
-.primary,
-.secondary {
+.primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -211,10 +210,6 @@
 }
 .primary:hover {
   background: #1d4867;
-}
-.secondary {
-  background: #fff;
-  border: 1px solid #d8e0e8;
 }
 .stats {
   display: grid;
@@ -688,16 +683,6 @@
   min-height: 48px;
   font-size: 17px;
 }
-.publishDisabled {
-  width: 100%;
-  padding: 12px 8px;
-  margin-top: 20px;
-  border-radius: 6px;
-  color: #8b9eae;
-  background: #edf2f6;
-  font-size: 14px;
-  cursor: not-allowed;
-}
 .tips {
   padding: 5px 15px;
 }
@@ -850,8 +835,7 @@
   .backToList {
     width: 100%;
   }
-  .primary,
-  .secondary {
+  .primary {
     padding: 10px 12px;
     font-size: 14px;
   }

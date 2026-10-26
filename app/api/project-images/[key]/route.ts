@@ -11,7 +11,15 @@ export async function GET(_request: Request, { params }: { params: Promise<{ key
     if (!hasPublishedPhoto(await publicProjectRecords(), key))
       return new Response(null, { status: 404, headers });
     const { bytes, type } = await readProjectImage(key);
-    return new Response(Buffer.from(bytes), { headers: { ...headers, "Content-Type": type } });
+    return new Response(Buffer.from(bytes), {
+      headers: {
+        ...headers,
+        // Cache only successful public images in the browser, never in a shared CDN.
+        // Keep this short so removed photos are rechecked promptly.
+        "Cache-Control": "private, max-age=60, must-revalidate",
+        "Content-Type": type,
+      },
+    });
   } catch {
     return new Response(null, { status: 503, headers });
   }

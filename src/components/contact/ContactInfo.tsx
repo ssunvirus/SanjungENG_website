@@ -9,7 +9,7 @@ export default function ContactInfo() {
           CONTACT
         </p>
         <Image
-          src="/images/contact/heading-line.svg"
+          src="/images/fabric-duct/resources/heading-line.svg"
           width={46.3058}
           height={2}
           alt=""

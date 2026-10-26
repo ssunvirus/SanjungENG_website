@@ -7,6 +7,7 @@ import ts from "typescript";
 import { mergeAdminProjects } from "../src/lib/project-record.ts";
 import { MAX_PROJECT_IMAGE_BYTES } from "../src/lib/project-images.ts";
 import { applyProjectOrder, moveProjectInList } from "../src/lib/project-order.ts";
+import { initialLegacyPhotos } from "../src/lib/legacy-project-photos.ts";
 
 const require = createRequire(import.meta.url);
 const source = ts.transpileModule(
@@ -72,6 +73,25 @@ async function setup(uploadResponse = { ok: true, json: async () => ({ src: uplo
       };
     },
     require(name) {
+      if (name === "./UnusedPhotoCleanup") return { default: "UnusedPhotoCleanup" };
+      if (["./ProjectList", "./ProjectEditor", "./ProjectPhotos"].includes(name)) {
+        const component = { ...sandbox, exports: {} };
+        const code = ts.transpileModule(
+          readFileSync(
+            new URL(`../src/components/admin/${name.slice(2)}.tsx`, import.meta.url),
+            "utf8",
+          ),
+          {
+            compilerOptions: {
+              module: ts.ModuleKind.CommonJS,
+              target: ts.ScriptTarget.ES2022,
+              jsx: ts.JsxEmit.ReactJSX,
+            },
+          },
+        ).outputText;
+        runInNewContext(code, component);
+        return component.exports;
+      }
       if (name === "react") return hooks;
       if (name === "react/jsx-runtime") return require(name);
       if (name === "next/image") return { default: "img" };
@@ -79,6 +99,7 @@ async function setup(uploadResponse = { ok: true, json: async () => ({ src: uplo
       if (name === "lucide-react") return new Proxy({}, { get: (_, key) => String(key) });
       if (name.endsWith("projects/data")) return { projects: [] };
       if (name.endsWith("project-record")) return { mergeAdminProjects };
+      if (name.endsWith("legacy-project-photos")) return { initialLegacyPhotos };
       if (name.endsWith("project-order")) return { applyProjectOrder, moveProjectInList };
       if (name.endsWith("project-images")) return { MAX_PROJECT_IMAGE_BYTES };
       if (name.endsWith(".css"))
@@ -89,7 +110,7 @@ async function setup(uploadResponse = { ok: true, json: async () => ({ src: uplo
   runInNewContext(source, sandbox);
   function render() {
     cursor = 0;
-    const tree = sandbox.exports.default();
+    const tree = expand(sandbox.exports.default());
     firstRender = false;
     return tree;
   }
@@ -100,6 +121,12 @@ async function setup(uploadResponse = { ok: true, json: async () => ({ src: uplo
   return { render, calls };
 }
 const flush = () => new Promise((resolve) => setImmediate(resolve));
+function expand(tree) {
+  if (Array.isArray(tree)) return tree.map(expand);
+  if (!tree || typeof tree !== "object") return tree;
+  if (typeof tree.type === "function") return expand(tree.type(tree.props));
+  return { ...tree, props: { ...tree.props, children: expand(tree.props?.children) } };
+}
 function find(tree, predicate) {
   if (Array.isArray(tree)) {
     for (const child of tree) {

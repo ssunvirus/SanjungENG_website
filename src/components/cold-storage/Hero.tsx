@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className="relative mx-auto h-[320px] lg:h-[627px] w-full max-w-[1920px] overflow-hidden text-white">
       <Image
-        src="/images/cold-storage/hero.jpg"
+        src="/images/projects-page/cold-storage.jpg"
         alt="저온저장고 내부 냉동설비"
         fill
         priority

@@ -19,6 +19,7 @@ export function mergePublicProjects(
     tag: record.category,
     description: record.summary?.trim() || record.description,
     image: record.photos[0] ? publicPhotoPath(record.photos[0].src) : "",
+    homeImage: undefined,
     imageTop: "0%",
     imageLeft: "0%",
     href: base?.href || `/projects/${record.id}`,
