@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Link as LinkIcon } from "lucide-react";
+import { projects } from "@/src/components/projects/data";
 
-export default function BlogBanner() {
+export default function BlogBanner({ projectId }: { projectId?: string }) {
+  const blogUrl = projects.find((project) => project.id === projectId)?.blogUrl;
   return (
     <a
-      href="https://blog.naver.com/sanjungeng"
+      href={blogUrl || "https://blog.naver.com/sanjungeng"}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="산정엔지니어링 공식 블로그에서 작업 과정 확인하기 (새 창)"

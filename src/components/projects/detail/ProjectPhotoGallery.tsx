@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-type ProjectPhoto = { src: string; alt: string } & (
+type ProjectPhoto = { src: string; alt: string; caption?: string } & (
   { width: number; height: number } | { width?: never; height?: never }
 );
 
@@ -22,29 +22,41 @@ export function ProjectGalleryLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export default function ProjectPhotoGallery({ photos }: { photos: ProjectPhoto[] }) {
+export default function ProjectPhotoGallery({
+  photos,
+  showAltCaption = false,
+}: {
+  photos: ProjectPhoto[];
+  showAltCaption?: boolean;
+}) {
   return (
     <ProjectGalleryLayout>
       {photos.map((photo) => (
-        <figure
-          key={photo.src}
-          className={
-            photo.width === undefined
-              ? "relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden"
-              : undefined
-          }
-        >
-          <Image
-            src={photo.src}
-            alt={photo.alt}
-            width={photo.width}
-            height={photo.height}
-            fill={photo.width === undefined}
-            sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
-            quality={100}
-            unoptimized={photo.src.startsWith("/api/")}
-            className={photo.width === undefined ? "object-cover" : "h-auto w-full"}
-          />
+        <figure key={photo.src}>
+          <div
+            className={
+              photo.width === undefined
+                ? "relative aspect-[4/3] lg:aspect-auto lg:h-[563px] overflow-hidden"
+                : undefined
+            }
+          >
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              fill={photo.width === undefined}
+              sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
+              quality={100}
+              unoptimized={photo.src.startsWith("/api/")}
+              className={photo.width === undefined ? "object-cover" : "h-auto w-full"}
+            />
+          </div>
+          {(photo.caption ?? (showAltCaption ? photo.alt : "")) && (
+            <figcaption className="px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
+              {photo.caption ?? photo.alt}
+            </figcaption>
+          )}
         </figure>
       ))}
     </ProjectGalleryLayout>

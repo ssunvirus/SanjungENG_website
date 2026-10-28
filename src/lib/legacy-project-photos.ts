@@ -1,7 +1,8 @@
 import type { ProjectRecord } from "./project-record.ts";
 import { ansanPaintFactoryPhotos } from "./ansan-paint-factory-project.ts";
+import { pyeongtaekDuctCleaningPhotos } from "./pyeongtaek-duct-cleaning-photos.ts";
 
-export type LegacyProjectPhoto = { src: string; alt: string } & (
+export type LegacyProjectPhoto = { src: string; alt: string; caption?: string } & (
   { width: number; height: number } | { width?: never; height?: never }
 );
 
@@ -96,6 +97,7 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "pyeongtaek-food-factory-duct-cleaning": pyeongtaekDuctCleaningPhotos,
   "ansan-paint-factory-precision-ac-repair": ansanPaintFactoryPhotos,
   "aju-pharmaceutical": ajuPhotos.map((photo) => ({
     src: `/images/projects/aju-pharmaceutical/${photo.number}.jpg`,
@@ -189,7 +191,8 @@ export function legacyPhotoDimensions(
 ): LegacyProjectPhoto {
   const source = photo.src === cover ? legacyCoverAliases[id] || photo.src : photo.src;
   const original = legacyProjectPhotos[id]?.find((item) => item.src === source);
+  const caption = original?.caption !== undefined ? { caption: original.caption } : {};
   return original?.width !== undefined
-    ? { ...photo, width: original.width, height: original.height }
-    : photo;
+    ? { ...photo, ...caption, width: original.width, height: original.height }
+    : { ...photo, ...caption };
 }

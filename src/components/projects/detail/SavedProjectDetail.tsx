@@ -44,6 +44,7 @@ export default function SavedProjectDetail({
           legacyGallery
         ) : project.photos.length > 0 ? (
           <ProjectPhotoGallery
+            showAltCaption
             photos={project.photos.map((photo) =>
               legacyPhotoDimensions(
                 { ...photo, src: publicPhotoPath(photo.src) },
@@ -60,7 +61,7 @@ export default function SavedProjectDetail({
           목록으로
         </Link>
         <ProjectInquiryBanner />
-        <BlogBanner />
+        <BlogBanner projectId={project.id} />
       </article>
     </main>
   );

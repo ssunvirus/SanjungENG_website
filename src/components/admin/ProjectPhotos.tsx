@@ -74,7 +74,7 @@ export default function ProjectPhotos({
                 aria-label={`사진 ${index + 1} 대체 설명`}
                 maxLength={300}
                 value={photo.alt}
-                placeholder="사진 설명(ALT)을 입력해주세요"
+                placeholder="사진 설명(ALT) — 상세페이지 사진 아래에도 표시됩니다"
                 onChange={(event) =>
                   update({
                     photos: editor.photos.map((item, i) =>

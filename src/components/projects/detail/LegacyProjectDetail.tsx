@@ -39,7 +39,7 @@ export default async function LegacyProjectDetail({
           목록으로
         </Link>
         <ProjectInquiryBanner />
-        <BlogBanner />
+        <BlogBanner projectId={id} />
       </article>
     </main>
   );

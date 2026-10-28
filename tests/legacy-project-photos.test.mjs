@@ -24,7 +24,7 @@ function seed(base) {
   };
 }
 test("all static galleries retain every photo and point to existing public assets", () => {
-  const expectedCounts = [9, 7, 10, 10, 4, 7, 11, 9, 8];
+  const expectedCounts = [6, 9, 7, 10, 10, 4, 7, 11, 9, 8];
   projects.forEach((base, index) => {
     const gallery = legacyProjectPhotos[base.id];
     assert.equal(gallery.length, expectedCounts[index], base.id);
@@ -94,4 +94,16 @@ test("admin merging repairs legacy seeds; unchanged gallery layout and portrait 
   assert.equal(portrait.width, 720);
   assert.equal(portrait.height, 960);
   assert.equal(portrait.alt, "Edited alt");
+});
+
+test("saved static photos retain captions including intentionally omitted captions", () => {
+  const id = "pyeongtaek-food-factory-duct-cleaning";
+  const gallery = legacyProjectPhotos[id];
+  assert.ok(gallery[0].caption.includes("세탁을 요청"));
+  for (const original of gallery) {
+    const resolved = legacyPhotoDimensions({ src: original.src, alt: original.alt }, id);
+    assert.equal(resolved.caption, original.caption);
+  }
+  assert.equal(gallery[4].caption, "");
+  assert.ok(gallery[5].caption.includes("시운전 완료"));
 });

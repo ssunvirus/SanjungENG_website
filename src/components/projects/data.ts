@@ -12,6 +12,7 @@ export type Project = {
   mobileTag?: string;
   location?: string;
   workDescription?: string;
+  blogUrl?: string;
 };
 
 export const ansanPaintFactoryProject = {
@@ -20,6 +21,7 @@ export const ansanPaintFactoryProject = {
   category: "냉동공조",
   tag: "항온항습기",
   title: "페인트공장 항온항습기 수리",
+  blogUrl: "https://blog.naver.com/sanjungeng/224355542281",
   description: "압축기 및 필터드라이어 교체",
   location: "안산시",
   workDescription:
@@ -29,6 +31,20 @@ export const ansanPaintFactoryProject = {
 } satisfies Project;
 
 export const projects: Project[] = [
+  {
+    id: "pyeongtaek-food-factory-duct-cleaning",
+    href: "/projects/pyeongtaek-food-factory-duct-cleaning",
+    category: "섬유덕트",
+    tag: "섬유덕트",
+    title: "식품가공공장 섬유덕트 세탁",
+    description: "페브릭덕트 세탁",
+    location: "평택시",
+    workDescription:
+      "장기간 사용으로 오염된 섬유덕트를 탈착, 세탁 후 재설치하여 공기 분배 효율을 개선하였습니다.",
+    blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
+    image: "/images/projects/pyeongtaek-food-factory-duct-cleaning/photo-01.jpg",
+    imageTop: "0%",
+  },
   ansanPaintFactoryProject,
   {
     id: "aju-pharmaceutical",
@@ -42,6 +58,7 @@ export const projects: Project[] = [
   },
   {
     id: "orion-production",
+    blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
     href: "/projects/orion-production",
     category: "섬유덕트",
     tag: "섬유덕트",
@@ -52,6 +69,7 @@ export const projects: Project[] = [
   },
   {
     id: "nonghyup-cold-storage",
+    blogUrl: "https://blog.naver.com/sanjungeng/224403631010",
     homeImage: "/images/projects-page/cold-storage.jpg",
     mobileTag: "저온저장고 시공",
     href: "/projects/wonsam-nonghyup",
@@ -64,6 +82,7 @@ export const projects: Project[] = [
   },
   {
     id: "gurye-pool",
+    blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
     homeImage: "/images/projects/pool-fabric-duct.jpg",
     mobileTag: "섬유덕트 시공",
     href: "/projects/gurye-pool",
@@ -77,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     id: "semiconductor-chiller",
+    blogUrl: "https://blog.naver.com/sanjungeng/222380530287",
     homeImage: "/images/projects/semiconductor-chiller/source-7.jpg",
     mobileTag: "냉동기 교체",
     href: "/projects/semiconductor-chiller",
@@ -91,6 +111,7 @@ export const projects: Project[] = [
   },
   {
     id: "seoanseong-maintenance",
+    blogUrl: "https://blog.naver.com/sanjungeng/224366829288",
     homeImage: "/images/projects/warehouse-maintenance.jpg",
     href: "/projects/seoanseong-maintenance",
     category: "냉동공조",
@@ -102,6 +123,7 @@ export const projects: Project[] = [
   },
   {
     id: "church-cooling-tower",
+    blogUrl: "https://blog.naver.com/sanjungeng/224359345662",
     mobileTag: "냉각탑 정비",
     href: "/projects/church-cooling-tower",
     category: "냉동공조",
@@ -113,6 +135,7 @@ export const projects: Project[] = [
   },
   {
     id: "warehouse-precision-ac",
+    blogUrl: "https://blog.naver.com/sanjungeng/224428194190",
     href: "/projects/warehouse-precision-ac",
     category: "냉동공조",
     tag: "항온항습기",
