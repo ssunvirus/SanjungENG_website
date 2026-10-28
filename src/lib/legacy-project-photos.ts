@@ -1,4 +1,5 @@
 import type { ProjectRecord } from "./project-record.ts";
+import { ansanPaintFactoryPhotos } from "./ansan-paint-factory-project.ts";
 
 export type LegacyProjectPhoto = { src: string; alt: string } & (
   { width: number; height: number } | { width?: never; height?: never }
@@ -95,6 +96,7 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "ansan-paint-factory-precision-ac-repair": ansanPaintFactoryPhotos,
   "aju-pharmaceutical": ajuPhotos.map((photo) => ({
     src: `/images/projects/aju-pharmaceutical/${photo.number}.jpg`,
     alt: photo.alt,

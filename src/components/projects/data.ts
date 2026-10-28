@@ -10,9 +10,26 @@ export type Project = {
   href: string;
   homeImage?: string;
   mobileTag?: string;
+  location?: string;
+  workDescription?: string;
 };
 
+export const ansanPaintFactoryProject = {
+  id: "ansan-paint-factory-precision-ac-repair",
+  href: "/projects/ansan-paint-factory-precision-ac-repair",
+  category: "냉동공조",
+  tag: "항온항습기",
+  title: "페인트공장 항온항습기 수리",
+  description: "압축기 및 필터드라이어 교체",
+  location: "안산시",
+  workDescription:
+    "공장 항온항습기의 압축기 및 필터드라이어를 교체하여 설비의 정상 운전을 복구하였습니다.",
+  image: "/images/projects/ansan-paint-factory-precision-ac-repair/photo-06.jpg",
+  imageTop: "0%",
+} satisfies Project;
+
 export const projects: Project[] = [
+  ansanPaintFactoryProject,
   {
     id: "aju-pharmaceutical",
     href: "/projects/aju-pharmaceutical",

@@ -8,13 +8,17 @@ const aliases = JSON.parse(
   readFileSync(new URL("../config/image-aliases.json", import.meta.url), "utf8"),
 );
 
-test("every removed duplicate resolves directly to an existing retained image", () => {
+test("legacy image URLs have physical files matching the canonical image for Amplify compatibility", () => {
   assert.equal(Object.keys(aliases).length, 23);
   for (const [source, destination] of Object.entries(aliases)) {
-    assert.ok(!existsSync(new URL(`../public${source}`, import.meta.url)), source);
+    assert.ok(existsSync(new URL(`../public${source}`, import.meta.url)), source);
     assert.ok(existsSync(new URL(`../public${destination}`, import.meta.url)), destination);
     assert.ok(!aliases[destination], `No rewrite chains: ${source}`);
     assert.ok(!source.includes("..") && !destination.includes(".."));
+    assert.deepEqual(
+      readFileSync(new URL(`../public${source}`, import.meta.url)),
+      readFileSync(new URL(`../public${destination}`, import.meta.url)),
+    );
   }
 });
 

@@ -23,8 +23,8 @@ function seed(base) {
     photos: [{ src: base.image, alt: base.title }],
   };
 }
-test("all eight legacy galleries retain every original photo and point to existing public assets", () => {
-  const expectedCounts = [7, 10, 10, 4, 7, 11, 9, 8];
+test("all static galleries retain every photo and point to existing public assets", () => {
+  const expectedCounts = [9, 7, 10, 10, 4, 7, 11, 9, 8];
   projects.forEach((base, index) => {
     const gallery = legacyProjectPhotos[base.id];
     assert.equal(gallery.length, expectedCounts[index], base.id);
@@ -55,7 +55,7 @@ test("old card-photo records expand to the complete gallery while retaining uplo
   }
 });
 test("saving a full photo list makes later intentional removal permanent rather than restoring photos", () => {
-  const base = projects[0];
+  const base = projects.find((project) => project.id === "aju-pharmaceutical");
   const repaired = completeLegacyProject(seed(base), base.image);
   const removedSrc = repaired.photos[1].src;
   const saved = parseProject({
@@ -76,7 +76,7 @@ test("saving a full photo list makes later intentional removal permanent rather 
   );
 });
 test("admin merging repairs legacy seeds; unchanged gallery layout and portrait dimensions are preserved", () => {
-  const base = projects[0];
+  const base = projects.find((project) => project.id === "aju-pharmaceutical");
   const initial = {
     ...seed(base),
     photos: initialLegacyPhotos(base.id, base.image, base.title),
