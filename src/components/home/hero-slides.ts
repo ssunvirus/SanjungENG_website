@@ -10,7 +10,7 @@ export const heroSlides = [
     details: "설치 ◦ 교체   |   수리 ◦ 오버홀   |   정기점검",
   },
   {
-    image: "/images/hero/fabric-duct-slide.png",
+    image: "/images/business/fabric-duct-card.jpg",
     imageAlt: "섬유덕트가 설치된 산업 시설 내부",
     imagePosition: "object-[80%_center]",
     category: "섬유덕트 솔루션",

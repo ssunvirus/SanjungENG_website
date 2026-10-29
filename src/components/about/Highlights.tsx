@@ -2,8 +2,8 @@ import { Award, Factory, Wind } from "lucide-react";
 
 const highlights = [
   { icon: Award, title: "30 YEARS", description: "30년의 현장경험과 기술" },
-  { icon: Wind, title: "ONE-STOP", description: "냉동기부터 섬유덕트까지" },
   { icon: Factory, title: "다양한 산업현장", description: "공장, 물류센터, 공공시설 등" },
+  { icon: Wind, title: "ONE-STOP", description: "냉동기부터 섬유덕트까지" },
 ];
 
 export default function Highlights() {

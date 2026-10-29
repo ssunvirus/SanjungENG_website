@@ -42,7 +42,10 @@ export default function ProjectCard({ project }: { project: Project }) {
   );
 
   return (
-    <article id={project.id} className="min-w-0 scroll-mt-24 overflow-hidden bg-white lg:h-[432px]">
+    <article
+      id={project.id}
+      className="min-w-0 scroll-mt-24 overflow-hidden rounded-[12px] bg-white shadow-[0_4px_16px_rgba(16,46,73,0.08)] ring-1 ring-brand-navy/10 lg:h-[432px]"
+    >
       <Link
         href={project.href}
         className="block h-full focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]"

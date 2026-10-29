@@ -1,10 +1,16 @@
 import type { ProjectRecord } from "./project-record.ts";
 import { ansanPaintFactoryPhotos } from "./ansan-paint-factory-project.ts";
+import { hwaseongChillerPhotos } from "./hwaseong-chiller-photos.ts";
+import { seoanseongValvePhotos } from "./seoanseong-valve-photos.ts";
+import { seoanseongCoolingTowerPhotos } from "./seoanseong-cooling-tower-photos.ts";
 import { pyeongtaekDuctCleaningPhotos } from "./pyeongtaek-duct-cleaning-photos.ts";
 
-export type LegacyProjectPhoto = { src: string; alt: string; caption?: string } & (
-  { width: number; height: number } | { width?: never; height?: never }
-);
+export type LegacyProjectPhoto = {
+  src: string;
+  alt: string;
+  caption?: string;
+  displayWidth?: number;
+} & ({ width: number; height: number } | { width?: never; height?: never });
 
 const ajuPhotos = [
   { number: 0, alt: "기존 터보냉동기 분해 및 이동 작업" },
@@ -97,6 +103,9 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "seoanseong-cooling-tower-inspection": seoanseongCoolingTowerPhotos,
+  "seoanseong-chiller-valve-replacement": seoanseongValvePhotos,
+  "hwaseong-absorption-chiller-cleaning": hwaseongChillerPhotos,
   "pyeongtaek-food-factory-duct-cleaning": pyeongtaekDuctCleaningPhotos,
   "ansan-paint-factory-precision-ac-repair": ansanPaintFactoryPhotos,
   "aju-pharmaceutical": ajuPhotos.map((photo) => ({
@@ -192,7 +201,8 @@ export function legacyPhotoDimensions(
   const source = photo.src === cover ? legacyCoverAliases[id] || photo.src : photo.src;
   const original = legacyProjectPhotos[id]?.find((item) => item.src === source);
   const caption = original?.caption !== undefined ? { caption: original.caption } : {};
+  const display = original?.displayWidth ? { displayWidth: original.displayWidth } : {};
   return original?.width !== undefined
-    ? { ...photo, ...caption, width: original.width, height: original.height }
-    : { ...photo, ...caption };
+    ? { ...photo, ...caption, ...display, width: original.width, height: original.height }
+    : { ...photo, ...caption, ...display };
 }

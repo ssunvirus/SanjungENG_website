@@ -24,7 +24,7 @@ function seed(base) {
   };
 }
 test("all static galleries retain every photo and point to existing public assets", () => {
-  const expectedCounts = [6, 9, 7, 10, 10, 4, 7, 11, 9, 8];
+  const expectedCounts = [12, 12, 10, 6, 9, 7, 10, 10, 4, 7, 11, 9, 8];
   projects.forEach((base, index) => {
     const gallery = legacyProjectPhotos[base.id];
     assert.equal(gallery.length, expectedCounts[index], base.id);

@@ -1,27 +1,22 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { useRef, useState } from "react";
 import { desktopFeaturedProjects, type Project } from "@/src/components/projects/data";
+import useProjectAutoplay from "./useProjectAutoplay";
 
 const CARD_STEP = 536.25;
 
 export default function Projects({ projects = desktopFeaturedProjects }: { projects?: Project[] }) {
-  const LAST_SLIDE = Math.max(0, projects.length - 2);
+  const LAST_SLIDE = Math.max(0, projects.length - 1);
   const trackRef = useRef<HTMLDivElement>(null);
-  const scrollEndTimerRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  useEffect(
-    () => () => {
-      if (scrollEndTimerRef.current !== null) {
-        window.clearTimeout(scrollEndTimerRef.current);
-      }
-    },
-    [],
-  );
+  const sectionRef = useRef<HTMLElement>(null);
+  const [autoplay, setAutoplay] = useState(true);
+  const [interacting, setInteracting] = useState(false);
+  useProjectAutoplay(trackRef, projects.length, autoplay && !interacting && projects.length > 2);
 
   function move(direction: number) {
     const track = trackRef.current;
@@ -41,6 +36,14 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
   if (!projects.length) return null;
   return (
     <section
+      ref={sectionRef}
+      onMouseEnter={() => setInteracting(true)}
+      onMouseLeave={(event) => setInteracting(event.currentTarget.contains(document.activeElement))}
+      onFocusCapture={() => setInteracting(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget))
+          setInteracting(event.currentTarget.matches(":hover"));
+      }}
       id="projects"
       aria-labelledby="projects-heading"
       className="relative mx-auto h-[929px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
@@ -60,6 +63,18 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
           냉동공조부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
         </p>
         <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-brand-text">
+          <button
+            type="button"
+            aria-label={autoplay ? "시공사례 자동재생 정지" : "시공사례 자동재생 시작"}
+            onClick={() => setAutoplay((value) => !value)}
+            className="flex size-10 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white focus-visible:outline-2 focus-visible:outline-brand-blue"
+          >
+            {autoplay ? (
+              <Pause size={20} aria-hidden="true" />
+            ) : (
+              <Play size={20} aria-hidden="true" />
+            )}
+          </button>
           <button
             type="button"
             aria-label="이전 시공사례"
@@ -94,21 +109,17 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
           }}
           onScroll={(event) => {
             const track = event.currentTarget;
-            const max = track.scrollWidth - track.clientWidth;
+            const max = projects.length * CARD_STEP;
             const position = max > 0 ? track.scrollLeft / max : 0;
             setProgress(position < 0.001 ? 0 : position > 0.999 ? 1 : position);
 
-            if (scrollEndTimerRef.current !== null) {
-              window.clearTimeout(scrollEndTimerRef.current);
-            }
-            scrollEndTimerRef.current = window.setTimeout(() => {
-              setCurrentSlide(Math.min(LAST_SLIDE, Math.round(track.scrollLeft / CARD_STEP)));
-              scrollEndTimerRef.current = null;
-            }, 120);
+            setCurrentSlide(
+              Math.min(LAST_SLIDE, Math.round(track.scrollLeft / CARD_STEP) % projects.length),
+            );
           }}
-          className="mt-[35px] flex h-[498px] w-[1192px] snap-x snap-mandatory gap-[33.75px] overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-[#006EB8]"
+          className="relative mt-[35px] flex h-[498px] w-[1192px] gap-[33.75px] overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden focus-visible:outline-2 focus-visible:outline-[#006EB8]"
         >
-          {projects.map((project) => {
+          {[...projects, ...projects].map((project, index) => {
             const cardClassName =
               "group flex h-full w-full cursor-pointer flex-col items-stretch justify-start p-0 text-left focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]";
             const content = (
@@ -148,10 +159,15 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
 
             return (
               <article
-                key={project.id}
+                key={`${project.id}-${index}`}
+                aria-hidden={index >= projects.length || undefined}
                 className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white"
               >
-                <Link href={project.href} className={cardClassName}>
+                <Link
+                  href={project.href}
+                  tabIndex={index >= projects.length ? -1 : undefined}
+                  className={cardClassName}
+                >
                   {content}
                 </Link>
               </article>

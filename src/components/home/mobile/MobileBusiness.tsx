@@ -21,7 +21,7 @@ const business = [
   {
     title: "섬유덕트",
     description: "공간에 맞춘 공기 분배 설계",
-    image: "/images/about/business-fabric-duct.jpg",
+    image: "/images/business/fabric-duct-card.jpg",
     href: "/fabric-duct",
   },
   {

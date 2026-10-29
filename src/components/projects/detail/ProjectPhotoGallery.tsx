@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-type ProjectPhoto = { src: string; alt: string; caption?: string } & (
+type ProjectPhoto = { src: string; alt: string; caption?: string; displayWidth?: number } & (
   { width: number; height: number } | { width?: never; height?: never }
 );
 
@@ -32,7 +32,11 @@ export default function ProjectPhotoGallery({
   return (
     <ProjectGalleryLayout>
       {photos.map((photo) => (
-        <figure key={photo.src}>
+        <figure
+          key={photo.src}
+          className={photo.displayWidth ? "mx-auto w-full" : undefined}
+          style={photo.displayWidth ? { maxWidth: photo.displayWidth } : undefined}
+        >
           <div
             className={
               photo.width === undefined
@@ -46,7 +50,11 @@ export default function ProjectPhotoGallery({
               width={photo.width}
               height={photo.height}
               fill={photo.width === undefined}
-              sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
+              sizes={
+                photo.displayWidth
+                  ? `(max-width: ${photo.displayWidth + 40}px) calc(100vw - 40px), ${photo.displayWidth}px`
+                  : "(max-width: 1439px) calc(100vw - 40px), 1000px"
+              }
               quality={100}
               unoptimized={photo.src.startsWith("/api/")}
               className={photo.width === undefined ? "object-cover" : "h-auto w-full"}

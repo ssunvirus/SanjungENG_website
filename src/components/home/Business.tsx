@@ -18,7 +18,7 @@ const businessCards = [
     title: "섬유덕트",
     description: "공간에 맞춘 공기 분배 설계",
     services: "맞춤 설계 / 제작 / 시공",
-    image: "/images/about/business-fabric-duct.jpg",
+    image: "/images/business/fabric-duct-card.jpg",
     imageAlt: "실내 천장에 설치된 섬유덕트",
     href: "/fabric-duct",
   },
@@ -111,7 +111,11 @@ function BusinessOverview() {
             end: 442,
           },
         ].map((service, index) => (
-          <li key={service.title} className="absolute" style={{ left: service.x, top: service.y }}>
+          <li
+            key={service.title}
+            className="group/lift absolute hover:z-20 focus-within:z-20"
+            style={{ left: service.x, top: service.y }}
+          >
             <span
               aria-hidden="true"
               className="absolute top-[34px] w-[3px] -translate-x-1/2 bg-[#0075BB]"
@@ -122,23 +126,72 @@ function BusinessOverview() {
               className="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#0075BB] bg-white"
               style={{ top: service.end - service.y }}
             />
-            <div
-              className="relative flex h-[76px] flex-col justify-center rounded-[20px] bg-white pl-[42px] pr-[12px] shadow-[0_4px_2px_rgba(0,0,0,0.25)]"
-              style={{ width: service.width, left: -service.offset }}
-            >
-              <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
-                {service.title}
-              </h3>
-              <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
-                {service.description}
-              </p>
+            <div className="group/service relative transition-transform duration-300 ease-out motion-safe:group-hover/lift:-translate-y-[6px] motion-safe:group-focus-within/lift:-translate-y-[6px] motion-reduce:transition-none">
+              <div
+                tabIndex={0}
+                aria-describedby={`business-service-tooltip-${index}`}
+                className="relative flex h-[76px] flex-col justify-center rounded-[20px] bg-white pl-[42px] pr-[12px] shadow-[0_4px_2px_rgba(0,0,0,0.25)] transition-shadow duration-300 ease-out group-hover/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] group-focus-within/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-brand-blue"
+                style={{ width: service.width, left: -service.offset }}
+              >
+                <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
+                  {service.title}
+                </h3>
+                <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
+                  {service.description}
+                </p>
+                {(
+                  <div
+                    id={`business-service-tooltip-${index}`}
+                    role="tooltip"
+                    className="pointer-events-none absolute left-1/2 top-full z-30 w-[340px] -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-200 group-hover/service:pointer-events-auto group-hover/service:opacity-100 group-focus-within/service:pointer-events-auto group-focus-within/service:opacity-100 motion-reduce:transition-none"
+                  >
+                    <div className="relative rounded-xl border border-black/20 bg-white px-5 py-4 text-left text-[18px] font-medium leading-7 text-brand-navy shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+                      <span
+                        aria-hidden="true"
+                        className="absolute -top-[7px] left-1/2 size-3 -translate-x-1/2 rotate-45 border-l border-t border-black/20 bg-white"
+                      />
+                      <p className="mb-3 text-[20px] font-bold">
+                        {index === 0 ? "산업용 냉동기 & 공조 설비" : index === 1 ? "냉동공조 설비 수리 & 오버홀" : index === 2 ? "냉동공조 설비 정기점검 & 유지보수" : "섬유덕트 설계 & 시공"}
+                      </p>
+                      <p>
+                        {index === 0 ? <>
+                        흡수식,스크류 냉동기, 칠러<br />
+                        냉각탑, 항온항습기, 공조기<br />
+                        저온저장고, 유니트 쿨러
+                        </> : index === 1 ? <>
+                          압축기, 모터 등 주요 부품 점검 및 교체<br />
+                          냉매 누설 점검 및 냉매 충전<br />
+                          열교환기 세관 및 노후 배관 정비
+                        </> : index === 2 ? <>
+                          냉동기 운전 상태 및 냉각 성능 점검<br />
+                          증발기 제상 상태 확인 및 열교환기 청소<br />
+                          전력 사용량 확인 및 운전 상태 모니터링
+                        </> : <>
+                          CFD 해석을 통한 풍량, 기류 설계<br />
+                          현장에 맞춘 페브릭덕트 제작 및 설치<br />
+                          덕트 탈착, 세탁, 재설치 및 사후관리
+                        </>}
+                      </p>
+                      <p className="mt-4 border-t border-brand-blue/20 pt-3 font-semibold">
+                        {index === 0
+                          ? "신규 설치부터 노후 설비 철거, 교체까지"
+                          : index === 1
+                            ? "고장 원인을 찾아 신속한 수리 및 성능 회복"
+                            : index === 2
+                              ? "고장을 예방하고, 불필요한 에너지 낭비를 줄입니다."
+                              : "공간에 맞는 공기 분배, 설치 후 관리까지"}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <span
+                style={{ left: 8 - service.offset }}
+                className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-brand-blue text-[20px] font-semibold text-brand-text"
+              >
+                {index + 1}
+              </span>
             </div>
-            <span
-              style={{ left: 8 - service.offset }}
-              className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-brand-blue text-[20px] font-semibold text-brand-text"
-            >
-              {index + 1}
-            </span>
           </li>
         ))}
       </ol>

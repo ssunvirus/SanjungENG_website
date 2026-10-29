@@ -49,6 +49,7 @@ export const ansanPaintFactoryPhotos = [
   },
 ].map((photo) => ({
   ...photo,
+  displayWidth: 760,
   src: `/images/projects/${id}/photo-${String(photo.number).padStart(2, "0")}.jpg`,
   width: photo.portrait ? 3000 : 4000,
   height: photo.portrait ? 4000 : 3000,

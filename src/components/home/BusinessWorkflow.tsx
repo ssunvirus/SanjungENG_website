@@ -28,7 +28,7 @@ export default function BusinessWorkflow() {
   return (
     <ol
       aria-label="상담부터 사후관리까지"
-      className="flex flex-col gap-6 text-left lg:w-[1429px] lg:flex-row lg:gap-[72px]"
+      className="flex flex-col gap-6 text-left lg:w-max lg:flex-row lg:gap-[72px]"
     >
       {steps.map((step, index) => (
         <li

@@ -76,7 +76,7 @@ export default function ProjectGallery({ projects = existingProjects }: { projec
         ))}
       </div>
       <div aria-hidden="true" className="relative hidden lg:block">
-        <div className="h-[2.03808px] w-[1472px] bg-brand-navy/20" />
+        <div className="h-[2.03808px] w-full bg-brand-navy/20" />
         <div
           className="absolute top-0 h-[2px] w-[219px] bg-brand-blue transition-transform"
           style={{ transform: `translateX(${categories.indexOf(category) * 379}px)` }}
@@ -97,16 +97,16 @@ export default function ProjectGallery({ projects = existingProjects }: { projec
       </div>
       <nav
         aria-label="시공사례 페이지"
-        className="mt-9 lg:mt-[86px] flex h-[48px] items-center justify-center gap-[5px] pb-[50px] box-content"
+        className="mt-9 lg:mt-[86px] flex h-[56px] items-center justify-center gap-[5px] pb-[50px] box-content"
       >
         <button
           type="button"
           aria-label="이전 페이지"
           onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className="flex size-[48px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+          className="flex size-[56px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
         >
-          <ChevronLeft size={48} aria-hidden="true" />
+          <ChevronLeft size={56} aria-hidden="true" />
         </button>
         <div className="flex items-center gap-[8px]">
           {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) => (
@@ -116,7 +116,7 @@ export default function ProjectGallery({ projects = existingProjects }: { projec
               aria-label={`${number}페이지`}
               aria-current={page === number ? "page" : undefined}
               onClick={() => setPage(number)}
-              className={`relative flex size-[40px] cursor-pointer items-center justify-center text-[30px] leading-[36px] tracking-[1.5px] focus-visible:outline-2 focus-visible:outline-brand-blue ${page === number ? "text-white" : "text-brand-navy/65"}`}
+              className={`relative flex size-[48px] cursor-pointer items-center justify-center text-[30px] leading-none tracking-normal tabular-nums focus-visible:outline-2 focus-visible:outline-brand-blue ${page === number ? "text-white" : "text-brand-navy/65"}`}
             >
               {page === number && (
                 <span
@@ -133,9 +133,9 @@ export default function ProjectGallery({ projects = existingProjects }: { projec
           aria-label="다음 페이지"
           onClick={() => setPage(page + 1)}
           disabled={page === pageCount}
-          className="flex size-[48px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+          className="flex size-[56px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
         >
-          <ChevronRight size={48} aria-hidden="true" />
+          <ChevronRight size={56} aria-hidden="true" />
         </button>
       </nav>
     </section>

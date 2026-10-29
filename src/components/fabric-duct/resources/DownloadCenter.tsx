@@ -1,17 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Download } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, Download, Search, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 type ResourceDocument = {
   title: string;
-  file: string;
   image?: string;
   format?: string;
   manufacturer?: string;
 };
-const documents: ResourceDocument[] = [
+const documents: (ResourceDocument & { file: string })[] = [
   {
     title: "KLIMAGIEL 카탈로그",
     manufacturer: "Klimagiel",
@@ -30,111 +29,94 @@ const assetRoot = "/images/fabric-duct/resources";
 const certificateDocuments: ResourceDocument[] = [
   {
     title: "ISO 9001:2015",
-    file: `${assetRoot}/multixair-iso-9001.jpeg`,
     image: `${assetRoot}/multixair-iso-9001.jpeg`,
     format: "JPG",
   },
   {
     title: "ISO 14001:2015",
-    file: `${assetRoot}/multixair-iso-14001.jpeg`,
     image: `${assetRoot}/multixair-iso-14001.jpeg`,
     format: "JPG",
   },
   {
     title: "ISO 45001:2018",
-    file: `${assetRoot}/multixair-iso-45001.jpeg`,
     image: `${assetRoot}/multixair-iso-45001.jpeg`,
     format: "JPG",
   },
   {
     title: "A2급 연소성능 시험성적서",
-    file: "/documents/fabric-duct/multixair-a2-combustion-test.pdf",
     image: `${assetRoot}/multixair-a2-combustion-test.png`,
     format: "PDF",
   },
   {
     title: "유해가스 방출 시험성적서",
-    file: "/documents/fabric-duct/multixair-harmful-gas-emission-test.pdf",
     image: `${assetRoot}/multixair-harmful-gas-emission-test.png`,
     format: "PDF",
   },
   {
     title: "덕트 내압/강도 시험성적서",
-    file: "/documents/fabric-duct/multixair-duct-pressure-strength-test.pdf",
     image: `${assetRoot}/multixair-duct-pressure-strength-test.png`,
     format: "PDF",
   },
   {
     title: "대장균 항균성 시험성적서",
-    file: "/documents/fabric-duct/multixair-antibacterial-ecoli.pdf",
     image: `${assetRoot}/multixair-antibacterial-ecoli.png`,
     format: "PDF",
   },
   {
     title: "폐렴간균 항균성 시험성적서",
-    file: "/documents/fabric-duct/multixair-antibacterial-klebsiella.pdf",
     image: `${assetRoot}/multixair-antibacterial-klebsiella.png`,
     format: "PDF",
   },
   {
     title: "황색포도상구균 항균성 시험성적서",
-    file: "/documents/fabric-duct/multixair-antibacterial-staphylococcus.pdf",
     image: `${assetRoot}/multixair-antibacterial-staphylococcus.png`,
     format: "PDF",
   },
   {
     title: "섬유탈락성능 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-fiber-shedding-test.pdf",
     image: `${assetRoot}/multixair-fiber-shedding-test.png`,
     format: "PDF",
   },
   {
     title: "결로방지성능 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-condensation-prevention-test.pdf",
     image: `${assetRoot}/multixair-condensation-prevention-test.png`,
     format: "PDF",
   },
   {
     title: "고온 열노화성능 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-high-temperature-aging-test.pdf",
     image: `${assetRoot}/multixair-high-temperature-aging-test.png`,
     format: "PDF",
   },
   {
     title: "내열 공기노화성능 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-heat-air-aging-test.pdf",
     image: `${assetRoot}/multixair-heat-air-aging-test.png`,
     format: "PDF",
   },
   {
     title: "섬유제품 안전성 시험성적서 (A등급)",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-textile-safety-category-a-test.pdf",
     image: `${assetRoot}/multixair-textile-safety-category-a-test.png`,
     format: "PDF",
   },
   {
     title: "세탁 후 치수변화율 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-washing-dimensional-change-test.pdf",
     image: `${assetRoot}/multixair-washing-dimensional-change-test.png`,
     format: "PDF",
   },
   {
     title: "원단 인열강도 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-fabric-tear-strength-test.pdf",
     image: `${assetRoot}/multixair-fabric-tear-strength-test.png`,
     format: "PDF",
   },
   {
     title: "원단 파단강도 시험성적서",
     manufacturer: "MultiXair",
-    file: "/documents/fabric-duct/multixair-fabric-breaking-strength-test.pdf",
     image: `${assetRoot}/multixair-fabric-breaking-strength-test.png`,
     format: "PDF",
   },
@@ -142,6 +124,19 @@ const certificateDocuments: ResourceDocument[] = [
 const pageSize = 8;
 
 export default function DownloadCenter() {
+  const [preview, setPreview] = useState<ResourceDocument | null>(null);
+  const previewRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    const dialog = previewRef.current;
+    if (!preview || !dialog) return;
+    dialog.showModal();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [preview]);
   const [activeTab, setActiveTab] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const tabDocuments = activeTab === 1 ? documents.slice(0, 2) : certificateDocuments;
@@ -256,36 +251,58 @@ export default function DownloadCenter() {
                 <p className="mt-[8px] text-[14.58px] font-semibold leading-[20px] tracking-[0.73px] text-brand-navy/80">
                   {item.manufacturer ?? (activeTab === 0 ? "MultiXair" : "")}
                 </p>
-                <div
-                  aria-hidden="true"
-                  className="hidden lg:block absolute left-[29.97px] top-[120.72px] h-[0.81px] w-[217.082px] bg-brand-navy/20"
-                />
-                <a
-                  href={item.file}
-                  download
-                  className="mt-auto flex min-h-11 justify-end border-t border-[#D1DFE8] pt-2 lg:mt-0 lg:absolute lg:left-[165.24px] lg:top-[128.82px] lg:min-h-0 lg:h-[24.3px] lg:border-0 lg:pt-0 items-center gap-[5px] text-[14.58px] font-bold text-brand-blue"
-                >
-                  다운로드
-                  <Download size={19.44} aria-hidden="true" />
-                </a>
+                {"file" in item && typeof item.file === "string" && (
+                  <>
+                    <div
+                      aria-hidden="true"
+                      className="hidden lg:block absolute left-[29.97px] top-[120.72px] h-[0.81px] w-[217.082px] bg-brand-navy/20"
+                    />
+                    <a
+                      href={item.file}
+                      download
+                      className="mt-auto flex min-h-11 justify-end border-t border-[#D1DFE8] pt-2 lg:mt-0 lg:absolute lg:left-[165.24px] lg:top-[128.82px] lg:min-h-0 lg:h-[24.3px] lg:border-0 lg:pt-0 items-center gap-[5px] text-[14.58px] font-bold text-brand-blue"
+                    >
+                      다운로드
+                      <Download size={19.44} aria-hidden="true" />
+                    </a>
+                  </>
+                )}
+                {activeTab === 0 && (
+                  <>
+                    <div
+                      aria-hidden="true"
+                      className="hidden lg:block absolute left-[29.97px] top-[120.72px] h-[0.81px] w-[217.082px] bg-brand-navy/20"
+                    />
+                    <button
+                      type="button"
+                      aria-haspopup="dialog"
+                      aria-label={`${item.title} 자세히 보기`}
+                      onClick={() => setPreview(item)}
+                      className="mt-auto flex min-h-11 cursor-pointer items-center justify-end gap-[5px] border-t border-[#D1DFE8] pt-2 text-[14.58px] font-bold text-brand-blue lg:absolute lg:right-[29px] lg:top-[128.82px] lg:mt-0 lg:h-[24.3px] lg:min-h-0 lg:border-0 lg:pt-0 focus-visible:outline-2 focus-visible:outline-brand-blue"
+                    >
+                      자세히 보기
+                      <Search size={19.44} aria-hidden="true" />
+                    </button>
+                  </>
+                )}
               </div>
             </article>
           ))}
         </div>
         <nav
           aria-label="자료 페이지"
-          className="mt-9 lg:mt-[77px] flex h-[48px] items-center justify-center gap-[5px] text-[30px] text-brand-navy/65"
+          className="mt-9 lg:mt-[77px] flex h-[56px] items-center justify-center gap-[5px] text-[30px] text-brand-navy/65"
         >
           <button
             type="button"
             disabled={currentPage === 1}
             onClick={() => selectPage(currentPage - 1)}
             aria-label="이전 페이지"
-            className="cursor-pointer disabled:cursor-default disabled:opacity-40"
+            className="flex size-[56px] cursor-pointer items-center justify-center disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
           >
-            <ChevronLeft size={48} aria-hidden="true" />
+            <ChevronLeft size={56} aria-hidden="true" />
           </button>
-          <div className="flex items-center gap-[18px]">
+          <div className="flex items-center gap-[8px]">
             {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
               <button
                 key={page}
@@ -293,12 +310,12 @@ export default function DownloadCenter() {
                 onClick={() => selectPage(page)}
                 aria-current={page === currentPage ? "page" : undefined}
                 aria-label={`${page}페이지`}
-                className="relative flex h-[40px] w-[30px] cursor-pointer items-center justify-center"
+                className="relative flex size-[48px] cursor-pointer items-center justify-center leading-none tracking-normal tabular-nums focus-visible:outline-2 focus-visible:outline-brand-blue"
               >
                 {page === currentPage && (
                   <span
                     aria-hidden="true"
-                    className="absolute left-1/2 size-10 rounded-full bg-brand-blue/60 -translate-x-1/2"
+                    className="absolute inset-0 rounded-full bg-brand-blue/60"
                   />
                 )}
                 <span className={`relative ${page === currentPage ? "text-white" : ""}`}>
@@ -312,14 +329,61 @@ export default function DownloadCenter() {
             disabled={currentPage === pageCount}
             onClick={() => selectPage(currentPage + 1)}
             aria-label="다음 페이지"
-            className="cursor-pointer disabled:cursor-default disabled:opacity-40"
+            className="flex size-[56px] cursor-pointer items-center justify-center disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
           >
-            <ChevronRight size={48} aria-hidden="true" />
+            <ChevronRight size={56} aria-hidden="true" />
           </button>
         </nav>
 
         <div aria-hidden="true" className="mt-[16px] min-h-[28px]" />
       </div>
+      <dialog
+        ref={previewRef}
+        aria-labelledby="resource-preview-title"
+        onClose={() => setPreview(null)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) {
+            const bounds = event.currentTarget.getBoundingClientRect();
+            if (
+              event.clientX < bounds.left ||
+              event.clientX > bounds.right ||
+              event.clientY < bounds.top ||
+              event.clientY > bounds.bottom
+            )
+              setPreview(null);
+          }
+        }}
+        className="fixed inset-0 m-auto max-h-[90dvh] w-[min(92vw,800px)] max-w-none overflow-y-auto rounded-2xl bg-[#303030] p-4 text-white shadow-2xl backdrop:bg-brand-navy/60 sm:p-6"
+      >
+        {preview && (
+          <>
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <h2 id="resource-preview-title" className="text-lg font-bold sm:text-xl">
+                {preview.title}
+              </h2>
+              <button
+                type="button"
+                autoFocus
+                aria-label="상세보기 닫기"
+                onClick={() => setPreview(null)}
+                className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-slate-100 text-brand-navy hover:bg-slate-200 focus-visible:outline-2 focus-visible:outline-brand-blue"
+              >
+                <X size={24} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="relative h-[70dvh] w-full bg-[#303030]">
+              <Image
+                src={preview.image ?? `${assetRoot}/catalog-cover.png`}
+                alt={`${preview.title} 상세 이미지`}
+                fill
+                sizes="(max-width: 870px) 92vw, 752px"
+                quality={100}
+                className="object-contain"
+              />
+            </div>
+          </>
+        )}
+      </dialog>
     </section>
   );
 }

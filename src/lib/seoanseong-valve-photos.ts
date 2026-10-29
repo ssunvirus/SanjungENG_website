@@ -1,0 +1,85 @@
+// Attachment order; edited assets remove only the added caption boxes.
+export const seoanseongValvePhotos = [
+  {
+    number: 1,
+    edited: true,
+    alt: "서안성 냉동창고 냉동기 냉각수 배수 작업",
+    caption: "밸브 교체에 앞서 냉동기 냉각수라인 배수 진행",
+  },
+  {
+    number: 2,
+    edited: true,
+    alt: "냉동기 밸브 교체를 위한 기계실 작업 준비",
+    caption: "작업 구역을 정리하고 밸브 교체 공구와 장비 준비",
+  },
+  {
+    number: 3,
+    edited: false,
+    alt: "냉동기 냉각수라인 교체용 밸브와 배관 자재",
+    caption: "교체용 밸브와 배관 자재 준비",
+  },
+  {
+    number: 4,
+    edited: true,
+    alt: "냉동기 냉각수 배관의 노후 밸브 교체 작업",
+    caption: "냉각수라인의 노후 밸브 분리 및 교체 진행",
+  },
+  {
+    number: 5,
+    edited: true,
+    portrait: true,
+    alt: "냉동기 냉각수라인에서 분리한 기존 버터플라이 밸브",
+    caption: "배관에서 분리한 기존 밸브 상태 확인",
+  },
+  {
+    number: 6,
+    edited: false,
+    alt: "교체 후 모아 둔 기존 밸브와 배관 부속",
+    caption: "철거한 노후 밸브와 배관 부속 정리",
+  },
+  {
+    number: 7,
+    edited: true,
+    portrait: true,
+    alt: "냉동기 냉각수라인 밸브 교체와 배관 용접 작업",
+    caption: "밸브 교체와 함께 냉각수 배관 연결부 정비",
+  },
+  {
+    number: 8,
+    edited: true,
+    portrait: true,
+    alt: "새 밸브를 설치한 냉동기 냉각수 배관",
+    caption: "새 밸브 설치 후 플랜지와 연결부 상태 확인",
+  },
+  {
+    number: 9,
+    edited: true,
+    alt: "냉동기 냉각수 배관 연결부 용접 작업",
+    caption: "배관 연결부 용접 및 마감 작업 진행",
+  },
+  {
+    number: 10,
+    edited: true,
+    portrait: true,
+    alt: "밸브를 분리한 냉각수 배관 플랜지와 작업자",
+    caption: "밸브 교체 과정에서 배관 플랜지와 체결부 정비",
+  },
+  {
+    number: 11,
+    edited: false,
+    alt: "밸브 교체 후 냉동기 냉각수 배관 전경",
+    caption: "밸브 교체 후 냉각수라인 설치 상태 확인",
+  },
+  {
+    number: 12,
+    edited: false,
+    alt: "냉동기 밸브 교체 및 배관 정비를 마친 기계실",
+    caption: "냉동기 밸브 교체 및 배관 정비 후 기계실 전경",
+  },
+].map((photo) => ({
+  ...photo,
+  src: `/images/projects/seoanseong-chiller-valve-replacement/photo-${String(photo.number).padStart(2, "0")}.${photo.edited ? "png" : "jpg"}`,
+  displayWidth: 760,
+  width: photo.portrait ? 1086 : photo.edited ? 1448 : 4000,
+  height: photo.portrait ? 1448 : photo.edited ? 1086 : 3000,
+}));

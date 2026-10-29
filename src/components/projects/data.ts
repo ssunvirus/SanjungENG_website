@@ -32,6 +32,50 @@ export const ansanPaintFactoryProject = {
 
 export const projects: Project[] = [
   {
+    id: "seoanseong-cooling-tower-inspection",
+    href: "/projects/seoanseong-cooling-tower-inspection",
+    category: "냉동공조",
+    tag: "냉각탑",
+    title: "냉각탑 정기 점검",
+    description: "냉각탑 흡입그릴 청소 및 팬 구동부 점검",
+    location: "서안성",
+    workDescription:
+      "냉각탑 흡입그릴 청소 및 팬, 구동부 점검, 그리스 주입 작업을 통해 냉각탑의 성능을 개선하였습니다.",
+    blogUrl: "https://blog.naver.com/sanjungeng/224378454682",
+    image: "/images/projects/seoanseong-cooling-tower-inspection/photo-01.jpg",
+    imageTop: "0%",
+  },
+  {
+    id: "seoanseong-chiller-valve-replacement",
+    href: "/projects/seoanseong-chiller-valve-replacement",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "냉동창고 냉동기 밸브 교체",
+    description: "냉동기 밸브 교체",
+    location: "서안성",
+    workDescription:
+      "냉동기 냉각수라인의 노후 밸브 교체 및 배관 정비를 통해 냉동 설비를 보수했습니다.",
+    blogUrl:
+      "https://blog.naver.com/PostView.naver?blogId=sanjungeng&logNo=224367095697&categoryNo=23&parentCategoryNo=&from=thumbnailList",
+    image: "/images/projects/seoanseong-chiller-valve-replacement/photo-03.jpg",
+    imageTop: "0%",
+  },
+  {
+    id: "hwaseong-absorption-chiller-cleaning",
+    href: "/projects/hwaseong-absorption-chiller-cleaning",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "자원순환시설 흡수식냉동기 세관",
+    description: "흡수식냉동기 세관",
+    location: "화성시",
+    workDescription:
+      "자원순환시설 흡수식냉동기의 열교환기 내부 오염물을 제거하고, 냉동기 운전 효율과 안정성을 개선하였습니다.",
+    blogUrl:
+      "https://blog.naver.com/PostView.naver?blogId=sanjungeng&logNo=224359079016&categoryNo=23&parentCategoryNo=&from=thumbnailList",
+    image: "/images/projects/hwaseong-absorption-chiller-cleaning/photo-06.jpg",
+    imageTop: "0%",
+  },
+  {
     id: "pyeongtaek-food-factory-duct-cleaning",
     href: "/projects/pyeongtaek-food-factory-duct-cleaning",
     category: "섬유덕트",
@@ -156,6 +200,8 @@ function selectProjects(ids: string[]): Project[] {
 }
 
 export const desktopFeaturedProjects = selectProjects([
+  "hwaseong-absorption-chiller-cleaning",
+  "seoanseong-cooling-tower-inspection",
   "nonghyup-cold-storage",
   "gurye-pool",
   "semiconductor-chiller",
@@ -163,6 +209,8 @@ export const desktopFeaturedProjects = selectProjects([
 ]);
 
 export const mobileFeaturedProjects = selectProjects([
+  "hwaseong-absorption-chiller-cleaning",
+  "seoanseong-cooling-tower-inspection",
   "nonghyup-cold-storage",
   "gurye-pool",
   "semiconductor-chiller",

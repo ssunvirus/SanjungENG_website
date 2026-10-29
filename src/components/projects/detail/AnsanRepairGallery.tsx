@@ -18,13 +18,13 @@ export default function AnsanRepairGallery() {
   return (
     <ProjectGalleryLayout>
       {ansanPaintFactoryPhotos.map((photo, index) => (
-        <figure key={photo.src}>
+        <figure key={photo.src} className="mx-auto w-full" style={{ maxWidth: photo.displayWidth }}>
           <Image
             src={photo.src}
             alt={photo.alt}
             width={photo.width}
             height={photo.height}
-            sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
+            sizes="(max-width: 800px) calc(100vw - 40px), 760px"
             quality={100}
             className="h-auto w-full"
           />

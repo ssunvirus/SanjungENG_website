@@ -35,17 +35,30 @@ export default function Hero() {
       aria-label="산정엔지니어링 주요 서비스"
     >
       {slides.map((item, index) => (
-        <Image
+        <div
           key={item.image}
-          src={item.image}
-          alt={index === currentSlide ? item.imageAlt : ""}
-          fill
-          priority={index === 0}
-          sizes="1920px"
-          className={`pointer-events-none z-0 object-cover transition-opacity duration-700 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
-        />
+          className={`pointer-events-none absolute inset-0 bg-[#082d56] transition-opacity duration-700 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}
+        >
+          <div
+            className={index === 1 ? "absolute inset-y-0 left-[20%] w-[80%]" : "absolute inset-0"}
+          >
+            <Image
+              src={item.image}
+              alt={index === currentSlide ? item.imageAlt : ""}
+              fill
+              priority={index === 0}
+              sizes={index === 1 ? "1536px" : "1920px"}
+              style={index === 1 ? { objectPosition: "center 42%" } : undefined}
+              className="pointer-events-none z-0 object-cover"
+            />
+          </div>
+          {index === 1 && (
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-[linear-gradient(90deg,#082d56_0%,#082d56_20%,rgba(8,45,86,0.75)_28%,rgba(8,45,86,0.4)_38%,rgba(8,45,86,0.1)_50%,transparent_60%)]"
+            />
+          )}
+        </div>
       ))}
 
       <div

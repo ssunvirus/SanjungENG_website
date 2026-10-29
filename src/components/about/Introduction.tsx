@@ -28,7 +28,7 @@ export default function Introduction() {
           <p className="text-[15px] lg:text-[25px] font-semibold leading-normal text-brand-text/60">
             다양한 산업 현장에서 쌓아온 경험과 기술력을 바탕으로
             <br />
-            고객의 환경에 최적화된 냉동/공조 솔루션을 제공합니다.
+            고객의 환경에 최적화된 냉동공조 솔루션을 제공합니다.
             <br />
             <br />
             정확한 진단과 신뢰할 수 있는 시공, 지속적인 유지관리로

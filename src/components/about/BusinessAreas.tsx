@@ -7,7 +7,7 @@ const areas = [
     quality: 75,
     top: "-35.91%",
     lines: [
-      "냉동기 설치/교체",
+      "냉동기 설치/교체/철거",
       "스크류, 흡수식, 터보 냉동기",
       "항온항습기 설치/교체",
       "냉각탑 설치/교체",
@@ -104,7 +104,7 @@ export default function BusinessAreas() {
               <h3 className="text-center text-[20px] lg:text-[30px] font-bold leading-[24px] lg:leading-[36px] tracking-[0px] lg:tracking-[-3px] text-brand-navy">
                 {area.title}
               </h3>
-              <span aria-hidden="true" className="h-0.5 w-full bg-brand-blue/40" />
+              <span aria-hidden="true" className="h-0.5 w-full shrink-0 bg-brand-blue/40" />
               <ul className="text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[30px] text-brand-text/60">
                 {area.lines.map((line) => (
                   <li key={line}>{line}</li>
