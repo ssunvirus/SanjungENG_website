@@ -161,11 +161,12 @@ export const legacyCoverAliases: Record<string, string> = {
 
 export function initialLegacyPhotos(id: string, cover: string, alt: string) {
   const equivalent = legacyCoverAliases[id] || cover;
+  const coverPhoto = legacyProjectPhotos[id]?.find((photo) => photo.src === equivalent);
   return [
-    { src: cover, alt },
+    { src: cover, alt: coverPhoto?.caption ?? alt },
     ...(legacyProjectPhotos[id] || [])
       .filter((photo) => photo.src !== equivalent)
-      .map(({ src, alt }) => ({ src, alt })),
+      .map(({ src, alt, caption }) => ({ src, alt: caption ?? alt })),
   ];
 }
 

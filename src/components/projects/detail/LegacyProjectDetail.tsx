@@ -20,7 +20,7 @@ export default async function LegacyProjectDetail({
 }) {
   await connection();
   const saved = await publicProject(id);
-  if (saved) return <SavedProjectDetail project={saved} legacyGallery={gallery} />;
+  if (saved) return <SavedProjectDetail project={saved} />;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />

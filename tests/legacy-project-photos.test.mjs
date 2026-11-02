@@ -121,3 +121,13 @@ test("admin-edited photo descriptions replace default captions, including cleari
     original.caption,
   );
 });
+
+test("admin defaults use the visible captions, including intentionally empty captions", () => {
+  for (const base of projects) {
+    const photos = initialLegacyPhotos(base.id, base.image, base.title);
+    for (const photo of photos) {
+      const source = legacyProjectPhotos[base.id].find((item) => item.src === photo.src);
+      if (source?.caption !== undefined) assert.equal(photo.alt, source.caption, photo.src);
+    }
+  }
+});

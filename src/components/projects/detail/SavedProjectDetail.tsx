@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import Link from "next/link";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "./ProjectOverview";
@@ -8,18 +7,10 @@ import ProjectInquiryBanner from "./ProjectInquiryBanner";
 import type { ProjectRecord } from "@/src/lib/project-record";
 import { publicPhotoPath } from "@/src/lib/public-project-data";
 import { projects } from "@/src/components/projects/data";
-import { hasDefaultLegacyPhotos, legacyPhotoDimensions } from "@/src/lib/legacy-project-photos";
+import { legacyPhotoDimensions } from "@/src/lib/legacy-project-photos";
 
-export default function SavedProjectDetail({
-  project,
-  legacyGallery,
-}: {
-  project: ProjectRecord;
-  legacyGallery?: ReactNode;
-}) {
+export default function SavedProjectDetail({ project }: { project: ProjectRecord }) {
   const base = projects.find((item) => item.id === project.id);
-  const keepGallery =
-    legacyGallery && base && hasDefaultLegacyPhotos(project, base.image, base.title);
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-navy">
       <Hero />
@@ -40,18 +31,17 @@ export default function SavedProjectDetail({
             {project.description}
           </p>
         )}
-        {keepGallery ? (
-          legacyGallery
-        ) : project.photos.length > 0 ? (
+        {project.photos.length > 0 ? (
           <ProjectPhotoGallery
             showAltCaption
-            photos={project.photos.map((photo) =>
-              legacyPhotoDimensions(
+            photos={project.photos.map((photo) => ({
+              ...legacyPhotoDimensions(
                 { ...photo, src: publicPhotoPath(photo.src) },
                 project.id,
                 base?.image,
               ),
-            )}
+              caption: photo.alt,
+            }))}
           />
         ) : null}
         <Link

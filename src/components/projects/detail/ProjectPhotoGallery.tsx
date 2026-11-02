@@ -24,7 +24,7 @@ export function ProjectGalleryLayout({ children }: { children: ReactNode }) {
 
 export default function ProjectPhotoGallery({
   photos,
-  showAltCaption = false,
+  showAltCaption = true,
 }: {
   photos: ProjectPhoto[];
   showAltCaption?: boolean;
@@ -61,7 +61,7 @@ export default function ProjectPhotoGallery({
             />
           </div>
           {(photo.caption ?? (showAltCaption ? photo.alt : "")) && (
-            <figcaption className="px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
+            <figcaption className="whitespace-pre-line px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
               {photo.caption ?? photo.alt}
             </figcaption>
           )}
