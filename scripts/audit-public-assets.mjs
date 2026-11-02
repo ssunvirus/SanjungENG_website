@@ -37,6 +37,28 @@ for (const item of inventory) {
   hashes.set(item.hash, group);
 }
 const duplicates = [...hashes.values()].filter((group) => group.length > 1);
+const sourceFiles = (
+  await Promise.all(["app", "src", "config"].map((dir) => files(path.join(root, dir))))
+).flat();
+const sourceText = (
+  await Promise.all(
+    sourceFiles
+      .filter((file) => /\.(tsx?|jsx?|json|css)$/.test(file))
+      .map((file) => readFile(file, "utf8")),
+  )
+).join("\n");
+const unreferencedCandidates = inventory
+  .filter(({ file }) => {
+    if (!file.startsWith("public/images/")) return false;
+    const name = path.basename(file);
+    const stem = name.slice(0, -path.extname(name).length);
+    return (
+      !sourceText.includes(file.slice("public".length)) &&
+      !sourceText.includes(name) &&
+      !sourceText.includes(stem)
+    );
+  })
+  .map(({ file, size }) => ({ file, size, requiresDatabaseAndExternalLinkCheck: true }));
 console.log(
   JSON.stringify(
     {
@@ -49,6 +71,7 @@ console.log(
         .slice(0, 20)
         .map(({ file, size }) => ({ file, size })),
       duplicates: duplicates.map((group) => group.map(({ file }) => file)),
+      unreferencedCandidates,
     },
     null,
     2,

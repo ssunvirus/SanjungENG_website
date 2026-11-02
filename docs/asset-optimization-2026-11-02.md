@@ -33,8 +33,14 @@ PDF 후보 생성, 비교 이미지, 파일별 압축 결과 JSON은 원본 백�
 ## AWS 점검 상태
 
 로컬 AWS 환경변수와 기본 자격 증명 파일이 없으며 SDK 조회 준비 단계에서
-`CredentialsProviderError`가 발생했다. 실제 S3 버킷, DynamoDB TTL 상태는 아직 미확인.
-스토리지 삭제, TTL 변경, 운영 배포는 실행하지 않았다.
+`CredentialsProviderError`가 발생했다. 이후 사용자가 CloudShell에서 제공한 결과로 다음을 확인했다.
+
+- DynamoDB `sanjung-projects`: TTL `ENABLED`, 속성 `expiresAt`으로 코드와 일치.
+- S3 `sanjung-project-images-235390156511`의 `projects/`: 현재 객체 10개, 2.2 MiB.
+- 미사용 사진 여부와 이전 버전 저장 용량, 수명 주기 설정은 아직 미확인.
+
+스토리지 삭제나 TTL 변경은 실행하지 않았다. 사용자는 앞선 수정사항 배포 완료를 알렸다.
+이후 공통 UI 리팩터링은 별도 변경이므로 추가 배포가 필요하다.
 
 CloudShell에서 우선 확인할 읽기 전용 명령:
 
@@ -52,7 +58,20 @@ aws dynamodb describe-time-to-live --table-name sanjung-projects --region ap-sou
 node scripts/audit-aws-storage.mjs --region=ap-southeast-2 --table=sanjung-projects --bucket=ACTUAL_BUCKET_NAME
 ```
 
-읽기 권한: `dynamodb:DescribeTimeToLive`, `dynamodb:Scan`, `s3:ListBucket`,
+읽기 권한: `dynamodb:DescribeTimeToLive`, `dynamodb:Scan`, `s3:ListBucket`, `s3:ListBucketVersions`,
 `s3:GetBucketVersioning`, `s3:GetLifecycleConfiguration`.
 스크립트는 집계 결과만 출력하고 데이터 수정이나 삭제는 하지 않는다.
-S3 이전 버전 용량은 현재 객체 목록에 포함되지 않는다.
+S3 이전 버전 용량은 현재 객체 목록과 분리해 집계한다.
+버전 목록 조회 권한이 없으면 `previousVersions.checked: false`로 표시한다.
+
+## 공통 UI 정리 후속 작업
+
+- 네 설비 페이지의 시공사례 레이아웃을 `shared/EquipmentCaseStudy.tsx`로 통합.
+- 네 설비 페이지의 단계별 카드를 `shared/WorkProcessCards.tsx`로 통합.
+- 각 설비 폴더의 `CaseStudy.tsx`, `WorkProcess.tsx`에는 기존 문구·사진·순서 및 개별 이미지 옵션 유지.
+- 너비 390px, 1440px에서 8개 영역의 전후 캡처 16쌍 비교. 배치와 크기 변화 없음.
+- 캡처 비교: `%TEMP%\sanjung-visual-audit\refactor-comparison.json`.
+- `assets:audit`에 코드 문자열에서 참조를 찾지 못한 이미지 후보 목록 추가.
+  동적 경로, DB 경로, 외부 링크의 실제 사용 여부를 증명하는 검사는 아니므로 자동 삭제하지 않음.
+- 현재 후보 16개. `application-line.svg` 등 CSS로 대체된 장식과 구버전 이미지 포함.
+- 사용자는 버전 관리 조회 시 출력이 없었다고 알려왔으며, 출력 형식을 JSON으로 고정한 재조회 결과 확인 대기 중.

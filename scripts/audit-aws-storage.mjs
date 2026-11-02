@@ -3,6 +3,7 @@ import { DynamoDBClient, DescribeTimeToLiveCommand, ScanCommand } from "@aws-sdk
 import {
   S3Client,
   ListObjectsV2Command,
+  ListObjectVersionsCommand,
   GetBucketVersioningCommand,
   GetBucketLifecycleConfigurationCommand,
 } from "@aws-sdk/client-s3";
@@ -81,6 +82,37 @@ try {
     if (page.IsTruncated && !token) throw new Error("IncompleteS3Inventory");
   } while (token);
   const versioning = await s3.send(new GetBucketVersioningCommand({ Bucket: bucket }));
+  let previousVersions;
+  try {
+    let keyMarker;
+    let versionIdMarker;
+    let count = 0;
+    let bytes = 0;
+    let deleteMarkers = 0;
+    do {
+      const page = await s3.send(
+        new ListObjectVersionsCommand({
+          Bucket: bucket,
+          Prefix: "projects/",
+          KeyMarker: keyMarker,
+          VersionIdMarker: versionIdMarker,
+        }),
+      );
+      for (const item of page.Versions || []) {
+        if (!item.IsLatest) {
+          count++;
+          bytes += item.Size || 0;
+        }
+      }
+      deleteMarkers += page.DeleteMarkers?.length || 0;
+      keyMarker = page.IsTruncated ? page.NextKeyMarker : undefined;
+      versionIdMarker = page.IsTruncated ? page.NextVersionIdMarker : undefined;
+      if (page.IsTruncated && !keyMarker) throw new Error("IncompleteVersionInventory");
+    } while (keyMarker);
+    previousVersions = { checked: true, count, totalMiB: bytes / 1048576, deleteMarkers };
+  } catch (error) {
+    previousVersions = { checked: false, error: error.name };
+  }
   let lifecycle;
   try {
     const result = await s3.send(new GetBucketLifecycleConfigurationCommand({ Bucket: bucket }));
@@ -110,8 +142,9 @@ try {
         oldUnreferenced,
         oldUnreferencedMiB: oldUnreferencedBytes / 1048576,
         versioning: versioning.Status || "Not enabled",
+        previousVersions,
         lifecycle,
-        note: "No changes made. Counts are current objects only, not older S3 versions; unreferenced files require rechecking before deletion.",
+        note: "No changes made. Current objects and previous versions are counted separately; unreferenced files require rechecking before deletion.",
       },
       null,
       2,
