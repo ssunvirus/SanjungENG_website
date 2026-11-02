@@ -13,7 +13,7 @@ const maintenanceServices = [
   {
     number: "02",
     title: "수리 & 오버홀",
-    description: "주요 부품을 분해, 점검하고 마모·손상 부품을 정비",
+    description: "주요 부품을 분해, 점검하고 마모/손상 부품을 정비",
     image: "/images/chiller/maintenance-overhaul.png",
     alt: "냉동기 주요 부품 수리와 오버홀 작업",
     width: 400,

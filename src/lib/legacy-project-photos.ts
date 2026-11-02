@@ -1,6 +1,8 @@
+import { anseongDefrostPhotos } from "./anseong-defrost-photos.ts";
 import type { ProjectRecord } from "./project-record.ts";
 import { ansanPaintFactoryPhotos } from "./ansan-paint-factory-project.ts";
 import { hwaseongChillerPhotos } from "./hwaseong-chiller-photos.ts";
+import { hwaseongChillerRemovalPhotos } from "./hwaseong-chiller-removal-photos.ts";
 import { seoanseongValvePhotos } from "./seoanseong-valve-photos.ts";
 import { seoanseongCoolingTowerPhotos } from "./seoanseong-cooling-tower-photos.ts";
 import { pyeongtaekDuctCleaningPhotos } from "./pyeongtaek-duct-cleaning-photos.ts";
@@ -103,6 +105,8 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "anseong-cold-storage-defrost-maintenance": anseongDefrostPhotos,
+  "hwaseong-absorption-chiller-removal": hwaseongChillerRemovalPhotos,
   "seoanseong-cooling-tower-inspection": seoanseongCoolingTowerPhotos,
   "seoanseong-chiller-valve-replacement": seoanseongValvePhotos,
   "hwaseong-absorption-chiller-cleaning": hwaseongChillerPhotos,

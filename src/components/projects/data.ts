@@ -32,6 +32,34 @@ export const ansanPaintFactoryProject = {
 
 export const projects: Project[] = [
   {
+    id: "anseong-cold-storage-defrost-maintenance",
+    blogUrl: "https://blog.naver.com/sanjungeng/224366829288",
+    href: "/projects/anseong-cold-storage-defrost-maintenance",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "냉동창고 냉동설비 제상 및 유지보수",
+    description: "증발기 제상 작업 및 유지보수",
+    location: "안성시",
+    workDescription:
+      "냉동창고의 증발기 제상 작업과 냉동설비 정기점검을 진행하여 냉각 성능 저하를 예방하고, 창고 내부 온도가 안정적으로 유지될 수 있도록 정비하였습니다.",
+    image: "/images/projects/anseong-cold-storage-defrost-maintenance/photo-16.jpg",
+    imageTop: "0%",
+  },
+  {
+    id: "hwaseong-absorption-chiller-removal",
+    href: "/projects/hwaseong-absorption-chiller-removal",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "자원순환시설 노후 흡수식냉동기 철거",
+    description: "노후 흡수식 냉동기 철거 및 반출",
+    location: "화성시",
+    workDescription:
+      "흡수식 냉동기 철거를 위해 배관 분리, 장비 해체 및 반출 작업을 진행하였습니다.",
+    blogUrl: "https://blog.naver.com/sanjungeng/224457871630",
+    image: "/images/projects/hwaseong-absorption-chiller-removal/photo-01.jpg",
+    imageTop: "0%",
+  },
+  {
     id: "seoanseong-cooling-tower-inspection",
     href: "/projects/seoanseong-cooling-tower-inspection",
     category: "냉동공조",

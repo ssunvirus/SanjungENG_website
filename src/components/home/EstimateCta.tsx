@@ -91,8 +91,12 @@ export default function EstimateCta() {
             </p>
             <div className="flex flex-col gap-[6px]">
               <PhoneCall size={36} strokeWidth={1.8} aria-hidden="true" />
-              <p className="text-[23px] font-bold leading-[35px]">대표번호 : 010 - 5340 - 1728</p>
-              <p className="text-[23px] font-bold leading-[35px]">회사번호 : 02 - 891 - 1728</p>
+              <a href="tel:01053401728" className="text-[23px] font-bold leading-[35px]">
+                대표번호 : 010 - 5340 - 1728
+              </a>
+              <a href="tel:028911728" className="text-[23px] font-bold leading-[35px]">
+                회사번호 : 02 - 891 - 1728
+              </a>
             </div>
             <div className="flex items-center gap-3 text-[#D1E3ED]">
               <Mail size={30} strokeWidth={1.8} aria-hidden="true" />
