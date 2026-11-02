@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/chiller/CaseStudy";
 import ChillerTypes from "@/src/components/chiller/ChillerTypes";
-import ChillerFaq from "@/src/components/chiller/ChillerFaq";
+import EquipmentFaq from "@/src/components/shared/EquipmentFaq";
 import Hero from "@/src/components/chiller/Hero";
 import Maintenance from "@/src/components/chiller/Maintenance";
 import Services from "@/src/components/chiller/Services";
@@ -24,7 +24,7 @@ export default function SolutionsPage() {
       <Maintenance />
       <ChillerTypes />
       <CaseStudy />
-      <ChillerFaq />
+      <EquipmentFaq />
       <div className="lg:hidden">
         <MobileEstimate />
       </div>

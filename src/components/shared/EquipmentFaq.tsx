@@ -77,7 +77,7 @@ type FaqProps = {
   introduction?: string;
 };
 
-export default function ChillerFaq({
+export default function EquipmentFaq({
   categories: faqCategories = categories,
   questions: faqQuestions = questions,
   id = "chiller-faq",
@@ -157,7 +157,12 @@ export default function ChillerFaq({
             ))}
           </div>
         </div>
-        <div tabIndex={0} role="region" aria-label="자주 묻는 질문 목록" className="h-[380px] overflow-y-auto overscroll-contain bg-[#E3F6FC] p-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue lg:h-[540px] lg:p-6">
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label="자주 묻는 질문 목록"
+          className="h-[380px] overflow-y-auto overscroll-contain bg-[#E3F6FC] p-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue lg:h-[540px] lg:p-6"
+        >
           <div key={category} className="space-y-3">
             {filtered.map((item, index) => (
               <details

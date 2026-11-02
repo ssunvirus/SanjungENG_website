@@ -10,7 +10,7 @@ export default function BlogBanner({ projectId }: { projectId?: string }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="산정엔지니어링 공식 블로그에서 작업 과정 확인하기 (새 창)"
-      className="relative mx-auto mt-[21px] block h-auto w-full p-5 lg:p-0 lg:h-[268px] lg:w-[1268px] overflow-hidden rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
+      className="relative mx-auto mt-[21px] block h-auto w-full p-5 lg:p-0 lg:h-[268px] lg:max-w-[1268px] overflow-hidden rounded-[10px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
     >
       <div
         aria-hidden="true"

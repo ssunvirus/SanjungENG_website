@@ -23,7 +23,7 @@ const equipmentPoints = [
 
 export default function Equipment() {
   return (
-    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
+    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-10 py-[36px] lg:py-[60px]">
       <header className="text-center">
         <p className="text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
           COLD STORAGE SERVICE
@@ -37,8 +37,8 @@ export default function Equipment() {
         </p>
       </header>
 
-      <div className="mx-auto mt-[24px] lg:mt-[51px] flex flex-col lg:flex-row w-full lg:w-[1092px] gap-[28px] lg:gap-[52px]">
-        <div className="relative h-[260px] lg:h-[520px] w-full lg:w-[390px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="mx-auto mt-[24px] lg:mt-[51px] grid w-full max-w-[1200px] grid-cols-1 lg:grid-cols-[minmax(0,390fr)_minmax(0,666fr)] gap-[28px] lg:gap-[52px]">
+        <div className="relative h-[260px] lg:h-[520px] w-full min-w-0 shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
           <Image
             src="/images/cold-storage/equipment-overview.jpg"
             alt="저온저장고 냉동설비"
@@ -47,7 +47,7 @@ export default function Equipment() {
             className="object-cover"
           />
         </div>
-        <div className="flex w-full lg:w-[666px] flex-col gap-[16px] lg:gap-[30px]">
+        <div className="flex w-full min-w-0 flex-col gap-[16px] lg:gap-[30px]">
           {equipmentPoints.map((point, index) => (
             <article
               key={point.number}
@@ -60,10 +60,10 @@ export default function Equipment() {
                 <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
                   {point.number}
                 </p>
-                <h3 className="mt-[10px] lg:whitespace-nowrap text-[21px] lg:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-brand-navy">
+                <h3 className="mt-[10px] text-[21px] lg:text-[28px] xl:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-brand-navy">
                   {point.title}
                 </h3>
-                <p className="mt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[25px] font-semibold leading-6 lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-brand-text/80">
+                <p className="mt-[10px] text-[15px] lg:text-[20px] xl:text-[25px] font-semibold leading-6 lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-brand-text/80">
                   {point.description}
                 </p>
               </div>

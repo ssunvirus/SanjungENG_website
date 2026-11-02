@@ -15,7 +15,7 @@ const details = [
       </>
     ),
   },
-  { icon: FileText, title: "작업 결과", description: <>새로운 냉동기 설치 및 냉동 성능 향상</> },
+  { icon: FileText, title: "작업 결과", description: <>냉동설비 설치 완료 및 안정적인 저온저장고 환경 구축</> },
 ];
 
 export default function CaseStudy() {

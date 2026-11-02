@@ -1,4 +1,4 @@
-import ChillerFaq from "@/src/components/chiller/ChillerFaq";
+import EquipmentFaq from "@/src/components/shared/EquipmentFaq";
 
 const categories = ["전체", "설치 및 교체", "부품 교체 및 정비", "점검 및 유지관리"];
 const questions = [
@@ -54,7 +54,7 @@ const questions = [
 
 export default function CoolingTowerFaq() {
   return (
-    <ChillerFaq
+    <EquipmentFaq
       id="cooling-tower-faq"
       categories={categories}
       questions={questions}

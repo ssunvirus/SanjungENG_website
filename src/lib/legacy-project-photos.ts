@@ -205,7 +205,10 @@ export function legacyPhotoDimensions(
 ): LegacyProjectPhoto {
   const source = photo.src === cover ? legacyCoverAliases[id] || photo.src : photo.src;
   const original = legacyProjectPhotos[id]?.find((item) => item.src === source);
-  const caption = original?.caption !== undefined ? { caption: original.caption } : {};
+  const caption =
+    original?.caption !== undefined
+      ? { caption: photo.alt !== original.alt ? photo.alt : original.caption }
+      : {};
   const display = original?.displayWidth ? { displayWidth: original.displayWidth } : {};
   return original?.width !== undefined
     ? { ...photo, ...caption, ...display, width: original.width, height: original.height }

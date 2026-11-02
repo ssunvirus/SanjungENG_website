@@ -107,3 +107,17 @@ test("saved static photos retain captions including intentionally omitted captio
   assert.equal(gallery[4].caption, "");
   assert.ok(gallery[5].caption.includes("시운전 완료"));
 });
+
+test("admin-edited photo descriptions replace default captions, including clearing them", () => {
+  const id = "nonghyup-cold-storage";
+  const original = legacyProjectPhotos[id][0];
+  assert.equal(
+    legacyPhotoDimensions({ src: original.src, alt: "수정한 현장 설명" }, id).caption,
+    "수정한 현장 설명",
+  );
+  assert.equal(legacyPhotoDimensions({ src: original.src, alt: "" }, id).caption, "");
+  assert.equal(
+    legacyPhotoDimensions({ src: original.src, alt: original.alt }, id).caption,
+    original.caption,
+  );
+});

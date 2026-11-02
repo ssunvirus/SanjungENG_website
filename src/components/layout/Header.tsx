@@ -104,7 +104,10 @@ export default function Header() {
       }}
       className="sticky top-0 z-50 h-[64px] bg-white/90 shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px] lg:h-[90px]"
     >
-      <div aria-hidden="true" className={`pointer-events-none absolute inset-0 hidden origin-right bg-brand-navy transition-transform duration-700 ease-in-out motion-reduce:transition-none lg:block ${contactActive ? "scale-x-100" : "scale-x-0"}`} />
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 hidden origin-right bg-brand-navy transition-transform duration-700 ease-in-out motion-reduce:transition-none lg:block ${contactActive ? "scale-x-100" : "scale-x-0"}`}
+      />
       <div className="relative mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-5 lg:pl-[clamp(24px,12.5vw,240px)] lg:pr-0">
         <Link
           href="/"
@@ -147,14 +150,16 @@ export default function Header() {
                 const selectPreview = isFabric ? setFabricPreviewIndex : setPreviewIndex;
                 const preview = previews[selectedIndex];
                 return (
-                  <li key={menu.href} className="group relative shrink-0 text-center">
+                  <li key={menu.href} className="group shrink-0 text-center">
                     <Link
                       href={menu.href}
                       onClick={(event) => event.currentTarget.blur()}
                       className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-brand-blue after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
-                        contactActive ? "text-white after:w-0" : isMenuActive(menu.href)
-                          ? "text-[#006EB8] after:w-full"
-                          : "text-brand-text after:w-0"
+                        contactActive
+                          ? "text-white after:w-0"
+                          : isMenuActive(menu.href)
+                            ? "text-[#006EB8] after:w-full"
+                            : "text-brand-text after:w-0"
                       }`}
                     >
                       {menu.label}
@@ -162,7 +167,7 @@ export default function Header() {
                     {menu.submenu ? (
                       <div
                         aria-label={`${menu.label} 하위 메뉴`}
-                        className={`invisible absolute ${isFabric ? "left-[-300px]" : "left-[-150px]"} top-[calc(100%+8px)] z-50 grid w-[min(850px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[280px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-7 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none`}
+                        className={`invisible absolute left-1/2 -translate-x-1/2 top-full z-50 grid w-[min(850px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[280px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-7 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none`}
                       >
                         <ul className="space-y-2 border-r border-[#D1DFE8] pr-6">
                           {previews.map((item, index) => (
@@ -176,13 +181,13 @@ export default function Header() {
                                 className={`flex min-h-14 items-center justify-between gap-3 whitespace-nowrap rounded-full px-4 py-3 text-[22px] font-bold transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#EFF7FB] text-[#006EB8]" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
                               >
                                 {item.label}
-                                {(
+                                {
                                   <ChevronRight
                                     size={23}
                                     aria-hidden="true"
                                     className={`shrink-0 text-brand-blue ${selectedIndex === index ? "opacity-100" : "opacity-0"}`}
                                   />
-                                )}
+                                }
                               </Link>
                             </li>
                           ))}

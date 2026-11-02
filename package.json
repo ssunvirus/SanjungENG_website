@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test tests/*.test.mjs",
+    "assets:audit": "node scripts/audit-public-assets.mjs",
     "format": "prettier --write app src scripts tests eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json package.json",
     "format:check": "prettier --check app src scripts tests eslint.config.mjs next.config.ts postcss.config.mjs tsconfig.json package.json"
   },

@@ -1,4 +1,4 @@
-import ChillerFaq from "@/src/components/chiller/ChillerFaq";
+import EquipmentFaq from "@/src/components/shared/EquipmentFaq";
 
 const categories = ["전체", "설치 및 교체", "수리 및 정비", "점검 및 유지관리"];
 const questions = [
@@ -66,7 +66,7 @@ const questions = [
 
 export default function PrecisionAcFaq() {
   return (
-    <ChillerFaq
+    <EquipmentFaq
       id="precision-ac-faq"
       categories={categories}
       questions={questions}

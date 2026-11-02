@@ -14,7 +14,7 @@ const applications = [
 
 export default function Applications() {
   return (
-    <section className="mx-auto h-auto lg:h-[538px] w-full lg:max-w-[1440px] px-[20px] lg:px-[120px] py-[24px] lg:py-[60px]">
+    <section className="mx-auto h-auto  w-full lg:max-w-[1440px] px-[20px] lg:px-10 py-[24px] lg:py-[60px]">
       <SectionEyebrow>APPLICATIONS</SectionEyebrow>
       <h2 className="mt-[10px] lg:mt-[9px] text-[28px] lg:text-[51px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
         항온항습기가 필요한 공간
@@ -22,11 +22,11 @@ export default function Applications() {
       <p className="mt-[10px] lg:mt-[22px] text-[14px] lg:text-[17px] font-semibold">
         전산실부터 연구실, 생산시설까지, 요구 조건에 맞는 온/습도 관리를 지원합니다.
       </p>
-      <div className="mt-[24px] lg:mt-[37px] flex flex-col lg:flex-row gap-[16px] lg:gap-[21px]">
+      <div className="mt-[24px] lg:mt-[37px] grid grid-cols-1 lg:grid-cols-3 gap-[16px] lg:gap-[21px]">
         {applications.map(([number, title, description, image]) => (
           <article
             key={number}
-            className="h-auto lg:h-[240px] w-full lg:w-[386px] rounded-[11px] border border-transparent bg-white px-[20px] lg:px-[26px] py-[24px] lg:py-[21px] transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-brand-blue/60 hover:shadow-[0_8px_24px_rgba(16,46,73,0.10)] motion-reduce:transition-none"
+            className="h-auto lg:h-[240px] w-full min-w-0 rounded-[11px] border border-transparent bg-white px-[20px] lg:px-[26px] py-[24px] lg:py-[21px] transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-brand-blue/60 hover:shadow-[0_8px_24px_rgba(16,46,73,0.10)] motion-reduce:transition-none"
           >
             <div className="flex items-start justify-between">
               <div className="relative size-[100px]">

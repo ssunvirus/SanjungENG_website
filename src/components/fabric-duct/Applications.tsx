@@ -37,7 +37,6 @@ const slides: { title: string; image: string; description: string }[] = [
       "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 섬유덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
   },
 ];
-const underlinePositions = [0, 370, 740, 1110];
 
 export default function Applications() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -51,7 +50,7 @@ export default function Applications() {
   return (
     <section
       id="fabric-case"
-      className="mx-auto h-auto w-full lg:max-w-[1440px] mb-9 lg:mb-[100px] scroll-mt-[110px] px-5 lg:px-0 lg:pl-[46px] pt-[24px] lg:pt-[36.12px]"
+      className="mx-auto h-auto w-full lg:max-w-[1440px] mb-9 lg:mb-[100px] scroll-mt-[110px] px-5 lg:px-10 pt-[24px] lg:pt-[36.12px]"
     >
       <div className="h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="APPLICATION" title="다양한 공간에 적용됩니다.">
@@ -64,7 +63,7 @@ export default function Applications() {
       <div
         role="tablist"
         aria-label="섬유덕트 적용 공간"
-        className="mt-[24px] lg:mt-[63.118px] grid grid-cols-2 lg:flex gap-x-4 gap-y-3 lg:gap-[60px] font-semibold"
+        className="mt-[24px] lg:mt-[63.118px] grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-3 lg:gap-6 font-semibold"
       >
         {applications.map(([title, description], index) => (
           <button
@@ -87,14 +86,14 @@ export default function Applications() {
               selectTab(nextIndex, true);
             }}
             key={title}
-            className={`min-h-12 min-w-0 w-full lg:w-[310px] shrink-0 cursor-pointer border-b-2 pb-3 text-left lg:border-0 lg:pb-0 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand-blue ${index === activeIndex ? "border-brand-blue" : "border-[#B7C6CF]"}`}
+            className={`min-h-12 min-w-0 w-full cursor-pointer border-b-2 pb-3 text-left lg:border-0 lg:pb-0 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand-blue ${index === activeIndex ? "border-brand-blue" : "border-[#B7C6CF]"}`}
           >
             <span
               className={`mb-2 block text-base lg:text-[25px] leading-6 lg:leading-[30px] transition-colors ${index === activeIndex ? "text-brand-blue" : "text-brand-navy/80"}`}
             >
               {title}
             </span>
-            <span className="mt-[6px] hidden lg:block lg:whitespace-nowrap text-[20px] leading-[24px] text-brand-navy/60">
+            <span className="mt-[6px] hidden lg:block break-keep text-[20px] leading-[24px] text-brand-navy/60">
               {description}
             </span>
           </button>
@@ -103,22 +102,10 @@ export default function Applications() {
       <p className="mt-4 text-sm leading-6 text-brand-navy/70 lg:hidden">
         {applications[activeIndex][1]}
       </p>
-      <div className="hidden lg:block relative ml-[4px] mt-[24px] lg:mt-[26px]">
-        <Image
-          src="/images/fabric-duct/application-line.svg"
-          width={1363}
-          height={2}
-          alt=""
-          aria-hidden="true"
-        />
-        <Image
-          src="/images/fabric-duct/application-active-line.svg"
-          width={253}
-          height={2}
-          alt=""
-          aria-hidden="true"
-          className="absolute left-0 top-0 transition-transform duration-300 motion-reduce:transition-none"
-          style={{ transform: `translateX(${underlinePositions[activeIndex]}px)` }}
+      <div aria-hidden="true" className="relative mt-6 hidden h-0.5 bg-brand-navy/20 lg:block">
+        <span
+          className="absolute left-0 top-0 h-0.5 w-1/4 bg-brand-blue transition-transform duration-300 motion-reduce:transition-none"
+          style={{ transform: `translateX(${activeIndex * 100}%)` }}
         />
       </div>
       <div
@@ -126,9 +113,9 @@ export default function Applications() {
         id="fabric-application-panel"
         aria-labelledby={`fabric-application-tab-${activeIndex}`}
         tabIndex={0}
-        className="mt-[24px] lg:mt-[26px] flex flex-col lg:flex-row gap-[28px] lg:gap-[36px] focus-visible:outline-2 focus-visible:outline-brand-blue"
+        className="mt-[24px] lg:mt-[26px] grid grid-cols-1 lg:grid-cols-[minmax(0,904fr)_minmax(0,428fr)] gap-[28px] lg:gap-[36px] focus-visible:outline-2 focus-visible:outline-brand-blue"
       >
-        <figure className="relative aspect-[904/504] lg:aspect-auto lg:h-[504px] w-full lg:w-[904px] shrink-0 overflow-hidden rounded-[10px]">
+        <figure className="relative aspect-[904/504] lg:aspect-auto lg:h-[504px] w-full min-w-0 overflow-hidden rounded-[10px]">
           <div
             className={
               activeIndex === 1
@@ -155,7 +142,7 @@ export default function Applications() {
             {slide.title}
           </figcaption>
         </figure>
-        <div className="w-full lg:w-[428px] pt-0 lg:pt-[38px]">
+        <div className="w-full min-w-0 pt-0 lg:pt-[38px]">
           <p className="flex h-9 lg:h-[47px] w-fit lg:min-w-[187px] items-center justify-center border-[1.5px] border-brand-blue px-[20px] lg:px-[21px] text-[16px] lg:text-[25px] leading-[24px] lg:leading-[35px] text-brand-blue">
             {applications[activeIndex][0]}
           </p>

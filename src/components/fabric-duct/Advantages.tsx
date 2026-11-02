@@ -51,13 +51,13 @@ export default function Advantages() {
           }
         />
       </div>
-      <div className="mt-[24px] lg:mt-[41px] flex flex-col lg:flex-row w-full lg:w-[1276px] items-center gap-[16px]">
+      <div className="mt-[24px] lg:mt-[41px] grid w-full max-w-[1276px] grid-cols-1 lg:grid-cols-[minmax(0,717fr)_minmax(0,543fr)] items-center gap-[16px]">
         <AdvantagesGallery />
-        <div className="flex w-full lg:w-[543px] flex-col gap-[16px] lg:gap-[27px]">
-          {advantages.map((advantage, index) => (
+        <div className="flex w-full min-w-0 flex-col gap-[16px] lg:gap-[27px]">
+          {advantages.map((advantage) => (
             <article
               key={advantage.title}
-              className={`flex h-auto lg:h-[158px] w-full lg:w-[539px] items-center gap-4 lg:gap-[33px] rounded-[20px] bg-white/60 px-4 lg:px-[47px] py-4 lg:py-[14px] ${index ? "ml-[4px]" : ""}`}
+              className="flex min-h-[158px] w-full items-center gap-4 rounded-[20px] bg-white/60 px-4 py-4 xl:gap-6 xl:px-8"
             >
               <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-brand-blue/10">
                 <div
@@ -74,7 +74,7 @@ export default function Advantages() {
                   </div>
                 </div>
               </div>
-              <div className="min-w-0 flex-1 lg:flex-none w-full lg:w-[278px] font-bold leading-[1.45]">
+              <div className="min-w-0 flex-1 font-bold leading-[1.45]">
                 <h3 className="text-[16px] lg:text-[25px] text-brand-navy">{advantage.title}</h3>
                 <p className="mt-[10px] lg:mt-[9px] text-[14px] lg:text-[15px] text-brand-navy/80">
                   {advantage.description[0]}

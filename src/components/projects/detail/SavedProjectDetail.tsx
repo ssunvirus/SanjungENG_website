@@ -32,7 +32,7 @@ export default function SavedProjectDetail({
           title={project.title}
           description=""
           category={project.category}
-          work={project.category}
+          work={project.summary?.trim() || base?.description || "?"}
           location={project.location || "—"}
         />
         {project.description && (

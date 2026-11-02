@@ -16,8 +16,8 @@ const items = [
 
 export default function Maintenance() {
   return (
-    <section className="mx-auto h-auto lg:h-[798.725px] w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[24px] lg:py-[60px]">
-      <header className="h-auto lg:h-[140.882px] w-full lg:w-[1200px]">
+    <section className="mx-auto h-auto  w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-10 py-[24px] lg:py-[60px]">
+      <header className="h-auto  w-full ">
         <div className="flex items-center gap-[16px] lg:gap-[17.647px] text-[14px] lg:text-[17.65px] font-medium tracking-[3px] lg:tracking-[5.295px] text-brand-blue/60">
           MAINTENANCE <span className="h-[1.76px] w-[40.858px] bg-current" />
         </div>
@@ -29,7 +29,7 @@ export default function Maintenance() {
         </p>
       </header>
 
-      <div className="mt-[24px] lg:mt-[36.667px] grid h-auto lg:h-[501.176px] w-full lg:w-[1200px] grid-cols-2 lg:grid-cols-3 gap-[16px] lg:gap-[21.176px]">
+      <div className="mt-[24px] lg:mt-[36.667px] grid h-auto  w-full  grid-cols-2 lg:grid-cols-3 gap-[16px] lg:gap-[21.176px]">
         {items.map(([number, title, description, image]) => (
           <article
             key={number}
