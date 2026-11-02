@@ -41,7 +41,7 @@ export const projects: Project[] = [
     description: "증발기 제상 작업 및 유지보수",
     location: "안성시",
     workDescription:
-      "냉동창고의 증발기 제상 작업과 냉동설비 정기점검을 진행하여 냉각 성능 저하를 예방하고, 창고 내부 온도가 안정적으로 유지될 수 있도록 정비하였습니다.",
+      "냉동창고의 증발기 제상 작업과 냉동설비 정기점검을 진행하여 냉각 성능 저하를 예방하고,\n창고 내부 온도가 안정적으로 유지될 수 있도록 정비하였습니다.",
     image: "/images/projects/anseong-cold-storage-defrost-maintenance/photo-16.jpg",
     imageTop: "0%",
   },

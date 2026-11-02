@@ -9,8 +9,8 @@ export default function WonsamGallery() {
   return (
     <ProjectGalleryLayout>
       {photos.map((photo, index) => (
-        <figure
-          key={photo.src}
+        <figure key={photo.src}>
+          <div
           className={`relative overflow-hidden lg:h-[563px] ${index === 5 ? "aspect-[3/4] lg:aspect-auto" : "aspect-[4/3] lg:aspect-auto"}`}
         >
           <div
@@ -40,6 +40,10 @@ export default function WonsamGallery() {
               className="absolute bottom-[34px] left-1/2 -translate-x-1/2 text-[#1D1B20]"
             />
           )}
+          </div>
+          <figcaption className="px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
+            {photo.caption}
+          </figcaption>
         </figure>
       ))}
     </ProjectGalleryLayout>

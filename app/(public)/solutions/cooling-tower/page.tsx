@@ -4,6 +4,9 @@ import Hero from "@/src/components/cooling-tower/Hero";
 import Maintenance from "@/src/components/cooling-tower/Maintenance";
 import Services from "@/src/components/cooling-tower/Services";
 import WorkProcess from "@/src/components/cooling-tower/WorkProcess";
+import CoolingTowerFaq from "@/src/components/cooling-tower/CoolingTowerFaq";
+import EstimateCta from "@/src/components/home/EstimateCta";
+import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cooling-tower" },
@@ -20,6 +23,13 @@ export default function CoolingTowerPage() {
       <Maintenance />
       <WorkProcess />
       <CaseStudy />
+      <CoolingTowerFaq />
+      <div className="lg:hidden">
+        <MobileEstimate />
+      </div>
+      <div className="hidden lg:block">
+        <EstimateCta />
+      </div>
     </main>
   );
 }

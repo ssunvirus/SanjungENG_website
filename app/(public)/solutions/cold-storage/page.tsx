@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/cold-storage/CaseStudy";
+import ColdStorageFaq from "@/src/components/cold-storage/ColdStorageFaq";
 import Equipment from "@/src/components/cold-storage/Equipment";
 import Hero from "@/src/components/cold-storage/Hero";
 import WorkProcess from "@/src/components/cold-storage/WorkProcess";
+import EstimateCta from "@/src/components/home/EstimateCta";
+import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cold-storage" },
@@ -18,6 +21,13 @@ export default function ColdStoragePage() {
       <Equipment />
       <WorkProcess />
       <CaseStudy />
+      <ColdStorageFaq />
+      <div className="lg:hidden">
+        <MobileEstimate />
+      </div>
+      <div className="hidden lg:block">
+        <EstimateCta />
+      </div>
     </main>
   );
 }

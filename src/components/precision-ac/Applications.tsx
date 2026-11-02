@@ -26,7 +26,7 @@ export default function Applications() {
         {applications.map(([number, title, description, image]) => (
           <article
             key={number}
-            className="h-auto lg:h-[240px] w-full lg:w-[386px] rounded-[11px] bg-white px-[20px] lg:px-[26px] py-[24px] lg:py-[21px]"
+            className="h-auto lg:h-[240px] w-full lg:w-[386px] rounded-[11px] border border-transparent bg-white px-[20px] lg:px-[26px] py-[24px] lg:py-[21px] transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-brand-blue/60 hover:shadow-[0_8px_24px_rgba(16,46,73,0.10)] motion-reduce:transition-none"
           >
             <div className="flex items-start justify-between">
               <div className="relative size-[100px]">

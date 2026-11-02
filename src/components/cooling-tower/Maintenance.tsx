@@ -33,7 +33,7 @@ export default function Maintenance() {
         {items.map(([number, title, description, image]) => (
           <article
             key={number}
-            className="min-h-[220px] h-auto lg:h-[240px] rounded-[10.588px] bg-[#EFF7FB] px-3 lg:px-[26.471px] py-[24px] lg:py-[21.176px]"
+            className="min-h-[220px] h-auto lg:h-[240px] rounded-[10.588px] border border-transparent bg-[#EFF7FB] px-3 lg:px-[26.471px] py-[24px] lg:py-[21.176px] transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-1 hover:border-brand-blue/60 hover:shadow-[0_8px_24px_rgba(16,46,73,0.10)] motion-reduce:transition-none"
           >
             <div className="flex h-[64px] lg:h-[100.588px] items-start justify-between">
               <Image

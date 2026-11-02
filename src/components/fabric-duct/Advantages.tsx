@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
+import AdvantagesGallery from "./AdvantagesGallery";
 
 const advantages = [
   {
@@ -37,7 +38,7 @@ const advantages = [
 export default function Advantages() {
   return (
     <section className="mx-auto w-full lg:max-w-[1440px] px-[20px] lg:px-[51px] py-[36px] lg:py-[70px]">
-      <div className="h-auto lg:h-[170.882px]">
+      <div>
         <SectionHeading
           eyebrow="ADVANTAGES"
           title={
@@ -48,25 +49,10 @@ export default function Advantages() {
               </span>
             </>
           }
-        >
-          <p className="hidden lg:block">섬유덕트는 섬유 소재로 제작된 공기 분배 시스템으로,</p>
-          <p className="hidden lg:block">
-            공간 전체에 공기를 균일하게 배분하여 특정 구역에 냉기나 열기가 집중되는 현상을 줄이고,
-            보다 균일한 실내 환경을 만듭니다.
-          </p>
-        </SectionHeading>
+        />
       </div>
       <div className="mt-[24px] lg:mt-[41px] flex flex-col lg:flex-row w-full lg:w-[1276px] items-center gap-[16px]">
-        <div className="relative h-[240px] lg:h-[528px] w-full lg:w-[717px] shrink-0">
-          <Image
-            src="/images/fabric-duct/advantages.png"
-            alt="기계실에 설치된 섬유덕트"
-            fill
-            sizes="717px"
-            quality={100}
-            className="object-cover"
-          />
-        </div>
+        <AdvantagesGallery />
         <div className="flex w-full lg:w-[543px] flex-col gap-[16px] lg:gap-[27px]">
           {advantages.map((advantage, index) => (
             <article

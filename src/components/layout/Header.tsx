@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
+import { Search, Menu, X, ChevronDown, ChevronRight, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -29,10 +29,57 @@ const menus = [
   { label: "시공사례", href: "/projects" },
 ];
 
+const solutionPreviews = [
+  {
+    label: "냉동기",
+    href: "/solutions",
+    image: "chiller.png",
+    description: "산업 현장에 맞는 냉동기 설치, 교체, 유지보수 및 철거",
+  },
+  {
+    label: "저온저장고",
+    href: "/solutions/cold-storage",
+    image: "cold-storage.png",
+    description: "보관 환경에 맞춘 CDU, 유니트쿨러 설치 및 냉동설비 시공",
+  },
+  {
+    label: "냉각탑",
+    href: "/solutions/cooling-tower",
+    image: "cooling-tower.png",
+    description: "냉각탑 설치와 교체, 충진물 및 주요 부품 정비",
+  },
+  {
+    label: "항온항습기",
+    href: "/solutions/precision-ac",
+    image: "precision-ac.png",
+    description: "공간의 온도/습도 조건에 맞춘 설치, 수리 및 정기점검",
+  },
+];
+
+const fabricPreviews = [
+  {
+    label: "섬유덕트 솔루션",
+    href: "/fabric-duct",
+    image: "fabric-duct.png",
+    description: "공간과 공기 흐름에 맞춘 섬유덕트 설계, 설치 및 유지관리",
+  },
+  {
+    label: "인증서 & 카탈로그",
+    href: "/fabric-duct/resources",
+    image: "fabric-resources.png",
+    description: "섬유덕트 제품 인증서와 카탈로그를 확인해보세요.",
+  },
+];
+
 export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [previewIndex, setPreviewIndex] = useState(0);
+  const [fabricPreviewIndex, setFabricPreviewIndex] = useState(0);
+  const [contactHovered, setContactHovered] = useState(false);
+  const [contactFocused, setContactFocused] = useState(false);
+  const contactActive = contactHovered || contactFocused;
 
   function closeMobileMenu() {
     setMobileOpen(false);
@@ -57,7 +104,8 @@ export default function Header() {
       }}
       className="sticky top-0 z-50 h-[64px] bg-white/90 shadow-[0_4px_5px_rgba(0,0,0,0.25)] backdrop-blur-[5px] lg:h-[90px]"
     >
-      <div className="mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-5 lg:pl-[clamp(24px,12.5vw,240px)] lg:pr-0">
+      <div aria-hidden="true" className={`pointer-events-none absolute inset-0 hidden origin-right bg-brand-navy transition-transform duration-700 ease-in-out motion-reduce:transition-none lg:block ${contactActive ? "scale-x-100" : "scale-x-0"}`} />
+      <div className="relative mx-auto flex h-full w-full max-w-[1920px] items-center justify-between px-5 lg:pl-[clamp(24px,12.5vw,240px)] lg:pr-0">
         <Link
           href="/"
           onClick={closeMobileMenu}
@@ -65,7 +113,7 @@ export default function Header() {
           aria-label="산정엔지니어링 메인으로 이동"
         >
           <Image
-            src="/logo-default.svg"
+            src={contactActive ? "/logo-white.svg" : "/logo-default.svg"}
             alt="산정엔지니어링"
             width={158}
             height={48}
@@ -92,45 +140,92 @@ export default function Header() {
         <div className="hidden h-full items-center gap-[clamp(24px,7.1875vw,138px)] lg:flex">
           <nav aria-label="주요 메뉴">
             <ul className="flex items-center justify-center gap-[clamp(20px,3.125vw,60px)]">
-              {menus.map((menu) => (
-                <li key={menu.href} className="group relative shrink-0 text-center">
-                  <Link
-                    href={menu.href}
-                    onClick={(event) => event.currentTarget.blur()}
-                    className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-brand-blue after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
-                      isMenuActive(menu.href)
-                        ? "text-[#006EB8] after:w-full"
-                        : "text-brand-text after:w-0"
-                    }`}
-                  >
-                    {menu.label}
-                  </Link>
-                  {menu.submenu && (
-                    <ul
-                      className="invisible absolute left-1/2 top-[calc(100%+8px)] z-50 w-[202px] -translate-x-1/2 translate-y-[-4px] rounded-[6px] border border-[#D1DFE8] bg-white p-[8px] text-left opacity-0 shadow-[0_3px_6px_rgba(0,0,0,0.25)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[9px] before:left-0 before:h-[9px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
-                      aria-label={`${menu.label} 하위 메뉴`}
+              {menus.map((menu) => {
+                const isFabric = menu.href === "/fabric-duct";
+                const previews = isFabric ? fabricPreviews : solutionPreviews;
+                const selectedIndex = isFabric ? fabricPreviewIndex : previewIndex;
+                const selectPreview = isFabric ? setFabricPreviewIndex : setPreviewIndex;
+                const preview = previews[selectedIndex];
+                return (
+                  <li key={menu.href} className="group relative shrink-0 text-center">
+                    <Link
+                      href={menu.href}
+                      onClick={(event) => event.currentTarget.blur()}
+                      className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-brand-blue after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
+                        contactActive ? "text-white after:w-0" : isMenuActive(menu.href)
+                          ? "text-[#006EB8] after:w-full"
+                          : "text-brand-text after:w-0"
+                      }`}
                     >
-                      {menu.submenu.map((submenu) => (
-                        <li key={submenu.label}>
-                          <Link
-                            href={submenu.href}
-                            onClick={(event) => event.currentTarget.blur()}
-                            className="flex h-[61px] items-center px-[8px] text-[20px] font-bold tracking-[-0.5px] text-brand-text/80 transition-colors hover:rounded-[9px] hover:bg-[#EFF7FB] hover:text-[#006EB8] focus-visible:rounded-[9px] focus-visible:bg-[#EFF7FB] focus-visible:text-[#006EB8] focus-visible:outline-none"
-                          >
-                            {submenu.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+                      {menu.label}
+                    </Link>
+                    {menu.submenu ? (
+                      <div
+                        aria-label={`${menu.label} 하위 메뉴`}
+                        className={`invisible absolute ${isFabric ? "left-[-300px]" : "left-[-150px]"} top-[calc(100%+8px)] z-50 grid w-[min(850px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[280px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-7 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none`}
+                      >
+                        <ul className="space-y-2 border-r border-[#D1DFE8] pr-6">
+                          {previews.map((item, index) => (
+                            <li key={item.href}>
+                              <Link
+                                href={item.href}
+                                onMouseEnter={() => selectPreview(index)}
+                                onFocus={() => selectPreview(index)}
+                                onClick={(event) => event.currentTarget.blur()}
+                                aria-current={pathname === item.href ? "page" : undefined}
+                                className={`flex min-h-14 items-center justify-between gap-3 whitespace-nowrap rounded-full px-4 py-3 text-[22px] font-bold transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#EFF7FB] text-[#006EB8]" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
+                              >
+                                {item.label}
+                                {(
+                                  <ChevronRight
+                                    size={23}
+                                    aria-hidden="true"
+                                    className={`shrink-0 text-brand-blue ${selectedIndex === index ? "opacity-100" : "opacity-0"}`}
+                                  />
+                                )}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="flex min-w-0 items-center gap-6">
+                          <div className="relative size-[120px] shrink-0 overflow-hidden rounded-3xl bg-[#EFF7FB]">
+                            <Image
+                              src={`/images/navigation/${preview.image}`}
+                              alt=""
+                              fill
+                              sizes="120px"
+                              className={`object-contain ${isFabric ? "[filter:hue-rotate(-25deg)]" : ""}`}
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-[32px] font-bold text-brand-navy">{preview.label}</p>
+                            <p className="mt-3 break-keep text-[18px] font-medium leading-7 text-brand-text/80">
+                              {preview.description}
+                            </p>
+                            <Link
+                              href={preview.href}
+                              onClick={(event) => event.currentTarget.blur()}
+                              className="mt-6 inline-flex items-center gap-3 rounded text-xl font-bold text-brand-blue focus-visible:outline-2 focus-visible:outline-brand-blue"
+                            >
+                              자세히 보기 <ArrowRight size={23} aria-hidden="true" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}{" "}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
           <Link
             href="/contact"
-            className="flex h-[90px] w-[clamp(200px,21.2vw,407px)] items-center justify-center gap-[12px] bg-brand-navy text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)]"
+            onMouseEnter={() => setContactHovered(true)}
+            onMouseLeave={() => setContactHovered(false)}
+            onFocus={() => setContactFocused(true)}
+            onBlur={() => setContactFocused(false)}
+            className="group/contact relative isolate flex h-[90px] w-[clamp(200px,21.2vw,407px)] items-center justify-center gap-[12px] overflow-hidden bg-brand-navy text-[30px] font-bold text-white [clip-path:polygon(32px_0,100%_0,100%_100%,0_100%)] focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-white"
           >
             <Search size={30} strokeWidth={2.5} aria-hidden="true" />
             <span className="whitespace-nowrap">견적문의</span>

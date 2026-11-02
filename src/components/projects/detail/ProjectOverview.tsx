@@ -1,14 +1,4 @@
-import Image from "next/image";
-import { MapPin, Settings } from "lucide-react";
-
-function Divider() {
-  return (
-    <div
-      aria-hidden="true"
-      className="hidden lg:block h-[117px] w-[2px] shrink-0 bg-brand-navy/20"
-    />
-  );
-}
+import { MapPin, Settings, Snowflake } from "lucide-react";
 
 export type ProjectOverviewProps = {
   title?: string;
@@ -34,43 +24,40 @@ export default function ProjectOverview({
         <h1 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
           {title}
         </h1>
-        <p className="mt-3 lg:mt-[21px] text-[15px] lg:text-[20px] leading-[24px] text-brand-navy/80">
+        <p className="mx-auto mt-3 max-w-[1100px] whitespace-pre-line break-keep text-[15px] leading-7 text-brand-navy/80 lg:mt-[21px] lg:text-[20px] lg:leading-8">
           {description}
         </p>
       </header>
-      <dl className="mt-6 lg:mt-[37px] flex flex-col lg:flex-row h-auto lg:h-[139px] items-stretch lg:items-center justify-center gap-5 lg:gap-[64px] p-5 lg:p-0 rounded-[10px] bg-white">
-        <div className="flex items-center gap-4 lg:gap-[30px]">
-          <Image
-            src="/images/projects/wonsam-nonghyup/snowflake.svg"
-            width={70}
-            height={70}
-            alt=""
-            aria-hidden="true"
-            className="size-10 shrink-0 lg:size-[70px]"
-          />
-          <div className="min-w-0 flex-1 lg:flex-none lg:w-[152px]">
-            <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">공사구분</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
+      <dl className="mx-auto mt-6 grid max-w-[1200px] grid-cols-2 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-[0_4px_20px_rgba(16,46,73,0.04)] lg:mt-[37px] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex min-w-0 items-start gap-3 p-5 lg:gap-4 lg:p-7">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
+            <Snowflake size={25} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">공사구분</dt>
+            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {category}
             </dd>
           </div>
         </div>
-        <Divider />
-        <div className="flex items-center gap-4 lg:gap-[30px]">
-          <Settings size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
-          <div className="min-w-0 flex-1 lg:flex-none lg:w-[332px]">
-            <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">주요 작업</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
+        <div className="col-span-2 row-start-2 flex min-w-0 items-start gap-3 border-t border-brand-navy/10 p-5 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:gap-4 lg:border-l lg:border-t-0 lg:p-7">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
+            <Settings size={25} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">주요 작업</dt>
+            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {work}
             </dd>
           </div>
         </div>
-        <Divider />
-        <div className="flex items-center gap-4 lg:gap-[30px]">
-          <MapPin size={70} className="size-10 shrink-0 lg:size-[70px]" aria-hidden="true" />
-          <div className="min-w-0 flex-1 lg:flex-none lg:min-w-[160px] lg:whitespace-nowrap">
-            <dt className="text-sm lg:text-[20px] font-bold leading-[24px]">현장 위치</dt>
-            <dd className="mt-1 lg:mt-[9px] text-lg lg:text-[30px] font-medium leading-7 lg:leading-[36px] text-brand-blue">
+        <div className="col-start-2 row-start-1 flex min-w-0 items-start gap-3 border-l border-brand-navy/10 p-5 lg:col-start-3 lg:gap-4 lg:p-7">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
+            <MapPin size={25} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">현장 위치</dt>
+            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {location}
             </dd>
           </div>

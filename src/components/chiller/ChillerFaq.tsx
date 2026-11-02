@@ -68,22 +68,38 @@ const questions = [
   },
 ];
 
-export default function ChillerFaq() {
+type FaqProps = {
+  categories?: string[];
+  questions?: { category: string; question: string; answer: string }[];
+  id?: string;
+  image?: string;
+  imageFit?: "cover" | "contain";
+  introduction?: string;
+};
+
+export default function ChillerFaq({
+  categories: faqCategories = categories,
+  questions: faqQuestions = questions,
+  id = "chiller-faq",
+  image = "/images/chiller/hero-indoor-chillers.jpg",
+  imageFit = "cover",
+  introduction = "설치, 수리, 정기점검, 철거까지",
+}: FaqProps = {}) {
   const [category, setCategory] = useState("전체");
-  const filtered = questions.filter((item) => category === "전체" || item.category === category);
+  const filtered = faqQuestions.filter((item) => category === "전체" || item.category === category);
   return (
     <section
-      aria-labelledby="chiller-faq-title"
+      aria-labelledby={`${id}-title`}
       className="mx-auto w-full max-w-[1440px] px-5 py-12 lg:px-10 lg:py-16"
     >
       <div className="grid overflow-hidden rounded-2xl bg-brand-navy shadow-[0_8px_32px_rgba(16,46,73,0.12)] lg:grid-cols-[0.95fr_1.05fr]">
         <div className="relative isolate flex min-h-[430px] flex-col p-7 text-white lg:h-[540px] lg:min-h-0 lg:p-6">
           <Image
-            src="/images/chiller/hero-indoor-chillers.jpg"
+            src={image}
             alt=""
             fill
             sizes="(min-width: 1440px) 740px, 100vw"
-            className="-z-20 object-cover"
+            className={`-z-20 ${imageFit === "contain" ? "object-contain" : "object-cover"}`}
           />
           <div
             aria-hidden="true"
@@ -94,13 +110,13 @@ export default function ChillerFaq() {
             <span aria-hidden="true" className="h-0.5 w-10 bg-brand-blue" />
           </p>
           <h2
-            id="chiller-faq-title"
+            id={`${id}-title`}
             className="mt-5 text-[32px] font-bold leading-tight lg:text-[38px]"
           >
             자주 묻는 <span className="text-brand-blue">질문</span>
           </h2>
           <p className="mt-4 max-w-[370px] text-base font-medium leading-7 text-white/80">
-            설치, 수리, 정기점검, 철거까지
+            {introduction}
             <br />
             문의 전 궁금한 내용을 확인해보세요.
           </p>
@@ -128,7 +144,7 @@ export default function ChillerFaq() {
             aria-label="질문 분야 선택"
             className="relative z-10 mt-auto flex flex-wrap gap-2 pt-5"
           >
-            {categories.map((item) => (
+            {faqCategories.map((item) => (
               <button
                 key={item}
                 type="button"
@@ -136,7 +152,7 @@ export default function ChillerFaq() {
                 onClick={() => setCategory(item)}
                 className={`rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${category === item ? "border-brand-blue bg-brand-blue text-white" : "border-white/25 bg-white/10 text-white hover:bg-white/20"}`}
               >
-                {item} ({questions.filter((q) => item === "전체" || q.category === item).length})
+                {item} ({faqQuestions.filter((q) => item === "전체" || q.category === item).length})
               </button>
             ))}
           </div>
@@ -146,7 +162,7 @@ export default function ChillerFaq() {
             {filtered.map((item, index) => (
               <details
                 key={item.question}
-                name="chiller-faq"
+                name={id}
                 open={index === 0}
                 className="group overflow-hidden rounded-xl border border-brand-navy/10 bg-white"
               >
@@ -170,7 +186,7 @@ export default function ChillerFaq() {
                   >
                     A
                   </span>
-                  <p className="text-[15px] font-medium leading-7 text-brand-text/80">
+                  <p className="whitespace-pre-line text-[15px] font-medium leading-7 text-brand-text/80">
                     {item.answer}
                   </p>
                 </div>

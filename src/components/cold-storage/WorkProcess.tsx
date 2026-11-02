@@ -46,50 +46,46 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-brand-blue/5 px-5 py-9 lg:px-[120px] lg:py-[60px]">
-      <p className="flex items-center gap-[20px] text-xs lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
-        WORK PROCESS <span className="h-[2px] w-[46px] bg-current" />
+    <section className="mx-auto w-full bg-[#E3F6FC] px-5 py-9 lg:max-w-[1600px] lg:px-10 lg:py-[64px]">
+      <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]">
+        WORK PROCESS <span className="h-[2px] w-[46px] bg-brand-blue/60" />
       </p>
-      <h2 className="mt-[10px] text-[28px] lg:text-[50px] font-bold lg:tracking-[1px] text-brand-navy">
+      <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-brand-navy lg:mt-[10px] lg:text-[50px] lg:tracking-[2.5px]">
         저온저장고 냉동설비 이렇게 시공합니다.
       </h2>
-      <p className="mt-[25px] text-[15px] lg:text-[19px] font-semibold text-brand-text">
+      <p className="mt-3 text-[15px] font-semibold text-brand-text lg:mt-[25px] lg:text-[19px]">
         냉동설비 입고부터 배관, 제어까지, 모두 책임지고 수행합니다.
       </p>
 
-      <div className="mt-7 grid grid-cols-2 gap-x-3 gap-y-7 lg:mt-[60px] lg:grid-cols-4 lg:gap-[15px]">
+      <div className="relative mt-8 lg:mt-10">
+        <ol className="relative z-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {steps.map((step, index) => (
-          <article key={step.number} className="min-w-0 text-center">
-            <div className="relative h-[180px] sm:h-[260px] lg:h-[400px] overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+          <li key={step.number} className="group min-w-0 overflow-hidden rounded-xl border border-brand-navy/10 bg-white shadow-[0_4px_16px_rgba(16,46,73,0.08)] transition-[border-color,box-shadow,transform] duration-200 hover:border-brand-blue hover:shadow-[0_8px_24px_rgba(0,173,219,0.15)] motion-safe:hover:-translate-y-1 motion-reduce:transition-none">
+            <div className="relative h-[300px] overflow-hidden bg-[#F1FAFD] sm:h-[340px] lg:h-[410px]">
               <Image
                 src={step.image}
                 alt={`${step.title} 작업 현장`}
                 fill
-                sizes="(max-width: 1023px) 45vw, 300px"
+                sizes="(min-width: 1440px) 365px, (min-width: 640px) 45vw, 90vw"
                 quality={100}
                 unoptimized={step.number === "04"}
                 className={`object-cover ${index === 3 ? "object-[60%_center]" : ""}`}
               />
             </div>
-            <div className="relative mt-5 lg:mt-[40px]">
-              {index < 3 && (
-                <span
-                  aria-hidden="true"
-                  className="absolute left-[calc(50%+60px)] right-[calc(-50%+60px)] top-[38px] hidden lg:block h-[2px] bg-brand-blue"
-                />
-              )}
-              <span className="relative z-10 mx-auto flex size-11 lg:size-[76px] items-center justify-center rounded-full bg-brand-blue text-lg lg:text-[30px] font-bold text-white">
-                {step.number}
+            <div className="relative px-5 pb-6 pt-8">
+              <span className="absolute -top-5 left-5 inline-flex h-10 items-center gap-2 rounded-full border-[3px] border-white bg-brand-blue px-4 text-sm font-bold tracking-wide text-white shadow-sm">
+                STEP <span className="text-lg tabular-nums">{Number(step.number)}</span>
               </span>
-              <h3 className="mt-3 lg:mt-[25px] lg:whitespace-nowrap text-lg lg:text-[30px] font-semibold text-brand-text">
+              <h3 className="text-xl font-bold text-brand-navy lg:text-[23px]">
                 {step.title}
               </h3>
-              <p className="hidden lg:block mt-2 lg:mt-[15px] lg:whitespace-nowrap text-sm lg:text-[22px] font-semibold leading-normal text-brand-text/80">
+              <p className="mt-2 text-base font-semibold leading-7 text-brand-text/70">
                 {step.description}
               </p>
             </div>
-          </article>
+          </li>
         ))}
+        </ol>
       </div>
     </section>
   );

@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import PrecisionAcFaq from "@/src/components/precision-ac/PrecisionAcFaq";
+import EstimateCta from "@/src/components/home/EstimateCta";
+import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 import Applications from "@/src/components/precision-ac/Applications";
 import CaseStudy from "@/src/components/precision-ac/CaseStudy";
 import Hero from "@/src/components/precision-ac/Hero";
@@ -23,6 +26,13 @@ export default function PrecisionAcPage() {
       <WorkProcess />
       <Products />
       <CaseStudy />
+      <PrecisionAcFaq />
+      <div className="lg:hidden">
+        <MobileEstimate />
+      </div>
+      <div className="hidden lg:block">
+        <EstimateCta />
+      </div>
     </main>
   );
 }
