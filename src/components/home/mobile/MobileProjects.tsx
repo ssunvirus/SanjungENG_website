@@ -57,12 +57,12 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
             <div className="relative aspect-[1.7]">
               {(project.homeImage ?? project.image) ? (
                 <Image
-                  src={project.homeImage ?? project.image}
+                  src={project.thumbnailImage ?? project.homeImage ?? project.image}
                   alt={project.title}
                   fill
                   sizes="(max-width: 600px) 100vw, 600px"
                   unoptimized={project.image.startsWith("/api/project-images/")}
-                  className="object-cover"
+                  className={project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover"}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-[#E3EDF3] text-[#637382]">

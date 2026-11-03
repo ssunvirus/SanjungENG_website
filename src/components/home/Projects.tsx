@@ -135,12 +135,12 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                   {(project.homeImage ?? project.image) ? (
                     <Image
-                      src={project.homeImage ?? project.image}
+                      src={project.thumbnailImage ?? project.homeImage ?? project.image}
                       alt={project.title}
                       fill
                       sizes="503px"
                       unoptimized={project.image.startsWith("/api/project-images/")}
-                      className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"
+                      className={project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"}
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center bg-[#E3EDF3] text-brand-navy/50">

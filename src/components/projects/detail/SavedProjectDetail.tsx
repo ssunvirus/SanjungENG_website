@@ -3,6 +3,7 @@ import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "./ProjectOverview";
 import ProjectPhotoGallery from "./ProjectPhotoGallery";
 import BlogBanner from "./BlogBanner";
+import ProjectVideo from "./ProjectVideo";
 import ProjectInquiryBanner from "./ProjectInquiryBanner";
 import type { ProjectRecord } from "@/src/lib/project-record";
 import { publicPhotoPath } from "@/src/lib/public-project-data";
@@ -44,6 +45,7 @@ export default function SavedProjectDetail({ project }: { project: ProjectRecord
             }))}
           />
         ) : null}
+        <ProjectVideo projectId={project.id} />
         <Link
           href="/projects"
           className="mx-auto mt-8 flex h-12 w-52 items-center justify-center rounded bg-brand-navy text-white"

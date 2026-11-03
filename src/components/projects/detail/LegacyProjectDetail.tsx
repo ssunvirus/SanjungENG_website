@@ -7,6 +7,7 @@ import Hero from "@/src/components/projects/Hero";
 import ProjectOverview, { type ProjectOverviewProps } from "./ProjectOverview";
 import SavedProjectDetail from "./SavedProjectDetail";
 import BlogBanner from "./BlogBanner";
+import ProjectVideo from "./ProjectVideo";
 import ProjectInquiryBanner from "./ProjectInquiryBanner";
 
 export default async function LegacyProjectDetail({
@@ -31,6 +32,7 @@ export default async function LegacyProjectDetail({
       <article className="mx-auto w-full px-5 py-9 lg:max-w-[1440px] lg:px-0 lg:pb-[89px] lg:pt-[89px]">
         <ProjectOverview {...overview} />
         {gallery}
+        <ProjectVideo projectId={id} />
         <Link
           href="/projects"
           className="mx-auto mt-[33px] flex h-[48px] w-[208px] items-center justify-center gap-[12px] rounded-[5px] bg-brand-navy text-lg lg:text-[25px] font-medium text-white hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"

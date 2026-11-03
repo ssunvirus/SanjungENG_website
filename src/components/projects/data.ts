@@ -7,12 +7,15 @@ export type Project = {
   image: string;
   imageTop: string;
   imageLeft?: string;
+  imageFit?: "contain" | "cover";
+  thumbnailImage?: string;
   href: string;
   homeImage?: string;
   mobileTag?: string;
   location?: string;
   workDescription?: string;
   blogUrl?: string;
+  video?: { src: string; caption: string; poster?: string };
 };
 
 export const ansanPaintFactoryProject = {
@@ -31,6 +34,27 @@ export const ansanPaintFactoryProject = {
 } satisfies Project;
 
 export const projects: Project[] = [
+  {
+    id: "pharmaceutical-cold-storage-fabric-duct",
+    href: "/projects/pharmaceutical-cold-storage-fabric-duct",
+    category: "섬유덕트",
+    tag: "섬유덕트",
+    title: "의약품 냉장창고 패브릭덕트 설치공사",
+    description: "패브릭덕트 설계, 설치 및 유니트쿨러 연결",
+    location: "-",
+    workDescription:
+      "의약품 냉장창고 내부의 효율적인 냉기 분배를 위해 패브릭덕트를 설계하고 설치하여, 의약품 보관에 필요한 온/습도 환경을 조성하였습니다.",
+    blogUrl: "https://blog.naver.com/sanjungeng/224463574892",
+    image: "/images/projects/pharmaceutical-cold-storage-fabric-duct/photo-01.jpg",
+    thumbnailImage: "/images/projects/pharmaceutical-cold-storage-fabric-duct/thumbnail.jpg",
+    imageFit: "cover",
+    imageTop: "0%",
+    video: {
+      src: "/videos/projects/pharmaceutical-cold-storage-fabric-duct/site-tour.mp4",
+      poster: "/images/projects/pharmaceutical-cold-storage-fabric-duct/video-poster.jpg",
+      caption: "의약품 냉장창고 패브릭덕트 설치 현장 영상",
+    },
+  },
   {
     id: "anseong-cold-storage-defrost-maintenance",
     blogUrl: "https://blog.naver.com/sanjungeng/224366829288",
@@ -228,6 +252,7 @@ function selectProjects(ids: string[]): Project[] {
 }
 
 export const desktopFeaturedProjects = selectProjects([
+  "pharmaceutical-cold-storage-fabric-duct",
   "hwaseong-absorption-chiller-removal",
   "hwaseong-absorption-chiller-cleaning",
   "seoanseong-cooling-tower-inspection",
@@ -238,6 +263,7 @@ export const desktopFeaturedProjects = selectProjects([
 ]);
 
 export const mobileFeaturedProjects = selectProjects([
+  "pharmaceutical-cold-storage-fabric-duct",
   "hwaseong-absorption-chiller-removal",
   "hwaseong-absorption-chiller-cleaning",
   "seoanseong-cooling-tower-inspection",

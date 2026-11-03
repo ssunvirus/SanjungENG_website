@@ -34,7 +34,7 @@ function component(relative) {
       if (name.endsWith("/projects/data")) return { projects };
       if (name.endsWith("/legacy-project-photos")) return legacy;
       if (name.endsWith("/public-project-data")) return { publicPhotoPath };
-      if (["./ProjectPhotoGallery", "./AjuGallery"].includes(name))
+      if (["./ProjectPhotoGallery", "./AjuGallery", "./ProjectVideo"].includes(name))
         return component(path.relative(root, path.resolve(path.dirname(file), `${name}.tsx`)));
       if (name.startsWith("./") || name.startsWith("@/")) return { default: () => null };
       return require(name);
@@ -61,6 +61,29 @@ const record = {
   photosVersion: 1,
   photos: legacy.initialLegacyPhotos(base.id, base.image, base.title),
 };
+
+test("pharmaceutical case keeps its cover, ordered admin captions and video after an admin save", () => {
+  const base = projects.find((item) => item.id === "pharmaceutical-cold-storage-fabric-duct");
+  const photos = legacy.initialLegacyPhotos(base.id, base.image, base.title);
+  assert.equal(photos.length, 8);
+  assert.equal(photos[0].src, base.image);
+  photos.forEach((photo, index) => {
+    assert.ok(photo.src.endsWith(`photo-${String(index + 1).padStart(2, "0")}.jpg`));
+    assert.equal(photo.alt, legacy.legacyProjectPhotos[base.id][index].caption);
+    readFileSync(path.join(root, "public", photo.src));
+  });
+  readFileSync(path.join(root, "public", base.video.src));
+  assert.equal(base.blogUrl, "https://blog.naver.com/sanjungeng/224463574892");
+  const html = renderToStaticMarkup(
+    React.createElement(SavedProjectDetail, {
+      project: { ...record, id: base.id, title: base.title, photos },
+    }),
+  );
+  assert.equal((html.match(/<figcaption/g) || []).length, 9);
+  assert.ok(html.includes(base.video.src));
+  assert.match(html, /preload="metadata"/);
+  assert.equal(html.includes("autoPlay"), false);
+});
 
 test("saved default Aju gallery displays a caption for every photo", () => {
   const html = renderToStaticMarkup(

@@ -20,6 +20,7 @@ export function mergePublicProjects(
     description: record.summary?.trim() || record.description,
     image: record.photos[0] ? publicPhotoPath(record.photos[0].src) : "",
     homeImage: undefined,
+    thumbnailImage: record.photos[0]?.src === base?.image ? base?.thumbnailImage : undefined,
     imageTop: "0%",
     imageLeft: "0%",
     href: base?.href || `/projects/${record.id}`,

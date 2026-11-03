@@ -1,4 +1,5 @@
 import { anseongDefrostPhotos } from "./anseong-defrost-photos.ts";
+import { pharmaceuticalColdStorageFabricDuctPhotos } from "./pharmaceutical-cold-storage-fabric-duct-photos.ts";
 import type { ProjectRecord } from "./project-record.ts";
 import { ansanPaintFactoryPhotos } from "./ansan-paint-factory-project.ts";
 import { hwaseongChillerPhotos } from "./hwaseong-chiller-photos.ts";
@@ -105,6 +106,7 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "pharmaceutical-cold-storage-fabric-duct": pharmaceuticalColdStorageFabricDuctPhotos,
   "anseong-cold-storage-defrost-maintenance": anseongDefrostPhotos,
   "hwaseong-absorption-chiller-removal": hwaseongChillerRemovalPhotos,
   "seoanseong-cooling-tower-inspection": seoanseongCoolingTowerPhotos,

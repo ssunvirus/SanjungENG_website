@@ -7,18 +7,18 @@ export default function ProjectCard({ project }: { project: Project }) {
     <>
       <div className="group relative aspect-[465/316] overflow-hidden lg:aspect-auto lg:h-[316px]">
         <div
-          className="absolute h-[125.08%] w-full"
-          style={{ top: project.imageTop, left: project.imageLeft ?? "0%" }}
+          className={project.imageFit ? "absolute inset-0 bg-[#E3EDF3]" : "absolute h-[125.08%] w-full"}
+          style={project.imageFit ? undefined : { top: project.imageTop, left: project.imageLeft ?? "0%" }}
         >
           {project.image ? (
             <Image
-              src={project.image}
+              src={project.thumbnailImage ?? project.image}
               alt={project.title}
               fill
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 465px"
               quality={100}
               unoptimized={project.image.startsWith("/api/")}
-              className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"
+              className={project.imageFit === "contain" ? "object-contain" : "object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-105 motion-reduce:transition-none"}
             />
           ) : (
             <div className="flex h-full items-center justify-center bg-slate-100 text-brand-navy/50">
