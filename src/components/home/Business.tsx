@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle, ChevronRight } from "lucide-react";
 import BusinessWorkflow from "./BusinessWorkflow";
+import BusinessOverviewFrame from "./BusinessOverviewFrame";
 
 const businessCards = [
   {
@@ -53,12 +54,13 @@ function SectionEyebrow() {
 
 function BusinessOverview() {
   return (
-    <section className="relative mx-auto h-[1081px] w-full max-w-[1920px] overflow-hidden">
+    <BusinessOverviewFrame>
+    <section className="relative h-[1081px] w-[1920px] overflow-hidden">
       <Image
         src="/images/business/overview-background.png"
         alt="냉동공조와 섬유덕트가 적용된 산업 시설"
         fill
-        sizes="1920px"
+        sizes="(max-width: 1920px) 100vw, 1920px"
         className="object-cover"
       />
 
@@ -232,6 +234,7 @@ function BusinessOverview() {
         <BusinessWorkflow />
       </div>
     </section>
+    </BusinessOverviewFrame>
   );
 }
 

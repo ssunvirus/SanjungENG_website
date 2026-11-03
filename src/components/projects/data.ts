@@ -228,6 +228,7 @@ function selectProjects(ids: string[]): Project[] {
 }
 
 export const desktopFeaturedProjects = selectProjects([
+  "hwaseong-absorption-chiller-removal",
   "hwaseong-absorption-chiller-cleaning",
   "seoanseong-cooling-tower-inspection",
   "nonghyup-cold-storage",
@@ -237,6 +238,7 @@ export const desktopFeaturedProjects = selectProjects([
 ]);
 
 export const mobileFeaturedProjects = selectProjects([
+  "hwaseong-absorption-chiller-removal",
   "hwaseong-absorption-chiller-cleaning",
   "seoanseong-cooling-tower-inspection",
   "nonghyup-cold-storage",

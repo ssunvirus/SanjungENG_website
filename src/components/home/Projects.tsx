@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { desktopFeaturedProjects, type Project } from "@/src/components/projects/data";
 import useProjectAutoplay from "./useProjectAutoplay";
 
@@ -16,11 +16,21 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
   const sectionRef = useRef<HTMLElement>(null);
   const [autoplay, setAutoplay] = useState(true);
   const [interacting, setInteracting] = useState(false);
+  const manualMoveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (manualMoveTimer.current) clearTimeout(manualMoveTimer.current);
+  }, []);
   useProjectAutoplay(trackRef, projects.length, autoplay && !interacting && projects.length > 2);
 
   function move(direction: number) {
     const track = trackRef.current;
     if (!track) return;
+    setInteracting(true);
+    if (manualMoveTimer.current) clearTimeout(manualMoveTimer.current);
+    manualMoveTimer.current = setTimeout(() => {
+      manualMoveTimer.current = null;
+      setInteracting(sectionRef.current?.contains(document.activeElement) ?? false);
+    }, 800);
     const nextSlide = Math.min(LAST_SLIDE, Math.max(0, currentSlide + direction));
     const maxScroll = track.scrollWidth - track.clientWidth;
 
@@ -37,12 +47,10 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
   return (
     <section
       ref={sectionRef}
-      onMouseEnter={() => setInteracting(true)}
-      onMouseLeave={(event) => setInteracting(event.currentTarget.contains(document.activeElement))}
       onFocusCapture={() => setInteracting(true)}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setInteracting(event.currentTarget.matches(":hover"));
+        if (!event.currentTarget.contains(event.relatedTarget) && !manualMoveTimer.current)
+          setInteracting(false);
       }}
       id="projects"
       aria-labelledby="projects-heading"
