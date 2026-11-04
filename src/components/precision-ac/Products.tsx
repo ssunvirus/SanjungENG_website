@@ -51,6 +51,14 @@ export default function Products() {
           </article>
         ))}
       </div>
+      <div className="mt-6 rounded-2xl border border-brand-blue/15 bg-[#F1FAFD] p-5 lg:mt-8 lg:px-7 lg:py-6">
+        <p className="break-keep text-[16px] font-semibold leading-7 text-brand-navy lg:text-[19px] lg:leading-8">
+          다양한 제조사의 기존 항온항습기 교체, 수리 및 유지보수를 상담해드립니다.
+        </p>
+        <p className="mt-2 break-keep text-sm leading-6 text-brand-navy/70 lg:text-base lg:leading-7">
+          제조사와 모델, 장비 상태에 따라 작업 가능 여부를 안내드립니다.
+        </p>
+      </div>
     </section>
   );
 }

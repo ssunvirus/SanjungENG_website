@@ -57,7 +57,7 @@ export default function Advantages() {
           {advantages.map((advantage) => (
             <article
               key={advantage.title}
-              className="flex min-h-[158px] w-full items-center gap-4 rounded-[20px] bg-white/60 px-4 py-4 xl:gap-6 xl:px-8"
+              className="flex min-h-[158px] w-full items-center gap-4 rounded-[20px] bg-white/60 px-4 py-4 ring-1 ring-inset ring-transparent transition-[box-shadow,background-color] duration-200 hover:bg-white hover:ring-brand-blue/50 hover:shadow-[0_8px_24px_rgba(16,47,73,0.10)] motion-reduce:transition-none xl:gap-6 xl:px-8"
             >
               <div className="flex size-[70px] lg:size-[130px] shrink-0 items-center justify-center rounded-full bg-brand-blue/10">
                 <div

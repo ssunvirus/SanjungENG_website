@@ -1,106 +1,53 @@
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
+const reviewItems = [
+  { title: "검토 조건", description: "공간 구조, 장비 조건, 목표 온도" },
+  { title: "검토 내용", description: "공기 흐름, 도달 범위, 온도 분포" },
+  { title: "설계 반영", description: "덕트 배치와 공기 분배 방식" },
+];
+const examples = [
+  { image: "cfd-velocity.png", title: "공기 속도 분포", alt: "공기 속도 분포를 색상으로 나타낸 CFD 풍속 해석 예시" },
+  { image: "cfd-temperature.png", title: "온도 분포", alt: "공간의 온도 분포를 색상으로 나타낸 CFD 온도 해석 예시" },
+];
+
 export default function AirFlowDesign() {
   return (
-    <section className="mx-auto h-auto lg:h-[1276px] w-full lg:max-w-[1440px] bg-white pb-7 px-5 lg:px-0 lg:pl-[57px] pt-[24px] lg:pt-[48.12px]">
-      <div className="ml-[6px] h-auto lg:h-[145.882px]">
-        <SectionHeading eyebrow="AIR FLOW DESIGN" title="공기흐름을 계산하고 분배합니다.">
-          <p>
-            CFD 시뮬레이션을 통한 공기 흐름과 온도 분포를 사전에 검토해, 공간 조건에 맞는 섬유덕트
-            배치와 공기 분배 방식을 설계합니다.
-          </p>
-        </SectionHeading>
-      </div>
-      <div className="mt-[24px] lg:mt-[68.118px] flex w-full lg:w-[1258px] flex-col items-center gap-[28px] lg:gap-[83px]">
-        <div className="relative flex w-full lg:w-[816px] flex-col gap-[28px] lg:gap-[35px] font-semibold">
-          <h3 className="text-center text-[21px] lg:text-[40px] leading-[24px] lg:leading-[48px]">
-            CFD(전산유체공학) 설계
-          </h3>
-          <div className="flex flex-col lg:flex-row items-end gap-[16px] lg:gap-[11px]">
-            <figure className="w-full lg:w-[400px] shrink-0">
-              <div className="relative aspect-[400/436] h-auto lg:aspect-auto lg:h-[436px]">
-                <Image
-                  src="/images/fabric-duct/cfd-velocity.png"
-                  alt="CFD 풍속 분포 해석 도표"
-                  fill
-                  sizes="400px"
-                  quality={100}
-                  className="object-fill"
-                />
-                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25px] text-brand-navy/50">
-                  (출처:Klimagiel)
-                </span>
-              </div>
-              <figcaption className="mt-[10px] text-center text-[14px] lg:text-[16.544px] leading-[25px] text-brand-navy">
-                CFD 풍속 해석 예시
-              </figcaption>
-            </figure>
-            <figure className="w-full lg:w-[400px] shrink-0">
-              <div className="relative aspect-[400/428] h-auto lg:aspect-auto lg:h-[428px] overflow-hidden">
-                <div className="absolute left-[-0.03%] top-[-2.34%] h-[102.34%] w-[100.07%]">
-                  <Image
-                    src="/images/fabric-duct/cfd-temperature.png"
-                    alt="CFD 온도 분포 해석 도표"
-                    fill
-                    sizes="400px"
-                    quality={100}
-                    className="object-fill"
-                  />
+    <section className="mx-auto w-full max-w-[1440px] bg-white px-5 py-9 min-[768px]:px-10 min-[768px]:py-14">
+      <SectionHeading eyebrow="AIR FLOW DESIGN" title="현장 조건을 반영한 공기 분배 설계">
+        <p className="max-w-[950px] break-keep text-[16px] font-normal leading-[1.7] min-[1200px]:text-[18px]">
+          공간 크기와 천장 높이, 설비 배치, 공급 풍량 등을 바탕으로 공기 흐름과 온도 분포를 검토합니다.
+        </p>
+      </SectionHeading>
+      <div className="mt-8 grid items-center gap-8 min-[1024px]:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] min-[1024px]:gap-12 lg:mt-10">
+        <div className="min-w-0 rounded-2xl bg-[#F6FAFC] px-4 py-6 min-[768px]:p-7">
+          <h3 className="text-[21px] font-semibold leading-snug text-brand-navy min-[768px]:text-[26px]">CFD(전산유체역학) 설계</h3>
+          <div className="mx-auto mt-5 grid max-w-[560px] grid-cols-2 items-end gap-4 min-[768px]:gap-6">
+            {examples.map((example) => (
+              <figure key={example.image} className="min-w-0">
+                <div className="relative aspect-[400/436]">
+                  <Image src={`/images/fabric-duct/${example.image}`} alt={example.alt} fill sizes="(max-width: 767px) 40vw, 270px" className="object-contain" />
                 </div>
-                <span className="absolute bottom-[4px] right-0 text-[14px] lg:text-[10px] leading-[25px] text-brand-navy/50">
-                  (출처:Klimagiel)
-                </span>
-              </div>
-              <figcaption className="mt-[10px] lg:mt-[5px] text-center text-[14px] lg:text-[16.544px] leading-[25px] text-brand-navy">
-                CFD 온도 해석 적용 예시
-              </figcaption>
-            </figure>
+                <figcaption className="mt-3 text-center text-[16px] font-medium leading-7 text-brand-navy min-[768px]:text-[19px]">{example.title}</figcaption>
+              </figure>
+            ))}
           </div>
-          <p className="ml-[7px] lg:whitespace-nowrap text-[14px] lg:text-[16.544px] leading-[25px]">
-            CFD 시뮬레이션은 공기가 어떻게 흐르고, 온도가 어떻게 분포하는지, 계산하여 실제 환경에
-            가까운 시뮬레이션을 수행합니다.
-            <br />
-            이를 통해 공간의 각 지점에서 온도와 풍속을 평가할 수 있습니다.
+          <p className="mt-5 break-keep text-[15px] leading-[1.7] text-brand-navy/75 min-[768px]:text-[16px]">
+            색상은 각 도표의 범례에 따른 속도와 온도를 나타냅니다.
+            <span className="mt-1 block">CFD 해석 예시 / 출처: Klimagiel</span>
           </p>
         </div>
-        <div className="relative h-auto lg:h-[244px] w-full bg-brand-blue/10 px-[20px] lg:px-[44px] py-[36px] lg:py-[41px]">
-          <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 items-start justify-between">
-            <div className="flex w-full lg:w-[318px] flex-col gap-[16px] lg:gap-[19px]">
-              <h3 className="lg:whitespace-nowrap text-[14px] lg:text-[20px] font-bold leading-[24px]">
-                공간 전체의 기류를 계산하고 검토합니다.
-              </h3>
-              <Image
-                src="/images/fabric-duct/cfd-line.svg"
-                width={82.0549}
-                height={2}
-                alt=""
-                aria-hidden="true"
-                className="self-start"
-              />
-              <p className="lg:whitespace-nowrap text-[14px] lg:text-[18px] font-semibold leading-[25px] text-brand-text/80">
-                공간의 각 지점에서 온도와 풍속을
-                <br />
-                평가하여 효율적인 공기 분배를 설계합니다.
-              </p>
-            </div>
-            <div className="relative aspect-[790/162] h-auto lg:aspect-auto lg:h-[162px] w-full lg:w-[790px] overflow-hidden">
-              <div className="absolute top-[-29.48%] h-[163.01%] w-[100.01%]">
-                <Image
-                  src="/images/fabric-duct/cfd-airflow.png"
-                  alt="공간 전체의 CFD 공기 속도 분포"
-                  fill
-                  sizes="790px"
-                  quality={100}
-                  className="object-fill"
-                />
+        <dl className="min-w-0 divide-y divide-brand-navy/10">
+          {reviewItems.map((item, index) => (
+            <div key={item.title} className="flex gap-5 py-6 first:pt-0 last:pb-0 min-[768px]:gap-6 min-[768px]:py-8">
+              <span aria-hidden="true" className="pt-1 text-[16px] font-semibold min-[768px]:text-[18px] tabular-nums text-brand-blue">0{index + 1}</span>
+              <div>
+                <dt className="text-[24px] font-semibold leading-snug text-brand-navy min-[768px]:text-[30px]">{item.title}</dt>
+                <dd className="mt-2 break-keep text-[18px] font-medium leading-[1.7] text-brand-navy/85 min-[768px]:text-[21px]">{item.description}</dd>
               </div>
             </div>
-          </div>
-          <p className="relative mt-3 text-right lg:absolute lg:mt-0 lg:bottom-[10px] lg:right-[44px] text-[14px] lg:text-[16.544px] font-semibold leading-[25px] text-brand-navy/50">
-            CFD 해석 예시(출처:Klimagiel)
-          </p>
-        </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

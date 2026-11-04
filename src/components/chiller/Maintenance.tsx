@@ -1,10 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 
 const maintenanceServices = [
   {
     number: "01",
     title: "냉동기 세관",
+    href: "/projects/hwaseong-absorption-chiller-cleaning",
     description: "열교환기 내부의 스케일과 이물질을 제거",
     image: "/images/chiller/maintenance-cleaning.png",
     alt: "냉동기 열교환기 세관 작업",
@@ -13,6 +15,7 @@ const maintenanceServices = [
   {
     number: "02",
     title: "수리 & 오버홀",
+    href: "/projects/seoanseong-chiller-valve-replacement",
     description: "주요 부품을 분해, 점검하고 마모/손상 부품을 정비",
     image: "/images/chiller/maintenance-overhaul.png",
     alt: "냉동기 주요 부품 수리와 오버홀 작업",
@@ -21,6 +24,7 @@ const maintenanceServices = [
   {
     number: "03",
     title: "정기점검",
+    href: "/projects/seoanseong-maintenance",
     description: "운전 상태와 주요 부품을 주기적으로 점검",
     image: "/images/chiller/maintenance-inspection.png",
     alt: "냉동공조 설비 정기점검 작업",
@@ -51,7 +55,7 @@ export default function Maintenance() {
             style={{ "--card-width": `${service.width}px` } as CSSProperties}
             className="w-full lg:w-[var(--card-width)] shrink-0"
           >
-            <div className="relative h-[240px] lg:h-[300px]">
+            <Link href={service.href} aria-label={`${service.title} 시공사례 보기`} className="relative block h-[240px] rounded-[10px] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(16,47,73,0.16)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transform-none motion-reduce:transition-none lg:h-[300px]">
               <Image
                 src={service.image}
                 alt={service.alt}
@@ -59,7 +63,7 @@ export default function Maintenance() {
                 sizes={`${service.width}px`}
                 className="rounded-[10px] object-cover shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
               />
-            </div>
+            </Link>
             <div className="mt-[12px] lg:mt-[20px]">
               <div className="flex items-center gap-[12px] lg:gap-[19px]">
                 <span className="text-[20px] lg:text-[30px] font-bold tracking-[1px] lg:tracking-[3px] text-brand-blue">

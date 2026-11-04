@@ -76,9 +76,9 @@ export default function ProjectGallery({ projects = existingProjects }: { projec
         ))}
       </div>
       <div aria-hidden="true" className="relative hidden lg:block">
-        <div className="h-[2.03808px] w-full bg-brand-navy/20" />
+        <div className="h-[3px] w-full bg-brand-navy/20" />
         <div
-          className="absolute top-0 h-[2px] w-[219px] bg-brand-blue transition-transform"
+          className="absolute top-0 h-[3px] w-[219px] bg-brand-blue transition-transform"
           style={{ transform: `translateX(${categories.indexOf(category) * 379}px)` }}
         />
       </div>

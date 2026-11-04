@@ -1,26 +1,24 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 
-const applications = [
-  ["물류센터", "보관 구역과 적재물 맞춤 공기분배"],
-  ["생산시설", "작업 구역과 설비 배치에 맞춤 공기분배"],
-  ["상업시설", "다양한 상업공간에 맞춘 효율적인 공기분배"],
-  ["체육 / 공공시설", "넓은 실내 공간에 맞춤 공기분배"],
-];
+const applications = ["물류센터", "생산시설", "상업시설", "체육 / 공공시설"];
 
 // image에 사진 경로를 넣고 title과 description을 수정하면 됩니다.
-const slides: { title: string; image: string; description: string }[] = [
+const slides: { title: string; image: string; description: string; href?: string }[] = [
   {
-    title: "광저우 물류센터",
-    image: "/images/fabric-duct/application-warehouse.jpg",
+    title: "의약품 물류창고",
+    image: "/images/projects/pharmaceutical-cold-storage-fabric-duct/thumbnail.jpg",
     description:
-      "적재 배치와 보관 구역을 고려해 공기를 고르게 공급,\n보관 환경에 맞는 기류공급을 조성합니다.",
+      "적재 배치와 보관 구역을 고려해 공기를 고르게 분배하여, 공간별 온도 편차를 줄이고 안정적인 보관환경과 쾌적한 작업환경을 조성합니다.",
+    href: "/projects/pharmaceutical-cold-storage-fabric-duct",
   },
   {
     title: "오리온 생산설비",
+    href: "/projects/orion-production",
     image: "/images/projects/orion-production/cc_P5243334.jpg",
     description: "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성합니다.",
   },
@@ -32,6 +30,7 @@ const slides: { title: string; image: string; description: string }[] = [
   },
   {
     title: "구례 실내수영장",
+    href: "/projects/gurye-pool",
     image: "/images/fabric-duct/hero.jpg",
     description:
       "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 섬유덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
@@ -63,9 +62,9 @@ export default function Applications() {
       <div
         role="tablist"
         aria-label="섬유덕트 적용 공간"
-        className="mt-[24px] lg:mt-[63.118px] grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-3 lg:gap-6 font-semibold"
+        className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 font-semibold min-[768px]:grid-cols-4 min-[768px]:gap-x-0 lg:mt-8"
       >
-        {applications.map(([title, description], index) => (
+        {applications.map((title, index) => (
           <button
             type="button"
             role="tab"
@@ -86,25 +85,23 @@ export default function Applications() {
               selectTab(nextIndex, true);
             }}
             key={title}
-            className={`min-h-12 min-w-0 w-full cursor-pointer border-b-2 pb-3 text-left lg:border-0 lg:pb-0 focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand-blue ${index === activeIndex ? "border-brand-blue" : "border-[#B7C6CF]"}`}
+            className={`flex min-h-12 min-w-0 w-full cursor-pointer items-center justify-start py-3 text-left transition-colors duration-200 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue lg:pb-5 lg:pt-2 ${index === activeIndex ? "text-brand-blue" : "text-brand-navy/75 hover:text-brand-blue"}`}
           >
             <span
-              className={`mb-2 block text-base lg:text-[25px] leading-6 lg:leading-[30px] transition-colors ${index === activeIndex ? "text-brand-blue" : "text-brand-navy/80"}`}
+              aria-hidden="true"
+              className={`mr-2.5 size-[6px] shrink-0 rounded-full bg-brand-blue transition-[opacity,transform] duration-200 motion-reduce:transition-none lg:mr-3 ${index === activeIndex ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
+            />
+            <span
+              className="whitespace-nowrap text-[20px] leading-[1.4] min-[768px]:text-[24px] lg:text-[30px]"
             >
               {title}
-            </span>
-            <span className="mt-[6px] hidden lg:block break-keep text-[20px] leading-[24px] text-brand-navy/60">
-              {description}
             </span>
           </button>
         ))}
       </div>
-      <p className="mt-4 text-sm leading-6 text-brand-navy/70 lg:hidden">
-        {applications[activeIndex][1]}
-      </p>
-      <div aria-hidden="true" className="relative mt-6 hidden h-0.5 bg-brand-navy/20 lg:block">
+      <div aria-hidden="true" className="relative hidden h-[3px] bg-brand-navy/20 lg:block">
         <span
-          className="absolute left-0 top-0 h-0.5 w-1/4 bg-brand-blue transition-transform duration-300 motion-reduce:transition-none"
+          className="absolute left-0 top-0 h-[3px] w-1/4 bg-brand-blue transition-transform duration-300 motion-reduce:transition-none"
           style={{ transform: `translateX(${activeIndex * 100}%)` }}
         />
       </div>
@@ -144,14 +141,22 @@ export default function Applications() {
         </figure>
         <div className="w-full min-w-0 pt-0 lg:pt-[38px]">
           <p className="flex h-9 lg:h-[47px] w-fit lg:min-w-[187px] items-center justify-center border-[1.5px] border-brand-blue px-[20px] lg:px-[21px] text-[16px] lg:text-[25px] leading-[24px] lg:leading-[35px] text-brand-blue">
-            {applications[activeIndex][0]}
+            {applications[activeIndex]}
           </p>
           <h3 className="mt-4 lg:mt-[34px] text-[24px] lg:text-[45px] font-bold leading-[1.35] lg:leading-[54px] tracking-[1px] lg:tracking-[2.25px] text-brand-navy">
             {slide.title}
           </h3>
-          <p className="mt-3 lg:mt-[28px] whitespace-pre-line text-[15px] lg:text-[20px] leading-[26px] lg:leading-[35px]">
+          <p className="mt-3 lg:mt-[28px] whitespace-pre-line break-keep text-pretty text-[15px] lg:text-[20px] leading-[26px] lg:leading-[35px]">
             {slide.description}
           </p>
+          {slide.href && (
+            <Link
+              href={slide.href}
+              className="mt-6 inline-flex min-h-12 items-center gap-3 rounded-lg bg-brand-navy px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue lg:mt-8 lg:text-lg"
+            >
+              시공사례 보러가기 <span aria-hidden="true">→</span>
+            </Link>
+          )}
         </div>
       </div>
     </section>

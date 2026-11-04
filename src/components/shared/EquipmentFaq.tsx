@@ -178,7 +178,7 @@ export default function EquipmentFaq({
                   >
                     Q
                   </span>
-                  <span className="flex-1 pt-0.5 text-base leading-6">{item.question}</span>
+                  <span className="min-w-0 flex-1 break-keep pt-0.5 text-base leading-6 [overflow-wrap:anywhere]">{item.question}</span>
                   <Plus
                     aria-hidden="true"
                     className="mt-1 size-5 shrink-0 text-brand-blue transition-transform group-open:rotate-45 motion-reduce:transition-none"
@@ -191,7 +191,7 @@ export default function EquipmentFaq({
                   >
                     A
                   </span>
-                  <p className="whitespace-pre-line text-[15px] font-medium leading-7 text-brand-text/80">
+                  <p className="min-w-0 flex-1 whitespace-pre-line break-keep text-[15px] font-medium leading-7 text-brand-text/80 [overflow-wrap:anywhere]">
                     {item.answer}
                   </p>
                 </div>

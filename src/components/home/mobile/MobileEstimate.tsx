@@ -1,19 +1,25 @@
 import { Mail, PhoneCall } from "lucide-react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
 import MobileInquiry from "./MobileInquiry";
+import type { EstimateIntroProps } from "@/src/components/home/EstimateCta";
 
-export default function MobileEstimate() {
+export default function MobileEstimate({ title, description, note }: EstimateIntroProps = {}) {
   return (
     <section id="mobile-contact" className="mx-auto max-w-[600px] px-5 pb-12 pt-10">
       <Eyebrow variant="compact">SOLUTION</Eyebrow>
-      <h2 className="mt-6 text-[28px] font-bold leading-[1.5]">
-        현장에 필요한 답을,
-        <br />
-        <span className="text-brand-blue">빠르고 정확하게</span> 제안합니다.
+      <h2 className="mt-6 break-keep text-[28px] font-bold leading-[1.5]">
+        {title ?? (
+          <>
+            현장에 필요한 답을,
+            <br />
+            <span className="text-brand-blue">빠르고 정확하게</span> 제안합니다.
+          </>
+        )}
       </h2>
-      <p className="mt-4 text-base leading-7 text-[#526579]">
-        현장 조건과 필요한 작업을 알려주시면 최적의 솔루션을 제안합니다.
+      <p className="mt-4 break-keep text-base leading-7 text-[#526579]">
+        {description ?? "현장 조건과 필요한 작업을 알려주시면 최적의 솔루션을 제안합니다."}
       </p>
+      {note && <p className="mt-2 break-keep text-sm leading-6 text-brand-navy/65">{note}</p>}
       <div className="mt-6 rounded-2xl bg-brand-navy p-5 text-white">
         <div className="flex items-start gap-4">
           <PhoneCall size={32} aria-hidden="true" className="mt-1 shrink-0" />

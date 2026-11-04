@@ -106,7 +106,6 @@ export default function Services() {
             <details
               key={service.title}
               name="chiller-services"
-              open={index === 0}
               className="group border-b border-brand-navy/15 last:border-b-0"
             >
               <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-8 transition-colors hover:bg-[#00ADDB]/15 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue group-open:bg-[#00ADDB]/10 group-open:hover:bg-[#00ADDB]/15 lg:gap-6 lg:px-8 lg:py-9 [&::-webkit-details-marker]:hidden">

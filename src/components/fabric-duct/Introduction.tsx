@@ -1,3 +1,4 @@
+import styles from "./LaptopLayout.module.css";
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
@@ -11,14 +12,16 @@ const rows = [
 
 export default function Introduction() {
   return (
-    <section className="mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-[clamp(40px,8vw,160px)] lg:pt-[69px] min-[1920px]:h-[866px] min-[1920px]:pl-[280px] min-[1920px]:pr-[178px]">
+    <section className={`${styles.introduction} mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-[clamp(40px,8vw,160px)] lg:pt-[69px] min-[1920px]:h-[866px] min-[1920px]:pl-[280px] min-[1920px]:pr-[178px]`}>
       <div className="grid grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
         <div>
           <div className="h-auto  lg:h-[218px]">
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
-              <p>섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.</p>
-              <p>
-                공조설비에서 공급된 공기를 통기성 원단이나 타공부/노즐을 통해 공간에 빈틈없이
+              <p className="break-keep text-[16px] font-semibold leading-[1.7] min-[1200px]:text-[18px]">
+                섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.
+              </p>
+              <p className="mt-2 break-keep text-[16px] font-normal leading-[1.7] text-brand-navy/85 min-[1200px]:text-[18px]">
+                공조설비에서 공급된 공기를 통기성 원단이나 타공부 / 노즐을 통해 공간 전체에 고르게
                 분배합니다.
               </p>
             </SectionHeading>

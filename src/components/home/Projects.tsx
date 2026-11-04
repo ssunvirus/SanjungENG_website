@@ -182,7 +182,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
             );
           })}
         </div>
-        <div aria-hidden="true" className="mt-[26px] h-[2px] w-[1114px] bg-[#CBD3D7]">
+        <div aria-hidden="true" className="mt-[26px] h-[3px] w-[1114px] bg-[#CBD3D7]">
           <div
             className="h-full w-[143px] bg-brand-blue"
             style={{ transform: `translateX(${progress * 971}px)` }}

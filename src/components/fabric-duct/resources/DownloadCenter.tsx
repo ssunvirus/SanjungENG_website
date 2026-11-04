@@ -123,7 +123,7 @@ const certificateDocuments: ResourceDocument[] = [
 ];
 const pageSize = 8;
 
-export default function DownloadCenter() {
+export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 }) {
   const [preview, setPreview] = useState<ResourceDocument | null>(null);
   const previewRef = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -137,7 +137,7 @@ export default function DownloadCenter() {
       document.body.style.overflow = previousOverflow;
     };
   }, [preview]);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<number>(initialTab);
   const [currentPage, setCurrentPage] = useState(1);
   const tabDocuments = activeTab === 1 ? documents.slice(0, 2) : certificateDocuments;
   const pageCount = Math.ceil(tabDocuments.length / pageSize);
@@ -165,7 +165,7 @@ export default function DownloadCenter() {
         </p>
         <h2
           id="download-title"
-          className="mt-[10px] text-[28px] lg:text-[55px] font-bold leading-[1.2] tracking-[1px] lg:tracking-[2.75px] text-brand-navy"
+          className="scroll-mt-[120px] mt-[10px] text-[28px] lg:text-[55px] font-bold leading-[1.2] tracking-[1px] lg:tracking-[2.75px] text-brand-navy"
         >
           자료실
         </h2>

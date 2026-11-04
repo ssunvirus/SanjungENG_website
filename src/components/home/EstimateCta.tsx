@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown, Mail, PhoneCall } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, type ReactNode, useState } from "react";
 import Link from "next/link";
 import { useEstimateForm } from "@/src/hooks/use-estimate-form";
 import { estimateCategories, estimateLimits } from "@/src/lib/estimate-rules";
@@ -45,7 +45,13 @@ function RequiredInput({
   );
 }
 
-export default function EstimateCta() {
+export type EstimateIntroProps = {
+  title?: ReactNode;
+  description?: ReactNode;
+  note?: string;
+};
+
+export default function EstimateCta({ title, description, note }: EstimateIntroProps = {}) {
   const [category, setCategory] = useState("");
   const { status, notice, send } = useEstimateForm();
 
@@ -71,16 +77,25 @@ export default function EstimateCta() {
             <span>SOLUTION</span>
             <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
           </div>
-          <h2 id="estimate-heading" className="text-[44px] font-bold leading-[57px]">
-            현장에 필요한 답을,
-            <br />
-            <span className="text-brand-blue">빠르고 정확하게</span> 제안합니다.
+          <h2 id="estimate-heading" className="break-keep text-[44px] font-bold leading-[57px]">
+            {title ?? (
+              <>
+                현장에 필요한 답을,
+                <br />
+                <span className="text-brand-blue">빠르고 정확하게</span> 제안합니다.
+              </>
+            )}
           </h2>
-          <p className="text-[16px] leading-[26px] text-[#4F6173]">
-            냉동공조 설비부터 섬유덕트, 유지보수까지
-            <br />
-            현장 조건과 필요한 작업을 남겨주시면 담당자가 확인 후 연락드립니다.
+          <p className="break-keep text-[16px] leading-[26px] text-[#4F6173]">
+            {description ?? (
+              <>
+                냉동공조 설비부터 섬유덕트, 유지보수까지
+                <br />
+                현장 조건과 필요한 작업을 남겨주시면 담당자가 확인 후 연락드립니다.
+              </>
+            )}
           </p>
+          {note && <p className="break-keep text-[14px] leading-6 text-brand-navy/65">{note}</p>}
           <span aria-hidden="true" className="h-[3px] w-[60px] rounded-sm bg-brand-blue" />
           <p className="text-[14px] font-medium leading-[21px]">
             30년 현장 경험　·　설계부터 시공까지　·　설치 이후 유지관리

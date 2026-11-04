@@ -141,8 +141,8 @@ export default function Header() {
         </button>
 
         <div className="hidden h-full items-center gap-[clamp(24px,7.1875vw,138px)] lg:flex">
-          <nav aria-label="주요 메뉴">
-            <ul className="flex items-center justify-center gap-[clamp(20px,3.125vw,60px)]">
+          <nav aria-label="주요 메뉴" className="h-full">
+            <ul className="flex h-full items-center justify-center gap-[clamp(20px,3.125vw,60px)]">
               {menus.map((menu) => {
                 const isFabric = menu.href === "/fabric-duct";
                 const previews = isFabric ? fabricPreviews : solutionPreviews;
@@ -150,7 +150,7 @@ export default function Header() {
                 const selectPreview = isFabric ? setFabricPreviewIndex : setPreviewIndex;
                 const preview = previews[selectedIndex];
                 return (
-                  <li key={menu.href} className="group shrink-0 text-center">
+                  <li key={menu.href} className="group relative flex h-full shrink-0 items-center text-center">
                     <Link
                       href={menu.href}
                       onClick={(event) => event.currentTarget.blur()}

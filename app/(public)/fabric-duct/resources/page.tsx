@@ -8,7 +8,13 @@ export const metadata: Metadata = {
   description: "섬유덕트 제조사 인증서, 시험성적서 및 제품 카탈로그를 확인하세요.",
 };
 
-export default function ResourcesPage() {
+export default async function ResourcesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string | string[] }>;
+}) {
+  const { tab } = await searchParams;
+  const initialTab = tab === "catalogs" ? 1 : 0;
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <ResourcesHero />
@@ -16,7 +22,7 @@ export default function ResourcesPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <DownloadCenter />
+      <DownloadCenter key={initialTab} initialTab={initialTab} />
     </main>
   );
 }
