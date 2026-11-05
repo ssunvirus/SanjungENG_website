@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -38,7 +38,7 @@ const business = [
   },
 ];
 
-export default function MobileBusiness() {
+export function MobileBusinessOverview() {
   return (
     <>
       <section className="mx-auto max-w-[600px] pt-8 text-center">
@@ -96,6 +96,12 @@ export default function MobileBusiness() {
         </div>
       </section>
 
+    </>
+  );
+}
+
+export function MobileBusinessAreas() {
+  return (
       <section className="mx-auto max-w-[600px] px-5 py-8">
         <Eyebrow variant="compact">OUR BUSINESS</Eyebrow>
         <div className="mt-3 flex items-center justify-between">
@@ -134,6 +140,10 @@ export default function MobileBusiness() {
           ))}
         </div>
       </section>
-    </>
+
   );
+}
+
+export default function MobileBusiness() {
+  return <><MobileBusinessOverview /><MobileBusinessAreas /></>;
 }

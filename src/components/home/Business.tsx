@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle, ChevronRight } from "lucide-react";
 import BusinessWorkflow from "./BusinessWorkflow";
@@ -43,16 +43,7 @@ const businessCards = [
   },
 ];
 
-function SectionEyebrow() {
-  return (
-    <div className="flex items-center gap-[14px]">
-      <span className="h-[3px] w-12 bg-brand-blue" />
-      <span className="text-[20px] font-medium leading-6 text-brand-blue">OUR BUSINESS</span>
-    </div>
-  );
-}
-
-function BusinessOverview() {
+export function BusinessOverview() {
   return (
     <BusinessOverviewFrame>
     <section className="relative h-[1081px] w-[1920px] overflow-hidden">
@@ -65,8 +56,7 @@ function BusinessOverview() {
       />
 
       <div className="absolute top-[51px] left-[240px]">
-        <SectionEyebrow />
-        <h2 className="mt-[54px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
+        <h2 className="mt-[78px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
           냉동기부터 섬유덕트까지
         </h2>
         <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-brand-blue">
@@ -230,7 +220,8 @@ function BusinessOverview() {
         ))}
       </ol>
 
-      <div className="absolute top-[950px] left-1/2 -translate-x-1/2">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#EFF7FB]" />
+      <div className="absolute top-[950px] left-1/2 z-10 -translate-x-1/2">
         <BusinessWorkflow />
       </div>
     </section>
@@ -284,7 +275,7 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
   );
 }
 
-function BusinessAreas() {
+export function BusinessAreas() {
   return (
     <section className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
       <div className="mx-auto w-[1200px]">
@@ -313,3 +304,4 @@ export default function Business() {
     </>
   );
 }
+

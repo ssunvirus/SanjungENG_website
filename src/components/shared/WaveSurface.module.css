@@ -52,6 +52,10 @@
   height: 300px;
 }
 
+.blendTop {
+  mask-image: linear-gradient(to bottom, transparent, black 100px);
+}
+
 @media (max-width: 767px) {
   .top {
     width: 100%;
