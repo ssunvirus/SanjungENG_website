@@ -1,3 +1,4 @@
+﻿import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectGallery from "@/src/components/projects/ProjectGallery";
@@ -21,7 +22,10 @@ export default async function ProjectsPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <ProjectGallery projects={projects} />
+      <WaveSurface>
+        <ProjectGallery projects={projects} />
+      </WaveSurface>
     </main>
   );
 }
+

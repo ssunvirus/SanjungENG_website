@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const areas = [
   {
     title: "냉동설비",
+    href: "/solutions",
     image: "/images/about/business-refrigeration.jpg",
     quality: 75,
     top: "-35.91%",
@@ -17,6 +19,7 @@ const areas = [
   },
   {
     title: "섬유덕트",
+    href: "/fabric-duct",
     image: "/images/about/business-fabric-duct.jpg",
     quality: 100,
     top: "-24.56%",
@@ -30,6 +33,7 @@ const areas = [
   },
   {
     title: "저온저장고",
+    href: "/solutions/cold-storage",
     image: "/images/projects/wonsam-nonghyup/photo-4.jpg",
     quality: 100,
     top: "-17.96%",
@@ -44,6 +48,7 @@ const areas = [
   },
   {
     title: "수리 & 정기점검",
+    href: "/solutions#chiller-services-heading",
     image: "/images/projects/church-cooling-tower/photo-1.jpg",
     quality: 75,
     top: "-20.52%",
@@ -81,9 +86,13 @@ export default function BusinessAreas() {
         {areas.map((area) => (
           <article
             key={area.title}
-            className="flex w-full lg:w-[300px] flex-col items-center gap-[16px] lg:gap-[22px] bg-white/80 pb-[30px]"
+            className="flex w-full lg:w-[300px] flex-col items-center gap-[16px] lg:gap-[22px] overflow-hidden rounded-2xl bg-white/80 pb-[30px] ring-1 ring-inset ring-brand-navy/15 transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:ring-brand-blue/60 hover:shadow-[0_10px_26px_rgba(16,47,73,0.09)] motion-reduce:transform-none motion-reduce:transition-none"
           >
-            <div className="relative h-[260px] lg:h-[294px] w-full overflow-hidden">
+            <Link
+              href={area.href}
+              aria-label={`${area.title} 자세히 보기`}
+              className="relative block h-[260px] lg:h-[294px] w-full overflow-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue"
+            >
               <div className="absolute h-[136.05%] w-full" style={{ top: area.top }}>
                 {/* 4:3 사진이 높이 400px에 맞춰 약 534px 폭으로 확대된 뒤 잘립니다. */}
                 <Image
@@ -99,8 +108,8 @@ export default function BusinessAreas() {
                 aria-hidden="true"
                 className="absolute bottom-0 h-[44px] w-full bg-gradient-to-b from-transparent to-white"
               />
-            </div>
-            <div className="flex h-auto lg:h-[248px] px-5 lg:px-0 w-full lg:w-[215px] flex-col gap-[16px]">
+            </Link>
+            <div className="flex flex-1 h-auto lg:min-h-[316px] px-5 lg:px-0 w-full lg:w-[215px] flex-col gap-[16px]">
               <h3 className="text-center text-[20px] lg:text-[30px] font-bold leading-[24px] lg:leading-[36px] tracking-[0px] lg:tracking-[-3px] text-brand-navy">
                 {area.title}
               </h3>
@@ -110,6 +119,19 @@ export default function BusinessAreas() {
                   <li key={line}>{line}</li>
                 ))}
               </ul>
+              <Link
+                href={area.href}
+                aria-label={`${area.title} 자세히 보기`}
+                className="group mt-auto inline-flex min-h-11 items-center justify-between gap-4 pt-6 text-[16px] font-semibold text-brand-navy transition-colors hover:text-brand-blue focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue lg:text-[18px]"
+              >
+                자세히 보기
+                <span
+                  aria-hidden="true"
+                  className="text-brand-blue transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+                >
+                  →
+                </span>
+              </Link>
             </div>
           </article>
         ))}

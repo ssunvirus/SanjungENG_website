@@ -78,10 +78,6 @@ const chillerServices = [
 export default function Services() {
   return (
     <>
-      <div
-        aria-hidden="true"
-        className="relative z-10 h-4 bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)] lg:h-[64px]"
-      />
       <section
         aria-labelledby="chiller-services-heading"
         className="mx-auto w-full max-w-[1440px] bg-[#F1FAFD] px-5 py-12 lg:px-[120px] lg:py-16"

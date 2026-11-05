@@ -1,3 +1,4 @@
+﻿import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import ResourcesHero from "@/src/components/fabric-duct/resources/Hero";
 import DownloadCenter from "@/src/components/fabric-duct/resources/DownloadCenter";
@@ -22,7 +23,10 @@ export default async function ResourcesPage({
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <DownloadCenter key={initialTab} initialTab={initialTab} />
+      <WaveSurface>
+        <DownloadCenter key={initialTab} initialTab={initialTab} />
+      </WaveSurface>
     </main>
   );
 }
+

@@ -1,3 +1,5 @@
+﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/cold-storage/CaseStudy";
 import ColdStorageFaq from "@/src/components/cold-storage/ColdStorageFaq";
@@ -13,21 +15,42 @@ export const metadata: Metadata = {
   description: "저온저장고의 CDU·유니트쿨러 설치와 냉매 배관, 제어설비 시공 내용을 소개합니다.",
 };
 
+const navigationItems = [
+  ["cold-storage-equipment", "주요 설비"],
+  ["cold-storage-process", "시공 과정"],
+  ["cold-storage-cases", "시공사례"],
+  ["cold-storage-questions", "자주 묻는 질문"],
+  ["cold-storage-inquiry", "견적문의"],
+] as const;
+
 export default function ColdStoragePage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
-      <div className="relative z-10 mx-auto h-4 w-full lg:h-[69px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
-      <Equipment />
-      <WorkProcess />
-      <CaseStudy />
-      <ColdStorageFaq />
-      <div className="lg:hidden">
-        <MobileEstimate />
-      </div>
-      <div className="hidden lg:block">
-        <EstimateCta />
-      </div>
+      <SectionNavigation items={navigationItems} label="저온저장고 페이지 구간 이동" />
+      <WaveSurface>
+        <div id="cold-storage-equipment" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <Equipment />
+        </div>
+        <div id="cold-storage-process" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <WorkProcess />
+        </div>
+        <div id="cold-storage-cases" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <CaseStudy />
+        </div>
+        <div id="cold-storage-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <ColdStorageFaq />
+        </div>
+        <div id="cold-storage-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div className="lg:hidden">
+          <MobileEstimate />
+        </div>
+        <div className="hidden lg:block">
+          <EstimateCta />
+        </div>
+        </div>
+      </WaveSurface>
     </main>
   );
 }
+

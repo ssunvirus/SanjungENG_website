@@ -1,3 +1,5 @@
+﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import PrecisionAcFaq from "@/src/components/precision-ac/PrecisionAcFaq";
 import EstimateCta from "@/src/components/home/EstimateCta";
@@ -16,23 +18,49 @@ export const metadata: Metadata = {
     "현장에 맞는 항온항습기 설치와 교체, 수리, 부품 교체 및 정기점검 서비스를 소개합니다.",
 };
 
+const navigationItems = [
+  ["precision-ac-services", "주요 서비스"],
+  ["precision-ac-process", "시공 과정"],
+  ["precision-ac-products", "주요 장비"],
+  ["precision-ac-cases", "시공사례"],
+  ["precision-ac-questions", "자주 묻는 질문"],
+  ["precision-ac-inquiry", "견적문의"],
+] as const;
+
 export default function PrecisionAcPage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
-      <div className="relative z-10 mx-auto h-4 w-full lg:h-[64px] lg:max-w-[1920px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]" />
-      <Services />
-      <Applications />
-      <WorkProcess />
-      <Products />
-      <CaseStudy />
-      <PrecisionAcFaq />
-      <div className="lg:hidden">
-        <MobileEstimate />
-      </div>
-      <div className="hidden lg:block">
-        <EstimateCta />
-      </div>
+      <SectionNavigation items={navigationItems} label="항온항습기 페이지 구간 이동" />
+      <WaveSurface>
+        <div id="precision-ac-services" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <Services />
+          <Applications />
+        </div>
+        <div id="precision-ac-process" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-[#E3F6FC]">
+          <WorkProcess />
+        </div>
+        <div id="precision-ac-products" tabIndex={-1} className="scroll-mt-[144px] bg-white outline-none lg:scroll-mt-[170px]">
+          <Products />
+        </div>
+        <div id="precision-ac-cases" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <CaseStudy />
+        </div>
+        <div id="precision-ac-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+          <PrecisionAcFaq />
+        </div>
+        <div id="precision-ac-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div className="lg:hidden">
+          <MobileEstimate />
+        </div>
+        <div className="hidden lg:block">
+          <EstimateCta />
+        </div>
+        </div>
+      </WaveSurface>
     </main>
   );
 }
+
+
+

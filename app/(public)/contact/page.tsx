@@ -1,3 +1,4 @@
+﻿import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import Hero from "@/src/components/contact/Hero";
 import ContactInfo from "@/src/components/contact/ContactInfo";
@@ -17,13 +18,16 @@ export default function ContactPage() {
         aria-hidden="true"
         className="relative z-10 h-4 lg:h-[64px] bg-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
       />
-      <section
-        aria-label="견적 상담 및 문의 작성"
-        className="mx-auto grid w-full grid-cols-1 gap-8 px-5 pb-9 lg:min-h-[1302px] lg:max-w-[1440px] lg:grid-cols-[473px_856px] lg:gap-[111px] lg:px-0 lg:pb-[25px]"
-      >
-        <ContactInfo />
-        <InquiryForm />
-      </section>
+      <WaveSurface>
+        <section
+          aria-label="견적 상담 및 문의 작성"
+          className="mx-auto grid w-full grid-cols-1 gap-8 px-5 pb-9 lg:min-h-[1302px] lg:max-w-[1440px] lg:grid-cols-[473px_856px] lg:gap-[111px] lg:px-0 lg:pb-[25px]"
+        >
+          <ContactInfo />
+          <InquiryForm />
+        </section>
+      </WaveSurface>
     </main>
   );
 }
+
