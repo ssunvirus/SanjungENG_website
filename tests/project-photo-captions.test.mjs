@@ -31,6 +31,8 @@ function component(relative) {
         return { default: ({ src, alt }) => React.createElement("img", { src, alt }) };
       if (name === "next/link")
         return { default: ({ children, ...props }) => React.createElement("a", props, children) };
+      if (name.endsWith("/shared/WaveSurface"))
+        return { default: ({ children }) => React.createElement(React.Fragment, null, children) };
       if (name.endsWith("/projects/data")) return { projects };
       if (name.endsWith("/legacy-project-photos")) return legacy;
       if (name.endsWith("/public-project-data")) return { publicPhotoPath };
