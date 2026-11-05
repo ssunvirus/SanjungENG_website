@@ -1,4 +1,4 @@
-import styles from "./LaptopLayout.module.css";
+﻿import styles from "./LaptopLayout.module.css";
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
@@ -12,8 +12,8 @@ const rows = [
 
 export default function Introduction() {
   return (
-    <section className={`${styles.introduction} mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-[clamp(40px,8vw,160px)] lg:pt-[69px] min-[1920px]:h-[866px] min-[1920px]:pl-[280px] min-[1920px]:pr-[178px]`}>
-      <div className="grid grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
+    <section className={`${styles.introduction} mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-10 lg:pt-[69px] min-[1920px]:h-[866px] `}>
+      <div className="mx-auto grid w-full max-w-[1462px] grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
         <div>
           <div className="h-auto  lg:h-[218px]">
             <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
@@ -88,3 +88,4 @@ export default function Introduction() {
     </section>
   );
 }
+
