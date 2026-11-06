@@ -63,7 +63,7 @@ function setup(blocked = false, naverState = "ready") {
         return {
           sendGAEvent: (...args) => {
             events.push(args);
-            if (blocked) throw new Error("Tracking blocked");
+            if (blocked === true || blocked === args[1]) throw new Error("Tracking blocked");
           },
         };
       throw new Error(name);
@@ -85,23 +85,23 @@ function setup(blocked = false, naverState = "ready") {
   };
 }
 
-test("telephone links send only the phone conversion label and cleanup prevents duplicate listeners", () => {
+test("telephone links send one GA4 event and one advertising conversion without duplicate listeners", () => {
   const tracker = setup();
   tracker.click("tel:01053401728");
   assert.equal(JSON.stringify(tracker.naverEvents), '[{"type":"custom001"}]');
   assert.equal(tracker.window.wcs_add.wa, "s_3311cae277b0");
   assert.equal(
     JSON.stringify(tracker.events),
-    "[[" + '"event","conversion",{"send_to":"AW-18414772395/xGhQCKXJvqYdEKvB7MxE"}]]',
+    '[["event","phone_click",{"send_to":"G-H64WF985Q8"}],["event","conversion",{"send_to":"AW-18414772395/xGhQCKXJvqYdEKvB7MxE"}]]',
   );
   tracker.cleanup();
   tracker.mount();
   tracker.click("tel:028911728");
-  assert.equal(tracker.events.length, 2);
+  assert.equal(tracker.events.length, 4);
   assert.equal(tracker.naverEvents.length, 2);
   tracker.cleanup();
   tracker.click("tel:028911728");
-  assert.equal(tracker.events.length, 2);
+  assert.equal(tracker.events.length, 4);
   assert.equal(tracker.naverEvents.length, 2);
 });
 
@@ -124,7 +124,7 @@ test("tracking errors do not throw or cancel telephone navigation", () => {
       },
     }),
   );
-  assert.equal(tracker.events.length, 1);
+  assert.equal(tracker.events.length, 2);
   assert.equal(tracker.naverEvents.length, 1);
 });
 
@@ -132,7 +132,17 @@ test("missing or blocked Naver tracking preserves Google conversion and telephon
   for (const state of ["missing", "blocked"]) {
     const tracker = setup(false, state);
     assert.doesNotThrow(() => tracker.click("tel:01053401728"));
-    assert.equal(tracker.events.length, 1);
+    assert.equal(tracker.events.length, 2);
     assert.equal(tracker.naverEvents.length, 0);
   }
+});
+
+test("a GA4 event failure still attempts the Google Ads and Naver phone conversions", () => {
+  const tracker = setup("phone_click");
+  assert.doesNotThrow(() => tracker.click("tel:01053401728"));
+  assert.deepEqual(
+    tracker.events.map((event) => event[1]),
+    ["phone_click", "conversion"],
+  );
+  assert.equal(tracker.naverEvents.length, 1);
 });

@@ -13,6 +13,11 @@ export default function PhoneConversionTracking() {
       if (!link?.getAttribute("href")?.toLowerCase().startsWith("tel:")) return;
 
       try {
+        sendGAEvent("event", "phone_click", { send_to: "G-H64WF985Q8" });
+      } catch {
+        // Analytics must not prevent advertising measurement or telephone navigation.
+      }
+      try {
         sendGAEvent("event", "conversion", {
           send_to: "AW-18414772395/xGhQCKXJvqYdEKvB7MxE",
         });
