@@ -44,34 +44,62 @@ export default function FabricDuctPage() {
       <Hero />
       <SectionNavigation items={navigationItems} label="섬유덕트 페이지 구간 이동" />
       <WaveSurface>
-        <div id="fabric-introduction" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-          <div className="bg-white"><Introduction /></div>
+        <div
+          id="fabric-introduction"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="bg-white">
+            <Introduction />
+          </div>
           <Advantages />
         </div>
-        <div id="fabric-applications" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="fabric-applications"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <Applications />
         </div>
-        <div id="fabric-design" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-          <div className="bg-white"><AirFlowDesign /></div>
+        <div
+          id="fabric-design"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="bg-white">
+            <AirFlowDesign />
+          </div>
           <OneStopSolution />
         </div>
-        <div id="fabric-partners" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-          <div className="bg-white"><Partners /></div>
+        <div
+          id="fabric-partners"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="bg-white">
+            <Partners />
+          </div>
         </div>
-        <div id="fabric-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="fabric-questions"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <FabricDuctFaq />
         </div>
-        <div id="fabric-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-        <div className="lg:hidden">
-          <MobileEstimate {...estimateIntro} />
-        </div>
-        <div className="hidden lg:block">
-          <EstimateCta {...estimateIntro} />
-        </div>
+        <div
+          id="fabric-inquiry"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="lg:hidden">
+            <MobileEstimate {...estimateIntro} />
+          </div>
+          <div className="hidden lg:block">
+            <EstimateCta {...estimateIntro} />
+          </div>
         </div>
       </WaveSurface>
     </main>
   );
 }
-
-

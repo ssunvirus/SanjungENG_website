@@ -95,55 +95,58 @@ export function MobileBusinessOverview() {
           <BusinessWorkflow />
         </div>
       </section>
-
     </>
   );
 }
 
 export function MobileBusinessAreas() {
   return (
-      <section className="mx-auto max-w-[600px] px-5 py-8">
-        <Eyebrow variant="compact">OUR BUSINESS</Eyebrow>
-        <div className="mt-3 flex items-center justify-between">
-          <h2 className="text-[28px] font-extrabold">사업영역</h2>
-          <Link href="/solutions" className="flex min-h-11 items-center gap-2 text-sm">
-            전체 보기
-            <ArrowRight size={16} aria-hidden="true" />
+    <section className="mx-auto max-w-[600px] px-5 py-8">
+      <Eyebrow variant="compact">OUR BUSINESS</Eyebrow>
+      <div className="mt-3 flex items-center justify-between">
+        <h2 className="text-[28px] font-extrabold">사업영역</h2>
+        <Link href="/solutions" className="flex min-h-11 items-center gap-2 text-sm">
+          전체 보기
+          <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+      </div>
+      <div className="mt-5 space-y-3">
+        {business.map((item) => (
+          <Link
+            key={item.title}
+            href={item.href}
+            className="flex min-h-[130px] items-center gap-4 rounded-[22px] bg-white p-3"
+          >
+            <div className="relative h-[108px] w-[100px] shrink-0 overflow-hidden rounded-xl">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="100px"
+                className="object-cover"
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-[21px] font-bold">{item.title}</h3>
+              <p className="mt-2 text-sm leading-5 text-[#637382]">{item.description}</p>
+              <ArrowRightCircle
+                size={28}
+                aria-hidden="true"
+                className="ml-auto mt-3 text-[#006EB8]"
+              />
+            </div>
           </Link>
-        </div>
-        <div className="mt-5 space-y-3">
-          {business.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className="flex min-h-[130px] items-center gap-4 rounded-[22px] bg-white p-3"
-            >
-              <div className="relative h-[108px] w-[100px] shrink-0 overflow-hidden rounded-xl">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="100px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <h3 className="text-[21px] font-bold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-5 text-[#637382]">{item.description}</p>
-                <ArrowRightCircle
-                  size={28}
-                  aria-hidden="true"
-                  className="ml-auto mt-3 text-[#006EB8]"
-                />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
+        ))}
+      </div>
+    </section>
   );
 }
 
 export default function MobileBusiness() {
-  return <><MobileBusinessOverview /><MobileBusinessAreas /></>;
+  return (
+    <>
+      <MobileBusinessOverview />
+      <MobileBusinessAreas />
+    </>
+  );
 }

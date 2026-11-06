@@ -54,7 +54,7 @@ export default function WorkProcess() {
         저온저장고 냉동설비 이렇게 시공합니다.
       </h2>
       <p className="mt-3 text-[15px] font-semibold text-brand-text lg:mt-[25px] lg:text-[19px]">
-        냉동설비 입고부터 배관, 제어까지, {" "}
+        냉동설비 입고부터 배관, 제어까지,{" "}
         <strong className="font-extrabold text-brand-blue">산정엔지니어링</strong>이 책임집니다.
       </p>
 

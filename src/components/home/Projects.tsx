@@ -17,9 +17,12 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
   const [autoplay, setAutoplay] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const manualMoveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => () => {
-    if (manualMoveTimer.current) clearTimeout(manualMoveTimer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (manualMoveTimer.current) clearTimeout(manualMoveTimer.current);
+    },
+    [],
+  );
   useProjectAutoplay(trackRef, projects.length, autoplay && !interacting && projects.length > 2);
 
   function move(direction: number) {
@@ -140,7 +143,11 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
                       fill
                       sizes="503px"
                       unoptimized={project.image.startsWith("/api/project-images/")}
-                      className={project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"}
+                      className={
+                        project.imageFit === "contain"
+                          ? "bg-[#E3EDF3] object-contain"
+                          : "object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.025]"
+                      }
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center bg-[#E3EDF3] text-brand-navy/50">

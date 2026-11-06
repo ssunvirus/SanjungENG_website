@@ -10,7 +10,13 @@ const mobileLabels: Record<string, string> = {
   "주요 항온항습기": "주요 장비",
 };
 
-export default function SectionNavigation({ items, label }: { items: readonly (readonly [string, string])[]; label: string }) {
+export default function SectionNavigation({
+  items,
+  label,
+}: {
+  items: readonly (readonly [string, string])[];
+  label: string;
+}) {
   const [active, setActive] = useState<string>(items[0][0]);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -19,7 +25,8 @@ export default function SectionNavigation({ items, label }: { items: readonly (r
   useEffect(() => {
     const list = listRef.current;
     if (!list) return;
-    const update = () => setCanScrollRight(list.scrollLeft + list.clientWidth < list.scrollWidth - 2);
+    const update = () =>
+      setCanScrollRight(list.scrollLeft + list.clientWidth < list.scrollWidth - 2);
     const observer = new ResizeObserver(update);
     observer.observe(list);
     list.addEventListener("scroll", update, { passive: true });
@@ -38,8 +45,11 @@ export default function SectionNavigation({ items, label }: { items: readonly (r
     const itemRect = selected.getBoundingClientRect();
     const listRect = list.getBoundingClientRect();
     list.scrollTo({
-      left: list.scrollLeft + itemRect.left - listRect.left - (list.clientWidth - itemRect.width) / 2,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+      left:
+        list.scrollLeft + itemRect.left - listRect.left - (list.clientWidth - itemRect.width) / 2,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
     });
   }, [active]);
 
@@ -80,7 +90,10 @@ export default function SectionNavigation({ items, label }: { items: readonly (r
       aria-label={label}
       className="sticky top-[64px] z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:top-[72px] min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:top-[98px] lg:-mt-6 lg:px-10"
     >
-      <div ref={listRef} className="mx-auto flex max-w-[1280px] items-center gap-1 overflow-x-auto bg-white px-3 py-2 [scrollbar-width:none] min-[768px]:gap-2 min-[768px]:rounded-[24px] min-[768px]:border min-[768px]:border-brand-navy/10 min-[768px]:py-3 min-[768px]:shadow-[0_6px_16px_rgba(16,47,73,0.2)] lg:gap-3 lg:px-5 [&::-webkit-scrollbar]:hidden">
+      <div
+        ref={listRef}
+        className="mx-auto flex max-w-[1280px] items-center gap-1 overflow-x-auto bg-white px-3 py-2 [scrollbar-width:none] min-[768px]:gap-2 min-[768px]:rounded-[24px] min-[768px]:border min-[768px]:border-brand-navy/10 min-[768px]:py-3 min-[768px]:shadow-[0_6px_16px_rgba(16,47,73,0.2)] lg:gap-3 lg:px-5 [&::-webkit-scrollbar]:hidden"
+      >
         {items.map(([id, label]) => (
           <a
             key={id}
@@ -113,13 +126,28 @@ export default function SectionNavigation({ items, label }: { items: readonly (r
           type="button"
           aria-label="오른쪽 이동메뉴 더 보기"
           className="absolute inset-y-0 right-0 flex w-10 items-center justify-end bg-gradient-to-l from-white via-white/95 to-transparent pr-2 text-brand-navy min-[768px]:hidden"
-          onClick={() => listRef.current?.scrollBy({ left: Math.max(140, listRef.current.clientWidth * 0.6), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })}
+          onClick={() =>
+            listRef.current?.scrollBy({
+              left: Math.max(140, listRef.current.clientWidth * 0.6),
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "instant"
+                : "smooth",
+            })
+          }
         >
-          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 5 7 7-7 7" /></svg>
+          <svg
+            aria-hidden="true"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="m9 5 7 7-7 7" />
+          </svg>
         </button>
       )}
     </nav>
   );
 }
-
-

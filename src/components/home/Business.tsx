@@ -46,185 +46,236 @@ const businessCards = [
 export function BusinessOverview() {
   return (
     <BusinessOverviewFrame>
-    <section className="relative h-[1081px] w-[1920px] overflow-hidden">
-      <Image
-        src="/images/business/overview-background.png"
-        alt="냉동공조와 섬유덕트가 적용된 산업 시설"
-        fill
-        sizes="(max-width: 1920px) 100vw, 1920px"
-        className="object-cover"
-      />
+      <section className="relative h-[1081px] w-[1920px] overflow-hidden">
+        <Image
+          src="/images/business/overview-background.png"
+          alt="냉동공조와 섬유덕트가 적용된 산업 시설"
+          fill
+          sizes="(max-width: 1920px) 100vw, 1920px"
+          className="object-cover"
+        />
 
-      <div className="absolute top-[51px] left-[240px]">
-        <h2 className="mt-[78px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
-          냉동기부터 섬유덕트까지
-        </h2>
-        <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-brand-blue">
-          냉동공조 설계 &amp; 시공.
-        </p>
-      </div>
+        <div className="absolute top-[51px] left-[240px]">
+          <h2 className="mt-[78px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
+            냉동기부터 섬유덕트까지
+          </h2>
+          <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-brand-blue">
+            냉동공조 설계 &amp; 시공.
+          </p>
+        </div>
 
-      <ol aria-label="주요 사업 안내">
-        {[
-          {
-            title: "냉동설비",
-            description: "설치 & 교체",
-            x: 389,
-            y: 399,
-            width: 171,
-            offset: 8,
-            end: 624,
-          },
-          {
-            title: "수리&오버홀",
-            description: "성능 복구",
-            x: 771,
-            y: 485,
-            width: 220,
-            offset: 10,
-            end: 695,
-          },
-          {
-            title: "유지보수",
-            description: "정기점검",
-            x: 1166,
-            y: 543,
-            width: 166,
-            offset: 8,
-            end: 728,
-          },
-          {
-            title: "섬유덕트",
-            description: "CFD 설계 & 시공",
-            x: 1526,
-            y: 213,
-            width: 204,
-            offset: 8,
-            end: 442,
-          },
-        ].map((service, index) => (
-          <li
-            key={service.title}
-            className={`group/lift absolute hover:z-20 focus-within:z-20 ${index <= 2 ? "before:pointer-events-none before:absolute before:-top-[210px] before:left-0 before:h-[210px] before:w-full hover:before:pointer-events-auto focus-within:before:pointer-events-auto" : ""}`}
-            style={{ left: service.x, top: service.y }}
-          >
-            <span
-              aria-hidden="true"
-              className={`absolute top-[34px] w-[3px] -translate-x-1/2 bg-[#0075BB] origin-bottom transition-transform duration-300 ease-out motion-reduce:transition-none ${index === 2 ? "group-hover/lift:scale-y-[2.39073] group-focus-within/lift:scale-y-[2.39073]" : index === 1 ? "group-hover/lift:scale-y-[2.02273] group-focus-within/lift:scale-y-[2.02273]" : index === 0 ? "group-hover/lift:scale-y-[1.41885] group-focus-within/lift:scale-y-[1.41885]" : ""}`}
-              style={{ height: service.end - service.y - 34 }}
-            />
-            <span
-              aria-hidden="true"
-              className="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#0075BB] bg-white"
-              style={{ top: service.end - service.y }}
-            />
-            <div className={`group/service relative transition-transform duration-300 ease-out ${index === 2 ? "group-hover/lift:-translate-y-[210px] group-focus-within/lift:-translate-y-[210px]" : index === 1 ? "group-hover/lift:-translate-y-[180px] group-focus-within/lift:-translate-y-[180px]" : index === 0 ? "group-hover/lift:-translate-y-[80px] group-focus-within/lift:-translate-y-[80px]" : "motion-safe:group-hover/lift:-translate-y-[6px] motion-safe:group-focus-within/lift:-translate-y-[6px]"} motion-reduce:transition-none`}>
-              <div
-                tabIndex={0}
-                aria-describedby={`business-service-tooltip-${index}`}
-                className="relative flex h-[76px] flex-col justify-center rounded-[20px] bg-white pl-[42px] pr-[12px] shadow-[0_4px_2px_rgba(0,0,0,0.25)] transition-shadow duration-300 ease-out group-hover/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] group-focus-within/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-brand-blue"
-                style={{ width: service.width, left: -service.offset }}
-              >
-                <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
-                  {service.title}
-                </h3>
-                <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
-                  {service.description}
-                </p>
-                {(
-                  <div
-                    id={`business-service-tooltip-${index}`}
-                    role="tooltip"
-                    className="pointer-events-none absolute left-1/2 top-full z-30 w-[340px] -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-200 group-hover/service:pointer-events-auto group-hover/service:opacity-100 group-focus-within/service:pointer-events-auto group-focus-within/service:opacity-100 motion-reduce:transition-none"
-                  >
-                    <div className="relative rounded-xl border border-black/20 bg-white px-5 py-4 text-left text-[18px] font-medium leading-7 text-brand-navy shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
-                      <span
-                        aria-hidden="true"
-                        className="absolute -top-[7px] left-1/2 size-3 -translate-x-1/2 rotate-45 border-l border-t border-black/20 bg-white"
-                      />
-                      <p className="mb-3 text-[20px] font-bold">
-                        {index === 0 ? "산업용 냉동기 & 공조 설비" : index === 1 ? "냉동공조 설비 수리 & 오버홀" : index === 2 ? "냉동공조 설비 정기점검 & 유지보수" : "섬유덕트 설계 & 시공"}
-                      </p>
-                      <p>
-                        {index === 0 ? <>
-                          흡수식,스크류 냉동기, 칠러<br />
-                          냉각탑, 항온항습기, 공조기<br />
-                          저온저장고, 유니트 쿨러
-                        </> : index === 1 ? <>
-                          압축기, 모터 등 주요 부품 점검 및 교체<br />
-                          냉매 누설 점검 및 냉매 충전<br />
-                          열교환기 세관 및 노후 배관 정비
-                        </> : index === 2 ? <>
-                          냉동기 운전 상태 및 냉각 성능 점검<br />
-                          증발기 제상 상태 확인 및 열교환기 청소<br />
-                          전력 사용량 확인 및 운전 상태 모니터링
-                        </> : <>
-                          CFD 해석을 통한 풍량, 기류 설계<br />
-                          현장에 맞춘 페브릭덕트 제작 및 설치<br />
-                          덕트 탈착, 세탁, 재설치 및 사후관리
-                        </>}
-                      </p>
-                      <p className="mt-4 border-t border-brand-blue/20 pt-3 font-semibold">
-                        {index === 0
-                          ? "신규 설치부터 노후 설비 철거, 교체까지"
-                          : index === 1
-                            ? "고장 원인을 찾아 신속한 수리 및 성능 회복"
-                            : index === 2
-                              ? "고장을 예방하고, 불필요한 에너지 낭비를 줄입니다."
-                              : "공간에 맞는 공기 분배, 설치 후 관리까지"}
-                      </p>
-                    </div>
-                    {index === 1 && (
-                      <div className="mt-3 overflow-hidden rounded-xl border border-black/30 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
-                        <Image
-                          src="/images/business/repair-fan-replacement.jpg"
-                          alt="냉동창고 유니트 쿨러의 팬 구동부를 수리하는 작업자"
-                          width={3000}
-                          height={4000}
-                          sizes="340px"
-                          className="h-[210px] w-full object-cover object-[center_45%]"
-                        />
-                        <p className="px-4 py-3 text-[18px] font-semibold text-brand-navy">냉동설비 수리 현장</p>
-                      </div>
-                    )}
-                    {index !== 1 && (
-                      <Link
-                        href={index === 0 ? "/projects/wonsam-nonghyup" : index === 2 ? "/projects/seoanseong-maintenance" : "/projects/orion-production"}
-                        className="mt-3 block overflow-hidden rounded-xl border border-black/30 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.25)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
-                      >
-                        <Image
-                          src={index === 0 ? "/images/business/refrigeration-unit-installation.jpg" : index === 2 ? "/images/business/maintenance-thermal-inspection.jpg" : "/images/projects/orion-production/cc_P5243334.jpg"}
-                          alt={index === 0 ? "고소작업대와 지게차를 이용한 저온저장고 유니트 쿨러 설치" : index === 2 ? "열화상 카메라로 냉동창고 전기 제어반을 점검하는 작업자" : "공장 생산라인 천장에 설치된 페브릭덕트"}
-                          width={900}
-                          height={675}
-                          sizes="340px"
-                          className="h-[210px] w-full object-cover"
-                        />
-                        <span className="flex items-center justify-between gap-3 px-4 py-3 text-[18px] font-semibold text-brand-navy">
-                          {index === 0 ? "농협 저온저장고 냉동설비 설치" : index === 2 ? "서안성 냉동창고 정기점검" : "페브릭덕트 설치 현장"}
-                          <ChevronRight size={20} aria-hidden="true" />
-                        </span>
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
+        <ol aria-label="주요 사업 안내">
+          {[
+            {
+              title: "냉동설비",
+              description: "설치 & 교체",
+              x: 389,
+              y: 399,
+              width: 171,
+              offset: 8,
+              end: 624,
+            },
+            {
+              title: "수리&오버홀",
+              description: "성능 복구",
+              x: 771,
+              y: 485,
+              width: 220,
+              offset: 10,
+              end: 695,
+            },
+            {
+              title: "유지보수",
+              description: "정기점검",
+              x: 1166,
+              y: 543,
+              width: 166,
+              offset: 8,
+              end: 728,
+            },
+            {
+              title: "섬유덕트",
+              description: "CFD 설계 & 시공",
+              x: 1526,
+              y: 213,
+              width: 204,
+              offset: 8,
+              end: 442,
+            },
+          ].map((service, index) => (
+            <li
+              key={service.title}
+              className={`group/lift absolute hover:z-20 focus-within:z-20 ${index <= 2 ? "before:pointer-events-none before:absolute before:-top-[210px] before:left-0 before:h-[210px] before:w-full hover:before:pointer-events-auto focus-within:before:pointer-events-auto" : ""}`}
+              style={{ left: service.x, top: service.y }}
+            >
               <span
-                style={{ left: 8 - service.offset }}
-                className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-brand-blue text-[20px] font-semibold text-brand-text"
+                aria-hidden="true"
+                className={`absolute top-[34px] w-[3px] -translate-x-1/2 bg-[#0075BB] origin-bottom transition-transform duration-300 ease-out motion-reduce:transition-none ${index === 2 ? "group-hover/lift:scale-y-[2.39073] group-focus-within/lift:scale-y-[2.39073]" : index === 1 ? "group-hover/lift:scale-y-[2.02273] group-focus-within/lift:scale-y-[2.02273]" : index === 0 ? "group-hover/lift:scale-y-[1.41885] group-focus-within/lift:scale-y-[1.41885]" : ""}`}
+                style={{ height: service.end - service.y - 34 }}
+              />
+              <span
+                aria-hidden="true"
+                className="absolute size-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#0075BB] bg-white"
+                style={{ top: service.end - service.y }}
+              />
+              <div
+                className={`group/service relative transition-transform duration-300 ease-out ${index === 2 ? "group-hover/lift:-translate-y-[210px] group-focus-within/lift:-translate-y-[210px]" : index === 1 ? "group-hover/lift:-translate-y-[180px] group-focus-within/lift:-translate-y-[180px]" : index === 0 ? "group-hover/lift:-translate-y-[80px] group-focus-within/lift:-translate-y-[80px]" : "motion-safe:group-hover/lift:-translate-y-[6px] motion-safe:group-focus-within/lift:-translate-y-[6px]"} motion-reduce:transition-none`}
               >
-                {index + 1}
-              </span>
-            </div>
-          </li>
-        ))}
-      </ol>
+                <div
+                  tabIndex={0}
+                  aria-describedby={`business-service-tooltip-${index}`}
+                  className="relative flex h-[76px] flex-col justify-center rounded-[20px] bg-white pl-[42px] pr-[12px] shadow-[0_4px_2px_rgba(0,0,0,0.25)] transition-shadow duration-300 ease-out group-hover/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] group-focus-within/lift:shadow-[0_10px_20px_rgba(0,0,0,0.2)] motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-brand-blue"
+                  style={{ width: service.width, left: -service.offset }}
+                >
+                  <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
+                    {service.title}
+                  </h3>
+                  <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
+                    {service.description}
+                  </p>
+                  {
+                    <div
+                      id={`business-service-tooltip-${index}`}
+                      role="tooltip"
+                      className="pointer-events-none absolute left-1/2 top-full z-30 w-[340px] -translate-x-1/2 pt-3 opacity-0 transition-opacity duration-200 group-hover/service:pointer-events-auto group-hover/service:opacity-100 group-focus-within/service:pointer-events-auto group-focus-within/service:opacity-100 motion-reduce:transition-none"
+                    >
+                      <div className="relative rounded-xl border border-black/20 bg-white px-5 py-4 text-left text-[18px] font-medium leading-7 text-brand-navy shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+                        <span
+                          aria-hidden="true"
+                          className="absolute -top-[7px] left-1/2 size-3 -translate-x-1/2 rotate-45 border-l border-t border-black/20 bg-white"
+                        />
+                        <p className="mb-3 text-[20px] font-bold">
+                          {index === 0
+                            ? "산업용 냉동기 & 공조 설비"
+                            : index === 1
+                              ? "냉동공조 설비 수리 & 오버홀"
+                              : index === 2
+                                ? "냉동공조 설비 정기점검 & 유지보수"
+                                : "섬유덕트 설계 & 시공"}
+                        </p>
+                        <p>
+                          {index === 0 ? (
+                            <>
+                              흡수식,스크류 냉동기, 칠러
+                              <br />
+                              냉각탑, 항온항습기, 공조기
+                              <br />
+                              저온저장고, 유니트 쿨러
+                            </>
+                          ) : index === 1 ? (
+                            <>
+                              압축기, 모터 등 주요 부품 점검 및 교체
+                              <br />
+                              냉매 누설 점검 및 냉매 충전
+                              <br />
+                              열교환기 세관 및 노후 배관 정비
+                            </>
+                          ) : index === 2 ? (
+                            <>
+                              냉동기 운전 상태 및 냉각 성능 점검
+                              <br />
+                              증발기 제상 상태 확인 및 열교환기 청소
+                              <br />
+                              전력 사용량 확인 및 운전 상태 모니터링
+                            </>
+                          ) : (
+                            <>
+                              CFD 해석을 통한 풍량, 기류 설계
+                              <br />
+                              현장에 맞춘 페브릭덕트 제작 및 설치
+                              <br />
+                              덕트 탈착, 세탁, 재설치 및 사후관리
+                            </>
+                          )}
+                        </p>
+                        <p className="mt-4 border-t border-brand-blue/20 pt-3 font-semibold">
+                          {index === 0
+                            ? "신규 설치부터 노후 설비 철거, 교체까지"
+                            : index === 1
+                              ? "고장 원인을 찾아 신속한 수리 및 성능 회복"
+                              : index === 2
+                                ? "고장을 예방하고, 불필요한 에너지 낭비를 줄입니다."
+                                : "공간에 맞는 공기 분배, 설치 후 관리까지"}
+                        </p>
+                      </div>
+                      {index === 1 && (
+                        <div className="mt-3 overflow-hidden rounded-xl border border-black/30 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+                          <Image
+                            src="/images/business/repair-fan-replacement.jpg"
+                            alt="냉동창고 유니트 쿨러의 팬 구동부를 수리하는 작업자"
+                            width={3000}
+                            height={4000}
+                            sizes="340px"
+                            className="h-[210px] w-full object-cover object-[center_45%]"
+                          />
+                          <p className="px-4 py-3 text-[18px] font-semibold text-brand-navy">
+                            냉동설비 수리 현장
+                          </p>
+                        </div>
+                      )}
+                      {index !== 1 && (
+                        <Link
+                          href={
+                            index === 0
+                              ? "/projects/wonsam-nonghyup"
+                              : index === 2
+                                ? "/projects/seoanseong-maintenance"
+                                : "/projects/orion-production"
+                          }
+                          className="mt-3 block overflow-hidden rounded-xl border border-black/30 bg-white shadow-[0_8px_24px_rgba(0,0,0,0.25)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+                        >
+                          <Image
+                            src={
+                              index === 0
+                                ? "/images/business/refrigeration-unit-installation.jpg"
+                                : index === 2
+                                  ? "/images/business/maintenance-thermal-inspection.jpg"
+                                  : "/images/projects/orion-production/cc_P5243334.jpg"
+                            }
+                            alt={
+                              index === 0
+                                ? "고소작업대와 지게차를 이용한 저온저장고 유니트 쿨러 설치"
+                                : index === 2
+                                  ? "열화상 카메라로 냉동창고 전기 제어반을 점검하는 작업자"
+                                  : "공장 생산라인 천장에 설치된 페브릭덕트"
+                            }
+                            width={900}
+                            height={675}
+                            sizes="340px"
+                            className="h-[210px] w-full object-cover"
+                          />
+                          <span className="flex items-center justify-between gap-3 px-4 py-3 text-[18px] font-semibold text-brand-navy">
+                            {index === 0
+                              ? "농협 저온저장고 냉동설비 설치"
+                              : index === 2
+                                ? "서안성 냉동창고 정기점검"
+                                : "페브릭덕트 설치 현장"}
+                            <ChevronRight size={20} aria-hidden="true" />
+                          </span>
+                        </Link>
+                      )}
+                    </div>
+                  }
+                </div>
+                <span
+                  style={{ left: 8 - service.offset }}
+                  className="absolute top-[12px] flex size-[44px] -translate-x-1/2 items-center justify-center rounded-full border-[4px] border-white bg-brand-blue text-[20px] font-semibold text-brand-text"
+                >
+                  {index + 1}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ol>
 
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#EFF7FB]" />
-      <div className="absolute top-[950px] left-1/2 z-10 -translate-x-1/2">
-        <BusinessWorkflow />
-      </div>
-    </section>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#EFF7FB]"
+        />
+        <div className="absolute top-[950px] left-1/2 z-10 -translate-x-1/2">
+          <BusinessWorkflow />
+        </div>
+      </section>
     </BusinessOverviewFrame>
   );
 }
@@ -304,4 +355,3 @@ export default function Business() {
     </>
   );
 }
-

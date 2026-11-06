@@ -10,5 +10,6 @@ const items = [
   ["chiller-inquiry", "견적문의"],
 ] as const;
 
-export default function ChillerSectionNavigation() { return <SectionNavigation items={items} label="냉동기 페이지 구간 이동" />; }
-
+export default function ChillerSectionNavigation() {
+  return <SectionNavigation items={items} label="냉동기 페이지 구간 이동" />;
+}

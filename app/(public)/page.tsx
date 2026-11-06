@@ -6,7 +6,10 @@ import Projects from "@/src/components/home/Projects";
 import Customers from "@/src/components/home/Customers";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileHero from "@/src/components/home/mobile/MobileHero";
-import { MobileBusinessOverview, MobileBusinessAreas } from "@/src/components/home/mobile/MobileBusiness";
+import {
+  MobileBusinessOverview,
+  MobileBusinessAreas,
+} from "@/src/components/home/mobile/MobileBusiness";
 import MobileProjects from "@/src/components/home/mobile/MobileProjects";
 import MobileCustomers from "@/src/components/home/mobile/MobileCustomers";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
@@ -51,31 +54,30 @@ export default async function Home() {
         <MobileHero />
         <MobileBusinessOverview />
         <div className="relative">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 -top-20 z-10 h-20 bg-gradient-to-b from-transparent to-[#EFF7FB] lg:-top-28 lg:h-28" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 -top-20 z-10 h-20 bg-gradient-to-b from-transparent to-[#EFF7FB] lg:-top-28 lg:h-28"
+          />
           <WaveSurface blendTop>
-          <MobileBusinessAreas />
-        <MobileProjects cases={mobileCases} />
-        <MobileCustomers />
-        <MobileEstimate />
-        </WaveSurface>
+            <MobileBusinessAreas />
+            <MobileProjects cases={mobileCases} />
+            <MobileCustomers />
+            <MobileEstimate />
+          </WaveSurface>
         </div>
       </div>
       <div className="hidden lg:block">
         <Hero />
         <BusinessOverview />
         <div className="relative -mt-[2px]">
-
           <WaveSurface blendTop>
-          <BusinessAreas />
-        <Projects projects={desktopCases} />
-        <Customers />
-        <EstimateCta />
-        </WaveSurface>
+            <BusinessAreas />
+            <Projects projects={desktopCases} />
+            <Customers />
+            <EstimateCta />
+          </WaveSurface>
         </div>
       </div>
     </main>
   );
 }
-
-
-

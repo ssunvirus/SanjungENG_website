@@ -10,7 +10,8 @@ export default function Products() {
       <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
         <div>
           <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-5 lg:text-[20px] lg:tracking-[6px]">
-            AIR CONDITIONER <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
+            AIR CONDITIONER{" "}
+            <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
           </p>
           <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-brand-navy lg:mt-[10px] lg:text-[45px] lg:tracking-[2px]">
             주요 항온항습기

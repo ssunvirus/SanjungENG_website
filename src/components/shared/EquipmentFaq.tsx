@@ -178,7 +178,9 @@ export default function EquipmentFaq({
                   >
                     Q
                   </span>
-                  <span className="min-w-0 flex-1 break-keep pt-0.5 text-base leading-6 [overflow-wrap:anywhere]">{item.question}</span>
+                  <span className="min-w-0 flex-1 break-keep pt-0.5 text-base leading-6 [overflow-wrap:anywhere]">
+                    {item.question}
+                  </span>
                   <Plus
                     aria-hidden="true"
                     className="mt-1 size-5 shrink-0 text-brand-blue transition-transform group-open:rotate-45 motion-reduce:transition-none"

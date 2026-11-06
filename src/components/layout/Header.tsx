@@ -150,7 +150,10 @@ export default function Header() {
                 const selectPreview = isFabric ? setFabricPreviewIndex : setPreviewIndex;
                 const preview = previews[selectedIndex];
                 return (
-                  <li key={menu.href} className="group relative flex h-full shrink-0 items-center text-center">
+                  <li
+                    key={menu.href}
+                    className="group relative flex h-full shrink-0 items-center text-center"
+                  >
                     <Link
                       href={menu.href}
                       onClick={(event) => event.currentTarget.blur()}

@@ -91,9 +91,7 @@ export default function Applications() {
               aria-hidden="true"
               className={`mr-2.5 size-[6px] shrink-0 rounded-full bg-brand-blue transition-[opacity,transform] duration-200 motion-reduce:transition-none lg:mr-3 ${index === activeIndex ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
             />
-            <span
-              className="whitespace-nowrap text-[20px] leading-[1.4] min-[768px]:text-[24px] lg:text-[30px]"
-            >
+            <span className="whitespace-nowrap text-[20px] leading-[1.4] min-[768px]:text-[24px] lg:text-[30px]">
               {title}
             </span>
           </button>

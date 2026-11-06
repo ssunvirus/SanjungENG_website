@@ -51,7 +51,11 @@ export default function Partners() {
               className="group inline-flex min-h-[52px] items-center justify-between gap-5 rounded-xl border border-brand-navy/50 bg-white px-5 py-3 text-[16px] font-semibold text-brand-navy transition-[border-color,background-color,color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-brand-blue hover:bg-[#EFF9FC] hover:text-[#006EB8] hover:shadow-[0_5px_14px_rgba(16,47,73,0.10)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transform-none motion-reduce:transition-none"
             >
               {resource.title}
-              <ArrowUpRight aria-hidden="true" size={18} className="shrink-0 text-brand-navy/70 transition-[color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#006EB8] motion-reduce:transform-none motion-reduce:transition-none" />
+              <ArrowUpRight
+                aria-hidden="true"
+                size={18}
+                className="shrink-0 text-brand-navy/70 transition-[color,transform] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#006EB8] motion-reduce:transform-none motion-reduce:transition-none"
+              />
             </Link>
           ))}
         </div>

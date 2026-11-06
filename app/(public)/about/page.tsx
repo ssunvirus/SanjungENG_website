@@ -26,14 +26,28 @@ export default function AboutPage() {
       <Hero />
       <SectionNavigation items={navigationItems} label="회사소개 페이지 구간 이동" />
       <WaveSurface>
-        <div id="about-introduction" tabIndex={-1} className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]">
+        <div
+          id="about-introduction"
+          tabIndex={-1}
+          className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]"
+        >
           <Introduction />
-          <div><Highlights /></div>
+          <div>
+            <Highlights />
+          </div>
         </div>
-        <div id="about-overview" tabIndex={-1} className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]">
+        <div
+          id="about-overview"
+          tabIndex={-1}
+          className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]"
+        >
           <CompanyOverview />
         </div>
-        <div id="about-business" tabIndex={-1} className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]">
+        <div
+          id="about-business"
+          tabIndex={-1}
+          className="scroll-mt-[160px] outline-none lg:scroll-mt-[190px]"
+        >
           <BusinessAreas />
         </div>
       </WaveSurface>

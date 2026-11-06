@@ -62,7 +62,9 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
                   fill
                   sizes="(max-width: 600px) 100vw, 600px"
                   unoptimized={project.image.startsWith("/api/project-images/")}
-                  className={project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover"}
+                  className={
+                    project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover"
+                  }
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center bg-[#E3EDF3] text-[#637382]">

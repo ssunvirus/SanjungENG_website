@@ -31,31 +31,54 @@ export default function CoolingTowerPage() {
       <Hero />
       <SectionNavigation items={navigationItems} label="냉각탑 페이지 구간 이동" />
       <WaveSurface>
-        <div id="cooling-tower-services" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cooling-tower-services"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <Services />
         </div>
-        <div id="cooling-tower-maintenance" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cooling-tower-maintenance"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <Maintenance />
         </div>
-        <div id="cooling-tower-process" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cooling-tower-process"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <WorkProcess />
         </div>
-        <div id="cooling-tower-cases" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cooling-tower-cases"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <CaseStudy />
         </div>
-        <div id="cooling-tower-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cooling-tower-questions"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <CoolingTowerFaq />
         </div>
-        <div id="cooling-tower-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-        <div className="lg:hidden">
-          <MobileEstimate />
-        </div>
-        <div className="hidden lg:block">
-          <EstimateCta />
-        </div>
+        <div
+          id="cooling-tower-inquiry"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="lg:hidden">
+            <MobileEstimate />
+          </div>
+          <div className="hidden lg:block">
+            <EstimateCta />
+          </div>
         </div>
       </WaveSurface>
     </main>
   );
 }
-

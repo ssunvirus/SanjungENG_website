@@ -12,7 +12,9 @@ const rows = [
 
 export default function Introduction() {
   return (
-    <section className={`${styles.introduction} mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-10 lg:pt-[69px] min-[1920px]:h-[866px] `}>
+    <section
+      className={`${styles.introduction} mx-auto h-auto w-full max-w-[1920px] bg-white px-5 pb-7 pt-6 lg:px-10 lg:pt-[69px] min-[1920px]:h-[866px] `}
+    >
       <div className="mx-auto grid w-full max-w-[1462px] grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
         <div>
           <div className="h-auto  lg:h-[218px]">
@@ -88,4 +90,3 @@ export default function Introduction() {
     </section>
   );
 }
-

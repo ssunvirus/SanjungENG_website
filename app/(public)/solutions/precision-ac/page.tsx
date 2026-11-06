@@ -33,34 +33,55 @@ export default function PrecisionAcPage() {
       <Hero />
       <SectionNavigation items={navigationItems} label="항온항습기 페이지 구간 이동" />
       <WaveSurface>
-        <div id="precision-ac-services" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="precision-ac-services"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <Services />
           <Applications />
         </div>
-        <div id="precision-ac-process" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-[#E3F6FC]">
+        <div
+          id="precision-ac-process"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-[#E3F6FC]"
+        >
           <WorkProcess />
         </div>
-        <div id="precision-ac-products" tabIndex={-1} className="scroll-mt-[144px] bg-white outline-none lg:scroll-mt-[170px]">
+        <div
+          id="precision-ac-products"
+          tabIndex={-1}
+          className="scroll-mt-[144px] bg-white outline-none lg:scroll-mt-[170px]"
+        >
           <Products />
         </div>
-        <div id="precision-ac-cases" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="precision-ac-cases"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <CaseStudy />
         </div>
-        <div id="precision-ac-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="precision-ac-questions"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <PrecisionAcFaq />
         </div>
-        <div id="precision-ac-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-        <div className="lg:hidden">
-          <MobileEstimate />
-        </div>
-        <div className="hidden lg:block">
-          <EstimateCta />
-        </div>
+        <div
+          id="precision-ac-inquiry"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="lg:hidden">
+            <MobileEstimate />
+          </div>
+          <div className="hidden lg:block">
+            <EstimateCta />
+          </div>
         </div>
       </WaveSurface>
     </main>
   );
 }
-
-
-

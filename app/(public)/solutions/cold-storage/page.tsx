@@ -29,28 +29,47 @@ export default function ColdStoragePage() {
       <Hero />
       <SectionNavigation items={navigationItems} label="저온저장고 페이지 구간 이동" />
       <WaveSurface>
-        <div id="cold-storage-equipment" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cold-storage-equipment"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <Equipment />
         </div>
-        <div id="cold-storage-process" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cold-storage-process"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <WorkProcess />
         </div>
-        <div id="cold-storage-cases" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cold-storage-cases"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <CaseStudy />
         </div>
-        <div id="cold-storage-questions" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
+        <div
+          id="cold-storage-questions"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <ColdStorageFaq />
         </div>
-        <div id="cold-storage-inquiry" tabIndex={-1} className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]">
-        <div className="lg:hidden">
-          <MobileEstimate />
-        </div>
-        <div className="hidden lg:block">
-          <EstimateCta />
-        </div>
+        <div
+          id="cold-storage-inquiry"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <div className="lg:hidden">
+            <MobileEstimate />
+          </div>
+          <div className="hidden lg:block">
+            <EstimateCta />
+          </div>
         </div>
       </WaveSurface>
     </main>
   );
 }
-

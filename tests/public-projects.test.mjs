@@ -182,7 +182,9 @@ test("anonymous public photo route serves saved photos but rejects orphan and ma
   const unavailable = imageRoute([], true);
   assert.equal((await unavailable.GET(null, { params: Promise.resolve({ key }) })).status, 503);
   assert.equal(
-    (await unavailable.GET(null, { params: Promise.resolve({ key }) })).headers.get("cache-control"),
+    (await unavailable.GET(null, { params: Promise.resolve({ key }) })).headers.get(
+      "cache-control",
+    ),
     "no-store",
   );
   assert.deepEqual(unavailable.calls, []);

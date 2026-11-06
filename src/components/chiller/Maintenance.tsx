@@ -55,7 +55,11 @@ export default function Maintenance() {
             style={{ "--card-width": `${service.width}px` } as CSSProperties}
             className="w-full lg:w-[var(--card-width)] shrink-0"
           >
-            <Link href={service.href} aria-label={`${service.title} 시공사례 보기`} className="relative block h-[240px] rounded-[10px] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(16,47,73,0.16)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transform-none motion-reduce:transition-none lg:h-[300px]">
+            <Link
+              href={service.href}
+              aria-label={`${service.title} 시공사례 보기`}
+              className="relative block h-[240px] rounded-[10px] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(16,47,73,0.16)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transform-none motion-reduce:transition-none lg:h-[300px]"
+            >
               <Image
                 src={service.image}
                 alt={service.alt}
