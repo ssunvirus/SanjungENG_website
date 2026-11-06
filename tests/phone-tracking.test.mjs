@@ -12,9 +12,29 @@ const source = ts.transpileModule(
   { compilerOptions: { module: ts.ModuleKind.CommonJS } },
 ).outputText;
 
-function setup(blocked = false) {
+function setup(blocked = false, naverState = "ready") {
   const listeners = new Set();
   const events = [];
+  const naverEvents = [];
+  const window =
+    naverState === "missing"
+      ? {}
+      : {
+          wcs: {
+            trans: (data) => {
+              if (naverState === "blocked") throw new Error("Naver blocked");
+              naverEvents.push(data);
+            },
+          },
+        };
+  const naverSandbox = { exports: {}, window };
+  runInNewContext(
+    ts.transpileModule(
+      readFileSync(new URL("../src/lib/naver-analytics.ts", import.meta.url), "utf8"),
+      { compilerOptions: { module: ts.ModuleKind.CommonJS } },
+    ).outputText,
+    naverSandbox,
+  );
   let cleanup;
   class Element {
     constructor(href) {
@@ -32,6 +52,7 @@ function setup(blocked = false) {
       removeEventListener: (_, listener) => listeners.delete(listener),
     },
     require(name) {
+      if (name === "@/src/lib/naver-analytics") return naverSandbox.exports;
       if (name === "react")
         return {
           useEffect: (effect) => {
@@ -53,6 +74,8 @@ function setup(blocked = false) {
   mount();
   return {
     events,
+    naverEvents,
+    window,
     mount,
     cleanup: () => cleanup(),
     click(href, options = {}) {
@@ -65,6 +88,8 @@ function setup(blocked = false) {
 test("telephone links send only the phone conversion label and cleanup prevents duplicate listeners", () => {
   const tracker = setup();
   tracker.click("tel:01053401728");
+  assert.equal(JSON.stringify(tracker.naverEvents), '[{"type":"custom001"}]');
+  assert.equal(tracker.window.wcs_add.wa, "s_3311cae277b0");
   assert.equal(
     JSON.stringify(tracker.events),
     "[[" + '"event","conversion",{"send_to":"AW-18414772395/xGhQCKXJvqYdEKvB7MxE"}]]',
@@ -73,9 +98,11 @@ test("telephone links send only the phone conversion label and cleanup prevents 
   tracker.mount();
   tracker.click("tel:028911728");
   assert.equal(tracker.events.length, 2);
+  assert.equal(tracker.naverEvents.length, 2);
   tracker.cleanup();
   tracker.click("tel:028911728");
   assert.equal(tracker.events.length, 2);
+  assert.equal(tracker.naverEvents.length, 2);
 });
 
 test("ordinary links and canceled clicks do not count as phone conversions", () => {
@@ -85,6 +112,7 @@ test("ordinary links and canceled clicks do not count as phone conversions", () 
   tracker.click("tel:028911728", { defaultPrevented: true });
   tracker.click("tel:028911728", { button: 1 });
   assert.equal(tracker.events.length, 0);
+  assert.equal(tracker.naverEvents.length, 0);
 });
 
 test("tracking errors do not throw or cancel telephone navigation", () => {
@@ -97,4 +125,14 @@ test("tracking errors do not throw or cancel telephone navigation", () => {
     }),
   );
   assert.equal(tracker.events.length, 1);
+  assert.equal(tracker.naverEvents.length, 1);
+});
+
+test("missing or blocked Naver tracking preserves Google conversion and telephone navigation", () => {
+  for (const state of ["missing", "blocked"]) {
+    const tracker = setup(false, state);
+    assert.doesNotThrow(() => tracker.click("tel:01053401728"));
+    assert.equal(tracker.events.length, 1);
+    assert.equal(tracker.naverEvents.length, 0);
+  }
 });

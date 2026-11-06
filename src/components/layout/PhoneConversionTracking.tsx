@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
+import { sendNaverPhoneClick } from "@/src/lib/naver-analytics";
 
 export default function PhoneConversionTracking() {
   useEffect(() => {
@@ -17,6 +18,11 @@ export default function PhoneConversionTracking() {
         });
       } catch {
         // Preserve the native telephone link even if tracking is blocked.
+      }
+      try {
+        sendNaverPhoneClick();
+      } catch {
+        // Each provider is independent; a tracking failure must not block a call.
       }
     }
 
