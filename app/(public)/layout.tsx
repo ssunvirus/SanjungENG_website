@@ -10,6 +10,19 @@ export { metadata } from "@/src/lib/site-layout-metadata";
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ko" className="h-full antialiased">
+      <head>
+        <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5HNZ98TP" />
+        <script
+          id="google-tag-manager-init"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            `,
+          }}
+        />
+      </head>
       <body className="flex min-h-full min-w-0 flex-col overflow-x-clip bg-[#EFF7FB]">
         <SiteFrame>{children}</SiteFrame>
         <PhoneConversionTracking />
