@@ -3,6 +3,19 @@ import imageAliases from "./config/image-aliases.json";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["172.30.1.51"],
+  poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     // Keep image paths stored in older DB records and external links working.
     return Object.entries(imageAliases).map(([source, destination]) => ({ source, destination }));
