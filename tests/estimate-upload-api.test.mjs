@@ -6,6 +6,7 @@ import test from "node:test";
 import ts from "typescript";
 import * as tokens from "../src/lib/estimate-upload-tokens.ts";
 import * as rules from "../src/lib/estimate-rules.ts";
+import { isEstimateOriginAllowed } from "../src/lib/estimate-origin.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../app/api/estimate/attachments/upload/route.ts", import.meta.url), "utf8"),
@@ -51,6 +52,7 @@ function setup(mode) {
             },
     },
     require(name) {
+      if (name.endsWith("estimate-origin")) return { isEstimateOriginAllowed };
       if (name === "node:crypto") return { randomUUID };
       if (name.endsWith("estimate-rules")) return rules;
       if (name.endsWith("estimate-upload-tokens")) return tokens;

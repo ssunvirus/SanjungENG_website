@@ -8,13 +8,20 @@ import {
 } from "@/src/lib/estimate-rules";
 import { sealUploadToken, validateUploadManifest } from "@/src/lib/estimate-upload-tokens";
 import { createEstimateUpload } from "@/src/lib/estimate-upload-storage";
+import { isEstimateOriginAllowed } from "@/src/lib/estimate-origin";
 
 export const runtime = "nodejs";
 const fail = (message: string, status: number) =>
   Response.json({ message }, { status, headers: { "Cache-Control": "no-store" } });
 
 export async function POST(request: Request) {
-  if (request.headers.get("origin") !== new URL(request.url).origin)
+  if (
+    !isEstimateOriginAllowed(request, {
+      siteUrl: process.env.SITE_URL,
+      production: process.env.NODE_ENV === "production",
+      requireOrigin: true,
+    })
+  )
     return fail("올바른 홈페이지에서 다시 요청해주세요.", 403);
   if (!request.headers.get("content-type")?.includes("application/json"))
     return fail("잘못된 요청 형식입니다.", 415);

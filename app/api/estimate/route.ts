@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { getSmtpPassword } from "@/src/lib/estimate-smtp";
 import { takeEstimateSlot, releaseEstimateSlot } from "@/src/lib/estimate-rate-limit";
 import { isSupportedAttachment } from "@/src/lib/estimate-attachments";
+import { isEstimateOriginAllowed } from "@/src/lib/estimate-origin";
 import { openUploadToken } from "@/src/lib/estimate-upload-tokens";
 import { verifyEstimateUploads, estimateAttachmentLinks } from "@/src/lib/estimate-upload-storage";
 import {
@@ -18,23 +19,13 @@ export const maxDuration = 60;
 const fail = (message: string, status: number) => Response.json({ message }, { status });
 
 export async function POST(request: Request) {
-  const origin = request.headers.get("origin");
-  if (origin) {
-    const requestUrl = new URL(request.url);
-    const host = request.headers.get("host") || requestUrl.host;
-    try {
-      const originUrl = new URL(origin);
-      if (
-        origin !== originUrl.origin ||
-        originUrl.host !== host ||
-        originUrl.protocol !== requestUrl.protocol
-      ) {
-        return fail("올바른 홈페이지에서 다시 요청해주세요.", 403);
-      }
-    } catch {
-      return fail("올바른 홈페이지에서 다시 요청해주세요.", 403);
-    }
-  }
+  if (
+    !isEstimateOriginAllowed(request, {
+      siteUrl: process.env.SITE_URL,
+      production: process.env.NODE_ENV === "production",
+    })
+  )
+    return fail("올바른 홈페이지에서 다시 요청해주세요.", 403);
   const contentType = request.headers.get("content-type") || "";
   const multipart = contentType.includes("multipart/form-data");
   if (!multipart && !contentType.includes("application/json")) {

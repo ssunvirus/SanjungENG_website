@@ -4,6 +4,7 @@ import { runInNewContext } from "node:vm";
 import test from "node:test";
 import ts from "typescript";
 import * as rules from "../src/lib/estimate-rules.ts";
+import { isEstimateOriginAllowed } from "../src/lib/estimate-origin.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../app/api/estimate/route.ts", import.meta.url), "utf8"),
@@ -36,6 +37,7 @@ function setup({ mode = "success", configured = true, secretFailure = false } = 
         : {},
     },
     require(name) {
+      if (name.endsWith("estimate-origin")) return { isEstimateOriginAllowed };
       if (name === "nodemailer")
         return {
           default: {
