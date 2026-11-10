@@ -10,6 +10,7 @@ export const estimateLimits = {
   attachmentCount: 5,
   attachmentBytes: 20 * 1024 * 1024,
   directAttachmentBytes: 3 * 1024 * 1024,
+  mailAttachmentBytes: 5 * 1024 * 1024,
   jsonBytes: 24000,
   multipartBytes: 4 * 1024 * 1024,
 } as const;

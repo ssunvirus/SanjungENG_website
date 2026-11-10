@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import { getSmtpPassword } from "@/src/lib/estimate-smtp";
 import { takeEstimateSlot, releaseEstimateSlot } from "@/src/lib/estimate-rate-limit";
 import { isSupportedAttachment } from "@/src/lib/estimate-attachments";
+import { buildEstimateEmail } from "@/src/lib/estimate-email-body";
 import { isEstimateOriginAllowed } from "@/src/lib/estimate-origin";
 import { openUploadToken } from "@/src/lib/estimate-upload-tokens";
 import { verifyEstimateUploads, estimateAttachmentLinks } from "@/src/lib/estimate-upload-storage";
@@ -139,10 +140,11 @@ export async function POST(request: Request) {
   try {
     const uploadedFiles =
       typeof uploadToken === "string"
-        ? await verifyEstimateUploads(uploadToken, phone, password)
+        ? await verifyEstimateUploads(uploadToken, phone, password, true)
         : [];
-    const downloadLinks = uploadedFiles.length
-      ? await estimateAttachmentLinks(uploadedFiles, password)
+    const linkedFiles = uploadedFiles.filter((file) => !file.content);
+    const downloadLinks = linkedFiles.length
+      ? await estimateAttachmentLinks(linkedFiles, password)
       : [];
     transporter = nodemailer.createTransport({
       host: "smtp.naver.com",
@@ -155,44 +157,51 @@ export async function POST(request: Request) {
       disableFileAccess: true,
       disableUrlAccess: true,
     });
-    const attachments = await Promise.all(
-      files.map(async (file) => ({
-        filename: file.name.replace(/[\r\n/\\]/g, "_").slice(0, 150),
-        content: Buffer.from(await file.arrayBuffer()),
-        contentType: file.name.toLowerCase().endsWith(".zip") ? "application/zip" : file.type,
-      })),
-    );
+    const attachments: { filename: string; content: Buffer; contentType: string }[] =
+      await Promise.all(
+        files.map(async (file) => ({
+          filename: file.name.replace(/[\r\n/\\]/g, "_").slice(0, 150),
+          content: Buffer.from(await file.arrayBuffer()),
+          contentType: file.name.toLowerCase().endsWith(".zip") ? "application/zip" : file.type,
+        })),
+      );
+    for (const file of uploadedFiles) {
+      if (file.content)
+        attachments.push({
+          filename: file.name,
+          content: file.content,
+          contentType: file.name.toLowerCase().endsWith(".zip") ? "application/zip" : file.type,
+        });
+    }
     const result = await transporter.sendMail({
       from: { name: "산정엔지니어링 홈페이지", address: user },
       to: [to],
       subject: `[산정엔지니어링] ${category} 견적문의`,
       ...(email ? { replyTo: email } : {}),
       ...(attachments.length ? { attachments } : {}),
-      text: [
-        "산정엔지니어링 홈페이지 견적문의",
-        "",
-        `접수 일시: ${new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })} (한국 시간)`,
-        `문의 분야: ${category}`,
-        `회사명: ${company || "미입력"}`,
-        `담당자명: ${manager}`,
-        `연락처: ${phone}`,
-        `이메일: ${email || "미입력"}`,
-        `현장 위치: ${location || "미입력"}`,
-        `첨부파일: ${[...attachments.map((file) => file.filename), ...uploadedFiles.map((file) => file.name)].join(", ") || "없음"}`,
-        ...(downloadLinks.length
-          ? [
-              "",
-              "첨부파일 다운로드 (접수 후 7일간 유효)",
-              ...downloadLinks,
-              "링크를 가진 사람은 파일을 다운로드할 수 있으니 외부에 공유하지 마세요.",
-            ]
-          : []),
-        "",
-        "문의 내용",
+      ...buildEstimateEmail({
+        details: [
+          [
+            "접수 일시",
+            `${new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" })} (한국 시간)`,
+          ],
+          ["문의 분야", category],
+          ["회사명", company || "미입력"],
+          ["담당자명", manager],
+          ["연락처", phone],
+          ["이메일", email || "미입력"],
+          ["현장 위치", location || "미입력"],
+          [
+            "첨부파일",
+            [
+              ...attachments.map((file) => file.filename),
+              ...linkedFiles.map((file) => file.name),
+            ].join(", ") || "없음",
+          ],
+        ],
         message,
-        "",
-        "개인정보 수집 및 이용 동의: 동의",
-      ].join("\n"),
+        links: downloadLinks,
+      }),
     });
     if (!result.accepted.length || result.rejected.length)
       return fail("메일을 보내지 못했습니다. 잠시 후 다시 시도하거나 전화로 문의해주세요.", 502);

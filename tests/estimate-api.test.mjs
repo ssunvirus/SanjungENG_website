@@ -5,6 +5,7 @@ import test from "node:test";
 import ts from "typescript";
 import * as rules from "../src/lib/estimate-rules.ts";
 import { isEstimateOriginAllowed } from "../src/lib/estimate-origin.ts";
+import { buildEstimateEmail } from "../src/lib/estimate-email-body.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../app/api/estimate/route.ts", import.meta.url), "utf8"),
@@ -37,6 +38,7 @@ function setup({ mode = "success", configured = true, secretFailure = false } = 
         : {},
     },
     require(name) {
+      if (name.endsWith("estimate-email-body")) return { buildEstimateEmail };
       if (name.endsWith("estimate-origin")) return { isEstimateOriginAllowed };
       if (name === "nodemailer")
         return {
@@ -87,10 +89,19 @@ function setup({ mode = "success", configured = true, secretFailure = false } = 
           verifyEstimateUploads: async () => {
             calls.push("verify-upload");
             if (mode === "invalid-upload") throw new Error("ChecksumMismatch");
-            return [{ name: "도면.pdf" }];
+            return [
+              {
+                name: "도면.pdf",
+                type: "application/pdf",
+                ...(mode === "uploaded-attachment" ? { content: Buffer.from("verified") } : {}),
+              },
+            ];
           },
           estimateAttachmentLinks: async () => [
-            "도면.pdf: https://example.com/api/estimate/attachments/download?token=encrypted",
+            {
+              name: "도면.pdf",
+              url: "https://example.com/api/estimate/attachments/download?token=encrypted",
+            },
           ],
         };
       throw new Error(name);
@@ -126,6 +137,7 @@ test("verified large uploads are mailed as links and invalid capabilities or sto
   assert.equal(valid.mail[0].attachments, undefined);
   assert.match(valid.mail[0].text, /download\?token=encrypted/);
   assert.match(valid.mail[0].text, /7일/);
+  assert.match(valid.mail[0].html, /<a href="https:\/\/example.com[^>]*>도면.pdf<\/a>/);
   const invalid = setup({ mode: "invalid-upload" });
   assert.equal(
     (await invalid.POST(request({ ...fields, uploadsToken: "valid-upload-token" }))).status,
@@ -133,6 +145,17 @@ test("verified large uploads are mailed as links and invalid capabilities or sto
   );
   assert.deepEqual(invalid.calls, ["take", "verify-upload", "refund"]);
   assert.equal(invalid.mail.length, 0);
+});
+
+test("S3-verified files within the mail threshold are attached without download links", async () => {
+  const api = setup({ mode: "uploaded-attachment" });
+  const response = await api.POST(request({ ...fields, uploadsToken: "valid-upload-token" }));
+  assert.equal((await response.json()).received, true);
+  assert.equal(api.mail[0].attachments.length, 1);
+  assert.equal(api.mail[0].attachments[0].filename, "도면.pdf");
+  assert.equal(api.mail[0].attachments[0].content.toString(), "verified");
+  assert.doesNotMatch(api.mail[0].text, /download\?token|7일/);
+  assert.equal(api.mail[0].text.split("도면.pdf").length - 1, 1);
 });
 
 test("direct attachments keep five small files but reject more than 3MiB without sending mail", async () => {

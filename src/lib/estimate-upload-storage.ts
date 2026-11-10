@@ -4,6 +4,7 @@ import { S3Client, GetObjectCommand, HeadObjectCommand } from "@aws-sdk/client-s
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { isSupportedAttachment } from "./estimate-attachments";
+import { estimateLimits } from "./estimate-rules";
 import { openUploadToken, sealUploadToken, type EstimateUpload } from "./estimate-upload-tokens";
 
 const clients = new Map<string, S3Client>();
@@ -57,8 +58,17 @@ export async function estimateDownloadUrl(token: string, secret: string) {
   );
 }
 
-export async function verifyEstimateUploads(token: string, phone: string, secret: string) {
+export async function verifyEstimateUploads(
+  token: string,
+  phone: string,
+  secret: string,
+  includeMailContent = false,
+) {
   const files = await openUploadToken(token, secret, "upload", phone);
+  const attachToMail =
+    includeMailContent &&
+    files.reduce((total, file) => total + file.size, 0) <= estimateLimits.mailAttachmentBytes;
+  const verified: (EstimateUpload & { content?: Buffer })[] = [];
   const { Bucket, client } = storage();
   // Validate actual stored bytes before granting any download capability. The POST
   // checksum policy prevents the same upload URL from replacing them with other bytes.
@@ -88,8 +98,9 @@ export async function verifyEstimateUploads(token: string, phone: string, secret
       !(await isSupportedAttachment(new File([bytes], file.name, { type: file.type })))
     )
       throw new Error("InvalidUploadedAttachment");
+    verified.push(attachToMail ? { ...file, content: bytes } : file);
   }
-  return files;
+  return verified;
 }
 
 export async function estimateAttachmentLinks(files: EstimateUpload[], secret: string) {
@@ -99,7 +110,7 @@ export async function estimateAttachmentLinks(files: EstimateUpload[], secret: s
     files.map(async (file) => {
       const url = new URL("/api/estimate/attachments/download", base);
       url.searchParams.set("token", await sealUploadToken([file], secret, "download"));
-      return `${file.name}: ${url.href}`;
+      return { name: file.name, url: url.href };
     }),
   );
 }

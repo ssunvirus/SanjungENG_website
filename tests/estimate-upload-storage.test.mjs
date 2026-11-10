@@ -5,6 +5,7 @@ import { runInNewContext } from "node:vm";
 import test from "node:test";
 import ts from "typescript";
 import * as tokens from "../src/lib/estimate-upload-tokens.ts";
+import * as rules from "../src/lib/estimate-rules.ts";
 
 const source = ts.transpileModule(
   readFileSync(new URL("../src/lib/estimate-upload-storage.ts", import.meta.url), "utf8"),
@@ -18,7 +19,7 @@ const file = {
   type: "image/jpeg",
   checksum: createHash("sha256").update(bytes).digest("base64"),
 };
-function setup(mode) {
+function setup(mode, storedFile = file, storedBytes = bytes) {
   const calls = [];
   let destroyed = false;
   class Command {
@@ -44,6 +45,7 @@ function setup(mode) {
       if (name === "server-only") return {};
       if (name === "node:crypto") return { createHash };
       if (name.endsWith("estimate-upload-tokens")) return tokens;
+      if (name.endsWith("estimate-rules")) return rules;
       if (name.endsWith("estimate-attachments"))
         return { isSupportedAttachment: async () => mode !== "signature" };
       if (name === "@aws-sdk/client-s3")
@@ -56,17 +58,17 @@ function setup(mode) {
               calls.push(input);
               if (!input.IfMatch)
                 return {
-                  ContentLength: mode === "size" ? file.size + 1 : file.size,
+                  ContentLength: mode === "size" ? storedFile.size + 1 : storedFile.size,
                   ETag: "immutable",
                 };
               return {
                 Body: {
                   async *[Symbol.asyncIterator]() {
                     yield mode === "checksum"
-                      ? Buffer.alloc(file.size)
+                      ? Buffer.alloc(storedFile.size)
                       : mode === "overflow"
-                        ? Buffer.alloc(file.size + 1)
-                        : bytes;
+                        ? Buffer.alloc(storedFile.size + 1)
+                        : storedBytes;
                   },
                   destroy() {
                     destroyed = true;
@@ -114,7 +116,9 @@ test("presigned upload policy fixes file size, checksum, content type and privat
 test("stored data is checked for size, checksum and signature before a mail link can be issued", async () => {
   const token = await tokens.sealUploadToken([file], "secret", "upload", "01012345678");
   const api = setup();
-  assert.deepEqual(await api.verifyEstimateUploads(token, "01012345678", "secret"), [file]);
+  assert.deepEqual(Array.from(await api.verifyEstimateUploads(token, "01012345678", "secret")), [
+    file,
+  ]);
   assert.equal(api.calls[1].IfMatch, "immutable");
   for (const mode of ["size", "checksum", "signature", "overflow"]) {
     const failed = setup(mode);
@@ -122,10 +126,46 @@ test("stored data is checked for size, checksum and signature before a mail link
     if (mode === "overflow") assert.equal(failed.destroyed(), true);
   }
 });
+test("exactly 5MiB remains mail content; over 5MiB and combined batches are links", async () => {
+  for (const size of [5 * 1024 * 1024, 5 * 1024 * 1024 + 1]) {
+    const data = Buffer.alloc(size);
+    bytes.copy(data);
+    const descriptor = {
+      ...file,
+      size,
+      checksum: createHash("sha256").update(data).digest("base64"),
+    };
+    const api = setup(undefined, descriptor, data);
+    const token = await tokens.sealUploadToken([descriptor], "secret", "upload", "01012345678");
+    const [verified] = await api.verifyEstimateUploads(token, "01012345678", "secret", true);
+    assert.equal(Boolean(verified.content), size === 5 * 1024 * 1024);
+    if (verified.content) assert.deepEqual(verified.content, data);
+  }
+  const data = Buffer.alloc(3 * 1024 * 1024);
+  bytes.copy(data);
+  const descriptor = {
+    ...file,
+    size: data.length,
+    checksum: createHash("sha256").update(data).digest("base64"),
+  };
+  const api = setup(undefined, descriptor, data);
+  const second = { ...descriptor, key: `estimate-attachments/${randomUUID()}/${randomUUID()}` };
+  const token = await tokens.sealUploadToken(
+    [descriptor, second],
+    "secret",
+    "upload",
+    "01012345678",
+  );
+  const verified = await api.verifyEstimateUploads(token, "01012345678", "secret", true);
+  assert.equal(verified.length, 2);
+  assert(verified.every((value) => !value.content));
+});
+
 test("mail URLs carry download-only tokens; download redirects force attachment and short expiry", async () => {
   const api = setup();
   const [link] = await api.estimateAttachmentLinks([file], "secret");
-  const url = new URL(link.slice(link.indexOf("https://")));
+  assert.equal(link.name, file.name);
+  const url = new URL(link.url);
   assert.equal(url.origin, "https://example.com");
   const token = url.searchParams.get("token");
   assert.deepEqual(await tokens.openUploadToken(token, "secret", "download"), [file]);
