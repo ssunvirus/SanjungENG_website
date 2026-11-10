@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ArrowRight, Paperclip } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type DragEvent, type FormEvent, useRef, useState } from "react";
 import { useEstimateForm } from "@/src/hooks/use-estimate-form";
 import {
   attachmentAccept,
@@ -60,13 +60,49 @@ function Field({
 
 export default function InquiryForm() {
   const [category, setCategory] = useState<(typeof estimateCategories)[number]>("냉동공조");
-  const [fileNames, setFileNames] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [draggingFiles, setDraggingFiles] = useState(false);
+  const dragDepth = useRef(0);
   const { status, notice, send, showError, clearNotice } = useEstimateForm();
+
+  function addFiles(incoming: File[]) {
+    if (status === "sending" || !incoming.length) return;
+    const combined = [...selectedFiles];
+    for (const file of incoming) {
+      if (
+        !combined.some(
+          (existing) =>
+            existing.name === file.name &&
+            existing.size === file.size &&
+            existing.type === file.type &&
+            existing.lastModified === file.lastModified,
+        )
+      )
+        combined.push(file);
+    }
+    const error = validateAttachments(combined);
+    if (error) {
+      showError(error);
+      return;
+    }
+    setSelectedFiles(combined);
+    clearNotice();
+  }
+
+  function handleDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    dragDepth.current = 0;
+    setDraggingFiles(false);
+    addFiles(Array.from(event.dataTransfer.files));
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const fields = new FormData(form);
+    // Dropped files live in state; both selection methods use the same payload.
+    fields.delete("attachments");
+    for (const file of selectedFiles) fields.append("attachments", file);
     for (const key of ["company", "manager", "phone", "email", "location", "message"]) {
       const value = fields.get(key);
       if (typeof value === "string") fields.set(key, value.trim());
@@ -86,7 +122,9 @@ export default function InquiryForm() {
     if (await send(fields, true)) {
       form.reset();
       setCategory("냉동공조");
-      setFileNames("");
+      setSelectedFiles([]);
+      setDraggingFiles(false);
+      dragDepth.current = 0;
     }
   }
 
@@ -205,7 +243,26 @@ export default function InquiryForm() {
           >
             첨부파일
           </label>
-          <div className="mt-[12px] lg:mt-[10px] flex flex-wrap lg:flex-nowrap min-h-[75px] py-3 lg:py-0 items-center gap-[12px] lg:gap-[20px] border-2 border-brand-navy/10 px-[16px] lg:px-[19px]">
+          <div
+            onDragEnter={(event) => {
+              if (status === "sending" || !event.dataTransfer.types.includes("Files")) return;
+              event.preventDefault();
+              dragDepth.current += 1;
+              setDraggingFiles(true);
+            }}
+            onDragOver={(event) => {
+              if (!event.dataTransfer.types.includes("Files")) return;
+              event.preventDefault();
+              event.dataTransfer.dropEffect = status === "sending" ? "none" : "copy";
+            }}
+            onDragLeave={(event) => {
+              event.preventDefault();
+              dragDepth.current = Math.max(0, dragDepth.current - 1);
+              if (!dragDepth.current) setDraggingFiles(false);
+            }}
+            onDrop={handleDrop}
+            className={`mt-[12px] lg:mt-[10px] flex flex-wrap min-h-[100px] py-3 items-center gap-[12px] lg:gap-[20px] border-2 border-dashed px-[16px] lg:px-[19px] transition-colors ${draggingFiles ? "border-brand-blue bg-[#EFF7FB]" : "border-brand-navy/20"}`}
+          >
             <Paperclip size={30} className="shrink-0 text-brand-navy/20" aria-hidden="true" />
             <label className="relative shrink-0 cursor-pointer border border-brand-navy/10 bg-brand-text/10 px-[16px] py-[16px] lg:py-[11px] text-[14px] lg:text-[20px] font-semibold text-brand-navy/80 focus-within:outline-2 focus-within:outline-brand-blue">
               파일 선택
@@ -215,28 +272,45 @@ export default function InquiryForm() {
                 type="file"
                 accept={attachmentAccept}
                 multiple
+                disabled={status === "sending"}
+                aria-describedby="inquiry-file-help"
                 onChange={(event) => {
-                  const files = Array.from(event.target.files ?? []);
-                  const error = validateAttachments(files);
-                  if (error) {
-                    event.target.value = "";
-                    setFileNames("");
-                    showError(error);
-                    return;
-                  }
-                  setFileNames(files.map((file) => file.name).join(", "));
-                  clearNotice();
+                  addFiles(Array.from(event.target.files ?? []));
+                  event.target.value = "";
                 }}
                 className="absolute inset-0 w-full cursor-pointer opacity-0"
               />
             </label>
-            <span
-              className={`min-w-0 break-all text-sm lg:text-[20px] font-semibold ${fileNames ? "text-brand-navy/80" : "text-brand-navy/20"}`}
-            >
-              {fileNames || "현장 사진 / 설비 명판 / 도면 등 (선택)"}
+            <span className="min-w-0 text-sm lg:text-[18px] text-brand-navy/60" aria-live="polite">
+              {draggingFiles
+                ? "여기에 놓으면 첨부됩니다."
+                : "사진·도면을 여기로 끌어다 놓거나 파일을 선택해주세요."}
             </span>
+            {selectedFiles.length > 0 && (
+              <ul className="w-full space-y-2" aria-label="선택한 첨부파일">
+                {selectedFiles.map((file, index) => (
+                  <li key={`${file.name}-${index}`} className="flex items-center gap-3 text-sm">
+                    <span className="min-w-0 flex-1 break-all">{file.name}</span>
+                    <button
+                      type="button"
+                      disabled={status === "sending"}
+                      aria-label={`${file.name} 첨부 삭제`}
+                      className="shrink-0 px-2 py-1 text-brand-blue underline disabled:opacity-50"
+                      onClick={() => {
+                        setSelectedFiles(
+                          selectedFiles.filter((_, selectedIndex) => selectedIndex !== index),
+                        );
+                        clearNotice();
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-          <p className="mt-2 text-[14px] text-brand-navy/60">
+          <p id="inquiry-file-help" className="mt-2 text-[14px] text-brand-navy/60">
             JPG, PNG, WEBP, PDF, ZIP · 최대 5개 / 전체 20MB
           </p>
           <p className="mt-1 text-[14px] text-brand-navy/60">
