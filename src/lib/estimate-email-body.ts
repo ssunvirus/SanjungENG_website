@@ -35,23 +35,26 @@ export function buildEstimateEmail({
       title,
       "",
       ...details.map(([label, value]) => `${label}: ${value}`),
-      ...(links.length
-        ? ["", heading, ...links.map((link) => `${link.name}: ${link.url}`), note]
-        : []),
       "",
       "문의 내용",
       message,
       "",
       consent,
+      ...(links.length
+        ? ["", heading, ...links.map((link) => `${link.name}: ${link.url}`), note]
+        : []),
     ].join("\n"),
     html: `<div lang="ko" style="font-family:Arial,sans-serif;font-size:15px;line-height:1.7;color:#102d4a;max-width:720px">
       <h2 style="font-size:21px">${title}</h2>
       <table role="presentation" style="border-collapse:collapse;width:100%">${details
         .map(
           ([label, value]) =>
-            `<tr><td style="padding:5px 16px 5px 0;vertical-align:top;white-space:nowrap;font-weight:bold">${escapeHtml(label)}</td><td style="padding:5px 0;overflow-wrap:anywhere">${escapeHtml(value)}</td></tr>`,
+            `<tr><td style="padding:5px 16px 5px 0;vertical-align:top;white-space:nowrap;font-weight:bold">${escapeHtml(label)}</td><td style="padding:5px 0;overflow-wrap:anywhere">${escapeHtml(value).replace(/\r\n|\r|\n/g, "<br />")}</td></tr>`,
         )
         .join("")}</table>
+      <h3 style="font-size:16px;margin-top:24px">문의 내용</h3>
+      <div style="overflow-wrap:anywhere">${escapeHtml(message).replace(/\r\n|\r|\n/g, "<br />")}</div>
+      <p style="font-size:12px;color:#64748b;margin-top:24px">${consent}</p>
       ${
         links.length
           ? `<h3 style="font-size:16px;margin-top:24px">${heading}</h3>
@@ -60,9 +63,6 @@ export function buildEstimateEmail({
         <p style="font-size:12px;color:#64748b">${note}</p>`
           : ""
       }
-      <h3 style="font-size:16px;margin-top:24px">문의 내용</h3>
-      <div style="overflow-wrap:anywhere">${escapeHtml(message).replace(/\r\n|\r|\n/g, "<br />")}</div>
-      <p style="font-size:12px;color:#64748b;margin-top:24px">${consent}</p>
     </div>`,
   };
 }
