@@ -20,7 +20,7 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
       />
-      <div className="relative mx-auto w-full px-7 pt-[45px] lg:w-[1430px] lg:px-0 lg:pt-[108px]">
+      <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px]">
         <nav
           aria-label="현재 위치"
           className="hidden lg:flex items-center text-[22.5px] font-bold text-brand-blue"
