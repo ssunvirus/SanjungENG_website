@@ -155,7 +155,7 @@ test("S3-verified files within the mail threshold are attached without download 
   assert.equal(api.mail[0].attachments[0].filename, "도면.pdf");
   assert.equal(api.mail[0].attachments[0].content.toString(), "verified");
   assert.doesNotMatch(api.mail[0].text, /download\?token|7일/);
-  assert.equal(api.mail[0].text.split("도면.pdf").length - 1, 1);
+  assert.doesNotMatch(api.mail[0].text, /첨부파일:|도면\.pdf/);
 });
 
 test("direct attachments keep five small files but reject more than 3MiB without sending mail", async () => {

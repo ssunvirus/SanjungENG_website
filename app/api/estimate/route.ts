@@ -191,13 +191,6 @@ export async function POST(request: Request) {
           ["연락처", phone],
           ["이메일", email || "미입력"],
           ["현장 위치", location || "미입력"],
-          [
-            "첨부파일",
-            [
-              ...attachments.map((file) => file.filename),
-              ...linkedFiles.map((file) => file.name),
-            ].join(", ") || "없음",
-          ],
         ],
         message,
         links: downloadLinks,
