@@ -24,7 +24,7 @@ export function useEstimateForm() {
     if (sending.current) return false;
     sending.current = true;
     setStatus("sending");
-    setNotice("문의를 전송하고 있습니다.");
+    setNotice("문의를 전송하고 있습니다. 약 30초 정도 걸릴 수 있으니 잠시만 기다려주세요.");
     try {
       const received = await submitEstimate(fields, multipart);
       if (received) {
