@@ -31,7 +31,10 @@ export default function PrivacyPage() {
           <h2 className={heading}>2. 보유 및 이용 기간</h2>
           <p className={body}>
             견적문의 개인정보는 접수일로부터 1년간 보관한 뒤 파기합니다. 다만 관계 법령에 따라
-            보존해야 하는 경우에는 해당 법령에서 정한 기간 동안 보관합니다.
+            보존해야 하는 경우에는 해당 법령에서 정한 기간 동안 보관합니다. 합계 3MB를 초과하는
+            첨부파일의 다운로드 링크는 7일간 유효하며, 별도 저장소의 파일은 업로드 후 8일이 지나면
+            자동 삭제 대상이 됩니다. 메일에 첨부되거나 업무용으로 다운로드한 자료에는 위 보유기간을
+            적용합니다.
           </p>
 
           <h2 className={heading}>3. 제3자 제공 및 서비스 이용</h2>
@@ -39,7 +42,7 @@ export default function PrivacyPage() {
             회사는 이용자의 개인정보를 견적문의 처리 목적 밖의 제3자에게 제공하지 않습니다. 웹사이트
             운영과 문의 메일 송수신에는 AWS Amplify와 네이버 메일 서비스를 이용합니다. 웹사이트의
             서버는 AWS 호주 시드니 리전에서 운영되며, 견적문의 정보는 접수 과정에서 이 서버를
-            경유합니다.
+            경유합니다. 대용량 첨부파일은 같은 리전의 비공개 AWS S3 저장소에 임시 보관합니다.
           </p>
 
           <h2 className={heading}>4. 파기 방법</h2>
@@ -73,7 +76,7 @@ export default function PrivacyPage() {
             </a>
           </p>
           <p className="mt-10 border-t border-[#D1DFE8] pt-5 text-sm text-[#637382]">
-            이 방침은 2026년 10월 14일부터 적용됩니다.
+            이 방침은 2026년 11월 10일부터 적용됩니다.
           </p>
         </article>
       </WaveSurface>

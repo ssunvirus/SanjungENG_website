@@ -7,9 +7,10 @@ export const estimateLimits = {
   email: 254,
   location: 300,
   message: 3000,
-  attachmentCount: 3,
-  attachmentBytes: 3 * 1024 * 1024,
-  jsonBytes: 16000,
+  attachmentCount: 5,
+  attachmentBytes: 20 * 1024 * 1024,
+  directAttachmentBytes: 3 * 1024 * 1024,
+  jsonBytes: 24000,
   multipartBytes: 4 * 1024 * 1024,
 } as const;
 
@@ -51,12 +52,14 @@ export function validatePhone(phone: string): string | null {
   return null;
 }
 
-export function validateAttachments(files: File[]): string | null {
+export function validateAttachments(
+  files: readonly Pick<File, "name" | "size" | "type">[],
+): string | null {
   if (
     files.length > estimateLimits.attachmentCount ||
     files.reduce((total, file) => total + file.size, 0) > estimateLimits.attachmentBytes
   ) {
-    return "첨부파일은 최대 3개, 전체 3MB 이내로 선택해주세요.";
+    return "첨부파일은 최대 5개, 전체 20MB 이내로 선택해주세요.";
   }
   for (const file of files) {
     const extension = file.name.split(".").at(-1)?.toLowerCase();

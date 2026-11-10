@@ -92,6 +92,22 @@ test("phone quota survives worker restarts, preserves normalization and expires 
   assert.ok([...db.items.values()].every((item) => Number.isInteger(Number(item.expiresAt.N))));
 });
 
+test("attachment upload budgets are shared across workers but do not consume inquiry budgets", async () => {
+  const db = backend();
+  const api = worker(db);
+  const now = 2000000;
+  for (let i = 0; i < 3; i++)
+    assert.ok(
+      (await api.takeEstimateSlot(headers, "01011112222", now, "attachment-upload")).ticket,
+    );
+  assert.equal(
+    (await worker(db).takeEstimateSlot(headers, "01011112222", now, "attachment-upload"))
+      .retryAfter,
+    3600,
+  );
+  assert.ok((await api.takeEstimateSlot(headers, "01011112222", now)).ticket);
+});
+
 test("shared IP quota uses the rightmost proxy address and preserves the ten-minute limit", async () => {
   const db = backend();
   const api = worker(db);

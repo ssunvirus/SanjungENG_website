@@ -107,9 +107,16 @@ export async function takeEstimateSlot(
   headers: Headers,
   phone: string,
   now = Date.now(),
+  purpose: "inquiry" | "attachment-upload" = "inquiry",
 ): Promise<{ retryAfter: number } | { ticket: EstimateSlot }> {
   const { TableName, client } = database();
-  const rules = rulesFor(headers, phone);
+  const rules = rulesFor(headers, phone).map((rule) => ({
+    ...rule,
+    id:
+      purpose === "attachment-upload"
+        ? rule.id.replace("estimate-limit-", "estimate-upload-limit-")
+        : rule.id,
+  }));
   for (let attempt = 0; attempt < 4; attempt++) {
     const previous = await Promise.all(
       rules.map(async (rule) => {

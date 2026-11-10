@@ -59,8 +59,9 @@ test("preserves inquiry length boundaries", () => {
 test("enforces attachment count, combined size and allowed extensions", () => {
   const small = new File([new Uint8Array([1])], "photo.jpg", { type: "image/jpeg" });
   assert.equal(validateAttachments([small, small, small]), null);
-  assert.notEqual(validateAttachments([small, small, small, small]), null);
-  const full = new File([new Uint8Array(3 * 1024 * 1024)], "drawing.pdf", {
+  assert.equal(validateAttachments([small, small, small, small, small]), null);
+  assert.notEqual(validateAttachments([small, small, small, small, small, small]), null);
+  const full = new File([new Uint8Array(20 * 1024 * 1024)], "drawing.pdf", {
     type: "application/pdf",
   });
   assert.equal(validateAttachments([full]), null);

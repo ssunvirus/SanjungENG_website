@@ -237,7 +237,7 @@ export default function InquiryForm() {
             </span>
           </div>
           <p className="mt-2 text-[14px] text-brand-navy/60">
-            JPG, PNG, WEBP, PDF, ZIP · 최대 3개 / 전체 3MB
+            JPG, PNG, WEBP, PDF, ZIP · 최대 5개 / 전체 20MB
           </p>
           <p className="mt-1 text-[14px] text-brand-navy/60">
             사진이 많으면 ZIP 파일로 압축해 첨부해주세요.

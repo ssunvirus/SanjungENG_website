@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 import { getSmtpPassword } from "@/src/lib/estimate-smtp";
 import { takeEstimateSlot, releaseEstimateSlot } from "@/src/lib/estimate-rate-limit";
 import { isSupportedAttachment } from "@/src/lib/estimate-attachments";
+import { openUploadToken } from "@/src/lib/estimate-upload-tokens";
+import { verifyEstimateUploads, estimateAttachmentLinks } from "@/src/lib/estimate-upload-storage";
 import {
   estimateLimits,
   attachmentTypeError,
@@ -81,6 +83,14 @@ export async function POST(request: Request) {
   if (fields.website) return Response.json({ message: "문의가 접수되었습니다." });
   const validationError = validateEstimateFields(fields) || validateAttachments(files);
   if (validationError) return fail(validationError, 400);
+  if (files.reduce((total, file) => total + file.size, 0) > estimateLimits.directAttachmentBytes)
+    return fail("합계 3MB를 초과하는 파일은 홈페이지의 대용량 업로드 기능으로 전송해주세요.", 400);
+  const uploadToken = data.uploadsToken;
+  if (
+    uploadToken !== undefined &&
+    (typeof uploadToken !== "string" || !uploadToken || uploadToken.length > 10000 || files.length)
+  )
+    return fail("첨부파일 정보를 확인해주세요.", 400);
   if ((await Promise.all(files.map(isSupportedAttachment))).some((supported) => !supported)) {
     return fail(attachmentTypeError, 400);
   }
@@ -102,6 +112,16 @@ export async function POST(request: Request) {
     );
   }
   if (!password) return fail("현재 온라인 문의 접수가 준비 중입니다. 전화로 문의해주세요.", 503);
+  if (typeof uploadToken === "string") {
+    try {
+      await openUploadToken(uploadToken, password, "upload", phone);
+    } catch {
+      return fail(
+        "첨부 업로드가 만료되었거나 올바르지 않습니다. 파일을 다시 선택해 전송해주세요.",
+        400,
+      );
+    }
+  }
 
   let slot: Awaited<ReturnType<typeof takeEstimateSlot>>;
   try {
@@ -126,6 +146,13 @@ export async function POST(request: Request) {
   let received = false;
   let transporter: ReturnType<typeof nodemailer.createTransport> | undefined;
   try {
+    const uploadedFiles =
+      typeof uploadToken === "string"
+        ? await verifyEstimateUploads(uploadToken, phone, password)
+        : [];
+    const downloadLinks = uploadedFiles.length
+      ? await estimateAttachmentLinks(uploadedFiles, password)
+      : [];
     transporter = nodemailer.createTransport({
       host: "smtp.naver.com",
       port: 465,
@@ -160,7 +187,15 @@ export async function POST(request: Request) {
         `연락처: ${phone}`,
         `이메일: ${email || "미입력"}`,
         `현장 위치: ${location || "미입력"}`,
-        `첨부파일: ${attachments.length ? attachments.map((file) => file.filename).join(", ") : "없음"}`,
+        `첨부파일: ${[...attachments.map((file) => file.filename), ...uploadedFiles.map((file) => file.name)].join(", ") || "없음"}`,
+        ...(downloadLinks.length
+          ? [
+              "",
+              "첨부파일 다운로드 (접수 후 7일간 유효)",
+              ...downloadLinks,
+              "링크를 가진 사람은 파일을 다운로드할 수 있으니 외부에 공유하지 마세요.",
+            ]
+          : []),
         "",
         "문의 내용",
         message,

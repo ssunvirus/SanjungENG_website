@@ -20,6 +20,7 @@ const fields = {
 };
 function setup({ mode = "success", configured = true, secretFailure = false } = {}) {
   const calls = [];
+  const mail = [];
   const sandbox = {
     exports: {},
     Response,
@@ -39,7 +40,8 @@ function setup({ mode = "success", configured = true, secretFailure = false } = 
         return {
           default: {
             createTransport: () => ({
-              sendMail: async () => {
+              sendMail: async (message) => {
+                mail.push(message);
                 calls.push("send");
                 if (mode === "smtp-failure") throw new Error("Down");
                 return mode === "rejected"
@@ -72,11 +74,28 @@ function setup({ mode = "success", configured = true, secretFailure = false } = 
         };
       if (name.endsWith("estimate-attachments")) return { isSupportedAttachment: async () => true };
       if (name.endsWith("estimate-rules")) return rules;
+      if (name.endsWith("estimate-upload-tokens"))
+        return {
+          openUploadToken: async (token) => {
+            if (token !== "valid-upload-token") throw new Error("InvalidToken");
+          },
+        };
+      if (name.endsWith("estimate-upload-storage"))
+        return {
+          verifyEstimateUploads: async () => {
+            calls.push("verify-upload");
+            if (mode === "invalid-upload") throw new Error("ChecksumMismatch");
+            return [{ name: "도면.pdf" }];
+          },
+          estimateAttachmentLinks: async () => [
+            "도면.pdf: https://example.com/api/estimate/attachments/download?token=encrypted",
+          ],
+        };
       throw new Error(name);
     },
   };
   runInNewContext(source, sandbox);
-  return { POST: sandbox.exports.POST, calls };
+  return { POST: sandbox.exports.POST, calls, mail };
 }
 function request(data = fields) {
   return new Request("https://example.com/api/estimate", {
@@ -92,6 +111,60 @@ test("accepted mail keeps the reserved quota and marks the response received", a
   assert.equal(response.status, 200);
   assert.equal((await response.json()).received, true);
   assert.deepEqual(api.calls, ["take", "send", "close"]);
+});
+
+test("verified large uploads are mailed as links and invalid capabilities or stored bytes never report success", async () => {
+  const forged = setup();
+  assert.equal((await forged.POST(request({ ...fields, uploadsToken: "forged" }))).status, 400);
+  assert.deepEqual(forged.calls, []);
+  const valid = setup();
+  const response = await valid.POST(request({ ...fields, uploadsToken: "valid-upload-token" }));
+  assert.equal((await response.json()).received, true);
+  assert.deepEqual(valid.calls, ["take", "verify-upload", "send", "close"]);
+  assert.equal(valid.mail[0].attachments, undefined);
+  assert.match(valid.mail[0].text, /download\?token=encrypted/);
+  assert.match(valid.mail[0].text, /7일/);
+  const invalid = setup({ mode: "invalid-upload" });
+  assert.equal(
+    (await invalid.POST(request({ ...fields, uploadsToken: "valid-upload-token" }))).status,
+    502,
+  );
+  assert.deepEqual(invalid.calls, ["take", "verify-upload", "refund"]);
+  assert.equal(invalid.mail.length, 0);
+});
+
+test("direct attachments keep five small files but reject more than 3MiB without sending mail", async () => {
+  for (const total of [5, 6]) {
+    const api = setup();
+    const form = new FormData();
+    for (const [key, value] of Object.entries(fields))
+      form.set(key, key === "privacy" ? "on" : String(value));
+    for (let index = 0; index < total; index++)
+      form.append("attachments", new File(["small"], `photo${index}.jpg`, { type: "image/jpeg" }));
+    const response = await api.POST(
+      new Request("https://example.com/api/estimate", { method: "POST", body: form }),
+    );
+    assert.equal(response.status, total === 5 ? 200 : 400);
+    assert.equal(api.mail.length, total === 5 ? 1 : 0);
+    if (total === 5) assert.equal(api.mail[0].attachments.length, 5);
+  }
+  const api = setup();
+  const form = new FormData();
+  for (const [key, value] of Object.entries(fields))
+    form.set(key, key === "privacy" ? "on" : String(value));
+  form.append(
+    "attachments",
+    new File([new Uint8Array(3 * 1024 * 1024 + 1)], "drawing.pdf", { type: "application/pdf" }),
+  );
+  assert.equal(
+    (
+      await api.POST(
+        new Request("https://example.com/api/estimate", { method: "POST", body: form }),
+      )
+    ).status,
+    400,
+  );
+  assert.deepEqual(api.calls, []);
 });
 
 test("SMTP failure and recipient rejection refund quota without reporting success", async () => {
