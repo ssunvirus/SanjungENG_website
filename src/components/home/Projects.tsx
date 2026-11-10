@@ -138,10 +138,16 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
                 <div className="relative h-[377px] w-full shrink-0 overflow-hidden">
                   {(project.homeImage ?? project.image) ? (
                     <Image
-                      src={project.thumbnailImage ?? project.homeImage ?? project.image}
+                      src={
+                        project.thumbnailImage ===
+                        "/images/projects/pharmaceutical-cold-storage-fabric-duct/thumbnail.jpg"
+                          ? "/images/projects/pharmaceutical-cold-storage-fabric-duct/cover-desktop.webp"
+                          : (project.thumbnailImage ?? project.homeImage ?? project.image)
+                      }
                       alt={project.title}
                       fill
                       sizes="503px"
+                      quality={project.id === "pharmaceutical-cold-storage-fabric-duct" ? 90 : 75}
                       unoptimized={project.image.startsWith("/api/project-images/")}
                       className={
                         project.imageFit === "contain"

@@ -10,9 +10,9 @@ export default function Footer() {
             <Image
               src="/logo-white.svg"
               alt="산정엔지니어링"
-              width={158}
-              height={48}
-              className="mx-auto md:mx-0"
+              width={204}
+              height={68}
+              className="mx-auto h-auto w-[158px] md:mx-0"
             />
             <h2 className="mt-[16px] text-[19px] font-semibold leading-[24px]">
               30년 경험으로
@@ -60,7 +60,7 @@ export default function Footer() {
               aria-label="산정엔지니어링 공식 블로그 접속"
               className="mt-5 block"
             >
-              <Image src="/naver-blog.svg" alt="" width={93} height={79} />
+              <Image src="/naver-blog.svg" alt="" width={95} height={74} className="h-auto w-[93px]" />
             </Link>
           </section>
         </div>

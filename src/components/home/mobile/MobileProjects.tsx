@@ -57,10 +57,16 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
             <div className="relative aspect-[1.7]">
               {(project.homeImage ?? project.image) ? (
                 <Image
-                  src={project.thumbnailImage ?? project.homeImage ?? project.image}
+                  src={
+                    project.thumbnailImage ===
+                    "/images/projects/pharmaceutical-cold-storage-fabric-duct/thumbnail.jpg"
+                      ? "/images/projects/pharmaceutical-cold-storage-fabric-duct/cover-mobile.webp"
+                      : (project.thumbnailImage ?? project.homeImage ?? project.image)
+                  }
                   alt={project.title}
                   fill
                   sizes="(max-width: 600px) 100vw, 600px"
+                  quality={project.id === "pharmaceutical-cold-storage-fabric-duct" ? 90 : 75}
                   unoptimized={project.image.startsWith("/api/project-images/")}
                   className={
                     project.imageFit === "contain" ? "bg-[#E3EDF3] object-contain" : "object-cover"

@@ -25,7 +25,7 @@ export default async function AdminLoginPage({
     <main className="flex min-h-screen w-full items-center justify-center bg-[#f5f7fa] px-5 py-12">
       <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
         <div className="mb-8 inline-block rounded-xl bg-brand-navy px-6 py-4">
-          <Image src="/logo-white.svg" alt="산정엔지니어링" width={158} height={48} />
+          <Image src="/logo-white.svg" alt="산정엔지니어링" width={204} height={68} className="h-auto w-[158px]" />
         </div>
         <p className="text-xs font-semibold tracking-widest text-slate-400">ADMIN WORKSPACE</p>
         <h1 className="mt-3 text-2xl font-bold text-brand-navy">관리자 로그인</h1>

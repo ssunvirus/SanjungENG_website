@@ -118,8 +118,8 @@ export default function Header() {
           <Image
             src={contactActive ? "/logo-white.svg" : "/logo-default.svg"}
             alt="산정엔지니어링"
-            width={158}
-            height={48}
+            width={contactActive ? 204 : 209}
+            height={contactActive ? 68 : 64}
             priority
             className="h-auto w-[132px] lg:w-[158px]"
           />

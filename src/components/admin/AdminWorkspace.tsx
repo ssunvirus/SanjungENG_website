@@ -336,8 +336,8 @@ export default function AdminWorkspace() {
           <Image
             src="/logo-white.svg"
             alt="산정엔지니어링"
-            width={158}
-            height={48}
+            width={204}
+            height={68}
             className={styles.brandImage}
           />
         </Link>
