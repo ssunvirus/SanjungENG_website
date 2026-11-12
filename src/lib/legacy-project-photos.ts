@@ -7,6 +7,7 @@ import { hwaseongChillerRemovalPhotos } from "./hwaseong-chiller-removal-photos.
 import { seoanseongValvePhotos } from "./seoanseong-valve-photos.ts";
 import { seoanseongCoolingTowerPhotos } from "./seoanseong-cooling-tower-photos.ts";
 import { pyeongtaekDuctCleaningPhotos } from "./pyeongtaek-duct-cleaning-photos.ts";
+import { yonginBuildingChillerPhotos } from "./yongin-building-chiller-photos.ts";
 
 export type LegacyProjectPhoto = {
   src: string;
@@ -111,6 +112,7 @@ const warehousePhotos = [
 ];
 
 export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
+  "yongin-building-absorption-chiller-cleaning": yonginBuildingChillerPhotos,
   "pharmaceutical-cold-storage-fabric-duct": pharmaceuticalColdStorageFabricDuctPhotos,
   "anseong-cold-storage-defrost-maintenance": anseongDefrostPhotos,
   "hwaseong-absorption-chiller-removal": hwaseongChillerRemovalPhotos,

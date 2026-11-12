@@ -35,6 +35,19 @@ export const ansanPaintFactoryProject = {
 
 export const projects: Project[] = [
   {
+    id: "yongin-building-absorption-chiller-cleaning",
+    href: "/projects/yongin-building-absorption-chiller-cleaning",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "대형빌딩 흡수식냉온수기 세관",
+    description: "흡수식냉온수기 세관",
+    location: "경기도 용인시",
+    workDescription:
+      "흡수식 냉동기 6대 세관, 수실 청소 및 방청도료 작업을 통해 열교환 효율 개선과 설비 부식 예방을 위한 정비를 완료했습니다.",
+    image: "/images/projects/yongin-building-absorption-chiller-cleaning/original-01.jpg",
+    imageTop: "0%",
+  },
+  {
     id: "pharmaceutical-cold-storage-fabric-duct",
     href: "/projects/pharmaceutical-cold-storage-fabric-duct",
     category: "패브릭덕트",
