@@ -112,7 +112,7 @@ export default function MobileInquiry() {
       </div>
       <button
         disabled={sending}
-        className="mt-6 flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-brand-blue text-base font-bold text-white disabled:opacity-60"
+        className="mt-6 flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-brand-blue text-base font-bold text-brand-navy disabled:opacity-60"
       >
         {sending ? "전송 중…" : "무료 견적 요청하기"}
         <ArrowRight size={20} aria-hidden="true" />

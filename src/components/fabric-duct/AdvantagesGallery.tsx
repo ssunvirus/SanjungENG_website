@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const photos = [
   { src: "/images/fabric-duct/advantages.png", alt: "기계실에 설치된 패브릭덕트" },
@@ -23,6 +23,7 @@ const photos = [
 
 export default function AdvantagesGallery() {
   const [index, setIndex] = useState(0);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const move = (direction: number) =>
     setIndex((current) => (current + direction + photos.length) % photos.length);
 
@@ -31,7 +32,38 @@ export default function AdvantagesGallery() {
       role="region"
       aria-roledescription="캐러셀"
       aria-label="패브릭덕트 설치 사진"
-      className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-2xl bg-brand-navy lg:h-[528px] min-w-0"
+      onTouchStart={(event) => {
+        touchStart.current = null;
+        if (event.touches.length !== 1 || (event.target as Element).closest("button")) return;
+        const touch = event.touches[0];
+        touchStart.current = { x: touch.clientX, y: touch.clientY };
+      }}
+      onTouchMove={(event) => {
+        const start = touchStart.current;
+        if (!start) return;
+        if (event.touches.length !== 1) {
+          touchStart.current = null;
+          return;
+        }
+        const touch = event.touches[0];
+        const deltaX = Math.abs(touch.clientX - start.x);
+        const deltaY = Math.abs(touch.clientY - start.y);
+        if (deltaY > 12 && deltaY > deltaX) touchStart.current = null;
+      }}
+      onTouchEnd={(event) => {
+        const start = touchStart.current;
+        touchStart.current = null;
+        if (!start || event.touches.length || event.changedTouches.length !== 1) return;
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - start.x;
+        const deltaY = touch.clientY - start.y;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+        move(deltaX < 0 ? 1 : -1);
+      }}
+      onTouchCancel={() => {
+        touchStart.current = null;
+      }}
+      className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-2xl bg-brand-navy [touch-action:pan-y_pinch-zoom] lg:h-[528px] min-w-0"
     >
       <Image
         src={photos[index].src}
@@ -45,7 +77,7 @@ export default function AdvantagesGallery() {
         type="button"
         aria-label="이전 사진"
         onClick={() => move(-1)}
-        className="absolute left-3 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-navy shadow-md transition-colors hover:bg-brand-blue hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+        className="absolute left-3 top-1/2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-navy shadow-md transition-colors hover:bg-brand-blue hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:flex"
       >
         <ChevronLeft aria-hidden="true" size={28} />
       </button>
@@ -53,7 +85,7 @@ export default function AdvantagesGallery() {
         type="button"
         aria-label="다음 사진"
         onClick={() => move(1)}
-        className="absolute right-3 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-navy shadow-md transition-colors hover:bg-brand-blue hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+        className="absolute right-3 top-1/2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-navy shadow-md transition-colors hover:bg-brand-blue hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:flex"
       >
         <ChevronRight aria-hidden="true" size={28} />
       </button>

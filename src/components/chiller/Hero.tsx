@@ -5,7 +5,7 @@ import { ArrowRight, ArrowRightCircle, ChevronRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative mx-auto h-[320px] w-full max-w-[1920px] overflow-hidden text-white lg:h-[600px]">
+    <section className="relative mx-auto min-h-[320px] px-7 py-[45px] lg:min-h-0 lg:px-0 lg:py-0 w-full max-w-[1920px] overflow-hidden text-white lg:h-[600px]">
       <Image
         src="/images/chiller/hero-indoor-chillers.jpg"
         alt="실내 기계실에 설치된 냉동기와 배관 설비"
@@ -19,7 +19,7 @@ export default function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#042750] via-brand-navy/70 to-transparent lg:bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
       />
-      <div className="absolute left-7 right-5 top-[45px] lg:right-auto lg:left-[245px] lg:top-[108px]">
+      <div className="relative lg:absolute lg:right-auto lg:left-[245px] lg:top-[108px]">
         <nav
           aria-label="현재 위치"
           className="hidden lg:flex h-[12px] items-center text-[9px] font-bold text-brand-blue lg:h-auto lg:text-[22.5px]"
@@ -42,7 +42,7 @@ export default function Hero() {
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link
             href={projectListHref(1, "냉동공조")}
-            className="flex h-10 w-[180px] items-center justify-center gap-2 rounded-[9px] bg-brand-blue text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:text-[30px]"
+            className="flex min-h-11 h-auto w-[180px] max-w-full py-2 lg:py-0 items-center justify-center gap-2 rounded-[9px] bg-brand-blue text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:text-[30px]"
           >
             <span className="lg:hidden">시공사례</span>
             <span className="hidden lg:inline">시공사례</span>
@@ -51,7 +51,7 @@ export default function Hero() {
           </Link>
           <Link
             href="/contact"
-            className="flex h-10 w-[180px] items-center justify-center gap-2 rounded-[9px] border border-white text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:border-0 lg:bg-white/30 lg:text-[30px]"
+            className="flex min-h-11 h-auto w-[180px] max-w-full py-2 lg:py-0 items-center justify-center gap-2 rounded-[9px] border border-white text-lg font-semibold lg:h-[65px] lg:w-[210px] lg:gap-[14px] lg:rounded-[23px] lg:border-0 lg:bg-white/30 lg:text-[30px]"
           >
             견적문의
             <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />

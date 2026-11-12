@@ -72,7 +72,7 @@ export default function MobileHero() {
         <div className="mt-6 flex max-w-[210px] flex-col gap-3">
           <Link
             href={slide.projectsHref}
-            className="flex min-h-12 items-center justify-center gap-3 rounded-full bg-brand-blue font-bold"
+            className="flex min-h-12 items-center justify-center gap-3 rounded-full bg-brand-blue font-bold text-brand-navy"
           >
             시공사례 보기
             <ArrowRight size={18} aria-hidden="true" />

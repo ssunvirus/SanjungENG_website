@@ -133,7 +133,7 @@ export default function InquiryForm() {
       onSubmit={handleSubmit}
       aria-labelledby="inquiry-form-heading"
       aria-busy={status === "sending"}
-      className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18px]"
+      className="mt-[24px] lg:mt-[88px] lg:min-h-[1189px] bg-white px-5 lg:px-[58px] pb-[24px] pt-[18px] lg:rounded-2xl lg:pb-10 lg:pt-10 lg:ring-1 lg:ring-inset lg:ring-brand-navy/5 lg:shadow-[0_16px_48px_-12px_rgba(16,45,74,0.16),0_4px_12px_rgba(16,45,74,0.04)]"
     >
       <input
         name="website"

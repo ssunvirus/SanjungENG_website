@@ -5,7 +5,7 @@ import { ArrowRight, ArrowRightCircle, ChevronRight } from "lucide-react";
 
 export default function ResourcesHero() {
   return (
-    <section className="relative mx-auto h-[320px] lg:h-[600px] w-full max-w-[1920px] overflow-hidden px-7 pt-[45px] lg:px-[245px] lg:pt-[108px] text-white">
+    <section className="relative mx-auto min-h-[320px] lg:min-h-0 lg:h-[600px] w-full max-w-[1920px] overflow-hidden px-7 py-[45px] lg:pb-0 lg:px-[245px] lg:pt-[108px] text-white">
       <div className="absolute inset-x-0 top-0 h-full lg:top-[-158.04px] lg:h-[1080px]">
         <Image
           src="/images/projects/orion-production/cc_P5243334.jpg"
@@ -46,14 +46,14 @@ export default function ResourcesHero() {
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">
           <Link
             href={projectListHref(1, "패브릭덕트")}
-            className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-brand-blue text-lg lg:text-[30px] font-semibold"
+            className="flex min-h-11 h-auto w-[180px] max-w-full py-2 lg:py-0 lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-brand-blue text-lg lg:text-[30px] font-semibold"
           >
             시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
             <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />
           </Link>
           <Link
             href="/contact"
-            className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] border border-white lg:border-0 lg:bg-white/30 text-lg lg:text-[30px] font-semibold"
+            className="flex min-h-11 h-auto w-[180px] max-w-full py-2 lg:py-0 lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] border border-white lg:border-0 lg:bg-white/30 text-lg lg:text-[30px] font-semibold"
           >
             견적문의 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />
             <ArrowRightCircle size={38} aria-hidden="true" className="hidden lg:block" />

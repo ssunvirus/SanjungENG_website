@@ -5,7 +5,7 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { useRef, useState } from "react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
 import { mobileFeaturedProjects, type Project } from "@/src/components/projects/data";
-import useProjectAutoplay from "@/src/components/home/useProjectAutoplay";
+import useCardAutoplay from "@/src/components/home/useCardAutoplay";
 import { projectListHref } from "@/src/lib/project-list-navigation";
 
 export default function MobileProjects({ cases = mobileFeaturedProjects }: { cases?: Project[] }) {
@@ -14,17 +14,32 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
   const [autoplay, setAutoplay] = useState(true);
   const [interacting, setInteracting] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
-  useProjectAutoplay(trackRef, cases.length, autoplay && !interacting && cases.length > 1);
+  const pauseUntil = useRef(0);
+  const pauseAfterInteraction = () => {
+    pauseUntil.current = Date.now() + 10000;
+  };
+  useCardAutoplay(trackRef, cases.length, autoplay && !interacting, pauseUntil);
   if (!cases.length) return null;
   return (
     <section
       ref={sectionRef}
-      onMouseEnter={() => setInteracting(true)}
-      onMouseLeave={(event) => setInteracting(event.currentTarget.contains(document.activeElement))}
-      onFocusCapture={() => setInteracting(true)}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setInteracting(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") {
+          pauseAfterInteraction();
+          setInteracting(false);
+        }
+      }}
+      onFocusCapture={(event) => {
+        if (event.target.matches(":focus-visible")) setInteracting(true);
+      }}
       onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setInteracting(event.currentTarget.matches(":hover"));
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          pauseAfterInteraction();
+          setInteracting(false);
+        }
       }}
       className="mx-auto max-w-[600px] px-5 py-8"
     >
@@ -41,22 +56,28 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
       </div>
       <div
         ref={trackRef}
-        className="relative mt-5 flex gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="relative mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         onTouchStart={() => setInteracting(true)}
-        onTouchEnd={() => setInteracting(false)}
-        onTouchCancel={() => setInteracting(false)}
+        onTouchEnd={() => {
+          pauseAfterInteraction();
+          setInteracting(false);
+        }}
+        onTouchCancel={() => {
+          pauseAfterInteraction();
+          setInteracting(false);
+        }}
+        onWheel={pauseAfterInteraction}
+        onKeyDown={pauseAfterInteraction}
         onScroll={(event) => {
           const width = event.currentTarget.clientWidth + 16;
           setCaseIndex(Math.round(event.currentTarget.scrollLeft / width) % cases.length);
         }}
       >
-        {[...cases, ...cases].map((project, index) => (
+        {cases.map((project, index) => (
           <Link
             key={`${project.id}-${index}`}
             href={project.href}
-            aria-hidden={index >= cases.length || undefined}
-            tabIndex={index >= cases.length ? -1 : undefined}
-            className="block w-full shrink-0 overflow-hidden rounded-xl bg-white"
+            className="block w-full shrink-0 snap-start snap-always overflow-hidden rounded-xl bg-white"
           >
             <div className="relative aspect-[1.7]">
               {(project.homeImage ?? project.image) ? (
@@ -106,6 +127,7 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
           <button
             key={item.href}
             onClick={() => {
+              pauseAfterInteraction();
               const track = trackRef.current;
               track?.scrollTo({
                 left: index * (track.clientWidth + 16),

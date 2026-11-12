@@ -29,36 +29,36 @@ export default function ProjectOverview({
           {normalizeFabricDuctText(description)}
         </p>
       </header>
-      <dl className="mx-auto mt-6 grid max-w-[1200px] grid-cols-2 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-[0_4px_20px_rgba(16,46,73,0.04)] lg:mt-[37px] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)]">
-        <div className="flex min-w-0 items-start gap-3 p-5 lg:gap-4 lg:p-7">
+      <dl className="mx-auto mt-6 grid max-w-[1200px] grid-cols-1 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-[0_4px_20px_rgba(16,46,73,0.04)] sm:grid-cols-2 lg:mt-[37px] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)]">
+        <div className="flex min-w-0 items-start gap-4 p-4 sm:p-5 lg:gap-4 lg:p-7">
           <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
             <Snowflake size={25} aria-hidden="true" />
           </span>
           <div className="min-w-0">
             <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">공사구분</dt>
-            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
+            <dd className="mt-1 break-keep text-[20px] sm:mt-2 font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {normalizeFabricDuctText(category)}
             </dd>
           </div>
         </div>
-        <div className="col-span-2 row-start-2 flex min-w-0 items-start gap-3 border-t border-brand-navy/10 p-5 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:gap-4 lg:border-l lg:border-t-0 lg:p-7">
+        <div className="flex min-w-0 items-start gap-4 border-t border-brand-navy/10 p-4 sm:p-5 sm:col-span-2 sm:row-start-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:gap-4 lg:border-l lg:border-t-0 lg:p-7">
           <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
             <Settings size={25} aria-hidden="true" />
           </span>
           <div className="min-w-0">
             <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">주요 작업</dt>
-            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
+            <dd className="mt-1 break-keep text-[20px] sm:mt-2 font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {normalizeFabricDuctText(work)}
             </dd>
           </div>
         </div>
-        <div className="col-start-2 row-start-1 flex min-w-0 items-start gap-3 border-l border-brand-navy/10 p-5 lg:col-start-3 lg:gap-4 lg:p-7">
+        <div className="flex min-w-0 items-start gap-4 border-t border-brand-navy/10 p-4 sm:p-5 sm:col-start-2 sm:row-start-1 sm:border-l sm:border-t-0 lg:col-start-3 lg:gap-4 lg:p-7">
           <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue lg:size-12">
             <MapPin size={25} aria-hidden="true" />
           </span>
           <div className="min-w-0">
             <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">현장 위치</dt>
-            <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
+            <dd className="mt-1 break-keep text-[20px] sm:mt-2 font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
               {location}
             </dd>
           </div>
