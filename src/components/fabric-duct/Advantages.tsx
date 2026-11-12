@@ -43,7 +43,7 @@ export default function Advantages() {
           eyebrow="ADVANTAGES"
           title={
             <>
-              섬유덕트의{" "}
+              패브릭덕트의{" "}
               <span className="text-[28px] lg:text-[58.235px] tracking-[1px] lg:tracking-[2.9118px] text-brand-blue">
                 주요 장점
               </span>

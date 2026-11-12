@@ -1,8 +1,7 @@
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { ReactNode } from "react";
 import { connection } from "next/server";
-import Link from "next/link";
-import { List } from "lucide-react";
+import ProjectListButton from "./ProjectListButton";
 import { publicProject } from "@/src/lib/public-projects";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview, { type ProjectOverviewProps } from "./ProjectOverview";
@@ -35,13 +34,9 @@ export default async function LegacyProjectDetail({
           <ProjectOverview {...overview} />
           {gallery}
           <ProjectVideo projectId={id} />
-          <Link
-            href="/projects"
-            className="mx-auto mt-[33px] flex h-[48px] w-[208px] items-center justify-center gap-[12px] rounded-[5px] bg-brand-navy text-lg lg:text-[25px] font-medium text-white hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
-          >
-            <List size={30} aria-hidden="true" />
-            목록으로
-          </Link>
+          <div className="mt-[33px] flex justify-center">
+            <ProjectListButton />
+          </div>
           <ProjectInquiryBanner />
           <BlogBanner projectId={id} />
         </article>

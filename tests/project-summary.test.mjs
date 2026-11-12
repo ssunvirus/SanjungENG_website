@@ -6,7 +6,7 @@ import { mergePublicProjects } from "../src/lib/public-project-data.ts";
 const project = {
   id: "summary-test",
   title: "Project",
-  category: "섬유덕트",
+  category: "패브릭덕트",
   location: "",
   description: "Detailed work description",
   photos: [],

@@ -1,6 +1,6 @@
 export type Project = {
   id: string;
-  category: "냉동공조" | "섬유덕트";
+  category: "냉동공조" | "패브릭덕트";
   tag: string;
   title: string;
   description: string;
@@ -37,8 +37,8 @@ export const projects: Project[] = [
   {
     id: "pharmaceutical-cold-storage-fabric-duct",
     href: "/projects/pharmaceutical-cold-storage-fabric-duct",
-    category: "섬유덕트",
-    tag: "섬유덕트",
+    category: "패브릭덕트",
+    tag: "패브릭덕트",
     title: "의약품 냉장창고 패브릭덕트 설치공사",
     description: "패브릭덕트 설계, 설치 및 유니트쿨러 연결",
     location: "-",
@@ -130,13 +130,13 @@ export const projects: Project[] = [
   {
     id: "pyeongtaek-food-factory-duct-cleaning",
     href: "/projects/pyeongtaek-food-factory-duct-cleaning",
-    category: "섬유덕트",
-    tag: "섬유덕트",
-    title: "식품가공공장 섬유덕트 세탁",
-    description: "페브릭덕트 세탁",
+    category: "패브릭덕트",
+    tag: "패브릭덕트",
+    title: "식품가공공장 패브릭덕트 세탁",
+    description: "패브릭덕트 세탁",
     location: "평택시",
     workDescription:
-      "장기간 사용으로 오염된 섬유덕트를 탈착, 세탁 후 재설치하여 공기 분배 효율을 개선하였습니다.",
+      "장기간 사용으로 오염된 패브릭덕트를 탈착, 세탁 후 재설치하여 공기 분배 효율을 개선하였습니다.",
     blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
     image: "/images/projects/pyeongtaek-food-factory-duct-cleaning/photo-01.jpg",
     imageTop: "0%",
@@ -156,10 +156,10 @@ export const projects: Project[] = [
     id: "orion-production",
     blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
     href: "/projects/orion-production",
-    category: "섬유덕트",
-    tag: "섬유덕트",
-    title: "오리온 생산설비 섬유덕트 설치",
-    description: "섬유덕트 설계 / 설치",
+    category: "패브릭덕트",
+    tag: "패브릭덕트",
+    title: "오리온 생산설비 패브릭덕트 설치",
+    description: "패브릭덕트 설계 / 설치",
     image: "/images/projects/orion-production/cc_P5243334.jpg",
     imageTop: "-12.54%",
   },
@@ -180,12 +180,12 @@ export const projects: Project[] = [
     id: "gurye-pool",
     blogUrl: "https://blog.naver.com/PostList.naver?blogId=sanjungeng&from=postList&categoryNo=1",
     homeImage: "/images/projects/pool-fabric-duct.jpg",
-    mobileTag: "섬유덕트 시공",
+    mobileTag: "패브릭덕트 시공",
     href: "/projects/gurye-pool",
-    category: "섬유덕트",
-    tag: "섬유덕트",
-    title: "구례 실내수영장 섬유덕트 설치",
-    description: "섬유덕트 설계 / 설치",
+    category: "패브릭덕트",
+    tag: "패브릭덕트",
+    title: "구례 실내수영장 패브릭덕트 설치",
+    description: "패브릭덕트 설계 / 설치",
     image: "/images/projects-page/pool.jpg",
     imageTop: "-0.15%",
     imageLeft: "-0.02%",

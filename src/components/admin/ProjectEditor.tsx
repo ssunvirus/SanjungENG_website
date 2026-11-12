@@ -4,7 +4,7 @@ import type { ProjectRecord as Entry } from "@/src/lib/project-record";
 import ProjectPhotos, { type PhotoFeedback } from "./ProjectPhotos";
 import styles from "./admin.module.css";
 
-const categories = ["냉동기", "항온항습기", "냉각탑", "저온저장고", "섬유덕트", "기타"];
+const categories = ["냉동기", "항온항습기", "냉각탑", "저온저장고", "패브릭덕트", "기타"];
 type Props = {
   editor: Entry;
   saving: boolean;
@@ -73,7 +73,7 @@ export default function ProjectEditor({
               <input
                 value={editor.summary ?? ""}
                 maxLength={50}
-                placeholder="예: 페브릭덕트 설계 및 설치"
+                placeholder="예: 패브릭덕트 설계 및 설치"
                 onChange={(event) => update({ summary: event.target.value })}
               />
               <small className={styles.fieldHint}>

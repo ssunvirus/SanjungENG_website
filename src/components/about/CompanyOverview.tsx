@@ -5,7 +5,7 @@ const companyDetails = [
   { term: "회사명", lines: ["주식회사 산정엔지니어링"], icon: Building2 },
   { term: "대표자", lines: ["김윤환"], icon: UserRound },
   { term: "설립연도", lines: ["1993년"], icon: CalendarDays },
-  { term: "주요사업", lines: ["냉동공조 설비, 섬유덕트"], icon: Layers },
+  { term: "주요사업", lines: ["냉동공조 설비, 패브릭덕트"], icon: Layers },
   {
     term: "소재지",
     lines: ["서울시 금천구 시흥대로 97, 6-213", "(시흥동, 시흥산업 용재 유통센터)"],

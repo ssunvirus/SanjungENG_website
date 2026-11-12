@@ -33,7 +33,7 @@ export default function Hero() {
           견적문의
         </h1>
         <p className="mt-5 lg:mt-[34px] text-[20px] text-white/80 lg:text-[33.75px] font-medium leading-7 lg:leading-15">
-          냉동공조부터 섬유덕트까지
+          냉동공조부터 패브릭덕트까지
           <br />
           현장에 맞는 솔루션을 제공합니다.
         </p>

@@ -1,6 +1,7 @@
 import type { Project } from "@/src/components/projects/data";
 import type { ProjectRecord } from "./project-record";
 import { applyProjectOrder } from "./project-order.ts";
+import { normalizeFabricDuctText } from "./fabric-duct-label.ts";
 
 export function publicPhotoPath(src: string) {
   return src.replace(/^\/api\/admin\/project-images\//, "/api/project-images/");
@@ -14,10 +15,10 @@ export function mergePublicProjects(
   const toCard = (record: ProjectRecord, base?: Project): Project => ({
     ...base,
     id: record.id,
-    title: record.title,
-    category: record.category === "섬유덕트" ? "섬유덕트" : "냉동공조",
-    tag: record.category,
-    description: record.summary?.trim() || record.description,
+    title: normalizeFabricDuctText(record.title),
+    category: normalizeFabricDuctText(record.category) === "패브릭덕트" ? "패브릭덕트" : "냉동공조",
+    tag: normalizeFabricDuctText(record.category),
+    description: normalizeFabricDuctText(record.summary?.trim() || record.description),
     image: record.photos[0] ? publicPhotoPath(record.photos[0].src) : "",
     homeImage: undefined,
     thumbnailImage: record.photos[0]?.src === base?.image ? base?.thumbnailImage : undefined,

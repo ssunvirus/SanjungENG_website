@@ -22,9 +22,9 @@ export default function PyeongtaekDuctCleaningPage() {
       overview={{
         title: project.title,
         description:
-          "장기간 사용으로 오염된 섬유덕트를 탈착, 세탁 후 재설치하여 공기 분배 효율을 개선하였습니다.",
+          "장기간 사용으로 오염된 패브릭덕트를 탈착, 세탁 후 재설치하여 공기 분배 효율을 개선하였습니다.",
         category: project.tag,
-        work: "섬유덕트 탈착 후 세척",
+        work: "패브릭덕트 탈착 후 세척",
         location: project.location,
       }}
       gallery={<DuctCleaningGallery />}

@@ -1,5 +1,5 @@
 import WaveSurface from "@/src/components/shared/WaveSurface";
-import Link from "next/link";
+import ProjectListButton from "./ProjectListButton";
 import Hero from "@/src/components/projects/Hero";
 import ProjectOverview from "./ProjectOverview";
 import ProjectPhotoGallery from "./ProjectPhotoGallery";
@@ -24,16 +24,11 @@ export default function SavedProjectDetail({ project }: { project: ProjectRecord
         <article className="mx-auto w-full max-w-[1440px] px-5 py-9 lg:py-[89px]">
           <ProjectOverview
             title={project.title}
-            description=""
+            description={project.description}
             category={project.category}
             work={project.summary?.trim() || base?.description || "?"}
             location={project.location || "—"}
           />
-          {project.description && (
-            <p className="mx-auto mt-8 max-w-[1000px] whitespace-pre-wrap break-words text-base leading-8">
-              {project.description}
-            </p>
-          )}
           {project.photos.length > 0 ? (
             <ProjectPhotoGallery
               showAltCaption
@@ -48,12 +43,9 @@ export default function SavedProjectDetail({ project }: { project: ProjectRecord
             />
           ) : null}
           <ProjectVideo projectId={project.id} />
-          <Link
-            href="/projects"
-            className="mx-auto mt-8 flex h-12 w-52 items-center justify-center rounded bg-brand-navy text-white"
-          >
-            목록으로
-          </Link>
+          <div className="mt-8 flex justify-center">
+            <ProjectListButton />
+          </div>
           <ProjectInquiryBanner />
           <BlogBanner projectId={project.id} />
         </article>

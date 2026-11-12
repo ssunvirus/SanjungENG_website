@@ -84,7 +84,7 @@ export default function MobileInquiry() {
             name="message"
             maxLength={estimateLimits.message}
             rows={3}
-            placeholder="예) 냉동기 설치, 섬유덕트, 유지보수 등"
+            placeholder="예) 냉동기 설치, 패브릭덕트, 유지보수 등"
             className={`${field} py-3`}
           />
         </label>

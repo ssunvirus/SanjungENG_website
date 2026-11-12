@@ -60,7 +60,13 @@ export default function Footer() {
               aria-label="산정엔지니어링 공식 블로그 접속"
               className="mt-5 block"
             >
-              <Image src="/naver-blog.svg" alt="" width={95} height={74} className="h-auto w-[93px]" />
+              <Image
+                src="/naver-blog.svg"
+                alt=""
+                width={95}
+                height={74}
+                className="h-auto w-[93px]"
+              />
             </Link>
           </section>
         </div>
@@ -70,7 +76,7 @@ export default function Footer() {
         >
           <Link href="/about">회사소개</Link>
           <Link href="/solutions">냉동공조</Link>
-          <Link href="/fabric-duct">섬유덕트</Link>
+          <Link href="/fabric-duct">패브릭덕트</Link>
           <Link href="/projects">시공사례</Link>
         </nav>
         <section className="mt-8 flex flex-col items-center gap-4 border-t border-white/15 py-6 md:flex-row md:items-center md:justify-between xl:mt-0 xl:h-[91px] xl:py-0">

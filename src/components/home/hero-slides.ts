@@ -11,12 +11,12 @@ export const heroSlides = [
   },
   {
     image: "/images/business/fabric-duct-card.jpg",
-    imageAlt: "섬유덕트가 설치된 산업 시설 내부",
+    imageAlt: "패브릭덕트가 설치된 산업 시설 내부",
     imagePosition: "object-[80%_center]",
-    category: "섬유덕트 솔루션",
+    category: "패브릭덕트 솔루션",
     title: ["공간에 맞춘 설계", "고르게 퍼지는 공기"],
-    subtitle: "섬유덕트 설계부터 시공까지 함께",
-    mobileDescription: "섬유덕트 설계부터 시공까지 함께합니다.",
+    subtitle: "패브릭덕트 설계부터 시공까지 함께",
+    mobileDescription: "패브릭덕트 설계부터 시공까지 함께합니다.",
     details: "CFD 설계   |   제품 공급   |   설치 & 시공",
   },
 ];

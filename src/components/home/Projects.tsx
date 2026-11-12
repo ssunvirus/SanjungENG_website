@@ -71,7 +71,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
           시공사례
         </h2>
         <p className="mt-[25px] text-[19px] font-semibold leading-[29px] text-brand-text">
-          냉동공조부터 섬유덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
+          냉동공조부터 패브릭덕트까지, 산정엔지니어링의 시공사례를 소개합니다.
         </p>
         <div className="relative z-10 mt-[20px] flex h-10 justify-end gap-[15px] text-brand-text">
           <button

@@ -20,7 +20,7 @@ import { desktopFeaturedProjects, mobileFeaturedProjects } from "@/src/component
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
-  title: "냉동공조·섬유덕트 설계 및 시공 | 산정엔지니어링",
+  title: "냉동공조·패브릭덕트 설계 및 시공 | 산정엔지니어링",
   description: siteDescription,
 };
 
@@ -43,7 +43,7 @@ export default async function Home() {
 
   return (
     <main id="page-top" className="min-w-0 flex-1">
-      <h1 className="sr-only">냉동공조·섬유덕트 설계 및 시공 | 산정엔지니어링</h1>
+      <h1 className="sr-only">냉동공조·패브릭덕트 설계 및 시공 | 산정엔지니어링</h1>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

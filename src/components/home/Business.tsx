@@ -16,11 +16,11 @@ const businessCards = [
   },
   {
     number: "02",
-    title: "섬유덕트",
+    title: "패브릭덕트",
     description: "공간에 맞춘 공기 분배 설계",
     services: "맞춤 설계 / 제작 / 시공",
     image: "/images/business/fabric-duct-card.jpg",
-    imageAlt: "실내 천장에 설치된 섬유덕트",
+    imageAlt: "실내 천장에 설치된 패브릭덕트",
     href: "/fabric-duct",
   },
   {
@@ -49,7 +49,7 @@ export function BusinessOverview() {
       <section className="relative h-[1081px] w-[1920px] overflow-hidden">
         <Image
           src="/images/business/overview-background.png"
-          alt="냉동공조와 섬유덕트가 적용된 산업 시설"
+          alt="냉동공조와 패브릭덕트가 적용된 산업 시설"
           fill
           sizes="(max-width: 1920px) 100vw, 1920px"
           className="object-cover"
@@ -57,7 +57,7 @@ export function BusinessOverview() {
 
         <div className="absolute top-[51px] left-[240px]">
           <h2 className="mt-[78px] text-[60px] font-extrabold leading-[72px] text-brand-navy">
-            냉동기부터 섬유덕트까지
+            냉동기부터 패브릭덕트까지
           </h2>
           <p className="mt-[12px] text-[60px] font-extrabold leading-[72px] text-brand-blue">
             냉동공조 설계 &amp; 시공.
@@ -94,7 +94,7 @@ export function BusinessOverview() {
               end: 728,
             },
             {
-              title: "섬유덕트",
+              title: "패브릭덕트",
               description: "CFD 설계 & 시공",
               x: 1526,
               y: 213,
@@ -151,7 +151,7 @@ export function BusinessOverview() {
                               ? "냉동공조 설비 수리 & 오버홀"
                               : index === 2
                                 ? "냉동공조 설비 정기점검 & 유지보수"
-                                : "섬유덕트 설계 & 시공"}
+                                : "패브릭덕트 설계 & 시공"}
                         </p>
                         <p>
                           {index === 0 ? (
@@ -182,7 +182,7 @@ export function BusinessOverview() {
                             <>
                               CFD 해석을 통한 풍량, 기류 설계
                               <br />
-                              현장에 맞춘 페브릭덕트 제작 및 설치
+                              현장에 맞춘 패브릭덕트 제작 및 설치
                               <br />
                               덕트 탈착, 세탁, 재설치 및 사후관리
                             </>
@@ -237,7 +237,7 @@ export function BusinessOverview() {
                                 ? "고소작업대와 지게차를 이용한 저온저장고 유니트 쿨러 설치"
                                 : index === 2
                                   ? "열화상 카메라로 냉동창고 전기 제어반을 점검하는 작업자"
-                                  : "공장 생산라인 천장에 설치된 페브릭덕트"
+                                  : "공장 생산라인 천장에 설치된 패브릭덕트"
                             }
                             width={900}
                             height={675}
@@ -249,7 +249,7 @@ export function BusinessOverview() {
                               ? "농협 저온저장고 냉동설비 설치"
                               : index === 2
                                 ? "서안성 냉동창고 정기점검"
-                                : "페브릭덕트 설치 현장"}
+                                : "패브릭덕트 설치 현장"}
                             <ChevronRight size={20} aria-hidden="true" />
                           </span>
                         </Link>

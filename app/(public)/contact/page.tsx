@@ -7,7 +7,7 @@ import InquiryForm from "@/src/components/contact/InquiryForm";
 export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
   title: "견적문의 | 산정엔지니어링",
-  description: "냉동공조 설비와 섬유덕트 설치, 교체, 수리 및 유지보수 견적을 문의하세요.",
+  description: "냉동공조 설비와 패브릭덕트 설치, 교체, 수리 및 유지보수 견적을 문의하세요.",
 };
 
 export default function ContactPage() {

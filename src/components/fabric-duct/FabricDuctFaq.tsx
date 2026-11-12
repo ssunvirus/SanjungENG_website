@@ -47,7 +47,7 @@ export default function FabricDuctFaq() {
       categories={categories}
       questions={questions}
       image="/images/projects/pharmaceutical-cold-storage-fabric-duct/thumbnail.jpg"
-      introduction="섬유덕트 설계와 설치부터 세척 및 유지관리까지"
+      introduction="패브릭덕트 설계와 설치부터 세척 및 유지관리까지"
     />
   );
 }

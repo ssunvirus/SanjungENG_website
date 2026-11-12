@@ -31,7 +31,7 @@ export default function Hero({ headingTag: Heading = "p" }: { headingTag?: "h1" 
           시공사례
         </Heading>
         <p className="mt-5 text-[20px] text-white/80 font-medium leading-7 lg:mt-[34px] lg:text-[33.75px] lg:leading-13">
-          냉동공조부터 섬유덕트까지
+          냉동공조부터 패브릭덕트까지
           <br />
           산정엔지니어링의 현장을 소개합니다.
         </p>

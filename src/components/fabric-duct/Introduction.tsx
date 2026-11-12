@@ -3,7 +3,7 @@ import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
 const rows = [
-  ["구분", "금속덕트", "섬유덕트"],
+  ["구분", "금속덕트", "패브릭덕트"],
   ["소재", "아연도금 강판", "섬유 소재"],
   ["공기분배", "별도 취출구", "원단/타공부/노즐"],
   ["설치방식", "조립 지지대 고정", "케이블/레일설치"],
@@ -18,9 +18,9 @@ export default function Introduction() {
       <div className="mx-auto grid w-full max-w-[1462px] grid-cols-1 gap-5 min-[1920px]:grid-cols-[739px_683px] min-[1920px]:gap-[40px]">
         <div>
           <div className="h-auto  lg:h-[218px]">
-            <SectionHeading eyebrow="FABRIC DUCT" title="섬유덕트란?">
+            <SectionHeading eyebrow="FABRIC DUCT" title="패브릭덕트란?">
               <p className="break-keep text-[16px] font-semibold leading-[1.7] min-[1200px]:text-[18px]">
-                섬유덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.
+                패브릭덕트는 섬유 소재로 제작된 공기 분배 시스템입니다.
               </p>
               <p className="mt-2 break-keep text-[16px] font-normal leading-[1.7] text-brand-navy/85 min-[1200px]:text-[18px]">
                 공조설비에서 공급된 공기를 통기성 원단이나 타공부 / 노즐을 통해 공간 전체에 고르게

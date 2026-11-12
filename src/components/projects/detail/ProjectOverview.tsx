@@ -1,4 +1,5 @@
 import { MapPin, Settings, Snowflake } from "lucide-react";
+import { normalizeFabricDuctText } from "@/src/lib/fabric-duct-label";
 
 export type ProjectOverviewProps = {
   title?: string;
@@ -22,10 +23,10 @@ export default function ProjectOverview({
           PROJECTS DETAILS
         </p>
         <h1 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
-          {title}
+          {normalizeFabricDuctText(title)}
         </h1>
         <p className="mx-auto mt-3 max-w-[1100px] whitespace-pre-line break-keep text-[15px] leading-7 text-brand-navy/80 lg:mt-[21px] lg:text-[20px] lg:leading-8">
-          {description}
+          {normalizeFabricDuctText(description)}
         </p>
       </header>
       <dl className="mx-auto mt-6 grid max-w-[1200px] grid-cols-2 overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-[0_4px_20px_rgba(16,46,73,0.04)] lg:mt-[37px] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)_minmax(0,1fr)]">
@@ -36,7 +37,7 @@ export default function ProjectOverview({
           <div className="min-w-0">
             <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">공사구분</dt>
             <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
-              {category}
+              {normalizeFabricDuctText(category)}
             </dd>
           </div>
         </div>
@@ -47,7 +48,7 @@ export default function ProjectOverview({
           <div className="min-w-0">
             <dt className="text-[15px] font-semibold text-brand-navy/60 lg:text-base">주요 작업</dt>
             <dd className="mt-2 break-keep text-[20px] font-bold leading-8 text-brand-navy [overflow-wrap:anywhere] lg:text-[24px] lg:leading-9">
-              {work}
+              {normalizeFabricDuctText(work)}
             </dd>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { Images } from "lucide-react";
+import { normalizeFabricDuctText } from "@/src/lib/fabric-duct-label";
 
 type ProjectPhoto = { src: string; alt: string; caption?: string; displayWidth?: number } & (
   { width: number; height: number } | { width?: never; height?: never }
@@ -9,14 +9,13 @@ type ProjectPhoto = { src: string; alt: string; caption?: string; displayWidth?:
 
 export function ProjectGalleryLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto mt-5 w-full lg:w-[1000px]">
-      <Link
-        href="/projects"
-        className="mb-5 flex h-10 w-fit items-center gap-[5px] text-base lg:text-[25px] font-medium hover:text-brand-blue focus-visible:outline-2 focus-visible:outline-brand-blue"
-      >
-        <ArrowLeft size={40} aria-hidden="true" className="size-6 lg:size-10" />
-        목록으로 돌아가기
-      </Link>
+    <div className="mx-auto mt-5 w-full max-w-[1000px]">
+      <div className="mb-5 flex items-center justify-between gap-3">
+        <h2 className="flex min-w-0 items-center gap-2 text-xl font-bold text-brand-navy lg:gap-3 lg:text-[28px]">
+          <Images aria-hidden="true" className="size-6 shrink-0 lg:size-7" />
+          <span className="whitespace-nowrap">현장 사진</span>
+        </h2>
+      </div>
       <div className="flex flex-col gap-4 lg:gap-[30px]">{children}</div>
     </div>
   );
@@ -46,7 +45,7 @@ export default function ProjectPhotoGallery({
           >
             <Image
               src={photo.src}
-              alt={photo.alt}
+              alt={normalizeFabricDuctText(photo.alt)}
               width={photo.width}
               height={photo.height}
               fill={photo.width === undefined}
@@ -62,7 +61,7 @@ export default function ProjectPhotoGallery({
           </div>
           {(photo.caption ?? (showAltCaption ? photo.alt : "")) && (
             <figcaption className="whitespace-pre-line px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
-              {photo.caption ?? photo.alt}
+              {normalizeFabricDuctText(photo.caption ?? photo.alt)}
             </figcaption>
           )}
         </figure>

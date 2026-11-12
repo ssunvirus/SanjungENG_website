@@ -1,0 +1,162 @@
+{
+  "pagesChecked": 28,
+  "pages": [
+    {
+      "route": "/contact",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/about",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/email-collection",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/fabric-duct",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/fabric-duct/resources",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/privacy",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/aju-pharmaceutical",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/ansan-paint-factory-precision-ac-repair",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/church-cooling-tower",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/anseong-cold-storage-defrost-maintenance",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/gurye-pool",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/hwaseong-absorption-chiller-removal",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/hwaseong-absorption-chiller-cleaning",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/orion-production",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/pharmaceutical-cold-storage-fabric-duct",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/semiconductor-chiller",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/pyeongtaek-food-factory-duct-cleaning",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/seoanseong-cooling-tower-inspection",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/seoanseong-chiller-valve-replacement",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/seoanseong-maintenance",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/warehouse-precision-ac",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/solutions/cold-storage",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/wonsam-nonghyup",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/solutions/cooling-tower",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/solutions",
+      "status": 200,
+      "oldLabels": 0
+    },
+    {
+      "route": "/solutions/precision-ac",
+      "status": 200,
+      "oldLabels": 0
+    }
+  ],
+  "nonPageCandidates": [
+    {
+      "route": "/projects/page",
+      "status": 404,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/pool-fabric-duct",
+      "status": 404,
+      "oldLabels": 0
+    },
+    {
+      "route": "/projects/warehouse-maintenance",
+      "status": 404,
+      "oldLabels": 0
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { projectImagePathPattern } from "./project-images.ts";
 import { applyProjectOrder } from "./project-order.ts";
 import { completeLegacyProject } from "./legacy-project-photos.ts";
+import { normalizeFabricDuctText } from "./fabric-duct-label.ts";
 
 export type ProjectRecord = {
   id: string;
@@ -23,12 +24,12 @@ export function parseProject(value: unknown): ProjectRecord {
     const v = p[key];
     if (typeof v !== "string" || v.length > max || (required && !v.trim()))
       throw new Error("InvalidProject");
-    return v.trim();
+    return normalizeFabricDuctText(v.trim());
   }
   const id = field("id", 100, true);
   if (!/^[a-z0-9][a-z0-9-]*$/.test(id) || id === "project-order") throw new Error("InvalidProject");
   const category = field("category", 30, true);
-  if (!["냉동기", "항온항습기", "냉각탑", "저온저장고", "섬유덕트", "기타"].includes(category))
+  if (!["냉동기", "항온항습기", "냉각탑", "저온저장고", "패브릭덕트", "기타"].includes(category))
     throw new Error("InvalidProject");
   if (!Number.isSafeInteger(p.version) || (p.version as number) < 0)
     throw new Error("InvalidProject");
@@ -47,7 +48,7 @@ export function parseProject(value: unknown): ProjectRecord {
       alt.length > 300
     )
       throw new Error("InvalidProject");
-    return { src, alt: alt.trim() };
+    return { src, alt: normalizeFabricDuctText(alt.trim()) };
   });
   return {
     id,

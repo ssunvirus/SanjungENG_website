@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 const mobileLabels: Record<string, string> = {
   "산정엔지니어링 소개": "소개",
-  "섬유덕트 소개": "소개",
+  "패브릭덕트 소개": "소개",
   "공기 분배 설계": "공기 분배",
   "자주 묻는 질문": "FAQ",
   "주요 항온항습기": "주요 장비",

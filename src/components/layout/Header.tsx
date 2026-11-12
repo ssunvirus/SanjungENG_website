@@ -3,8 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Menu, X, ChevronDown, ChevronRight, ArrowRight } from "lucide-react";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useSyncExternalStore } from "react";
+import {
+  subscribeBrowserLocation,
+  getBrowserPathname,
+  getServerPathname,
+} from "@/src/lib/browser-location-store";
+
+const previewPanelClassName =
+  "invisible absolute left-1/2 -translate-x-1/2 top-full z-50 grid w-[min(1040px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[300px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-8 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none";
+
+const previewButtonClassName =
+  "group/detail mt-5 inline-flex min-h-14 items-center justify-between gap-6 rounded-xl border border-[#B9D2E4] bg-[#F4F9FC] px-5 py-2.5 text-[22px] font-bold leading-8 text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none";
 
 const menus = [
   { label: "회사소개", href: "/about" },
@@ -19,10 +29,10 @@ const menus = [
     ],
   },
   {
-    label: "섬유덕트",
+    label: "패브릭덕트",
     href: "/fabric-duct",
     submenu: [
-      { label: "섬유덕트 솔루션", href: "/fabric-duct" },
+      { label: "패브릭덕트 솔루션", href: "/fabric-duct" },
       { label: "인증서 & 카탈로그", href: "/fabric-duct/resources" },
     ],
   },
@@ -34,7 +44,7 @@ const solutionPreviews = [
     label: "냉동기",
     href: "/solutions",
     image: "chiller.png",
-    description: "산업 현장에 맞는 냉동기 설치, 교체, 유지보수 및 철거",
+    description: "냉동기 설치, 교체, 유지보수 및 철거",
   },
   {
     label: "저온저장고",
@@ -58,21 +68,25 @@ const solutionPreviews = [
 
 const fabricPreviews = [
   {
-    label: "섬유덕트 솔루션",
+    label: "패브릭덕트 솔루션",
     href: "/fabric-duct",
     image: "fabric-duct.png",
-    description: "공간과 공기 흐름에 맞춘 섬유덕트 설계, 설치 및 유지관리",
+    description: "공간과 공기 흐름에 맞춘 패브릭덕트 설계, 설치 및 유지관리",
   },
   {
     label: "인증서 & 카탈로그",
     href: "/fabric-duct/resources",
     image: "fabric-resources.png",
-    description: "섬유덕트 제품 인증서와 카탈로그를 확인해보세요.",
+    description: "패브릭덕트 제품 인증서와 카탈로그를 확인해보세요.",
   },
 ];
 
 export default function Header() {
-  const pathname = usePathname();
+  const pathname = useSyncExternalStore(
+    subscribeBrowserLocation,
+    getBrowserPathname,
+    getServerPathname,
+  );
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const [previewIndex, setPreviewIndex] = useState(0);
@@ -149,10 +163,12 @@ export default function Header() {
                 const selectedIndex = isFabric ? fabricPreviewIndex : previewIndex;
                 const selectPreview = isFabric ? setFabricPreviewIndex : setPreviewIndex;
                 const preview = previews[selectedIndex];
+                const previewAction =
+                  preview.href === "/fabric-duct/resources" ? "자료 확인하기" : "서비스 알아보기";
                 return (
                   <li
                     key={menu.href}
-                    className="group relative flex h-full shrink-0 items-center text-center"
+                    className="group flex h-full shrink-0 items-center text-center"
                   >
                     <Link
                       href={menu.href}
@@ -168,10 +184,7 @@ export default function Header() {
                       {menu.label}
                     </Link>
                     {menu.submenu ? (
-                      <div
-                        aria-label={`${menu.label} 하위 메뉴`}
-                        className={`invisible absolute left-1/2 -translate-x-1/2 top-full z-50 grid w-[min(850px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[280px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-7 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none`}
-                      >
+                      <div aria-label={`${menu.label} 하위 메뉴`} className={previewPanelClassName}>
                         <ul className="space-y-2 border-r border-[#D1DFE8] pr-6">
                           {previews.map((item, index) => (
                             <li key={item.href}>
@@ -181,12 +194,12 @@ export default function Header() {
                                 onFocus={() => selectPreview(index)}
                                 onClick={(event) => event.currentTarget.blur()}
                                 aria-current={pathname === item.href ? "page" : undefined}
-                                className={`flex min-h-14 items-center justify-between gap-3 whitespace-nowrap rounded-full px-4 py-3 text-[22px] font-bold transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#EFF7FB] text-[#006EB8]" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
+                                className={`flex min-h-16 items-center justify-between gap-3 whitespace-nowrap rounded-full px-4 py-3 text-[24px] font-bold leading-8 transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#EFF7FB] text-[#006EB8]" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
                               >
                                 {item.label}
                                 {
                                   <ChevronRight
-                                    size={23}
+                                    size={25}
                                     aria-hidden="true"
                                     className={`shrink-0 text-brand-blue ${selectedIndex === index ? "opacity-100" : "opacity-0"}`}
                                   />
@@ -196,26 +209,34 @@ export default function Header() {
                           ))}
                         </ul>
                         <div className="flex min-w-0 items-center gap-6">
-                          <div className="relative size-[120px] shrink-0 overflow-hidden rounded-3xl bg-[#EFF7FB]">
+                          <div className="relative size-[128px] shrink-0 overflow-hidden rounded-3xl bg-[#EFF7FB]">
                             <Image
                               src={`/images/navigation/${preview.image}`}
                               alt=""
                               fill
-                              sizes="120px"
+                              sizes="128px"
                               className={`object-contain ${isFabric ? "[filter:hue-rotate(-25deg)]" : ""}`}
                             />
                           </div>
                           <div className="min-w-0">
-                            <p className="text-[32px] font-bold text-brand-navy">{preview.label}</p>
-                            <p className="mt-3 break-keep text-[18px] font-medium leading-7 text-brand-text/80">
+                            <p className="break-keep text-[36px] font-bold leading-tight text-brand-navy">
+                              {preview.label}
+                            </p>
+                            <p className="mt-3 break-keep text-[20px] font-medium leading-8 text-brand-text/80">
                               {preview.description}
                             </p>
                             <Link
                               href={preview.href}
+                              aria-label={`${preview.label} ${previewAction}`}
                               onClick={(event) => event.currentTarget.blur()}
-                              className="mt-6 inline-flex items-center gap-3 rounded text-xl font-bold text-brand-blue focus-visible:outline-2 focus-visible:outline-brand-blue"
+                              className={previewButtonClassName}
                             >
-                              자세히 보기 <ArrowRight size={23} aria-hidden="true" />
+                              <span>{previewAction}</span>
+                              <ArrowRight
+                                size={24}
+                                aria-hidden="true"
+                                className="shrink-0 text-[#006EB8] transition-colors group-hover/detail:text-white motion-reduce:transition-none"
+                              />
                             </Link>
                           </div>
                         </div>

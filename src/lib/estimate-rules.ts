@@ -1,4 +1,6 @@
-export const estimateCategories = ["냉동공조", "섬유덕트"] as const;
+import { normalizeFabricDuctText } from "./fabric-duct-label.ts";
+
+export const estimateCategories = ["냉동공조", "패브릭덕트"] as const;
 
 export const estimateLimits = {
   company: 100,
@@ -94,7 +96,7 @@ export function readEstimateFields(data: Record<string, unknown>): EstimateField
     manager: get("manager"),
     phone: get("phone"),
     email: get("email"),
-    category: get("category"),
+    category: normalizeFabricDuctText(get("category")),
     message: get("message"),
     location: get("location"),
     website: get("website"),

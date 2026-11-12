@@ -75,7 +75,7 @@ export default function ProjectList({
       <section className={styles.panel} aria-label="시공사례 목록">
         <div className={styles.tools}>
           <div className={styles.tabs}>
-            {["전체", "냉동공조", "섬유덕트"].map((tab) => (
+            {["전체", "냉동공조", "패브릭덕트"].map((tab) => (
               <button
                 key={tab}
                 aria-pressed={filter === tab}

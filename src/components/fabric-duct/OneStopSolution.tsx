@@ -17,7 +17,7 @@ const steps = [
   },
   {
     number: "02",
-    title: "섬유덕트 설계/설치",
+    title: "패브릭덕트 설계/설치",
     description: "공간에 맞춘 기류 설계와 공기분배",
     image: "/images/projects/orion-production/cc_P5243359.jpg",
     line: "/images/fabric-duct/one-stop-line-2.svg",
@@ -57,7 +57,7 @@ export default function OneStopSolution() {
         >
           냉동설비부터
           <br />
-          섬유덕트까지,
+          패브릭덕트까지,
           <br />
           설치부터 관리까지
           <span className="ml-[11px] text-brand-blue">한 번에</span>
@@ -65,7 +65,7 @@ export default function OneStopSolution() {
         <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-brand-text/60">
           산정엔지니어링은
           <br />
-          냉동/공조설비부터 섬유덕트 설치,
+          냉동/공조설비부터 패브릭덕트 설치,
           <br />
           유지보수까지 모두 가능합니다.
         </p>

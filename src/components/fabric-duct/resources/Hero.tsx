@@ -8,7 +8,7 @@ export default function ResourcesHero() {
       <div className="absolute inset-x-0 top-0 h-full lg:top-[-158.04px] lg:h-[1080px]">
         <Image
           src="/images/projects/orion-production/cc_P5243334.jpg"
-          alt="생산시설에 설치된 섬유덕트"
+          alt="생산시설에 설치된 패브릭덕트"
           fill
           priority
           sizes="(max-width: 1023px) 100vw, 1920px"
@@ -27,7 +27,7 @@ export default function ResourcesHero() {
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" />
-          <Link href="/fabric-duct">섬유덕트</Link>
+          <Link href="/fabric-duct">패브릭덕트</Link>
           <ChevronRight size={38} aria-hidden="true" />
           <span aria-current="page">인증서, 카탈로그</span>
         </nav>

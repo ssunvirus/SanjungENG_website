@@ -1,20 +1,21 @@
 "use client";
 
 import Script from "next/script";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import {
+  subscribeBrowserLocation,
+  getBrowserPage,
+  getServerPage,
+} from "@/src/lib/browser-location-store";
 import { naverAccountId, type NaverWindow } from "@/src/lib/naver-analytics";
 
 export default function NaverAnalytics() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const query = searchParams.toString();
+  const page = useSyncExternalStore(subscribeBrowserLocation, getBrowserPage, getServerPage);
   const [ready, setReady] = useState(false);
   const lastPage = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!ready) return;
-    const page = `${pathname}${query ? `?${query}` : ""}`;
+    if (!ready || !page) return;
     if (lastPage.current === page) return;
 
     const naver = window as NaverWindow;
@@ -30,7 +31,7 @@ export default function NaverAnalytics() {
     } catch {
       // Ad tracking must not interrupt navigation or inquiry forms.
     }
-  }, [pathname, query, ready]);
+  }, [page, ready]);
 
   return (
     <Script

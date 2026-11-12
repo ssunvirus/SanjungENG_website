@@ -33,7 +33,7 @@ const slides: { title: string; image: string; description: string; href?: string
     href: "/projects/gurye-pool",
     image: "/images/fabric-duct/hero.jpg",
     description:
-      "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 섬유덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
+      "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 패브릭덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
   },
 ];
 
@@ -54,14 +54,14 @@ export default function Applications() {
       <div className="h-auto lg:h-[145.882px]">
         <SectionHeading eyebrow="APPLICATION" title="다양한 공간에 적용됩니다.">
           <p className="hidden lg:block">
-            섬유덕트는 저온저장고, 식품 생산시설, 물류센터, 스마트팜, 체육시설, 상업/공공시설 등에
+            패브릭덕트는 저온저장고, 식품 생산시설, 물류센터, 스마트팜, 체육시설, 상업/공공시설 등에
             적용할 수 있습니다.
           </p>
         </SectionHeading>
       </div>
       <div
         role="tablist"
-        aria-label="섬유덕트 적용 공간"
+        aria-label="패브릭덕트 적용 공간"
         className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 font-semibold min-[768px]:grid-cols-4 min-[768px]:gap-x-0 lg:mt-8"
       >
         {applications.map((title, index) => (
@@ -121,7 +121,7 @@ export default function Applications() {
             <Image
               key={slide.image}
               src={slide.image}
-              alt={`${slide.title} 섬유덕트 설치 현장`}
+              alt={`${slide.title} 패브릭덕트 설치 현장`}
               fill
               sizes="(max-width: 1023px) 100vw, 904px"
               quality={100}

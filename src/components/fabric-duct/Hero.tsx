@@ -8,7 +8,7 @@ export default function Hero() {
       <div className="absolute inset-x-0 top-0 h-full lg:h-[1080px]">
         <Image
           src="/images/fabric-duct/hero.jpg"
-          alt="실내 천장에 설치된 섬유덕트"
+          alt="실내 천장에 설치된 패브릭덕트"
           fill
           priority
           sizes="(max-width: 1023px) 100vw, 1920px"
@@ -27,16 +27,18 @@ export default function Hero() {
         >
           <Link href="/">홈</Link>
           <ChevronRight size={38} aria-hidden="true" />
-          <Link href="/fabric-duct">섬유덕트</Link>
+          <Link href="/fabric-duct">패브릭덕트</Link>
           <ChevronRight size={38} aria-hidden="true" />
-          <span aria-current="page">섬유덕트</span>
+          <span aria-current="page">패브릭덕트</span>
         </nav>
-        <h1 className="text-[30px] lg:text-[45px] font-extrabold leading-[1.2]">섬유덕트 솔루션</h1>
+        <h1 className="text-[30px] lg:text-[45px] font-extrabold leading-[1.2]">
+          패브릭덕트 솔루션
+        </h1>
         <p className="text-[15px] lg:text-[33.75px] font-medium leading-[1.2]">
           공간에 맞춘 설계로, 온도 편차를 줄입니다.
         </p>
         <p className="text-[11px] leading-5 lg:text-[22.5px] lg:leading-[1.2]">
-          CFD 설계&nbsp; | &nbsp; 섬유덕트 공급&nbsp; | &nbsp; 설치/시공
+          CFD 설계&nbsp; | &nbsp; 패브릭덕트 공급&nbsp; | &nbsp; 설치/시공
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">
           <Link

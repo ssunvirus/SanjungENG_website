@@ -5,16 +5,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 const photos = [
-  { src: "/images/fabric-duct/advantages.png", alt: "기계실에 설치된 섬유덕트" },
+  { src: "/images/fabric-duct/advantages.png", alt: "기계실에 설치된 패브릭덕트" },
   {
     src: "/images/projects/orion-production/cc_P5243349.jpg",
-    alt: "생산라인 천장에 설치된 흰색 섬유덕트",
+    alt: "생산라인 천장에 설치된 흰색 패브릭덕트",
   },
-  { src: "/images/fabric-duct/advantages-factory.jpg", alt: "공장 천장을 따라 설치된 섬유덕트" },
-  { src: "/images/fabric-duct/advantages-gym.png", alt: "실내 배드민턴 체육관에 설치된 섬유덕트" },
+  { src: "/images/fabric-duct/advantages-factory.jpg", alt: "공장 천장을 따라 설치된 패브릭덕트" },
+  {
+    src: "/images/fabric-duct/advantages-gym.png",
+    alt: "실내 배드민턴 체육관에 설치된 패브릭덕트",
+  },
   {
     src: "/images/fabric-duct/advantages-commercial.jpeg",
-    alt: "유리 지붕 실내 공간 양쪽에 설치된 섬유덕트",
+    alt: "유리 지붕 실내 공간 양쪽에 설치된 패브릭덕트",
   },
 ];
 
@@ -27,7 +30,7 @@ export default function AdvantagesGallery() {
     <div
       role="region"
       aria-roledescription="캐러셀"
-      aria-label="섬유덕트 설치 사진"
+      aria-label="패브릭덕트 설치 사진"
       className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-2xl bg-brand-navy lg:h-[528px] min-w-0"
     >
       <Image

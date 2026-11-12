@@ -29,9 +29,6 @@ export default function AnsanRepairGallery() {
             className="h-auto w-full"
           />
           <figcaption className="px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">
-            <span aria-hidden="true" className="mr-2 text-slate-400">
-              {String(index + 1).padStart(2, "0")}.
-            </span>
             {captions[index]}
           </figcaption>
         </figure>

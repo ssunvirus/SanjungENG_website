@@ -89,7 +89,7 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
           <p className="break-keep text-[16px] leading-[26px] text-[#4F6173]">
             {description ?? (
               <>
-                냉동공조 설비부터 섬유덕트, 유지보수까지
+                냉동공조 설비부터 패브릭덕트, 유지보수까지
                 <br />
                 현장 조건과 필요한 작업을 남겨주시면 담당자가 확인 후 연락드립니다.
               </>
@@ -171,7 +171,7 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
                 <span className="shrink-0">
                   문의 분야 <span className="ml-1 text-red-600">*</span>
                 </span>
-                <span className="ml-3 min-w-0 truncate">냉동공조 / 섬유덕트</span>
+                <span className="ml-3 min-w-0 truncate">냉동공조 / 패브릭덕트</span>
               </span>
             )}
             <ChevronDown

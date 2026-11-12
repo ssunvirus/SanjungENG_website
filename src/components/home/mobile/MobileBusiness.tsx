@@ -19,7 +19,7 @@ const business = [
     href: "/solutions",
   },
   {
-    title: "섬유덕트",
+    title: "패브릭덕트",
     description: "공간에 맞춘 공기 분배 설계",
     image: "/images/business/fabric-duct-card.jpg",
     href: "/fabric-duct",
@@ -45,7 +45,7 @@ export function MobileBusinessOverview() {
         <p className="text-xs tracking-[3px] font-semibold text-brand-blue">BUSINESS AREA</p>
         <h2 className="mt-5 text-[28px] font-extrabold">냉동공조 설계 &amp; 시공</h2>
         <p className="mt-3 px-5 text-base font-medium leading-7">
-          냉동기부터 섬유덕트까지
+          냉동기부터 패브릭덕트까지
           <br />
           원스톱으로 제공하는 산정엔지니어링
         </p>
@@ -64,7 +64,7 @@ export function MobileBusinessOverview() {
               text: "정기점검",
               href: "/solutions#maintenance",
             },
-            { icon: Wind, title: "섬유덕트", text: "CFD 설계 & 시공", href: "/fabric-duct" },
+            { icon: Wind, title: "패브릭덕트", text: "CFD 설계 & 시공", href: "/fabric-duct" },
           ].map((service) => (
             <Link
               key={service.title}

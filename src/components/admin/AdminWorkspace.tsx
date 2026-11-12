@@ -213,7 +213,9 @@ export default function AdminWorkspace() {
   const visible = entries.filter(
     (entry) =>
       (filter === "전체" ||
-        (filter === "섬유덕트" ? entry.category === "섬유덕트" : entry.category !== "섬유덕트")) &&
+        (filter === "패브릭덕트"
+          ? entry.category === "패브릭덕트"
+          : entry.category !== "패브릭덕트")) &&
       `${entry.title} ${entry.category} ${entry.location}`.includes(query.trim()),
   );
   const update = (patch: Partial<Entry>) =>

@@ -7,6 +7,7 @@ import { projects } from "@/src/components/projects/data";
 import { listProjects, getProjectOrder } from "./projects-db";
 import { mergePublicProjects } from "./public-project-data";
 import { completeLegacyProject } from "./legacy-project-photos";
+import { normalizeFabricDuctText } from "./fabric-duct-label";
 
 export const PUBLIC_PROJECTS_TAG = "public-projects";
 // This project does not enable Cache Components; use the supported Data Cache API.
@@ -15,7 +16,7 @@ const cachedRecords = unstable_cache(
     if (!table || !region) throw new Error("DatabaseUnconfigured");
     return listProjects();
   },
-  ["public-projects-v1"],
+  ["public-projects-v2-fabric-label"],
   { revalidate: 60, tags: [PUBLIC_PROJECTS_TAG] },
 );
 
@@ -66,8 +67,8 @@ export async function publicProjectMetadata(id: string, fallback: Metadata): Pro
   return project
     ? {
         ...fallback,
-        title: `${project.title} | 산정엔지니어링`,
-        description: project.description.slice(0, 160),
+        title: `${normalizeFabricDuctText(project.title)} | 산정엔지니어링`,
+        description: normalizeFabricDuctText(project.description).slice(0, 160),
       }
     : fallback;
 }

@@ -10,6 +10,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { projects } from "../src/components/projects/data.ts";
 import * as legacy from "../src/lib/legacy-project-photos.ts";
 import { publicPhotoPath } from "../src/lib/public-project-data.ts";
+import { normalizeFabricDuctText } from "../src/lib/fabric-duct-label.ts";
 
 const require = createRequire(import.meta.url);
 const root = path.resolve(import.meta.dirname, "..");
@@ -36,7 +37,12 @@ function component(relative) {
       if (name.endsWith("/projects/data")) return { projects };
       if (name.endsWith("/legacy-project-photos")) return legacy;
       if (name.endsWith("/public-project-data")) return { publicPhotoPath };
-      if (["./ProjectPhotoGallery", "./AjuGallery", "./ProjectVideo"].includes(name))
+      if (name.endsWith("/fabric-duct-label")) return { normalizeFabricDuctText };
+      if (
+        ["./ProjectPhotoGallery", "./ProjectOverview", "./AjuGallery", "./ProjectVideo"].includes(
+          name,
+        )
+      )
         return component(path.relative(root, path.resolve(path.dirname(file), `${name}.tsx`)));
       if (name.startsWith("./") || name.startsWith("@/")) return { default: () => null };
       return require(name);
@@ -51,6 +57,62 @@ const SavedProjectDetail = component(
 ).default;
 const AjuGallery = component("src/components/projects/detail/AjuGallery.tsx").default;
 const Gallery = component("src/components/projects/detail/ProjectPhotoGallery.tsx").default;
+
+test("admin-saved work description appears once between the title and information cards", () => {
+  const description = "관리자에서 입력한 작업 상세 설명";
+  const html = renderToStaticMarkup(
+    React.createElement(SavedProjectDetail, {
+      project: {
+        id: "saved-description",
+        title: "시공사례 제목",
+        category: "냉동기",
+        location: "안성시",
+        description,
+        photos: [],
+        version: 1,
+        status: "공개",
+      },
+    }),
+  );
+  assert.ok(html.indexOf(description) > html.indexOf("</h1>"));
+  assert.ok(html.indexOf(description) < html.indexOf("<dl"));
+  assert.equal(html.split(description).length - 1, 1);
+});
+
+test("old cached project headings and categories use the current public label", () => {
+  const Overview = component("src/components/projects/detail/ProjectOverview.tsx").default;
+  const old = "\uC12C\uC720\uB355\uD2B8";
+  const html = renderToStaticMarkup(
+    React.createElement(Overview, {
+      title: `공장 ${old} 세탁`,
+      category: old,
+      description: `${old} 세척`,
+      work: `${old} 탈착`,
+    }),
+  );
+  assert.ok(!html.includes(old));
+  assert.ok(html.includes("공장 패브릭덕트 세탁"));
+});
+
+test("old saved photo captions and alternative text use the current public label", () => {
+  const old = "\uC12C\uC720\uB355\uD2B8";
+  const html = renderToStaticMarkup(
+    React.createElement(Gallery, {
+      photos: [
+        {
+          src: "/images/example.jpg",
+          alt: `${old} 전경`,
+          caption: `${old} 세척`,
+          width: 800,
+          height: 600,
+        },
+      ],
+    }),
+  );
+  assert.ok(!html.includes(old));
+  assert.ok(html.includes("패브릭덕트 전경"));
+  assert.ok(html.includes("패브릭덕트 세척"));
+});
 const base = projects.find((item) => item.id === "aju-pharmaceutical");
 const record = {
   id: base.id,

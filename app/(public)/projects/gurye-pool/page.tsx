@@ -5,8 +5,8 @@ import GuryeGallery from "@/src/components/projects/detail/GuryeGallery";
 
 const fallbackMetadata: Metadata = {
   alternates: { canonical: "/projects/gurye-pool" },
-  title: "구례 실내수영장 섬유덕트 설치 | 산정엔지니어링",
-  description: "실내수영장의 균일한 공기 분배를 위한 섬유덕트 설치 현장입니다.",
+  title: "구례 실내수영장 패브릭덕트 설치 | 산정엔지니어링",
+  description: "실내수영장의 균일한 공기 분배를 위한 패브릭덕트 설치 현장입니다.",
 };
 
 export function generateMetadata() {
@@ -18,10 +18,10 @@ export default function GuryePoolPage() {
     <LegacyProjectDetail
       id="gurye-pool"
       overview={{
-        title: "구례 실내수영장 섬유덕트 설치",
-        description: "실내수영장의 균일한 공기 분배를 위한 섬유덕트 설치 현장입니다.",
-        category: "섬유덕트",
-        work: "섬유덕트 설치",
+        title: "구례 실내수영장 패브릭덕트 설치",
+        description: "실내수영장의 균일한 공기 분배를 위한 패브릭덕트 설치 현장입니다.",
+        category: "패브릭덕트",
+        work: "패브릭덕트 설치",
         location: "전라남도 구례",
       }}
       gallery={<GuryeGallery />}

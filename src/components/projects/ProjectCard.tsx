@@ -2,7 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "./data";
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({
+  project,
+  href = project.href,
+}: {
+  project: Project;
+  href?: string;
+}) {
   const content = (
     <>
       <div className="group relative aspect-[465/316] overflow-hidden lg:aspect-auto lg:h-[316px]">
@@ -57,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       className="min-w-0 scroll-mt-24 overflow-hidden rounded-[12px] bg-white shadow-[0_4px_16px_rgba(16,46,73,0.08)] ring-1 ring-brand-navy/10 lg:h-[432px]"
     >
       <Link
-        href={project.href}
+        href={href}
         className="block h-full focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#006EB8]"
       >
         {content}

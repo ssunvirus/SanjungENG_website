@@ -24,7 +24,7 @@ export default function ContactInfo() {
       <p className="ml-0 lg:ml-[7px] mt-[12px] lg:mt-[23px] text-[14px] lg:text-[20px] font-semibold leading-[24px] lg:leading-[25px] text-brand-text/80">
         설치/교체부터 수리, 유지보수와
         <br />
-        섬유덕트 시공까지 문의하실 수 있습니다.
+        패브릭덕트 시공까지 문의하실 수 있습니다.
       </p>
       <div className="ml-0 lg:ml-[7px] mt-[24px] lg:mt-[48px] flex items-start gap-[20px] lg:gap-[31.8px]">
         <span className="mt-[12px] lg:mt-[3px] flex size-[51.2px] shrink-0 items-center justify-center rounded-full bg-brand-blue text-white">

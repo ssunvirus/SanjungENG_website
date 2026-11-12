@@ -18,13 +18,13 @@ const areas = [
     ],
   },
   {
-    title: "섬유덕트",
+    title: "패브릭덕트",
     href: "/fabric-duct",
     image: "/images/about/business-fabric-duct.jpg",
     quality: 100,
     top: "-24.56%",
     lines: [
-      "섬유덕트 설계/공급/설치",
+      "패브릭덕트 설계/공급/설치",
       "현장별 덕트 배치 검토",
       "CFD 설계",
       "공기분배 방식 검토",

@@ -5,6 +5,7 @@ import test from "node:test";
 import ts from "typescript";
 import { mergeAdminProjects } from "../src/lib/project-record.ts";
 import { completeLegacyProject } from "../src/lib/legacy-project-photos.ts";
+import { normalizeFabricDuctText } from "../src/lib/fabric-duct-label.ts";
 import {
   mergePublicProjects,
   publicPhotoPath,
@@ -27,7 +28,7 @@ const existing = [
 const saved = {
   id: "new-case",
   title: "New case",
-  category: "섬유덕트",
+  category: "패브릭덕트",
   location: "Seoul",
   description: "New description",
   photos: [{ src: `/api/admin/project-images/${key}`, alt: "Photo" }],
@@ -42,7 +43,7 @@ test("public list merges saved records without duplicating or changing legacy ad
   ]);
   assert.equal(result.length, 2);
   assert.equal(result[0].href, "/projects/new-case");
-  assert.equal(result[0].category, "섬유덕트");
+  assert.equal(result[0].category, "패브릭덕트");
   assert.equal(result[0].image, `/api/project-images/${key}`);
   assert.equal(result[1].title, "Updated");
   assert.equal(result[1].href, "/projects/legacy-address");
@@ -83,6 +84,7 @@ test("deleted cases stay excluded from both lists and public photo access after 
 
 test("DB failures never resurrect legacy cases, and deleted detail routes return not-found", async () => {
   let fail = true;
+  let removed = true;
   const source = ts.transpileModule(
     readFileSync(new URL("../src/lib/public-projects.ts", import.meta.url), "utf8"),
     {
@@ -107,11 +109,19 @@ test("DB failures never resurrect legacy cases, and deleted detail routes return
       if (name.endsWith("projects/data")) return { projects: existing };
       if (name === "./public-project-data") return { mergePublicProjects };
       if (name === "./legacy-project-photos") return { completeLegacyProject };
+      if (name === "./fabric-duct-label") return { normalizeFabricDuctText };
       if (name === "./projects-db")
         return {
           listProjects: async () => {
             if (fail) throw new Error("Unavailable");
-            return [{ ...saved, deleted: true }];
+            return [
+              {
+                ...saved,
+                deleted: removed,
+                title: "\uC12C\uC720\uB355\uD2B8 설치",
+                description: "\uC12C\uC720\uB355\uD2B8 시공",
+              },
+            ];
           },
         };
       throw new Error(name);
@@ -123,6 +133,10 @@ test("DB failures never resurrect legacy cases, and deleted detail routes return
   await assert.rejects(sandbox.exports.publicProjectRecords());
   fail = false;
   await assert.rejects(sandbox.exports.publicProject("new-case"), /NEXT_NOT_FOUND/);
+  removed = false;
+  const metadata = await sandbox.exports.publicProjectMetadata("new-case", {});
+  assert.equal(metadata.title, "패브릭덕트 설치 | 산정엔지니어링");
+  assert.equal(metadata.description, "패브릭덕트 시공");
 });
 
 function imageRoute(records, fail = false) {

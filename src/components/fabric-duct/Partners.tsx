@@ -11,11 +11,11 @@ const resources = [
 export default function Partners() {
   return (
     <section
-      aria-label="섬유덕트 공급 파트너 및 제품 자료"
+      aria-label="패브릭덕트 공급 파트너 및 제품 자료"
       className="mx-auto w-full max-w-[1440px] bg-white px-5 py-10 min-[768px]:px-10 min-[768px]:py-14"
     >
       <SectionHeading eyebrow="PARTNERS" title="파트너">
-        산정엔지니어링과 함께하는 섬유덕트 공급 파트너입니다.
+        산정엔지니어링과 함께하는 패브릭덕트 공급 파트너입니다.
       </SectionHeading>
       <div className="mx-auto my-8 grid max-w-[920px] grid-cols-2 items-center min-[768px]:my-10">
         <div className="flex h-[130px] items-center justify-center px-2 min-[768px]:h-[210px] min-[768px]:px-8">

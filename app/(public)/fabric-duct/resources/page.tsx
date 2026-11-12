@@ -5,8 +5,8 @@ import DownloadCenter from "@/src/components/fabric-duct/resources/DownloadCente
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct/resources" },
-  title: "섬유덕트 자료실 | 산정엔지니어링",
-  description: "섬유덕트 제조사 인증서, 시험성적서 및 제품 카탈로그를 확인하세요.",
+  title: "패브릭덕트 자료실 | 산정엔지니어링",
+  description: "패브릭덕트 제조사 인증서, 시험성적서 및 제품 카탈로그를 확인하세요.",
 };
 
 export default async function ResourcesPage({

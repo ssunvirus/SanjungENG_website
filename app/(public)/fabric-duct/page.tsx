@@ -14,15 +14,15 @@ import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct" },
-  title: "섬유덕트·페브릭덕트 설계·시공 | 산정엔지니어링",
+  title: "패브릭덕트 설계·시공 | 산정엔지니어링",
   description:
-    "공간에 맞춘 섬유덕트(페브릭덕트) 설계와 설치, CFD를 활용한 공기 분배 설계 솔루션을 소개합니다.",
+    "공간에 맞춘 패브릭덕트 설계와 설치, CFD를 활용한 공기 분배 설계 솔루션을 소개합니다.",
 };
 
 const estimateIntro = {
   title: (
     <>
-      우리 현장에도 <span className="text-brand-blue">섬유덕트</span>를 적용할 수 있을까요?
+      우리 현장에도 <span className="text-brand-blue">패브릭덕트</span>를 적용할 수 있을까요?
     </>
   ),
   description:
@@ -30,7 +30,7 @@ const estimateIntro = {
   note: "풍량과 정압은 알고 계신 경우에만 전달해주세요.",
 };
 const navigationItems = [
-  ["fabric-introduction", "섬유덕트 소개"],
+  ["fabric-introduction", "패브릭덕트 소개"],
   ["fabric-applications", "적용 사례"],
   ["fabric-design", "공기 분배 설계"],
   ["fabric-partners", "파트너"],
@@ -42,7 +42,7 @@ export default function FabricDuctPage() {
   return (
     <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
       <Hero />
-      <SectionNavigation items={navigationItems} label="섬유덕트 페이지 구간 이동" />
+      <SectionNavigation items={navigationItems} label="패브릭덕트 페이지 구간 이동" />
       <WaveSurface>
         <div
           id="fabric-introduction"

@@ -20,7 +20,7 @@ const ajuPhotos = [
   { number: 1, alt: "체인블록을 이용한 터보냉동기 분해 작업", portrait: true },
   { number: 2, alt: "분해한 냉동기 부품 반출 작업", portrait: true },
   { number: 3, alt: "크레인을 이용한 냉동기 부품 인양", portrait: true },
-  { number: 5, alt: "아주약품에 설치된 터보냉동기 정면" },
+  { number: 5, alt: "아주약품에 설치된 신형 터보냉동기 정면" },
   { number: 6, alt: "터보냉동기와 연결 배관 전경" },
   { number: 7, alt: "설치 완료된 터보냉동기" },
 ];
@@ -52,10 +52,10 @@ const wonsamPhotos = [
 ];
 
 const guryePhotos = [
-  { src: "photo-1.jpg", alt: "구례 실내수영장 천장에 설치된 섬유덕트 전경" },
-  { src: "photo-2.jpg", alt: "구례 실내수영장 내부와 섬유덕트 배치" },
-  { src: "photo-3.jpg", alt: "수영장 천장을 따라 설치된 섬유덕트" },
-  { src: "photo-4.jpg", alt: "실내수영장 섬유덕트 연결부와 설치 상태" },
+  { src: "photo-1.jpg", alt: "구례 실내수영장 천장에 설치된 패브릭덕트 전경" },
+  { src: "photo-2.jpg", alt: "구례 실내수영장 내부와 패브릭덕트 배치" },
+  { src: "photo-3.jpg", alt: "수영장 천장을 따라 설치된 패브릭덕트" },
+  { src: "photo-4.jpg", alt: "실내수영장 패브릭덕트 연결부와 설치 상태" },
 ];
 
 const chillerPhotos = [
@@ -79,7 +79,12 @@ const seoanseongPhotos = [
   { file: "7.jpg", width: 3000, height: 4000, alt: "냉동설비 펌프 및 배관 점검" },
   { file: "8.jpeg", width: 864, height: 1152, alt: "냉각탑 상부 설비 점검" },
   { file: "9.jpg", width: 1050, height: 1400, alt: "냉각탑 모터 점검 작업" },
-  { file: "10.jpg", width: 1050, height: 1400, alt: "고소작업대를 이용한 냉동창고 천장 설비 점검" },
+  {
+    file: "10.jpg",
+    width: 1050,
+    height: 1400,
+    alt: "고소작업대를 이용한 냉동창고 천장 증발기 점검",
+  },
 ];
 
 const towerPhotos = [
@@ -122,7 +127,7 @@ export const legacyProjectPhotos: Record<string, LegacyProjectPhoto[]> = {
   })),
   "orion-production": orionPhotos.map((photo, index) => ({
     src: `/images/projects/orion-production/${photo}.jpg`,
-    alt: `오리온 생산설비 섬유덕트 설치 현장 사진 ${index + 1}`,
+    alt: `오리온 생산설비 패브릭덕트 설치 현장 사진 ${index + 1}`,
   })),
   "nonghyup-cold-storage": wonsamPhotos.map((photo) => ({
     src: photo.src.startsWith("/") ? photo.src : `/images/projects/wonsam-nonghyup/${photo.src}`,
