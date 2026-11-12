@@ -32,7 +32,10 @@ const record = {
   version: 1,
 };
 
-async function setup(uploadResponse = { ok: true, json: async () => ({ src: uploadedSrc }) }) {
+async function setup(
+  uploadResponse = { ok: true, json: async () => ({ src: uploadedSrc }) },
+  initialRecord = record,
+) {
   const slots = [];
   const calls = [];
   const effects = [];
@@ -65,7 +68,7 @@ async function setup(uploadResponse = { ok: true, json: async () => ({ src: uplo
     Set,
     fetch: async (url, options) => {
       calls.push({ url, options });
-      if (!options?.method) return { ok: true, json: async () => ({ projects: [record] }) };
+      if (!options?.method) return { ok: true, json: async () => ({ projects: [initialRecord] }) };
       if (url.endsWith("project-images")) return uploadResponse;
       return {
         ok: true,
@@ -190,4 +193,84 @@ test("upload failures appear next to the picker and a later selection is allowed
   picker(ui.render()).props.onChange({ target: { files: [file] } });
   await flush();
   assert.equal(ui.calls.filter((call) => call.url.endsWith("project-images")).length, 2);
+});
+
+const orderedPhotos = [
+  { src: "/images/first.jpg", alt: "첫 번째 사진 설명" },
+  { src: "/images/second.jpg", alt: "두 번째 사진 설명" },
+  { src: "/images/third.jpg", alt: "세 번째 사진 설명" },
+];
+
+test("photo move buttons keep captions attached and persist the new representative photo", async () => {
+  const ui = await setup(undefined, { ...record, photos: orderedPhotos });
+  find(ui.render(), (node) => node.props?.["aria-label"] === "사진 2 위로 이동").props.onClick();
+  const first = find(ui.render(), (node) => node.props?.["aria-label"] === "사진 1 대체 설명");
+  assert.equal(first.props.value, orderedPhotos[1].alt);
+  assert.equal(
+    find(ui.render(), (node) => node.props?.["aria-label"] === "사진 1 위로 이동").props.disabled,
+    true,
+  );
+  assert.equal(
+    find(ui.render(), (node) => node.props?.["aria-label"] === "사진 3 아래로 이동").props.disabled,
+    true,
+  );
+  find(
+    ui.render(),
+    (node) => node.type === "button" && text(node) === "수정사항 저장",
+  ).props.onClick();
+  await flush();
+  const save = ui.calls.find(
+    (call) => call.url === "/api/admin/projects" && call.options?.method === "POST",
+  );
+  assert.deepEqual(JSON.parse(save.options.body).photos, [
+    orderedPhotos[1],
+    orderedPhotos[0],
+    orderedPhotos[2],
+  ]);
+  assert.deepEqual(
+    orderedPhotos.map((photo) => photo.src),
+    ["/images/first.jpg", "/images/second.jpg", "/images/third.jpg"],
+  );
+  assert.equal(
+    ui.calls.some((call) => call.url.endsWith("project-images")),
+    false,
+  );
+});
+
+test("dragging a photo moves it to the requested position without losing its description", async () => {
+  const ui = await setup(undefined, { ...record, photos: orderedPhotos });
+  const dataTransfer = {
+    types: [],
+    setData(type) {
+      this.types.push(type);
+    },
+  };
+  find(ui.render(), (node) => node.props?.["aria-label"] === "사진 1 순서 변경").props.onDragStart({
+    dataTransfer,
+  });
+  let prevented = false;
+  find(ui.render(), (node) => node.props?.["data-photo-index"] === 2).props.onDrop({
+    dataTransfer,
+    preventDefault() {
+      prevented = true;
+    },
+  });
+  assert.equal(prevented, true);
+  assert.equal(
+    find(ui.render(), (node) => node.props?.["aria-label"] === "사진 3 대체 설명").props.value,
+    orderedPhotos[0].alt,
+  );
+  find(
+    ui.render(),
+    (node) => node.type === "button" && text(node) === "수정사항 저장",
+  ).props.onClick();
+  await flush();
+  const save = ui.calls.find(
+    (call) => call.url === "/api/admin/projects" && call.options?.method === "POST",
+  );
+  assert.deepEqual(JSON.parse(save.options.body).photos, [
+    orderedPhotos[1],
+    orderedPhotos[2],
+    orderedPhotos[0],
+  ]);
 });

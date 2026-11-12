@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import type { CSSProperties } from "react";
 
 const maintenanceServices = [
@@ -56,7 +57,7 @@ export default function Maintenance() {
             className="w-full lg:w-[var(--card-width)] shrink-0"
           >
             <Link
-              href={service.href}
+              href={projectListHref(1, "냉동공조")}
               aria-label={`${service.title} 시공사례 보기`}
               className="relative block h-[240px] rounded-[10px] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_rgba(16,47,73,0.16)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transform-none motion-reduce:transition-none lg:h-[300px]"
             >

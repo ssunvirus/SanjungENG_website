@@ -1,4 +1,5 @@
 import EquipmentCaseStudy from "@/src/components/shared/EquipmentCaseStudy";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import { FileText, Settings, Wrench } from "lucide-react";
 
 const details = [
@@ -33,7 +34,7 @@ export default function CaseStudy() {
       }
       image="/images/projects-page/cold-storage.jpg"
       imageAlt="농협 저온저장고 냉동설비 신설공사"
-      href="/projects/wonsam-nonghyup"
+      href={projectListHref(1, "냉동공조")}
       details={details}
     />
   );

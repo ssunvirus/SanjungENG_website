@@ -5,6 +5,7 @@ import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Pause, Play } 
 import { useEffect, useRef, useState } from "react";
 import { desktopFeaturedProjects, type Project } from "@/src/components/projects/data";
 import useProjectAutoplay from "./useProjectAutoplay";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 
 const CARD_STEP = 536.25;
 
@@ -195,14 +196,14 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
             );
           })}
         </div>
-        <div aria-hidden="true" className="mt-[26px] h-[3px] w-[1114px] bg-[#CBD3D7]">
+        <div aria-hidden="true" className="relative mt-[26px] h-[3px] w-full bg-[#CBD3D7]">
           <div
-            className="h-full w-[143px] bg-brand-blue"
-            style={{ transform: `translateX(${progress * 971}px)` }}
+            className="absolute top-0 h-full w-[143px] bg-brand-blue"
+            style={{ left: `calc(${progress * 100}% - ${progress * 143}px)` }}
           />
         </div>
         <Link
-          href="/projects"
+          href={projectListHref(1, "전체")}
           className="mx-auto mt-[49px] flex h-[53px] w-[267px] items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-brand-navy bg-brand-navy text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
         >
           시공사례 더 보기

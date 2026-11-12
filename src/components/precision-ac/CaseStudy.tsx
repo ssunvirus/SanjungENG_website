@@ -1,4 +1,5 @@
 import EquipmentCaseStudy from "@/src/components/shared/EquipmentCaseStudy";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import { FileText, Settings, Wrench } from "lucide-react";
 
 const details = [
@@ -14,7 +15,7 @@ export default function CaseStudy() {
       title={<>S 기업 물류창고 항온항습기 설치</>}
       image="/images/projects-page/precision-ac.jpg"
       imageAlt="S 기업 물류창고 항온항습기 설치 현장"
-      href="/projects/warehouse-precision-ac"
+      href={projectListHref(1, "냉동공조")}
       details={details}
       transparentBackground
     />

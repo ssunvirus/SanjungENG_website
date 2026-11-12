@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 
@@ -149,7 +150,7 @@ export default function Applications() {
           </p>
           {slide.href && (
             <Link
-              href={slide.href}
+              href={projectListHref(1, "패브릭덕트")}
               className="mt-6 inline-flex min-h-12 items-center gap-3 rounded-lg bg-brand-navy px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue lg:mt-8 lg:text-lg"
             >
               시공사례 보러가기 <span aria-hidden="true">→</span>

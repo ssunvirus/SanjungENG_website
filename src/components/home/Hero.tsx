@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { heroSlides as slides } from "./hero-slides";
 import { useHeroCarousel } from "@/src/hooks/use-hero-carousel";
 
@@ -30,7 +31,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate mx-auto h-[1080px] w-full max-w-[1920px] overflow-hidden bg-brand-navy text-white"
+      className="relative isolate mx-auto h-[900px] w-full max-w-[1920px] overflow-hidden bg-brand-navy text-white"
       aria-roledescription="carousel"
       aria-label="산정엔지니어링 주요 서비스"
     >
@@ -82,7 +83,7 @@ export default function Hero() {
 
         <div className="mt-[34px] flex gap-[26px]">
           <Link
-            href="/projects"
+            href={slide.projectsHref}
             className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-brand-blue text-[30px] font-semibold"
           >
             시공사례&nbsp; →
@@ -97,29 +98,23 @@ export default function Hero() {
       </div>
 
       <div
-        className="pointer-events-auto absolute top-[915px] left-[237px] z-20 flex h-[64px] items-center"
+        className="pointer-events-auto absolute bottom-[60px] left-[237px] z-20 flex h-12 items-center gap-2"
         aria-label="Hero 슬라이드 컨트롤"
       >
-        <span className="inline-block w-[34px] text-[30px] font-bold tabular-nums">
-          {String(currentSlide + 1).padStart(2, "0")}
-        </span>
-        <span className="ml-[18px] inline-block w-[10px] text-center text-[30px]">/</span>
-        <span className="ml-[15px] inline-block w-[34px] text-[30px] tabular-nums">02</span>
-
-        <div className="ml-[39px] flex gap-[12px]">
+        <div className="mr-5 flex gap-3">
           {slides.map((item, index) => (
             <button
               key={item.image}
               type="button"
               onClick={() => showSlide(index)}
-              className="flex h-[32px] w-[80px] cursor-pointer items-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              className="group flex h-12 w-20 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               aria-label={`${index + 1}번 슬라이드 보기`}
               aria-current={index === currentSlide}
             >
               <span
                 aria-hidden="true"
                 className={`h-[3px] w-full transition-colors ${
-                  index === currentSlide ? "bg-brand-blue" : "bg-white/75"
+                  index === currentSlide ? "bg-brand-blue" : "bg-white/75 group-hover:bg-white"
                 }`}
               />
             </button>
@@ -129,37 +124,31 @@ export default function Hero() {
         <button
           type="button"
           onClick={() => setIsPlaying((playing) => !playing)}
-          className="ml-[29px] flex h-8 w-8 cursor-pointer items-center justify-center"
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label={isPlaying ? "슬라이드 일시 정지" : "슬라이드 자동 재생"}
         >
           {isPlaying ? (
-            <span className="flex gap-[5px]" aria-hidden="true">
-              <span className="h-[18px] w-[3px] bg-white" />
-              <span className="h-[18px] w-[3px] bg-white" />
-            </span>
+            <Pause size={18} aria-hidden="true" />
           ) : (
-            <span
-              className="ml-[2px] border-y-[7px] border-l-[11px] border-y-transparent border-l-white"
-              aria-hidden="true"
-            />
+            <Play size={18} aria-hidden="true" />
           )}
         </button>
 
         <button
           type="button"
           onClick={showPreviousSlide}
-          className="ml-[16px] flex h-12 w-10 -translate-y-[3px] cursor-pointer items-center justify-center text-[50px] font-normal leading-none"
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label="이전 슬라이드"
         >
-          ‹
+          <ChevronLeft size={24} aria-hidden="true" />
         </button>
         <button
           type="button"
           onClick={showNextSlide}
-          className="ml-[15px] flex h-12 w-10 -translate-y-[3px] cursor-pointer items-center justify-center text-[50px] font-normal leading-none"
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label="다음 슬라이드"
         >
-          ›
+          <ChevronRight size={24} aria-hidden="true" />
         </button>
       </div>
     </section>

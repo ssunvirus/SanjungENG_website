@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
 import { mobileFeaturedProjects, type Project } from "@/src/components/projects/data";
 import useProjectAutoplay from "@/src/components/home/useProjectAutoplay";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 
 export default function MobileProjects({ cases = mobileFeaturedProjects }: { cases?: Project[] }) {
   const [caseIndex, setCaseIndex] = useState(0);
@@ -30,7 +31,10 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
       <Eyebrow variant="compact">PROJECTS</Eyebrow>
       <div className="mt-3 flex items-center justify-between">
         <h2 className="text-[28px] font-extrabold">시공사례</h2>
-        <Link href="/projects" className="flex min-h-11 items-center gap-2 text-sm">
+        <Link
+          href={projectListHref(1, "전체")}
+          className="flex min-h-11 items-center gap-2 text-sm"
+        >
           전체 보기
           <ArrowRight size={16} aria-hidden="true" />
         </Link>

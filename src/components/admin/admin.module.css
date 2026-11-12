@@ -631,6 +631,36 @@
 .photoList {
   margin-top: 20px;
 }
+.photoReorderHint {
+  margin-top: 8px;
+  color: #526d82;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.photoDragHandle {
+  display: flex;
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dce5ec;
+  border-radius: 7px;
+  color: #526d82;
+  background: #f7fafc;
+  cursor: grab;
+}
+.photoDragHandle:active {
+  cursor: grabbing;
+}
+.photoDragHandle:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+.photoDropTarget {
+  outline: 2px dashed #0085c5;
+  outline-offset: -2px;
+  background: #eff8fd;
+}
 .photoRow {
   display: flex;
   gap: 14px;
@@ -663,6 +693,8 @@
 }
 .photoActions {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 13px;
   margin-top: 7px;
 }
@@ -670,6 +702,26 @@
   font-size: 15px;
   color: #708a9f;
   cursor: pointer;
+}
+.photoActions .photoMoveButton {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 10px;
+  border: 1px solid #d5e1ea;
+  border-radius: 6px;
+  color: #244b68;
+  background: #f7fafc;
+}
+.photoActions button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.photoActions .photoMoveButton:hover:not(:disabled) {
+  border-color: #0085c5;
+  color: #006eb8;
+  background: #edf7fc;
 }
 .editorAside p {
   color: #8999a7;
@@ -738,6 +790,14 @@
   }
 }
 @media (max-width: 700px) {
+  .photoRow {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .photoRow > div:last-child {
+    grid-column: 1 / -1;
+  }
   .shell {
     display: block;
   }

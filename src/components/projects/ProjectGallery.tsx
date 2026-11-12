@@ -99,7 +99,7 @@ export default function ProjectGallery({
       </div>
       <h2
         id="projects-list-heading"
-        className="mt-3 lg:mt-[16px] text-[28px] lg:text-[45px] font-extrabold leading-normal lg:leading-[54px]"
+        className="mt-3 scroll-mt-24 lg:mt-[16px] lg:scroll-mt-[110px] text-[28px] lg:text-[45px] font-extrabold leading-normal lg:leading-[54px]"
       >
         시공사례
       </h2>

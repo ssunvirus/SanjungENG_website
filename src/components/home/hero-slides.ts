@@ -1,6 +1,9 @@
+import { projectListHref } from "@/src/lib/project-list-navigation";
+
 export const heroSlides = [
   {
     image: "/images/hero/hvac-slide.png",
+    projectsHref: projectListHref(1, "냉동공조"),
     imageAlt: "산업용 냉동공조 설비가 설치된 현장",
     imagePosition: "object-[40%_center]",
     category: "냉동공조 솔루션",
@@ -11,6 +14,7 @@ export const heroSlides = [
   },
   {
     image: "/images/business/fabric-duct-card.jpg",
+    projectsHref: projectListHref(1, "패브릭덕트"),
     imageAlt: "패브릭덕트가 설치된 산업 시설 내부",
     imagePosition: "object-[80%_center]",
     category: "패브릭덕트 솔루션",

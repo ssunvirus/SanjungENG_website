@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import {
   ArrowUpRight,
   Check,
@@ -151,7 +152,7 @@ export default function Services() {
                     ))}
                   </ul>
                   <Link
-                    href={service.href}
+                    href={projectListHref(1, "냉동공조")}
                     className="mt-7 inline-flex w-fit items-center gap-2 rounded-lg bg-brand-navy px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[#164366] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
                   >
                     관련 시공사례 보기

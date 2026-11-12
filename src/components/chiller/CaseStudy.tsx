@@ -1,4 +1,5 @@
 import EquipmentCaseStudy from "@/src/components/shared/EquipmentCaseStudy";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import { FileText, Settings, Wrench } from "lucide-react";
 
 const details = [
@@ -19,7 +20,7 @@ export default function CaseStudy() {
       }
       image="/images/projects/semiconductor-chiller/source-7.jpg"
       imageAlt="반도체 공장 칠러 시스템 구축 사례"
-      href="/projects/semiconductor-chiller"
+      href={projectListHref(1, "냉동공조")}
       details={details}
     />
   );

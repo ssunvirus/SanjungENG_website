@@ -71,7 +71,7 @@ export default function MobileHero() {
         <p className="mt-3 text-base font-semibold leading-7">{slide.mobileDescription}</p>
         <div className="mt-6 flex max-w-[210px] flex-col gap-3">
           <Link
-            href="/projects"
+            href={slide.projectsHref}
             className="flex min-h-12 items-center justify-center gap-3 rounded-full bg-brand-blue font-bold"
           >
             시공사례 보기

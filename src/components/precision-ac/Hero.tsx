@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 import { ArrowRight, ArrowRightCircle, ChevronRight } from "lucide-react";
 
 export default function Hero() {
@@ -36,7 +37,7 @@ export default function Hero() {
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">
           <Link
-            href="#precision-case"
+            href={projectListHref(1, "냉동공조")}
             className="flex h-10 w-[180px] lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[22.5px] bg-brand-blue text-lg lg:text-[30px] font-semibold"
           >
             시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />

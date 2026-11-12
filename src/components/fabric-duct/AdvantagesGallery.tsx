@@ -57,6 +57,29 @@ export default function AdvantagesGallery() {
       >
         <ChevronRight aria-hidden="true" size={28} />
       </button>
+      <div
+        role="group"
+        aria-label="사진 선택"
+        className="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center rounded-full bg-brand-navy/35 px-2 backdrop-blur-sm lg:bottom-4"
+      >
+        {photos.map((photo, photoIndex) => (
+          <button
+            key={photo.src}
+            type="button"
+            aria-label={`${photoIndex + 1}번째 사진 보기`}
+            aria-current={index === photoIndex ? "true" : undefined}
+            onClick={() => setIndex(photoIndex)}
+            className="group flex h-11 w-10 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:w-12"
+          >
+            <span
+              aria-hidden="true"
+              className={`h-1 w-7 rounded-full transition-colors motion-reduce:transition-none lg:w-9 ${
+                index === photoIndex ? "bg-brand-blue" : "bg-white/45 group-hover:bg-white/80"
+              }`}
+            />
+          </button>
+        ))}
+      </div>
       <span aria-live="polite" aria-atomic="true" className="sr-only">
         {photos[index].alt}, {index + 1} / {photos.length}
       </span>
