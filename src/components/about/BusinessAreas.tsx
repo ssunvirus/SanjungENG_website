@@ -72,7 +72,9 @@ export default function BusinessAreas() {
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
         <div className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
           <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-brand-blue sm:w-20" />
-          <p className="shrink-0 whitespace-nowrap">BUSINESS AREA</p>
+          <p data-section-eyebrow className="shrink-0 whitespace-nowrap">
+            BUSINESS AREA
+          </p>
           <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-brand-blue sm:w-20" />
         </div>
         <h2

@@ -29,7 +29,10 @@ export default function EquipmentCaseStudy({
     >
       <header className="mx-auto flex max-w-[1400px] flex-col items-start gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
         <div>
-          <p className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
+          <p
+            data-section-eyebrow
+            className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60"
+          >
             CASE STUDY <span className="h-[2px] w-[46px] bg-current" />
           </p>
           <h2 className="mt-[10px] text-[28px] lg:text-[45px] font-bold tracking-[1px] lg:tracking-[2px] text-brand-navy">

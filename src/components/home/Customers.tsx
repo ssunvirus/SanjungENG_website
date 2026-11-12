@@ -20,7 +20,10 @@ export default function Customers() {
       aria-label="함께한 주요 현장"
       className="relative mx-auto my-8 w-full max-w-[600px] px-5 py-14 text-center text-brand-navy before:absolute before:inset-x-5 before:top-0 before:h-px before:bg-brand-navy/10 after:absolute after:inset-x-5 after:bottom-0 after:h-px after:bg-brand-navy/10 lg:my-[60px] lg:max-w-[1440px] lg:px-[80px] lg:py-[100px] lg:before:inset-x-[80px] lg:after:inset-x-[80px]"
     >
-      <p className="text-xs font-semibold tracking-[4px] text-brand-blue lg:text-base lg:tracking-[6px]">
+      <p
+        data-section-eyebrow
+        className="text-xs font-semibold tracking-[4px] text-brand-blue lg:text-base lg:tracking-[6px]"
+      >
         CUSTOMER
       </p>
       <h2 className="mt-4 text-[28px] font-extrabold leading-tight lg:text-[48px]">

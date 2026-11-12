@@ -91,7 +91,7 @@ export default function ProjectGallery({
       aria-labelledby="projects-list-heading"
       className="mx-auto w-full px-5 pt-9 lg:min-h-[1430px] lg:max-w-[1440px] lg:px-0 lg:pt-[81px]"
     >
-      <div className="flex items-center gap-[20px]">
+      <div data-section-eyebrow className="flex items-center gap-[20px]">
         <p className="text-xs lg:text-[20px] font-semibold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           PROJECTS
         </p>
@@ -149,18 +149,18 @@ export default function ProjectGallery({
       </div>
       <nav
         aria-label="시공사례 페이지"
-        className="mt-9 lg:mt-[86px] flex h-[56px] items-center justify-center gap-[5px] pb-[50px] box-content"
+        className="mt-9 lg:mt-[86px] flex flex-wrap items-center justify-center gap-2 pb-[50px]"
       >
         <button
           type="button"
           aria-label="이전 페이지"
           onClick={() => setListing(page - 1)}
           disabled={page === 1}
-          className="flex size-[56px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+          className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-brand-navy transition-colors hover:bg-brand-blue/10 active:bg-brand-blue/20 disabled:cursor-default disabled:text-brand-navy/25 disabled:hover:bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12"
         >
-          <ChevronLeft size={56} aria-hidden="true" />
+          <ChevronLeft size={24} aria-hidden="true" />
         </button>
-        <div className="flex items-center gap-[8px]">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           {Array.from({ length: pageCount }, (_, index) => index + 1).map((number) => (
             <button
               key={number}
@@ -168,15 +168,9 @@ export default function ProjectGallery({
               aria-label={`${number}페이지`}
               aria-current={page === number ? "page" : undefined}
               onClick={() => setListing(number)}
-              className={`relative flex size-[48px] cursor-pointer items-center justify-center text-[30px] leading-none tracking-normal tabular-nums focus-visible:outline-2 focus-visible:outline-brand-blue ${page === number ? "text-white" : "text-brand-navy/65"}`}
+              className={`flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-lg font-semibold leading-none tabular-nums transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12 lg:text-xl ${page === number ? "bg-brand-navy text-white" : "text-brand-navy/75 hover:bg-brand-blue/10 hover:text-brand-navy active:bg-brand-blue/20"}`}
             >
-              {page === number && (
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-full bg-brand-blue/60"
-                />
-              )}
-              <span className="relative">{number}</span>
+              {number}
             </button>
           ))}
         </div>
@@ -185,9 +179,9 @@ export default function ProjectGallery({
           aria-label="다음 페이지"
           onClick={() => setListing(page + 1)}
           disabled={page === pageCount}
-          className="flex size-[56px] cursor-pointer items-center justify-center text-brand-navy/65 disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+          className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-brand-navy transition-colors hover:bg-brand-blue/10 active:bg-brand-blue/20 disabled:cursor-default disabled:text-brand-navy/25 disabled:hover:bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12"
         >
-          <ChevronRight size={56} aria-hidden="true" />
+          <ChevronRight size={24} aria-hidden="true" />
         </button>
       </nav>
     </section>

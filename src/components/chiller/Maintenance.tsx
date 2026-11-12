@@ -37,7 +37,10 @@ export default function Maintenance() {
   return (
     <section className="mx-auto w-full lg:max-w-[1440px] overflow-hidden px-[20px] lg:px-[63px] py-[36px] lg:py-[60px]">
       <header>
-        <p className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
+        <p
+          data-section-eyebrow
+          className="flex items-center gap-[12px] lg:gap-[20px] text-[12px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60"
+        >
           MAINTENANCE
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
         </p>

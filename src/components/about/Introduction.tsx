@@ -6,7 +6,10 @@ export default function Introduction() {
       <div className="flex flex-col lg:flex-row h-auto lg:h-[524px] items-center justify-center gap-[28px] lg:gap-[82px]">
         <div className="flex h-auto lg:h-[524px] w-full lg:w-[650px] shrink-0 flex-col items-start gap-[16px] lg:gap-[15px]">
           <div className="flex w-full lg:w-[568px] flex-col items-start gap-[16px] lg:gap-[26px]">
-            <p className="flex items-center gap-[16px] lg:gap-[19px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
+            <p
+              data-section-eyebrow
+              className="flex items-center gap-[16px] lg:gap-[19px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue"
+            >
               ABOUT SANJUNG
               <span aria-hidden="true" className="h-[2px] w-10 lg:w-[166px] bg-brand-blue" />
             </p>

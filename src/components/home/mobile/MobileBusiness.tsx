@@ -42,7 +42,9 @@ export function MobileBusinessOverview() {
   return (
     <>
       <section className="mx-auto max-w-[600px] pt-8 text-center">
-        <p className="text-xs tracking-[3px] font-semibold text-brand-blue">BUSINESS AREA</p>
+        <p data-section-eyebrow className="text-xs tracking-[3px] font-semibold text-brand-blue">
+          BUSINESS AREA
+        </p>
         <h2 className="mt-5 text-[28px] font-extrabold">냉동공조 설계 &amp; 시공</h2>
         <p className="mt-3 px-5 text-base font-medium leading-7">
           냉동기부터 패브릭덕트까지

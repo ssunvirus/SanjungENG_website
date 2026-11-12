@@ -48,7 +48,10 @@ export default function OneStopSolution() {
       className={`${styles.oneStop} mx-auto grid pb-6 px-5 lg:px-0 lg:pl-[65px] h-auto lg:h-[817px] w-full lg:max-w-[1440px] grid-cols-1 lg:grid-cols-[485px_734px] gap-[28px] lg:gap-[52px] pt-[24px] lg:pt-[47.12px]`}
     >
       <div>
-        <p className="text-[14px] lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue">
+        <p
+          data-section-eyebrow
+          className="text-[14px] lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue"
+        >
           ONE-STOP SOLUTION
         </p>
         <h2

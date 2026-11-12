@@ -17,7 +17,10 @@ export default function CompanyOverview() {
   return (
     <section className="mx-auto h-auto lg:min-h-[819px] w-full lg:max-w-[1440px] px-[20px] lg:px-[110px] py-[36px] lg:py-[73px]">
       <header>
-        <p className="flex items-center gap-[16px] lg:gap-[18px] text-[14px] lg:text-[18px] font-semibold tracking-[3px] lg:tracking-[5.3px] text-brand-blue/60">
+        <p
+          data-section-eyebrow
+          className="flex items-center gap-[16px] lg:gap-[18px] text-[14px] lg:text-[18px] font-semibold tracking-[3px] lg:tracking-[5.3px] text-brand-blue/60"
+        >
           COMPANY OVERVIEW
           <span aria-hidden="true" className="h-[2px] w-[41px] bg-current" />
         </p>

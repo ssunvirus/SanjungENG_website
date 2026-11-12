@@ -9,7 +9,10 @@ export default function Products() {
     <section className="mx-auto w-full max-w-[1440px] bg-white px-5 py-9 lg:px-10 lg:py-[60px]">
       <header className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
         <div>
-          <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-5 lg:text-[20px] lg:tracking-[6px]">
+          <p
+            data-section-eyebrow
+            className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-5 lg:text-[20px] lg:tracking-[6px]"
+          >
             AIR CONDITIONER{" "}
             <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
           </p>

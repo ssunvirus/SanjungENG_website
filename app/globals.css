@@ -27,6 +27,17 @@ body {
   font-family: "Pretendard", Arial, sans-serif;
 }
 
+/* Keep section titles concise in the compact layout, including tablets. */
+@media (width < 90rem) {
+  [data-section-eyebrow] {
+    display: none;
+  }
+
+  [data-section-eyebrow] + :is(h1, h2) {
+    margin-top: 0;
+  }
+}
+
 @keyframes hero-content {
   from {
     opacity: 0;

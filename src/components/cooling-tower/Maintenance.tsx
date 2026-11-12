@@ -18,7 +18,10 @@ export default function Maintenance() {
   return (
     <section className="mx-auto h-auto  w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-10 py-[24px] lg:py-[60px]">
       <header className="h-auto  w-full ">
-        <div className="flex items-center gap-[16px] lg:gap-[17.647px] text-[14px] lg:text-[17.65px] font-medium tracking-[3px] lg:tracking-[5.295px] text-brand-blue/60">
+        <div
+          data-section-eyebrow
+          className="flex items-center gap-[16px] lg:gap-[17.647px] text-[14px] lg:text-[17.65px] font-medium tracking-[3px] lg:tracking-[5.295px] text-brand-blue/60"
+        >
           MAINTENANCE <span className="h-[1.76px] w-[40.858px] bg-current" />
         </div>
         <h2 className="mt-[10px] lg:mt-[8.824px] text-[28px] lg:text-[51.38px] font-bold tracking-[1px] lg:tracking-[2.569px] text-brand-navy">

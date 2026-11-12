@@ -153,7 +153,10 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
       aria-labelledby="download-title"
     >
       <header className="ml-0 mt-0 lg:ml-[78px] lg:mt-[30px]">
-        <p className="flex items-center gap-3 text-[10px] font-semibold tracking-[2px] lg:gap-[20px] lg:text-[20px] lg:tracking-[6px] text-brand-blue/60">
+        <p
+          data-section-eyebrow
+          className="flex items-center gap-3 text-[10px] font-semibold tracking-[2px] lg:gap-[20px] lg:text-[20px] lg:tracking-[6px] text-brand-blue/60"
+        >
           CERTIFICATIONS & CATALOGS
           <Image
             src={`${assetRoot}/heading-line.svg`}
@@ -291,18 +294,18 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
         </div>
         <nav
           aria-label="자료 페이지"
-          className="mt-9 lg:mt-[77px] flex h-[56px] items-center justify-center gap-[5px] text-[30px] text-brand-navy/65"
+          className="mt-9 lg:mt-[77px] flex flex-wrap items-center justify-center gap-2"
         >
           <button
             type="button"
             disabled={currentPage === 1}
             onClick={() => selectPage(currentPage - 1)}
             aria-label="이전 페이지"
-            className="flex size-[56px] cursor-pointer items-center justify-center disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-brand-navy transition-colors hover:bg-brand-blue/10 active:bg-brand-blue/20 disabled:cursor-default disabled:text-brand-navy/25 disabled:hover:bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12"
           >
-            <ChevronLeft size={56} aria-hidden="true" />
+            <ChevronLeft size={24} aria-hidden="true" />
           </button>
-          <div className="flex items-center gap-[8px]">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {Array.from({ length: pageCount }, (_, index) => index + 1).map((page) => (
               <button
                 key={page}
@@ -310,17 +313,9 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
                 onClick={() => selectPage(page)}
                 aria-current={page === currentPage ? "page" : undefined}
                 aria-label={`${page}페이지`}
-                className="relative flex size-[48px] cursor-pointer items-center justify-center leading-none tracking-normal tabular-nums focus-visible:outline-2 focus-visible:outline-brand-blue"
+                className={`flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-lg font-semibold leading-none tabular-nums transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12 lg:text-xl ${page === currentPage ? "bg-brand-navy text-white" : "text-brand-navy/75 hover:bg-brand-blue/10 hover:text-brand-navy active:bg-brand-blue/20"}`}
               >
-                {page === currentPage && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-0 rounded-full bg-brand-blue/60"
-                  />
-                )}
-                <span className={`relative ${page === currentPage ? "text-white" : ""}`}>
-                  {page}
-                </span>
+                {page}
               </button>
             ))}
           </div>
@@ -329,9 +324,9 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
             disabled={currentPage === pageCount}
             onClick={() => selectPage(currentPage + 1)}
             aria-label="다음 페이지"
-            className="flex size-[56px] cursor-pointer items-center justify-center disabled:cursor-default disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl text-brand-navy transition-colors hover:bg-brand-blue/10 active:bg-brand-blue/20 disabled:cursor-default disabled:text-brand-navy/25 disabled:hover:bg-transparent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:size-12"
           >
-            <ChevronRight size={56} aria-hidden="true" />
+            <ChevronRight size={24} aria-hidden="true" />
           </button>
         </nav>
 

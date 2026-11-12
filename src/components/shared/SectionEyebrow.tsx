@@ -24,7 +24,7 @@ export default function SectionEyebrow({
 }) {
   const style = styles[variant];
   return (
-    <p className={style.text}>
+    <p data-section-eyebrow className={style.text}>
       {children}
       <span aria-hidden="true" className={style.line} />
     </p>

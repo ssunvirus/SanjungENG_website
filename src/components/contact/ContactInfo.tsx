@@ -4,7 +4,7 @@ import { FileText, Mail, PhoneCall } from "lucide-react";
 export default function ContactInfo() {
   return (
     <aside className="pt-[24px] lg:pt-[67px]">
-      <div className="flex items-center gap-[12px] lg:gap-[20px]">
+      <div data-section-eyebrow className="flex items-center gap-[12px] lg:gap-[20px]">
         <p className="text-[14px] lg:text-[20px] font-semibold tracking-[3px] lg:tracking-[6px] text-brand-blue/60">
           CONTACT
         </p>

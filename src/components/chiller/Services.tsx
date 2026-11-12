@@ -84,7 +84,10 @@ export default function Services() {
         className="mx-auto w-full max-w-[1440px] bg-[#F1FAFD] px-5 py-12 lg:px-[120px] lg:py-16"
       >
         <header className="mb-7 lg:mb-10">
-          <p className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]">
+          <p
+            data-section-eyebrow
+            className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]"
+          >
             CHILLER SERVICE{" "}
             <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
           </p>
