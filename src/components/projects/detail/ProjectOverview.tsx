@@ -23,7 +23,7 @@ export default function ProjectOverview({
           data-section-eyebrow
           className="text-xs lg:text-[20px] font-bold leading-[24px] tracking-[3px] lg:tracking-[6px] text-brand-blue/60"
         >
-          PROJECTS DETAILS
+          PROJECT DETAILS
         </p>
         <h1 className="mt-[16px] text-[26px] lg:text-[45px] font-extrabold leading-[1.35] lg:leading-[54px]">
           {normalizeFabricDuctText(title)}

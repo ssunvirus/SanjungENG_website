@@ -82,7 +82,7 @@ export default function ContactInfo() {
             사진과 도면을 함께 보내주세요
           </p>
           <p className="mt-[12px] lg:mt-[16px] text-[14px] lg:text-[20px] leading-[24px] tracking-[0px] lg:tracking-[1px] text-brand-navy/60">
-            현장 정보를 확인하는데 도움이 됩니다.
+            현장 정보를 확인하는 데 도움이 됩니다.
           </p>
         </div>
       </div>

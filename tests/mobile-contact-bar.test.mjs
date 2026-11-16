@@ -18,8 +18,9 @@ const code = ts.transpileModule(
 ).outputText;
 
 function setup() {
-  let visible = false;
-  let effect;
+  const states = [];
+  let stateIndex = 0;
+  const effects = [];
   let intersection;
   let mutation;
   let disconnected = 0;
@@ -76,14 +77,19 @@ function setup() {
     require(name) {
       if (name === "react")
         return {
-          useState: () => [
-            false,
-            (value) => {
-              visible = value;
-            },
-          ],
+          useState: (initial) => {
+            const index = stateIndex++;
+            if (!(index in states)) states[index] = initial;
+            return [
+              states[index],
+              (value) => {
+                states[index] = value;
+              },
+            ];
+          },
+          useRef: () => ({ current: null }),
           useEffect: (fn) => {
-            effect = fn;
+            effects.push(fn);
           },
           useSyncExternalStore: () => "/",
         };
@@ -94,13 +100,18 @@ function setup() {
   };
   runInNewContext(code, sandbox);
   sandbox.exports.default();
-  const cleanup = effect();
+  const cleanups = effects.map((effect) => effect());
+  const cleanup = () => cleanups.forEach((fn) => fn?.());
   const flush = () => {
     while (frames.length) frames.shift()();
   };
   flush();
   return {
-    visible: () => visible,
+    visible: () => states[0],
+    control: () => {
+      stateIndex = 0;
+      return sandbox.exports.default().props.children.props.children;
+    },
     intersect: (value) => intersection([{ target: form, isIntersecting: value }]),
     menu(value) {
       menu = value;
@@ -129,6 +140,22 @@ test("contact bar hides while the estimate form is visible and returns after lea
   assert.equal(app.visible(), true);
   app.cleanup();
   assert.equal(app.disconnected(), 2);
+});
+
+test("first tap expands the phone button and only the expanded control links to a call", () => {
+  const app = setup();
+  const collapsed = app.control();
+  assert.equal(collapsed.type, "button");
+  assert.equal(collapsed.props.href, undefined);
+  collapsed.props.onClick();
+  const expanded = app.control();
+  assert.equal(expanded.type, "a");
+  assert.equal(expanded.props.href, "tel:01053401728");
+  assert.ok(expanded.props.children.includes("전화문의"));
+  app.intersect(true);
+  app.intersect(false);
+  assert.equal(app.control().type, "button");
+  app.cleanup();
 });
 
 test("editing, open keyboard and open navigation each hide the contact bar", () => {

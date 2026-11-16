@@ -27,7 +27,7 @@ const advantages = [
     title: "설치 / 유지관리 편의성",
     description: [
       "가벼운 소재로 설치 부담을 줄이고,",
-      "분리/세척 할 수 있어 유지 관리가 편리합니다.",
+      "분리해 세척할 수 있어 유지관리가 편리합니다.",
     ],
     image: "maintenance-icon.png",
     slot: "h-[75px] w-[77px]",

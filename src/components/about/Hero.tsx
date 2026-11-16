@@ -28,7 +28,7 @@ export default function Hero() {
         <p className="text-[18px] lg:text-[34px] font-medium leading-8 lg:leading-[48px] opacity-80">
           30년의 현장 경험으로
           <br />
-          고객이 신뢰하고 믿을 수 있는
+          고객이 믿고 맡길 수 있는
           <br />
           냉동공조 서비스를 제공합니다.
         </p>

@@ -19,7 +19,7 @@ export const anseongDefrostPhotos = [
     src: "/images/projects/anseong-cold-storage-defrost-maintenance/photo-03.jpg",
     width: 1050,
     height: 1400,
-    alt: "안성시 냉동창고 냉동창고 내부 증발기 제상 및 유지보수 작업",
+    alt: "안성시 냉동창고 내부 증발기 제상 및 유지보수 작업",
     caption: "냉동창고 내부 증발기 제상 및 유지보수 작업",
     displayWidth: 760,
   },

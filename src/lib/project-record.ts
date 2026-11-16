@@ -48,7 +48,17 @@ export function parseProject(value: unknown): ProjectRecord {
       alt.length > 300
     )
       throw new Error("InvalidProject");
-    return { src, alt: normalizeFabricDuctText(alt.trim()) };
+    let caption = normalizeFabricDuctText(alt.trim());
+    // Repair known typos in older admin records when reading and saving them.
+    if (id === "anseong-cold-storage-defrost-maintenance") {
+      caption = caption
+        .replaceAll("팬 교체 빛 배선 정비", "팬 교체 및 배선 정비")
+        .replaceAll("안성시 냉동창고 냉동창고", "안성시 냉동창고");
+    }
+    if (id === "yongin-building-absorption-chiller-cleaning") {
+      caption = caption.replaceAll("전열관 세관 작업 완룐", "전열관 세관 작업 완료");
+    }
+    return { src, alt: caption };
   });
   return {
     id,

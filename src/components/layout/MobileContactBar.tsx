@@ -1,7 +1,7 @@
 "use client";
 
 import { Phone } from "lucide-react";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   subscribeBrowserLocation,
   getBrowserPathname,
@@ -15,6 +15,26 @@ export default function MobileContactBar() {
     getServerPathname,
   );
   const [visible, setVisible] = useState(false);
+  const [expandedPath, setExpandedPath] = useState<string | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const expanded = expandedPath === pathname;
+
+  useEffect(() => {
+    function collapse(event: PointerEvent) {
+      if (event.target instanceof Node && !containerRef.current?.contains(event.target)) {
+        setExpandedPath(null);
+      }
+    }
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setExpandedPath(null);
+    }
+    document.addEventListener("pointerdown", collapse);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", collapse);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
 
   useEffect(() => {
     const forms = new Map<Element, boolean>();
@@ -28,7 +48,9 @@ export default function MobileContactBar() {
       const keyboardOpen =
         viewport && viewport.scale === 1 && viewport.height < window.innerHeight * 0.75;
       const menuOpen = Boolean(document.getElementById("mobile-navigation"));
-      setVisible(!editing && !keyboardOpen && !menuOpen && ![...forms.values()].some(Boolean));
+      const show = !editing && !keyboardOpen && !menuOpen && ![...forms.values()].some(Boolean);
+      setVisible(show);
+      if (!show) setExpandedPath(null);
     }
     const observer = new IntersectionObserver(
       (entries) => {
@@ -81,17 +103,31 @@ export default function MobileContactBar() {
   return (
     <>
       <aside
+        ref={containerRef}
         aria-label="빠른 상담"
         hidden={!visible}
         className="fixed left-4 bottom-[calc(16px+env(safe-area-inset-bottom,0px))] z-40 lg:hidden"
       >
-        <a
-          href="tel:01053401728"
-          className="flex min-h-12 items-center justify-center gap-2 rounded-full border border-brand-navy/15 bg-white px-5 py-3 text-sm font-bold text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.16)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
-        >
-          <Phone size={20} aria-hidden="true" />
-          전화 상담
-        </a>
+        {expanded ? (
+          <a
+            href="tel:01053401728"
+            aria-label="전화문의, 010-5340-1728로 전화 연결"
+            className="flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-brand-navy px-4 text-sm font-bold text-white shadow-[0_4px_16px_rgba(16,45,74,0.24)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+          >
+            <Phone size={20} aria-hidden="true" />
+            전화문의
+          </a>
+        ) : (
+          <button
+            type="button"
+            aria-label="전화문의 펼치기"
+            aria-expanded={false}
+            onClick={() => setExpandedPath(pathname)}
+            className="flex size-12 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-brand-navy text-white shadow-[0_4px_16px_rgba(16,45,74,0.24)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+          >
+            <Phone size={20} aria-hidden="true" />
+          </button>
+        )}
       </aside>
     </>
   );

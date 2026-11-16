@@ -244,11 +244,11 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
                   {item.format ?? "PDF"}
                 </span>
               </div>
-              <div className="relative flex min-h-[210px] flex-col px-3 py-3 lg:block lg:min-h-0 lg:h-[166.08px] lg:px-[29.16px] lg:pt-[12.15px] lg:pb-0">
+              <div className="relative flex min-h-[180px] flex-col px-2.5 py-2.5 lg:block lg:min-h-0 lg:h-[166.08px] lg:px-[29.16px] lg:pt-[12.15px] lg:pb-0">
                 <p className="text-[12.15px] font-semibold text-brand-blue">
                   {activeTab === 1 ? "카탈로그" : "인증서/시험성적서"}
                 </p>
-                <h3 className="mt-[10px] break-words text-sm lg:break-keep lg:text-[16.2px] font-bold leading-[22px] tracking-[0.81px] text-brand-navy">
+                <h3 className="mt-2 break-keep text-sm lg:mt-[10px] lg:text-[16.2px] font-bold leading-[22px] tracking-normal lg:tracking-[0.81px] text-brand-navy">
                   {item.title}
                 </h3>
                 <p className="mt-[8px] text-[14.58px] font-semibold leading-[20px] tracking-[0.73px] text-brand-navy/80">
