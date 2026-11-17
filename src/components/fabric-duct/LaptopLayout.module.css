@@ -1,3 +1,55 @@
+.serviceStep {
+  position: relative;
+}
+
+.stepNumber {
+  animation: stepNumberFill 5.4s ease-in-out infinite;
+}
+
+@keyframes stepNumberFill {
+  0%,
+  33.33%,
+  100% {
+    background-color: white;
+    border-color: var(--color-brand-blue);
+    color: var(--color-brand-blue);
+  }
+  6%,
+  27% {
+    background-color: var(--color-brand-navy);
+    border-color: var(--color-brand-navy);
+    color: white;
+  }
+}
+
+.stepArrow {
+  animation: stepFlow 1.8s ease-in-out infinite;
+}
+
+@keyframes stepFlow {
+  0%,
+  65%,
+  100% {
+    opacity: 0.35;
+  }
+  15% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.75;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stepArrow {
+    animation: none;
+  }
+
+  .stepNumber {
+    animation: none;
+  }
+}
+
 /* Keep the mobile and large desktop layouts unchanged. */
 @media (min-width: 1200px) and (max-width: 1919px) {
   .introduction {

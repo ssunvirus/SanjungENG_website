@@ -1,6 +1,7 @@
 import styles from "./LaptopLayout.module.css";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import MobileServiceSteps from "./MobileServiceSteps";
 
 const steps = [
   {
@@ -8,36 +9,18 @@ const steps = [
     title: "냉동/공조설비 설치",
     description: "현장에 맞는 설비 설치",
     image: "/images/cold-storage/process-unit-installation.jpg",
-    line: "/images/fabric-duct/one-stop-line-1.svg",
-    lineWidth: 188,
-    lineHeight: 3,
-    lineTop: -9,
-    circleTop: 57,
-    arrowTop: 187,
   },
   {
     number: "02",
     title: "패브릭덕트 설계/설치",
     description: "공간에 맞춘 기류 설계와 공기분배",
     image: "/images/projects/orion-production/cc_P5243359.jpg",
-    line: "/images/fabric-duct/one-stop-line-2.svg",
-    lineWidth: 193,
-    lineHeight: 3.00041,
-    lineTop: 0,
-    circleTop: 66,
-    arrowTop: 186,
   },
   {
     number: "03",
     title: "세척 / 유지보수",
     description: "설치 후 세척과 정기점검으로\n이어지는 관리",
     image: "/images/fabric-duct/one-stop-maintenance.png",
-    line: "/images/fabric-duct/one-stop-line-3.svg",
-    lineWidth: 194,
-    lineHeight: 3,
-    lineTop: 0,
-    circleTop: 64,
-    arrowTop: null,
   },
 ];
 
@@ -58,12 +41,19 @@ export default function OneStopSolution() {
           id="one-stop-heading"
           className="mt-[24px] lg:mt-[41px] lg:whitespace-nowrap text-[28px] lg:text-[45px] font-bold leading-10 lg:leading-[60px] tracking-[1px] lg:tracking-[2.25px] text-brand-navy"
         >
-          냉동설비부터
-          <br />
-          패브릭덕트까지,
-          <br />
-          설치부터 관리까지
-          <span className="ml-[11px] text-brand-blue">한 번에</span>
+          <span className="lg:hidden">
+            설치 이후 관리까지
+            <br />
+            함께합니다.
+          </span>
+          <span className="hidden lg:inline">
+            냉동설비부터
+            <br />
+            패브릭덕트까지,
+            <br />
+            설치부터 관리까지
+            <span className="ml-[11px] text-brand-blue">한 번에</span>
+          </span>
         </h2>
         <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-brand-text/60">
           산정엔지니어링은
@@ -78,40 +68,38 @@ export default function OneStopSolution() {
           width={412}
           height={126}
           sizes="412px"
-          className="mt-[24px] lg:mt-[61px] h-auto w-[220px] lg:w-[412px] object-cover"
+          className="hidden lg:block mt-[24px] lg:mt-[61px] h-auto w-[220px] lg:w-[412px] object-cover"
         />
       </div>
-      <ol className="mt-[24px] lg:mt-[51px] flex flex-col gap-[28px] lg:gap-[39px]">
+      <MobileServiceSteps steps={steps} />
+      <ol className="mt-[24px] lg:mt-[51px] hidden lg:flex flex-col gap-[28px] lg:gap-[39px]">
         {steps.map((step, index) => (
           <li
             key={step.number}
-            className="grid h-auto lg:h-[194px] grid-cols-1 lg:grid-cols-[56px_374px_263px] items-center gap-y-4 lg:gap-y-0 gap-x-[20px]"
+            className={`${styles.serviceStep} grid h-auto lg:h-[194px] grid-cols-1 lg:grid-cols-[56px_374px_263px] items-center gap-y-4 lg:gap-y-0 gap-x-[20px]`}
           >
             <div aria-hidden="true" className="hidden lg:block relative h-full">
-              <Image
-                src={step.line}
-                width={step.lineWidth}
-                height={step.lineHeight}
-                alt=""
-                className="absolute left-[28px] max-w-none"
-                style={{
-                  top: step.lineTop + step.lineWidth / 2,
-                  transform: "translate(-50%, -50%) rotate(90deg)",
-                }}
-              />
+              <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-brand-blue" />
               <span
-                className="absolute flex size-[56px] items-center justify-center rounded-full border border-brand-blue bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-brand-blue"
-                style={{ top: step.circleTop, left: index === 0 ? 1 : 0 }}
+                className={`${styles.stepNumber} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex size-[56px] items-center justify-center rounded-full border border-brand-blue bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-brand-blue`}
+                style={{
+                  animationDelay: `${index * 1.8}s`,
+                }}
               >
                 {step.number}
               </span>
-              {step.arrowTop !== null && (
-                <ChevronDown
-                  size={48}
-                  strokeWidth={2}
-                  className="absolute left-[5px] text-brand-blue"
-                  style={{ top: step.arrowTop }}
-                />
+              {index < steps.length - 1 && (
+                <div className="absolute left-1/2 top-[calc(100%+19.5px)] -translate-x-1/2 -translate-y-1/2 flex flex-col text-brand-blue">
+                  {[0, 1, 2].map((arrow) => (
+                    <ChevronDown
+                      key={arrow}
+                      size={32}
+                      strokeWidth={2}
+                      className={`${styles.stepArrow} ${arrow > 0 ? "-mt-6" : ""}`}
+                      style={{ animationDelay: `${arrow * 0.2}s` }}
+                    />
+                  ))}
+                </div>
               )}
             </div>
             <div className="relative ml-[1px] h-[240px] lg:h-[194px] w-full lg:w-[374px] overflow-hidden">
