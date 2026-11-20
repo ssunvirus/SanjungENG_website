@@ -51,8 +51,8 @@ export const siheungCommercialChillerPhotos = [
     caption: "세척한 진공펌프 부품을 정리하고 조립 전 점검",
   },
   {
-    width: 4000,
-    height: 3000,
+    width: 1448,
+    height: 1086,
     caption: "냉동기 하부 전열관과 수실 정비 작업",
   },
   {
@@ -72,5 +72,7 @@ export const siheungCommercialChillerPhotos = [
   src:
     index === 0
       ? "/images/projects/siheung-commercial-absorption-chiller-repair/cover-01.png"
-      : `/images/projects/siheung-commercial-absorption-chiller-repair/original-${String(index + 1).padStart(2, "0")}.jpg`,
+      : index === 10
+        ? "/images/projects/siheung-commercial-absorption-chiller-repair/safety-11.png"
+        : `/images/projects/siheung-commercial-absorption-chiller-repair/original-${String(index + 1).padStart(2, "0")}.jpg`,
 }));
