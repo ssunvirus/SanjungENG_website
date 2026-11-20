@@ -12,6 +12,7 @@ const customerLogos = [
   ["pkc", "백광산업"],
   ["hwaseong", "화성도시공사"],
   ["db", "DB Schenker"],
+  ["avenue-france", "아브뉴프랑"],
 ];
 
 export default function Customers() {
@@ -33,20 +34,22 @@ export default function Customers() {
         산정엔지니어링은 다양한 산업의 주요 기업과 기관 현장에 최적의 냉동공조 솔루션을
         제공해왔습니다.
       </p>
-      <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-8 lg:mt-10 lg:grid-cols-[repeat(30,minmax(0,1fr))] lg:gap-4">
-        {customerLogos.map(([file, name], index) => (
+      <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:mt-10 lg:grid-cols-6 lg:gap-4">
+        {customerLogos.map(([file, name]) => (
           <li
             key={file}
-            className={`flex h-[100px] items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 px-4 shadow-[0_3px_12px_rgba(16,47,73,0.05)] sm:col-span-2 sm:px-3 lg:col-start-auto lg:h-[118px] lg:px-6 ${index === 8 ? "sm:col-start-2" : ""} ${index < 5 ? "lg:col-span-6" : "lg:col-span-5"}`}
+            className="flex h-[100px] items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 px-4 shadow-[0_3px_12px_rgba(16,47,73,0.05)] sm:px-3 lg:h-[118px] lg:px-6"
           >
             <div className="relative h-14 w-full lg:h-16">
               <Image
                 src={
-                  file === "hwaseong"
-                    ? "/images/home-refresh/customer-hwaseong-updated.png"
-                    : ["orion", "pkc", "bbq"].includes(file)
-                      ? `/images/home-refresh/customer-${file}-transparent.png`
-                      : `/images/home-refresh/customer-${file}.png`
+                  file === "avenue-france"
+                    ? "/images/home-refresh/customer-avenue-france.svg"
+                    : file === "hwaseong"
+                      ? "/images/home-refresh/customer-hwaseong-updated.png"
+                      : ["orion", "pkc", "bbq"].includes(file)
+                        ? `/images/home-refresh/customer-${file}-transparent.png`
+                        : `/images/home-refresh/customer-${file}.png`
                 }
                 alt={name}
                 fill

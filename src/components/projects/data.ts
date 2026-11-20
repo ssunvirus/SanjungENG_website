@@ -35,6 +35,21 @@ export const ansanPaintFactoryProject = {
 
 export const projects: Project[] = [
   {
+    id: "siheung-commercial-absorption-chiller-repair",
+    href: "/projects/siheung-commercial-absorption-chiller-repair",
+    category: "냉동공조",
+    tag: "냉동기",
+    title: "대형상업시설 흡수식냉동기 수리",
+    description: "흡수식 냉동기 수리 및 세관",
+    location: "시흥시",
+    workDescription:
+      "대형 상업시설에 설치된 흡수식 냉동기 2대의 고장 원인을 정밀 진단하고, 수리 및 세관 작업을 통해 정상적으로 기능을 회복했습니다.",
+    blogUrl:
+      "https://blog.naver.com/PostView.naver?blogId=sanjungeng&logNo=224481975518&categoryNo=23&parentCategoryNo=&from=thumbnailList",
+    image: "/images/projects/siheung-commercial-absorption-chiller-repair/original-01.jpg",
+    imageTop: "50%",
+  },
+  {
     id: "yongin-building-absorption-chiller-cleaning",
     href: "/projects/yongin-building-absorption-chiller-cleaning",
     category: "냉동공조",
