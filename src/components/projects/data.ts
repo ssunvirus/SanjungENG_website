@@ -46,8 +46,9 @@ export const projects: Project[] = [
       "대형 상업시설에 설치된 흡수식 냉동기 2대의 고장 원인을 정밀 진단하고, 수리 및 세관 작업을 통해 정상적으로 기능을 회복했습니다.",
     blogUrl:
       "https://blog.naver.com/PostView.naver?blogId=sanjungeng&logNo=224481975518&categoryNo=23&parentCategoryNo=&from=thumbnailList",
-    image: "/images/projects/siheung-commercial-absorption-chiller-repair/original-01.jpg",
-    imageTop: "50%",
+    image: "/images/projects/siheung-commercial-absorption-chiller-repair/cover-01.png",
+    imageFit: "cover",
+    imageTop: "0%",
   },
   {
     id: "yongin-building-absorption-chiller-cleaning",

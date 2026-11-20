@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from "./Customers.module.css";
 
 const customerLogos = [
   ["akzo", "AkzoNobel"],
@@ -13,6 +14,7 @@ const customerLogos = [
   ["hwaseong", "화성도시공사"],
   ["db", "DB Schenker"],
   ["avenue-france", "아브뉴프랑"],
+  ["hyundai-terratower", "현대테라타워"],
 ];
 
 export default function Customers() {
@@ -34,32 +36,44 @@ export default function Customers() {
         산정엔지니어링은 다양한 산업의 주요 기업과 기관 현장에 최적의 냉동공조 솔루션을
         제공해왔습니다.
       </p>
-      <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:mt-10 lg:grid-cols-6 lg:gap-4">
-        {customerLogos.map(([file, name]) => (
-          <li
-            key={file}
-            className="flex h-[100px] items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 px-4 shadow-[0_3px_12px_rgba(16,47,73,0.05)] sm:px-3 lg:h-[118px] lg:px-6"
-          >
-            <div className="relative h-14 w-full lg:h-16">
-              <Image
-                src={
-                  file === "avenue-france"
-                    ? "/images/home-refresh/customer-avenue-france.svg"
-                    : file === "hwaseong"
-                      ? "/images/home-refresh/customer-hwaseong-updated.png"
-                      : ["orion", "pkc", "bbq"].includes(file)
-                        ? `/images/home-refresh/customer-${file}-transparent.png`
-                        : `/images/home-refresh/customer-${file}.png`
-                }
-                alt={name}
-                fill
-                sizes="(min-width: 1440px) 210px, (min-width: 640px) 120px, (min-width: 600px) 232px, calc(50vw - 42px)"
-                className="object-contain"
-              />
+      <div className="mt-8 space-y-3 overflow-hidden py-2 lg:mt-10 lg:space-y-4">
+        {[customerLogos.slice(0, 7), customerLogos.slice(7)].map((logos, row) => (
+          <div key={row} className={styles.viewport}>
+            <div className={`${styles.track} ${row === 0 ? styles.right : styles.left}`}>
+              {[0, 1].map((copy) => (
+                <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className={styles.group}>
+                  {logos.map(([file, name]) => (
+                    <li
+                      key={file}
+                      className="flex h-[100px] w-[160px] shrink-0 items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 px-4 shadow-[0_3px_12px_rgba(16,47,73,0.05)] sm:px-3 lg:h-[118px] lg:w-[200px] lg:px-6"
+                    >
+                      <div
+                        className={`relative w-full ${file === "avenue-france" ? "h-[68px] lg:h-[78px]" : "h-14 lg:h-16"}`}
+                      >
+                        <Image
+                          src={
+                            file === "avenue-france"
+                              ? "/images/home-refresh/customer-avenue-france.svg"
+                              : file === "hwaseong"
+                                ? "/images/home-refresh/customer-hwaseong-updated.png"
+                                : ["orion", "pkc", "bbq"].includes(file)
+                                  ? `/images/home-refresh/customer-${file}-transparent.png`
+                                  : `/images/home-refresh/customer-${file}.png`
+                          }
+                          alt={copy === 0 ? name : ""}
+                          fill
+                          sizes="(min-width: 1024px) 152px, 128px"
+                          className="object-contain"
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ))}
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

@@ -1,8 +1,8 @@
 // Original files preserved without recompression, in attachment order.
 export const siheungCommercialChillerPhotos = [
   {
-    width: 3000,
-    height: 4000,
+    width: 1086,
+    height: 1448,
     caption: "체인블록을 이용한 흡수식 냉동기 수실 커버 분리 작업",
   },
   {
@@ -69,5 +69,8 @@ export const siheungCommercialChillerPhotos = [
   ...photo,
   alt: `시흥시 대형상업시설 흡수식냉동기 수리: ${photo.caption}`,
   displayWidth: 760,
-  src: `/images/projects/siheung-commercial-absorption-chiller-repair/original-${String(index + 1).padStart(2, "0")}.jpg`,
+  src:
+    index === 0
+      ? "/images/projects/siheung-commercial-absorption-chiller-repair/cover-01.png"
+      : `/images/projects/siheung-commercial-absorption-chiller-repair/original-${String(index + 1).padStart(2, "0")}.jpg`,
 }));
