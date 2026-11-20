@@ -15,6 +15,8 @@ const customerLogos = [
   ["db", "DB Schenker"],
   ["avenue-france", "아브뉴프랑"],
   ["hyundai-terratower", "현대테라타워"],
+  ["sk-shieldus", "SK쉴더스"],
+  ["kanavi-mobility", "카나비모빌리티"],
 ];
 
 export default function Customers() {
