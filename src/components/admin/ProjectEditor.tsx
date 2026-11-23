@@ -81,6 +81,20 @@ export default function ProjectEditor({
               </small>
             </label>
             <label>
+              네이버 블로그 링크
+              <input
+                type="url"
+                inputMode="url"
+                maxLength={2000}
+                value={editor.blogUrl ?? ""}
+                placeholder="https://blog.naver.com/sanjungeng/게시글번호"
+                onChange={(event) => update({ blogUrl: event.target.value })}
+              />
+              <small className={styles.fieldHint}>
+                상세페이지의 블로그 버튼에 연결됩니다. 비워두면 공식 블로그 홈으로 연결됩니다.
+              </small>
+            </label>
+            <label>
               작업 내용
               <textarea
                 rows={6}

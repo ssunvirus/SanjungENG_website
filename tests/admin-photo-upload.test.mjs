@@ -4,7 +4,7 @@ import { runInNewContext } from "node:vm";
 import { createRequire } from "node:module";
 import test from "node:test";
 import ts from "typescript";
-import { mergeAdminProjects } from "../src/lib/project-record.ts";
+import { mergeAdminProjects, parseProject } from "../src/lib/project-record.ts";
 import { MAX_PROJECT_IMAGE_BYTES } from "../src/lib/project-images.ts";
 import { applyProjectOrder, moveProjectInList } from "../src/lib/project-order.ts";
 import { initialLegacyPhotos } from "../src/lib/legacy-project-photos.ts";
@@ -101,7 +101,7 @@ async function setup(
       if (name === "next/link") return { default: "a" };
       if (name === "lucide-react") return new Proxy({}, { get: (_, key) => String(key) });
       if (name.endsWith("projects/data")) return { projects: [] };
-      if (name.endsWith("project-record")) return { mergeAdminProjects };
+      if (name.endsWith("project-record")) return { mergeAdminProjects, parseProject };
       if (name.endsWith("legacy-project-photos")) return { initialLegacyPhotos };
       if (name.endsWith("project-order")) return { applyProjectOrder, moveProjectInList };
       if (name.endsWith("project-images")) return { MAX_PROJECT_IMAGE_BYTES };

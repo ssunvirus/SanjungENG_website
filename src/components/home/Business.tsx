@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightCircle, ChevronRight } from "lucide-react";
 import BusinessWorkflow from "./BusinessWorkflow";
@@ -208,9 +208,13 @@ export function BusinessOverview() {
                             sizes="340px"
                             className="h-[210px] w-full object-cover object-[center_45%]"
                           />
-                          <p className="px-4 py-3 text-[18px] font-semibold text-brand-navy">
+                          <Link
+                            href="/projects/siheung-commercial-absorption-chiller-repair?listPage=1&listCategory=all"
+                            className="flex items-center justify-between gap-3 px-4 py-3 text-[18px] font-semibold text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-blue"
+                          >
                             냉동설비 수리 현장
-                          </p>
+                            <ChevronRight size={20} aria-hidden="true" />
+                          </Link>
                         </div>
                       )}
                       {index !== 1 && (

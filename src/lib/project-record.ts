@@ -10,6 +10,7 @@ export type ProjectRecord = {
   location: string;
   description: string;
   summary?: string;
+  blogUrl?: string;
   status: "공개";
   photos: { src: string; alt: string }[];
   version: number;
@@ -27,6 +28,27 @@ export function parseProject(value: unknown): ProjectRecord {
     return normalizeFabricDuctText(v.trim());
   }
   const id = field("id", 100, true);
+  let blogUrl: string | undefined;
+  if (p.blogUrl !== undefined) {
+    if (typeof p.blogUrl !== "string" || p.blogUrl.length > 2000) throw new Error("InvalidProject");
+    blogUrl = p.blogUrl.trim();
+    if (blogUrl) {
+      let url: URL;
+      try {
+        url = new URL(blogUrl);
+      } catch {
+        throw new Error("InvalidProject");
+      }
+      if (
+        url.protocol !== "https:" ||
+        !["blog.naver.com", "m.blog.naver.com"].includes(url.hostname) ||
+        url.username ||
+        url.password ||
+        url.port
+      )
+        throw new Error("InvalidProject");
+    }
+  }
   if (!/^[a-z0-9][a-z0-9-]*$/.test(id) || id === "project-order") throw new Error("InvalidProject");
   const category = field("category", 30, true);
   if (!["냉동기", "항온항습기", "냉각탑", "저온저장고", "패브릭덕트", "기타"].includes(category))
@@ -67,6 +89,7 @@ export function parseProject(value: unknown): ProjectRecord {
     location: field("location", 100),
     description: field("description", 5000),
     summary: p.summary === undefined ? "" : field("summary", 50).replace(/\s+/g, " "),
+    ...(blogUrl !== undefined ? { blogUrl } : {}),
     status: "공개",
     photos,
     version: p.version as number,
@@ -88,7 +111,10 @@ export function mergeAdminProjects(
       .filter((base) => !saved.some((item) => item.id === base.id && item.deleted))
       .map((base) =>
         completeLegacyProject(
-          saved.find((item) => item.id === base.id) || base,
+          (() => {
+            const record = saved.find((item) => item.id === base.id);
+            return record ? { ...record, blogUrl: record.blogUrl ?? base.blogUrl } : base;
+          })(),
           base.photos?.[0]?.src,
         ),
       ),

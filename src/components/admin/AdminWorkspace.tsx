@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { projects } from "@/src/components/projects/data";
-import { mergeAdminProjects, type ProjectRecord } from "@/src/lib/project-record";
+import { mergeAdminProjects, parseProject, type ProjectRecord } from "@/src/lib/project-record";
 import { MAX_PROJECT_IMAGE_BYTES } from "@/src/lib/project-images";
 import { initialLegacyPhotos } from "@/src/lib/legacy-project-photos";
 import { applyProjectOrder, moveProjectInList, type ProjectOrder } from "@/src/lib/project-order";
@@ -32,6 +32,7 @@ const initialEntries: Entry[] = projects.map((project) => ({
   location: project.location || "",
   description: project.workDescription || project.description,
   summary: project.description.slice(0, 50),
+  blogUrl: project.blogUrl,
   status: "공개",
   version: 0,
   photos: initialLegacyPhotos(project.id, project.image, project.title),
@@ -44,6 +45,7 @@ const emptyEntry = (): Entry => ({
   location: "",
   description: "",
   summary: "",
+  blogUrl: "",
   status: "공개",
   version: 0,
   photos: [],
@@ -95,6 +97,14 @@ export default function AdminWorkspace() {
     if (!editor || savingRef.current || loading) return;
     if (!editor.title.trim()) {
       setNotice("현장명을 입력해주세요.");
+      return;
+    }
+    try {
+      parseProject({ ...editor, id: editor.id || "new-project" });
+    } catch {
+      setNotice(
+        "입력 내용을 확인해주세요. 네이버 블로그 링크는 https://blog.naver.com/ 또는 https://m.blog.naver.com/ 주소를 입력해주세요.",
+      );
       return;
     }
     savingRef.current = true;

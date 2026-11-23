@@ -47,7 +47,7 @@ export default function SavedProjectDetail({ project }: { project: ProjectRecord
             <ProjectListButton />
           </div>
           <ProjectInquiryBanner />
-          <BlogBanner projectId={project.id} />
+          <BlogBanner projectId={project.id} blogUrl={project.blogUrl} />
         </article>
       </WaveSurface>
     </main>

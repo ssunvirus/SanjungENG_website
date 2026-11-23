@@ -2,8 +2,14 @@ import Image from "next/image";
 import { Link as LinkIcon } from "lucide-react";
 import { projects } from "@/src/components/projects/data";
 
-export default function BlogBanner({ projectId }: { projectId?: string }) {
-  const blogUrl = projects.find((project) => project.id === projectId)?.blogUrl;
+export default function BlogBanner({
+  projectId,
+  blogUrl: savedBlogUrl,
+}: {
+  projectId?: string;
+  blogUrl?: string;
+}) {
+  const blogUrl = savedBlogUrl ?? projects.find((project) => project.id === projectId)?.blogUrl;
   return (
     <a
       href={blogUrl || "https://blog.naver.com/sanjungeng"}

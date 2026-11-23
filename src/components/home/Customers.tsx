@@ -17,6 +17,7 @@ const customerLogos = [
   ["hyundai-terratower", "현대테라타워"],
   ["sk-shieldus", "SK쉴더스"],
   ["kanavi-mobility", "카나비모빌리티"],
+  ["kogas", "한국가스공사"],
 ];
 
 export default function Customers() {
@@ -39,7 +40,7 @@ export default function Customers() {
         제공해왔습니다.
       </p>
       <div className="mt-8 space-y-3 overflow-hidden py-2 lg:mt-10 lg:space-y-4">
-        {[customerLogos.slice(0, 7), customerLogos.slice(7)].map((logos, row) => (
+        {[customerLogos.slice(0, 8), customerLogos.slice(8)].map((logos, row) => (
           <div key={row} className={styles.viewport}>
             <div className={`${styles.track} ${row === 0 ? styles.right : styles.left}`}>
               {[0, 1].map((copy) => (
@@ -47,7 +48,7 @@ export default function Customers() {
                   {logos.map(([file, name]) => (
                     <li
                       key={file}
-                      className="flex h-[100px] w-[160px] shrink-0 items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 px-4 shadow-[0_3px_12px_rgba(16,47,73,0.05)] sm:px-3 lg:h-[118px] lg:w-[200px] lg:px-6"
+                      className={`flex h-[100px] w-[160px] shrink-0 items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 shadow-[0_3px_12px_rgba(16,47,73,0.05)] lg:h-[118px] lg:w-[200px] ${file === "kogas" ? "px-2" : "px-4 sm:px-3 lg:px-6"}`}
                     >
                       <div
                         className={`relative w-full ${file === "avenue-france" ? "h-[68px] lg:h-[78px]" : "h-14 lg:h-16"}`}
@@ -60,11 +61,11 @@ export default function Customers() {
                                 ? "/images/home-refresh/customer-hwaseong-updated.png"
                                 : ["orion", "pkc", "bbq"].includes(file)
                                   ? `/images/home-refresh/customer-${file}-transparent.png`
-                                  : `/images/home-refresh/customer-${file}.png`
+                                  : `/images/home-refresh/customer-${file}.${file === "kogas" ? "jpg" : "png"}`
                           }
                           alt={copy === 0 ? name : ""}
                           fill
-                          sizes="(min-width: 1024px) 152px, 128px"
+                          sizes={file === "kogas" ? "(min-width: 1024px) 184px, 144px" : "(min-width: 1024px) 152px, 128px"}
                           className="object-contain"
                         />
                       </div>
