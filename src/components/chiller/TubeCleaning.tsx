@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image, { type ImageProps } from "next/image";
-import { ArrowUpRight, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import WorkProcessCards from "@/src/components/shared/WorkProcessCards";
+import { projectListHref } from "@/src/lib/project-list-navigation";
 
 const steps = [
   {
@@ -412,6 +413,15 @@ export default function TubeCleaning() {
             <ChevronRight aria-hidden="true" />
           </button>
         </div>
+      </div>
+      <div className="mt-6 flex justify-center lg:mt-8">
+        <Link
+          href={projectListHref(1, "냉동기")}
+          className="flex min-h-[53px] w-fit max-w-full items-center justify-center gap-[8px] rounded-[23px] border-[4px] border-brand-navy bg-brand-navy px-3 text-[30px] font-bold text-white shadow-[0_3px_8px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#16436b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
+        >
+          세관 시공사례 보기
+          <ArrowRight size={34} strokeWidth={2.4} aria-hidden="true" />
+        </Link>
       </div>
       <dialog
         ref={previewRef}
