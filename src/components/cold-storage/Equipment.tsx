@@ -47,7 +47,7 @@ export default function Equipment() {
             alt="저온저장고 냉동설비"
             fill
             sizes="374px"
-            className="object-cover"
+            className="object-cover object-top lg:object-center"
           />
         </div>
         <div className="flex w-full min-w-0 flex-col gap-[16px] lg:gap-[30px]">

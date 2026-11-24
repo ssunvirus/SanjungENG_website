@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { type ImageProps } from "next/image";
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const steps = [
@@ -26,6 +26,19 @@ const steps = [
   },
 ];
 
+function mobilePhoto(src: string) {
+  return src.replace("/chiller/", "/chiller/mobile/").replace(/\.[^.]+$/, ".webp");
+}
+
+function CleaningImage({ src, alt, ...props }: Omit<ImageProps, "src"> & { src: string }) {
+  return (
+    <picture>
+      <source media="(max-width: 1023px)" srcSet={mobilePhoto(src)} type="image/webp" />
+      <Image {...props} src={src} alt={alt} />
+    </picture>
+  );
+}
+
 export default function TubeCleaning() {
   const [activeStep, setActiveStep] = useState(0);
   const [comparisonIndex, setComparisonIndex] = useState(0);
@@ -45,6 +58,20 @@ export default function TubeCleaning() {
   ];
   const comparison = comparisons[comparisonIndex];
   const selectedStep = steps[activeStep];
+  const nextComparison = comparisons[(comparisonIndex + 1) % comparisons.length];
+  const nextStep = steps[(activeStep + 1) % steps.length];
+  useEffect(() => {
+    if (!window.matchMedia("(max-width: 1023px)").matches) return;
+    // Warm only the next mobile photos; leave desktop requests unchanged.
+    const timer = window.setTimeout(() => {
+      for (const src of [nextStep.photo, nextComparison.before, nextComparison.after]) {
+        const photo = new window.Image();
+        photo.fetchPriority = "low";
+        photo.src = mobilePhoto(src);
+      }
+    }, 1200);
+    return () => window.clearTimeout(timer);
+  }, [nextStep.photo, nextComparison.before, nextComparison.after]);
   return (
     <section
       aria-labelledby="chiller-cleaning-heading"
@@ -68,7 +95,7 @@ export default function TubeCleaning() {
 
       <div className="grid items-center gap-7 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
         <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EFF3]">
-          <Image
+          <CleaningImage
             src="/images/chiller/tube-cleaning-overview.png"
             unoptimized
             alt="수실 커버를 개방하고 주변을 보양한 냉동기 세관 작업 현장"
@@ -126,7 +153,7 @@ export default function TubeCleaning() {
           className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EFF3] lg:aspect-auto lg:min-h-0 lg:self-stretch"
         >
           {selectedStep.photo ? (
-            <Image
+            <CleaningImage
               src={selectedStep.photo}
               alt={selectedStep.alt || selectedStep.title}
               fill
@@ -208,7 +235,7 @@ export default function TubeCleaning() {
             ].map(({ label, src, alt }) => (
               <figure key={label}>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EFF3]">
-                  <Image
+                  <CleaningImage
                     src={src}
                     alt={alt}
                     fill
