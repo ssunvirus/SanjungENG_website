@@ -15,7 +15,7 @@ import headingStyles from "@/src/components/chiller/section-headings.module.css"
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions" },
-  title: "냉동기 설치·수리·유지보수 | 산정엔지니어링",
+  title: "냉동기 설치, 수리, 유지보수 | 산정엔지니어링",
   description: "냉동기 설치와 교체부터 수리, 오버홀, 정기점검까지 냉동공조 서비스를 소개합니다.",
 };
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { projectListHref } from "@/src/lib/project-list-navigation";
 import { useState } from "react";
 import SectionHeading from "./SectionHeading";
+import ApplicationIcon from "./ApplicationIcon";
 
 const applications = ["물류센터", "생산시설", "상업시설", "체육 / 공공시설"];
 
@@ -63,7 +64,7 @@ export default function Applications() {
       <div
         role="tablist"
         aria-label="패브릭덕트 적용 공간"
-        className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 font-semibold min-[768px]:grid-cols-4 min-[768px]:gap-x-0 lg:mt-8"
+        className="mt-6 grid grid-cols-2 gap-2 px-1 py-3 lg:mt-8 lg:flex lg:gap-3"
       >
         {applications.map((title, index) => (
           <button
@@ -86,23 +87,17 @@ export default function Applications() {
               selectTab(nextIndex, true);
             }}
             key={title}
-            className={`flex min-h-12 min-w-0 w-full cursor-pointer items-center justify-start py-3 text-left transition-colors duration-200 motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue lg:pb-5 lg:pt-2 ${index === activeIndex ? "text-brand-blue" : "text-brand-navy/75 hover:text-brand-blue"}`}
+            className={`flex min-h-[88px] min-w-0 w-full flex-1 flex-col cursor-pointer items-center justify-center gap-1.5 rounded-2xl border px-1 py-2.5 text-[16px] min-[360px]:text-[18px] font-semibold whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:min-h-[76px] lg:flex-row lg:rounded-full lg:px-2 lg:py-3 lg:text-[22px] xl:gap-2 xl:text-[28px] ${index === activeIndex ? "border-brand-blue bg-brand-blue text-white shadow-[0_6px_20px_rgba(0,173,219,0.18)]" : "border-white/80 bg-white/75 text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.04)] hover:border-brand-blue/25 hover:bg-white hover:text-brand-blue"}`}
           >
-            <span
-              aria-hidden="true"
-              className={`mr-2.5 size-[6px] shrink-0 rounded-full bg-brand-blue transition-[opacity,transform] duration-200 motion-reduce:transition-none lg:mr-3 ${index === activeIndex ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
+            <ApplicationIcon
+              index={index}
+              className="size-[30px] shrink-0 lg:size-10 xl:size-11"
             />
-            <span className="whitespace-nowrap text-[20px] leading-[1.4] min-[768px]:text-[24px] lg:text-[30px]">
+            <span className="leading-[1.4]">
               {title}
             </span>
           </button>
         ))}
-      </div>
-      <div aria-hidden="true" className="relative hidden h-[3px] bg-brand-navy/20 lg:block">
-        <span
-          className="absolute left-0 top-0 h-[3px] w-1/4 bg-brand-blue transition-transform duration-300 motion-reduce:transition-none"
-          style={{ transform: `translateX(${activeIndex * 100}%)` }}
-        />
       </div>
       <div
         role="tabpanel"

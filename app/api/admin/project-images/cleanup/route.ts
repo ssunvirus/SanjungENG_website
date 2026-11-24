@@ -14,7 +14,7 @@ export async function GET() {
     return reply({ count: images.length, images: images.slice(0, CLEANUP_BATCH_SIZE) });
   } catch {
     return reply(
-      { error: "미사용 사진을 확인하지 못했습니다. S3 ListBucket·DB Scan 권한을 확인해주세요." },
+      { error: "미사용 사진을 확인하지 못했습니다. S3 ListBucket 및 DB Scan 권한을 확인해주세요." },
       503,
     );
   }
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
     return reply(
       {
         error:
-          "사진 정리가 중단되었습니다. 결과를 다시 조회해주세요. S3·DB 읽기 권한을 확인해주세요.",
+          "사진 정리가 중단되었습니다. 결과를 다시 조회해주세요. S3 및 DB 읽기 권한을 확인해주세요.",
       },
       503,
     );

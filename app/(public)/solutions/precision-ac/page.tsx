@@ -13,7 +13,7 @@ import WorkProcess from "@/src/components/precision-ac/WorkProcess";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/precision-ac" },
-  title: "항온항습기 설치·교체·수리 | 산정엔지니어링",
+  title: "항온항습기 설치, 교체, 수리 | 산정엔지니어링",
   description:
     "현장에 맞는 항온항습기 설치와 교체, 수리, 부품 교체 및 정기점검 서비스를 소개합니다.",
 };

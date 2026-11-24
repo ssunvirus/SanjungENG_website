@@ -40,7 +40,7 @@ export default function UnusedPhotoCleanup({
         const data = await response.json();
         if (!response.ok) throw new Error(data.error);
         setMessage(
-          `${data.deleted}장 삭제 · ${data.skipped}장 제외 · ${data.failed}장 실패. 실패한 사진은 다시 정리할 수 있습니다.`,
+          `${data.deleted}장 삭제 / ${data.skipped}장 제외 / ${data.failed}장 실패. 실패한 사진은 다시 정리할 수 있습니다.`,
         );
       } else {
         setMessage("");
@@ -97,7 +97,7 @@ export default function UnusedPhotoCleanup({
           <p role="status">
             정리 가능한 사진 {preview.count}장
             {preview.count > preview.images.length
-              ? ` · 오래된 ${preview.images.length}장부터 표시합니다.`
+              ? ` / 오래된 ${preview.images.length}장부터 표시합니다.`
               : ""}
           </p>
           {preview.images.length > 0 && (
@@ -120,7 +120,7 @@ export default function UnusedPhotoCleanup({
                       />
                     </div>
                     <figcaption className="mt-1 break-all text-xs text-slate-500">
-                      {new Date(image.modifiedAt).toLocaleDateString("ko-KR")} ·{" "}
+                      {new Date(image.modifiedAt).toLocaleDateString("ko-KR")} , {" "}
                       {(image.bytes / 1024 / 1024).toFixed(2)}MB
                     </figcaption>
                   </figure>

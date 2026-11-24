@@ -106,7 +106,7 @@ export default function ProjectGallery({
       <div
         role="group"
         aria-label="시공사례 분류"
-        className="mt-6 flex gap-2 overflow-x-auto px-1 py-3 lg:mt-[34px] lg:gap-3"
+        className="mt-6 grid grid-cols-3 gap-2 px-1 py-3 lg:mt-[34px] lg:flex lg:gap-3 lg:overflow-x-auto"
       >
         {categories.map((value) => (
           <button
@@ -118,9 +118,11 @@ export default function ProjectGallery({
               setListing(1, value);
             }}
             onFocus={(event) => {
-              event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+              if (window.matchMedia("(min-width: 90rem)").matches) {
+                event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+              }
             }}
-            className={`flex min-h-12 min-w-max flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full border px-3 py-2.5 text-lg font-semibold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue motion-reduce:transition-none lg:min-h-[76px] lg:gap-1.5 lg:px-2 lg:py-3 lg:text-[22px] xl:gap-2 xl:text-[28px] ${category === value ? "border-brand-blue bg-brand-blue text-white shadow-[0_6px_20px_rgba(0,173,219,0.18)]" : "border-white/80 bg-white/75 text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.04)] hover:border-brand-blue/25 hover:bg-white hover:text-brand-blue"}`}
+            className={`flex min-h-[88px] min-w-0 flex-1 flex-col cursor-pointer items-center justify-center gap-1.5 rounded-2xl border px-1 py-2.5 text-[16px] min-[360px]:text-[18px] font-semibold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue motion-reduce:transition-none lg:min-h-[76px] lg:min-w-max lg:flex-row lg:rounded-full lg:gap-1.5 lg:px-2 lg:py-3 lg:text-[22px] xl:gap-2 xl:text-[28px] ${category === value ? "border-brand-blue bg-brand-blue text-white shadow-[0_6px_20px_rgba(0,173,219,0.18)]" : "border-white/80 bg-white/75 text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.04)] hover:border-brand-blue/25 hover:bg-white hover:text-brand-blue"}`}
           >
             <ProjectCategoryIcon category={value} />
             <span>{value}</span>

@@ -202,7 +202,7 @@ export default function ProjectList({
         <div className={styles.listFooter}>
           총 {visible.length}건
           <span>
-            {ordering ? "순서 저장 중…" : "↑·↓ 버튼으로 이동하면 순서가 자동 저장됩니다."}
+            {ordering ? "순서 저장 중…" : "↑ / ↓ 버튼으로 이동하면 순서가 자동 저장됩니다."}
           </span>
         </div>
       </section>

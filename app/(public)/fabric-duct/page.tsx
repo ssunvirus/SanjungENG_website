@@ -1,4 +1,4 @@
-﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/SectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import Hero from "@/src/components/fabric-duct/Hero";
@@ -14,7 +14,7 @@ import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct" },
-  title: "패브릭덕트 설계·시공 | 산정엔지니어링",
+  title: "패브릭덕트 설계 및 시공 | 산정엔지니어링",
   description:
     "공간에 맞춘 패브릭덕트 설계와 설치, CFD를 활용한 공기 분배 설계 솔루션을 소개합니다.",
 };

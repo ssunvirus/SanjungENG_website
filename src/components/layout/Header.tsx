@@ -50,7 +50,7 @@ const solutionPreviews = [
     label: "저온저장고",
     href: "/solutions/cold-storage",
     image: "cold-storage.png",
-    description: "보관 환경에 맞춘 CDU, 유니트쿨러 설치 및 냉동설비 시공",
+    description: "보관 환경에 맞춘 CDU 및 유니트쿨러 설치 및 냉동설비 시공",
   },
   {
     label: "냉각탑",

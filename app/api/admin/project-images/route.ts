@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   if (denied) return denied;
   const type = request.headers.get("content-type") || "";
   if (!["image/jpeg", "image/png", "image/webp"].includes(type))
-    return reply({ error: "JPG·PNG·WEBP 사진만 업로드할 수 있습니다." }, 415);
+    return reply({ error: "JPG, PNG, WEBP 사진만 업로드할 수 있습니다." }, 415);
   if (!request.body) return reply({ error: "사진을 선택해주세요." }, 400);
   let bytes: Buffer;
   try {

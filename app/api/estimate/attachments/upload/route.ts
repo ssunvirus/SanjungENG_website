@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     if (files.reduce((total, file) => total + file.size, 0) <= estimateLimits.directAttachmentBytes)
       return fail("작은 첨부파일은 문의 양식에서 바로 전송해주세요.", 400);
   } catch {
-    return fail("첨부파일 형식·개수·용량을 확인해주세요. 최대 5개, 합계 20MB입니다.", 400);
+    return fail("첨부파일 형식, 개수, 용량을 확인해주세요. 최대 5개, 합계 20MB입니다.", 400);
   }
   if (
     !process.env.ESTIMATE_ATTACHMENTS_BUCKET ||

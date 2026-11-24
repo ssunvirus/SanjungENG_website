@@ -1,3 +1,6 @@
+"use client";
+
+import { useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { projectListHref } from "@/src/lib/project-list-navigation";
@@ -37,6 +40,9 @@ const maintenanceServices = [
 ];
 
 export default function Maintenance() {
+  const [activeCard, setActiveCard] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const trackId = useId();
   return (
     <section className="mx-auto w-full max-w-[1440px] break-keep px-5 py-12 lg:px-[63px] lg:py-20">
       <header>
@@ -56,9 +62,34 @@ export default function Maintenance() {
         </p>
       </header>
 
-      <div className="mt-8 grid grid-cols-1 gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-6">
+      <div
+        id={trackId}
+        ref={trackRef}
+        aria-label="유지보수 서비스 카드, 좌우로 넘겨보기"
+        onScroll={(event) => {
+          const track = event.currentTarget;
+          const first = track.children[0] as HTMLElement | undefined;
+          if (!first) return;
+          let nearest = 0;
+          let distance = Infinity;
+          Array.from(track.children).forEach((card, index) => {
+            const delta = Math.abs(
+              (card as HTMLElement).offsetLeft - first.offsetLeft - track.scrollLeft,
+            );
+            if (delta < distance) {
+              nearest = index;
+              distance = delta;
+            }
+          });
+          setActiveCard(nearest);
+        }}
+        className="relative mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-1 py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mt-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:p-0"
+      >
         {maintenanceServices.map((service) => (
-          <article key={service.number} className="min-w-0">
+          <article
+            key={service.number}
+            className="w-[90%] min-w-0 shrink-0 snap-start last:mr-[10%] lg:w-auto lg:last:mr-0"
+          >
             <Link
               href={projectListHref(1, "냉동기")}
               aria-label={`${service.title} 시공사례 보기`}
@@ -80,10 +111,10 @@ export default function Maintenance() {
                     <service.icon size={34} strokeWidth={2} aria-hidden="true" />
                   </span>
                   <div className="min-w-0 border-l border-brand-blue/35 pl-4 lg:pl-5">
-                    <span className="text-[24px] font-bold leading-none tabular-nums text-brand-blue lg:text-[28px]">
+                    <span className="hidden text-[24px] font-bold leading-none tabular-nums text-brand-blue lg:inline lg:text-[28px]">
                       {service.number}
                     </span>
-                    <h3 className="mt-2 text-[24px] font-bold leading-snug tracking-tight text-brand-navy lg:text-[28px]">
+                    <h3 className="text-[24px] font-bold leading-snug tracking-tight text-brand-navy lg:mt-2 lg:text-[28px]">
                       {service.title}
                     </h3>
                   </div>
@@ -94,6 +125,35 @@ export default function Maintenance() {
               </div>
             </Link>
           </article>
+        ))}
+      </div>
+      <div className="mt-1 flex justify-center gap-1 lg:hidden" aria-label="유지보수 서비스 선택">
+        {maintenanceServices.map((service, index) => (
+          <button
+            key={service.number}
+            type="button"
+            aria-label={`${service.title} 카드 보기`}
+            aria-pressed={activeCard === index}
+            aria-controls={trackId}
+            onClick={() => {
+              const track = trackRef.current;
+              const card = track?.children[index] as HTMLElement | undefined;
+              const first = track?.children[0] as HTMLElement | undefined;
+              if (track && card && first)
+                track.scrollTo({
+                  left: card.offsetLeft - first.offsetLeft,
+                  behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                    ? "instant"
+                    : "smooth",
+                });
+            }}
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-brand-blue"
+          >
+            <span
+              aria-hidden="true"
+              className={`h-2 rounded-full ${activeCard === index ? "w-5 bg-brand-blue" : "w-2 bg-brand-navy/20"}`}
+            />
+          </button>
         ))}
       </div>
     </section>

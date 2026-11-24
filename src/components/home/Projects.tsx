@@ -65,7 +65,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
       className="relative mx-auto h-[929px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
     >
       <div className="mx-auto w-[1192px]">
-        <div className="flex h-6 items-center gap-[20px] text-brand-blue/60">
+        <div data-desktop-section-eyebrow className="flex h-6 items-center gap-[20px] text-brand-blue/60">
           <span className="text-[20px] font-medium tracking-[6px]">PROJECTS</span>
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>

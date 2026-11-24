@@ -63,7 +63,7 @@ export default function ProjectPhotos({
         />
         <ImagePlus size={28} />
         <strong>{uploading ? "사진 업로드 중…" : "사진 선택하기"}</strong>
-        <small>JPG·PNG·WEBP · 사진당 5MB 이하 · 최대 30장</small>
+        <small>JPG, PNG, WEBP / 사진당 5MB 이하 / 최대 30장</small>
       </div>
       <p
         id="photo-upload-feedback"
@@ -73,7 +73,7 @@ export default function ProjectPhotos({
         {photoFeedback?.message ||
           (editor.photos.length === 0
             ? "등록된 사진이 없습니다. 위에서 사진을 선택해 추가해주세요."
-            : `현재 사진 ${editor.photos.length}장 · 사진을 더 추가할 수 있어요.`)}
+            : `현재 사진 ${editor.photos.length}장 / 사진을 더 추가할 수 있어요.`)}
       </p>
       {editor.photos.length > 1 && (
         <p className={styles.photoReorderHint}>

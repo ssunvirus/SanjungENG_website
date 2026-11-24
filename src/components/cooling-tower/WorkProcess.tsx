@@ -15,7 +15,7 @@ export default function WorkProcess() {
           data-section-eyebrow
           className="flex items-center gap-[16px] lg:gap-[20px] text-[14px] lg:text-[20px] font-medium tracking-[3px] lg:tracking-[6px] text-brand-blue/60"
         >
-          WORK PROCESS <span className="h-[2px] w-[46px] bg-current" />
+          WORK PROCESS <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>
         <h2 className="mt-[10px] text-[28px] lg:text-[50px] font-bold tracking-[1px] lg:tracking-[2.5px] text-brand-navy">
           냉각탑, 이렇게 점검하고 정비합니다.
@@ -26,6 +26,7 @@ export default function WorkProcess() {
       </header>
 
       <WorkProcessCards
+        mobileCarousel
         steps={steps.map(([number, title, description, image]) => ({
           number,
           title,

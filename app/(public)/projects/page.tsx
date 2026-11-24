@@ -1,4 +1,4 @@
-﻿import WaveSurface from "@/src/components/shared/WaveSurface";
+import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import Hero from "@/src/components/projects/Hero";
 import ProjectGallery from "@/src/components/projects/ProjectGallery";
@@ -7,9 +7,9 @@ import { publicProjectCards } from "@/src/lib/public-projects";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/projects" },
-  title: "냉동공조·패브릭덕트 시공사례 | 산정엔지니어링",
+  title: "냉동공조 및 패브릭덕트 시공사례 | 산정엔지니어링",
   description:
-    "냉동기, 저온저장고, 항온항습기, 냉각탑 및 패브릭덕트 설치·유지보수 현장을 소개합니다.",
+    "냉동기, 저온저장고, 항온항습기, 냉각탑 및 패브릭덕트 설치, 유지보수 현장을 소개합니다.",
 };
 
 export default async function ProjectsPage({

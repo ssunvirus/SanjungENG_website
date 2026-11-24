@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image, { type ImageProps } from "next/image";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import WorkProcessCards from "@/src/components/shared/WorkProcessCards";
 
 const steps = [
   {
@@ -30,6 +31,10 @@ function mobilePhoto(src: string) {
   return src.replace("/chiller/", "/chiller/mobile/").replace(/\.[^.]+$/, ".webp");
 }
 
+function previewPhoto(src: string) {
+  return src.replace("/chiller/", "/chiller/preview/").replace(/\.[^.]+$/, ".webp");
+}
+
 function CleaningImage({ src, alt, ...props }: Omit<ImageProps, "src"> & { src: string }) {
   return (
     <picture>
@@ -42,6 +47,21 @@ function CleaningImage({ src, alt, ...props }: Omit<ImageProps, "src"> & { src: 
 export default function TubeCleaning() {
   const [activeStep, setActiveStep] = useState(0);
   const [comparisonIndex, setComparisonIndex] = useState(0);
+  const comparisonTrack = useRef<HTMLDivElement>(null);
+  const comparisonSection = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDialogElement>(null);
+  const [preview, setPreview] = useState<{ src: string; title: string } | null>(null);
+  useEffect(() => {
+    const dialog = previewRef.current;
+    if (!preview || !dialog) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialog.showModal();
+    return () => {
+      dialog.close();
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [preview]);
   const comparisons = [
     {
       before: "/images/chiller/tube-cleaning-before-103719.jpg",
@@ -57,6 +77,24 @@ export default function TubeCleaning() {
     },
   ];
   const comparison = comparisons[comparisonIndex];
+  useEffect(() => {
+    const section = comparisonSection.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        for (const src of [comparison.before, comparison.after]) {
+          const photo = new window.Image();
+          photo.fetchPriority = "low";
+          photo.src = previewPhoto(src);
+        }
+        observer.disconnect();
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [comparison.before, comparison.after]);
   const selectedStep = steps[activeStep];
   const nextComparison = comparisons[(comparisonIndex + 1) % comparisons.length];
   const nextStep = steps[(activeStep + 1) % steps.length];
@@ -146,11 +184,25 @@ export default function TubeCleaning() {
             이런 순서로 진행됩니다
           </h3>
         </div>
+        <div className="-mt-8 min-w-0 lg:hidden">
+          <WorkProcessCards
+            mobileCarousel
+            steps={steps.map((step, index) => ({
+              number: String(index + 1).padStart(2, "0"),
+              title: step.title,
+              mobileTitle: ["수실 개방 및 세관", "건조 및 방청 도장", "조립 및 시운전"][index],
+              description: step.description,
+              image: mobilePhoto(step.photo),
+              alt: step.alt,
+              unoptimized: true,
+            }))}
+          />
+        </div>
         <div
           id="cleaning-step-photo"
           role="region"
           aria-label={`${selectedStep.title} 사진`}
-          className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EFF3] lg:aspect-auto lg:min-h-0 lg:self-stretch"
+          className="relative hidden overflow-hidden rounded-[10px] bg-[#E8EFF3] lg:block lg:min-h-0 lg:self-stretch"
         >
           {selectedStep.photo ? (
             <CleaningImage
@@ -170,7 +222,7 @@ export default function TubeCleaning() {
             </div>
           )}
         </div>
-        <ol className="divide-y divide-brand-navy/10 lg:col-start-2">
+        <ol className="hidden divide-y divide-brand-navy/10 lg:col-start-2 lg:block">
           {steps.map((step, index) => (
             <li
               key={step.title}
@@ -200,14 +252,115 @@ export default function TubeCleaning() {
         </ol>
       </div>
 
-      <div className="mt-12 border-t border-brand-navy/15 pt-7 lg:mt-16 lg:pt-9">
+      <div
+        ref={comparisonSection}
+        className="mt-12 border-t border-brand-navy/15 pt-7 lg:mt-16 lg:pt-9"
+      >
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-[26px] font-bold text-brand-navy lg:text-[32px]">세관 전과 후</h3>
           <p className="text-lg font-semibold tabular-nums text-brand-navy" aria-live="polite">
             사례 {comparisonIndex + 1} / {comparisons.length}
           </p>
         </div>
-        <div className="relative px-7 sm:px-12">
+        <div className="lg:hidden">
+          <div
+            ref={comparisonTrack}
+            aria-label="세관 전후 사례 사진, 좌우로 넘겨보기"
+            className="relative flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            onScroll={(event) => {
+              const track = event.currentTarget;
+              const first = track.children[0] as HTMLElement | undefined;
+              if (!first) return;
+              let nearest = 0;
+              let distance = Infinity;
+              Array.from(track.children).forEach((child, index) => {
+                const delta = Math.abs(
+                  (child as HTMLElement).offsetLeft - first.offsetLeft - track.scrollLeft,
+                );
+                if (delta < distance) {
+                  nearest = index;
+                  distance = delta;
+                }
+              });
+              setComparisonIndex(nearest);
+            }}
+          >
+            {comparisons.map((item, index) => (
+              <div
+                key={item.before}
+                role="group"
+                aria-label={`사례 ${index + 1}`}
+                className="w-[90%] shrink-0 snap-start rounded-xl border border-brand-navy/10 bg-white p-3 shadow-[0_4px_16px_rgba(16,46,73,0.08)] last:mr-[10%]"
+              >
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { label: "세관 전", src: item.before },
+                    { label: "세관 후", src: item.after },
+                  ].map((photo) => (
+                    <figure key={photo.label} className="min-w-0">
+                      <button
+                        type="button"
+                        aria-haspopup="dialog"
+                        aria-label={`사례 ${index + 1} ${photo.label} 사진 확대`}
+                        onClick={() =>
+                          setPreview({ src: photo.src, title: `사례 ${index + 1} ${photo.label}` })
+                        }
+                        className="relative block aspect-[3/4] w-full cursor-zoom-in overflow-hidden rounded-[8px] bg-[#E8EFF3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+                      >
+                        <Image
+                          src={mobilePhoto(photo.src)}
+                          alt={`사례 ${index + 1} ${photo.label} 냉동기 수실 내부`}
+                          fill
+                          unoptimized
+                          sizes="45vw"
+                          className="object-cover object-center"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="absolute bottom-2 right-2 flex size-8 items-center justify-center rounded-full bg-brand-navy/80 text-white"
+                        >
+                          <ZoomIn size={18} />
+                        </span>
+                      </button>
+                      <figcaption className="mt-3 text-center text-base font-bold text-brand-navy">
+                        {photo.label}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 flex justify-center gap-1">
+            {comparisons.map((item, index) => (
+              <button
+                key={item.before}
+                type="button"
+                aria-label={`세관 전후 사례 ${index + 1} 보기`}
+                aria-pressed={comparisonIndex === index}
+                onClick={() => {
+                  const track = comparisonTrack.current;
+                  const card = track?.children[index] as HTMLElement | undefined;
+                  const first = track?.children[0] as HTMLElement | undefined;
+                  if (track && card && first)
+                    track.scrollTo({
+                      left: card.offsetLeft - first.offsetLeft,
+                      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                        ? "instant"
+                        : "smooth",
+                    });
+                }}
+                className="flex size-11 cursor-pointer items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-brand-blue"
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-2 rounded-full ${comparisonIndex === index ? "w-5 bg-brand-blue" : "w-2 bg-brand-navy/20"}`}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="relative hidden px-12 lg:block">
           <button
             type="button"
             aria-label="이전 세관 전후 사례"
@@ -234,7 +387,7 @@ export default function TubeCleaning() {
               },
             ].map(({ label, src, alt }) => (
               <figure key={label}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] bg-[#E8EFF3]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[10px] bg-[#E8EFF3]">
                   <CleaningImage
                     src={src}
                     alt={alt}
@@ -260,6 +413,42 @@ export default function TubeCleaning() {
           </button>
         </div>
       </div>
+      <dialog
+        ref={previewRef}
+        aria-label={preview ? `${preview.title} 확대 보기` : "사진 확대 보기"}
+        onClose={() => setPreview(null)}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) previewRef.current?.close();
+        }}
+        className="fixed inset-0 m-auto w-[96vw] max-w-[1400px] max-h-[94dvh] overflow-auto rounded-xl border-0 bg-brand-navy p-3 text-white shadow-xl backdrop:bg-black/80 sm:p-5"
+      >
+        {preview && (
+          <>
+            <div className="mb-3 flex items-center justify-between gap-4">
+              <p className="text-lg font-bold">{preview.title}</p>
+              <button
+                type="button"
+                aria-label="확대 사진 닫기"
+                onClick={() => previewRef.current?.close()}
+                className="flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-white/10 hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-white"
+              >
+                <X aria-hidden="true" />
+              </button>
+            </div>
+            <div className="relative h-[75dvh]">
+              <Image
+                key={preview.src}
+                src={previewPhoto(preview.src)}
+                alt={`${preview.title} 냉동기 수실 내부`}
+                fill
+                unoptimized
+                sizes="96vw"
+                className="object-contain"
+              />
+            </div>
+          </>
+        )}
+      </dialog>
     </section>
   );
 }

@@ -73,7 +73,7 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
     >
       <div className="flex min-h-[546px] w-[1230px] items-center justify-center gap-[60px]">
         <div className="flex w-[525px] shrink-0 flex-col items-start gap-[21px] text-brand-navy">
-          <div className="flex h-6 items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-brand-blue/60">
+          <div data-desktop-section-eyebrow className="flex h-6 items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-brand-blue/60">
             <span>SOLUTION</span>
             <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
           </div>
@@ -98,7 +98,7 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
           {note && <p className="break-keep text-[14px] leading-6 text-brand-navy/65">{note}</p>}
           <span aria-hidden="true" className="h-[3px] w-[60px] rounded-sm bg-brand-blue" />
           <p className="text-[14px] font-medium leading-[21px]">
-            30년 현장 경험　·　설계부터 시공까지　·　설치 이후 유지관리
+            30년 현장 경험 / 설계부터 시공까지 / 설치 이후 유지관리
           </p>
           <div className="flex flex-col gap-[15px] rounded-[15px] bg-brand-navy px-[23px] py-[15px] text-white shadow-[0_4px_10px_rgba(0,0,0,0.25)]">
             <p className="text-[12px] font-medium leading-[17px] text-[#ADC9DB]">

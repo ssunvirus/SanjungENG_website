@@ -286,7 +286,7 @@ export default function InquiryForm() {
             <span className="min-w-0 text-sm lg:text-[18px] text-brand-navy/60" aria-live="polite">
               {draggingFiles
                 ? "여기에 놓으면 첨부됩니다."
-                : "사진·도면을 여기로 끌어다 놓거나 파일을 선택해주세요."}
+                : "사진과 도면을 여기로 끌어다 놓거나 파일을 선택해주세요."}
             </span>
             {selectedFiles.length > 0 && (
               <ul className="w-full space-y-2" aria-label="선택한 첨부파일">
@@ -313,7 +313,7 @@ export default function InquiryForm() {
             )}
           </div>
           <p id="inquiry-file-help" className="mt-2 text-[14px] text-brand-navy/60">
-            JPG, PNG, WEBP, PDF, ZIP · 최대 5개 / 전체 20MB
+            JPG, PNG, WEBP, PDF, ZIP / 최대 5개 / 전체 20MB
           </p>
           <p className="mt-1 text-[14px] text-brand-navy/60">
             사진이 많으면 ZIP 파일로 압축해 첨부해주세요.

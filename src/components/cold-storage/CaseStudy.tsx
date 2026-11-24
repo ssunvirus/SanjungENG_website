@@ -3,13 +3,13 @@ import { projectListHref } from "@/src/lib/project-list-navigation";
 import { FileText, Settings, Wrench } from "lucide-react";
 
 const details = [
-  { icon: Settings, title: "작업 내용", description: <>저온저장고 CDU, 유니트쿨러 신규 설치</> },
+  { icon: Settings, title: "작업 내용", description: <>저온저장고 CDU 및 유니트쿨러 신규 설치</> },
   {
     icon: Wrench,
     title: "주요 작업",
     description: (
       <>
-        CDU, 유니트쿨러 냉매배관, 보온 시공, 연결
+        CDU 및 유니트쿨러 냉매배관, 보온 시공, 연결
         <br />
         기밀시험, 진공 작업 및 냉매 충전
       </>

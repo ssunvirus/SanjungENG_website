@@ -34,7 +34,7 @@ export default function Hero() {
           저장고 환경에 맞춘 설치, 안정적인 온도 관리
         </p>
         <p className="mt-5 text-[11px] leading-5 lg:mt-[24px] lg:text-[22.5px]">
-          CDU, 유니트쿨러 설치&nbsp;&nbsp; | &nbsp;&nbsp;냉매 배관 시공&nbsp;&nbsp; |
+          CDU 및 유니트쿨러 설치&nbsp;&nbsp; | &nbsp;&nbsp;냉매 배관 시공&nbsp;&nbsp; |
           &nbsp;&nbsp;제어설비
         </p>
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">

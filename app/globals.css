@@ -38,6 +38,45 @@ body {
   }
 }
 
+/* Shared desktop section labels; compact layouts retain their existing rules. */
+@media (width >= 90rem) {
+  :is([data-section-eyebrow], [data-desktop-section-eyebrow]) {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: auto;
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgb(0 173 219 / 80%);
+  }
+
+  :is([data-section-eyebrow], [data-desktop-section-eyebrow]) > :is(p, span):not([aria-hidden]) {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+
+  :is([data-section-eyebrow], [data-desktop-section-eyebrow]) > [aria-hidden="true"] {
+    display: none;
+  }
+
+  :is([data-section-eyebrow], [data-desktop-section-eyebrow])::after {
+    content: none;
+  }
+
+  .text-center > [data-section-eyebrow] {
+    justify-content: center;
+  }
+
+  :is([data-section-eyebrow], [data-desktop-section-eyebrow]) + :is(h1, h2) {
+    margin-top: 12px;
+  }
+}
+
 @keyframes hero-content {
   from {
     opacity: 0;

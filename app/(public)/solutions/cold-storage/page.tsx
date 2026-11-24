@@ -1,4 +1,4 @@
-﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/SectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/cold-storage/CaseStudy";
@@ -12,7 +12,7 @@ import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cold-storage" },
   title: "저온저장고 냉동설비 설치 | 산정엔지니어링",
-  description: "저온저장고의 CDU·유니트쿨러 설치와 냉매 배관, 제어설비 시공 내용을 소개합니다.",
+  description: "저온저장고의 CDU 및 유니트쿨러 설치와 냉매 배관, 제어설비 시공 내용을 소개합니다.",
 };
 
 const navigationItems = [

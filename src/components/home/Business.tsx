@@ -27,7 +27,7 @@ const businessCards = [
     number: "03",
     title: "저온저장고",
     description: "저온 보관을 위한 설비 구축",
-    services: "저장고 설계 / CDU, 유니트쿨러 설치",
+    services: "저장고 설계 / CDU 및 유니트쿨러 설치",
     image: "/images/cold-storage/process-unit-installation.jpg",
     imageAlt: "저온저장고 설비현장",
     href: "/solutions/cold-storage",
@@ -334,7 +334,7 @@ export function BusinessAreas() {
   return (
     <section className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
       <div className="mx-auto w-[1200px]">
-        <div className="flex h-6 items-center gap-[20px] text-brand-blue/60">
+        <div data-desktop-section-eyebrow className="flex h-6 items-center gap-[20px] text-brand-blue/60">
           <span className="text-[20px] font-medium tracking-[6px]">OUR BUSINESS</span>
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>

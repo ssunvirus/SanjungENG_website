@@ -33,7 +33,7 @@ export default function Hero() {
           현장 환경에 맞춘 냉각탑 설치부터 유지관리까지
         </p>
         <p className="text-[11px] leading-5 lg:text-[22.5px]">
-          냉각탑 설치, 교체&nbsp;&nbsp; | &nbsp;&nbsp;충진물, 부품 교체&nbsp;&nbsp; |
+          냉각탑 설치, 교체&nbsp;&nbsp; | &nbsp;&nbsp;충진물 및 부품 교체&nbsp;&nbsp; |
           &nbsp;&nbsp;세척, 정비
         </p>
         <div className="flex flex-col gap-3 lg:flex-row lg:gap-[26px]">

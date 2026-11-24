@@ -37,7 +37,7 @@ export default function Hero() {
           현장 진단부터 설치, 유지보수까지
         </p>
         <p className="mt-5 text-[11px] leading-5 lg:mt-[24px] lg:text-[22.5px] lg:leading-normal">
-          설치 · 교체&nbsp;&nbsp; | &nbsp;&nbsp;수리 · 오버홀&nbsp;&nbsp; | &nbsp;&nbsp;정기점검
+          설치 / 교체&nbsp;&nbsp; | &nbsp;&nbsp;수리 / 오버홀&nbsp;&nbsp; | &nbsp;&nbsp;정기점검
         </p>
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link

@@ -66,11 +66,11 @@ export default function PrivacyPage() {
 
           <h2 className={heading}>7. 개인정보 관련 문의</h2>
           <p className={body}>
-            주식회사 산정엔지니어링 · 전화{" "}
+            주식회사 산정엔지니어링 / 전화{" "}
             <a className="underline" href="tel:028911728">
               02-891-1728
             </a>{" "}
-            · 이메일{" "}
+ / 이메일{" "}
             <a className="underline" href="mailto:sanjungeng@naver.com">
               sanjungeng@naver.com
             </a>

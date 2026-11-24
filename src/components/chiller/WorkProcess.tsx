@@ -4,24 +4,28 @@ const steps = [
   {
     number: "01",
     title: "현장 확인",
+    mobileTitle: "현장 확인",
     description: "설비 상태, 공간, 운전 조건 검토",
     image: "/images/chiller/process-site-inspection.jpg",
   },
   {
     number: "02",
     title: "장비, 작업 계획",
+    mobileTitle: "작업 계획",
     description: "용량, 공정, 일정 협의",
     image: "/images/chiller/process-work-planning.jpg",
   },
   {
     number: "03",
     title: "철거 & 설치",
+    mobileTitle: "철거 및 설치",
     description: "기존 설비 철거 및 신규 장비 입고",
     image: "/images/chiller/process-removal-installation.png",
   },
   {
     number: "04",
     title: "시운전 & 인계",
+    mobileTitle: "시운전 및 인계",
     description: "운전 확인 및 관리사항 안내",
     image: "/images/chiller/process-commissioning-handover.png",
   },
@@ -34,7 +38,7 @@ export default function WorkProcess() {
         data-section-eyebrow
         className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]"
       >
-        WORK PROCESS <span className="h-[2px] w-[46px] bg-brand-blue/60" />
+        WORK PROCESS <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
       </p>
       <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-brand-navy lg:mt-[10px] lg:text-[50px] lg:tracking-[2.5px]">
         설치 &amp; 교체, 어떻게 진행될까요?
@@ -46,6 +50,7 @@ export default function WorkProcess() {
         <strong className="font-extrabold text-brand-blue">산정엔지니어링</strong>이 책임집니다.
       </p>
       <WorkProcessCards
+        mobileCarousel
         steps={steps.map((step) => ({
           ...step,
           unoptimized: step.number === "03" || step.number === "04",
