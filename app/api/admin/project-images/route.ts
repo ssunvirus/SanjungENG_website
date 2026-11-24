@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     bytes = await readRequestBytes(request, MAX_PROJECT_IMAGE_BYTES);
   } catch (error) {
     if (error instanceof RequestBodyError && error.status === 413)
-      return reply({ error: "사진 한 장은 3MB 이하여야 합니다." }, 413);
+      return reply({ error: "사진 한 장은 5MB 이하여야 합니다." }, 413);
     return reply({ error: "사진 전송이 중단되었습니다. 다시 시도해주세요." }, 400);
   }
   if (!imageExtension(type, bytes)) return reply({ error: "사진 형식을 확인해주세요." }, 400);

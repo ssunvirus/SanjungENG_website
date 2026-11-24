@@ -1,4 +1,4 @@
-export const MAX_PROJECT_IMAGE_BYTES = 3 * 1024 * 1024;
+export const MAX_PROJECT_IMAGE_BYTES = 5 * 1024 * 1024;
 
 export function imageUploadError(error: unknown) {
   const name =

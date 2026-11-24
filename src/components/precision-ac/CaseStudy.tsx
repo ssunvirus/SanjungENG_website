@@ -15,7 +15,7 @@ export default function CaseStudy() {
       title={<>S 기업 물류창고 항온항습기 설치</>}
       image="/images/projects-page/precision-ac.jpg"
       imageAlt="S 기업 물류창고 항온항습기 설치 현장"
-      href={projectListHref(1, "냉동공조")}
+      href={projectListHref(1, "항온항습기")}
       details={details}
       transparentBackground
     />

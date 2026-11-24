@@ -34,7 +34,7 @@ export default function CaseStudy() {
       }
       image="/images/projects-page/cold-storage.jpg"
       imageAlt="농협 저온저장고 냉동설비 신설공사"
-      href={projectListHref(1, "냉동공조")}
+      href={projectListHref(1, "저온저장고")}
       details={details}
     />
   );

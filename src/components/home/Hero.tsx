@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+
 import { heroSlides as slides } from "./hero-slides";
 import { useHeroCarousel } from "@/src/hooks/use-hero-carousel";
 
@@ -137,16 +138,16 @@ export default function Hero() {
         <button
           type="button"
           onClick={showPreviousSlide}
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label="이전 슬라이드"
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <ChevronLeft size={24} aria-hidden="true" />
         </button>
         <button
           type="button"
           onClick={showNextSlide}
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           aria-label="다음 슬라이드"
+          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <ChevronRight size={24} aria-hidden="true" />
         </button>

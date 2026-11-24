@@ -3,7 +3,7 @@ import { projectListHref } from "@/src/lib/project-list-navigation";
 export const heroSlides = [
   {
     image: "/images/hero/hvac-slide.png",
-    projectsHref: projectListHref(1, "냉동공조"),
+    projectsHref: projectListHref(1, "냉동기"),
     imageAlt: "산업용 냉동공조 설비가 설치된 현장",
     imagePosition: "object-[40%_center]",
     category: "냉동공조 솔루션",

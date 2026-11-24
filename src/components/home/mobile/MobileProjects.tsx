@@ -6,7 +6,11 @@ import { useRef, useState } from "react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
 import { mobileFeaturedProjects, type Project } from "@/src/components/projects/data";
 import useCardAutoplay from "@/src/components/home/useCardAutoplay";
-import { projectListHref } from "@/src/lib/project-list-navigation";
+import {
+  projectListHref,
+  projectDetailHref,
+  projectCategoryForTag,
+} from "@/src/lib/project-list-navigation";
 
 export default function MobileProjects({ cases = mobileFeaturedProjects }: { cases?: Project[] }) {
   const [caseIndex, setCaseIndex] = useState(0);
@@ -76,7 +80,7 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
         {cases.map((project, index) => (
           <Link
             key={`${project.id}-${index}`}
-            href={project.href}
+            href={projectDetailHref(project.href, 1, projectCategoryForTag(project.tag))}
             className="block w-full shrink-0 snap-start snap-always overflow-hidden rounded-xl bg-white"
           >
             <div className="relative aspect-[1.7]">

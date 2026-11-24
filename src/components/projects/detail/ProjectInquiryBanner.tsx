@@ -23,7 +23,7 @@ export default function ProjectInquiryBanner() {
         </div>
         <Link
           href="/contact"
-          className="group inline-flex min-h-[58px] w-full shrink-0 items-center justify-center gap-5 rounded-[16px] bg-brand-blue px-7 py-4 text-[25px] font-semibold tracking-[-0.02em] text-brand-navy transition-[background-color,transform] duration-200 hover:bg-[#54d2f1] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:active:scale-100 sm:w-auto"
+          className="group inline-flex min-h-[58px] w-full shrink-0 items-center justify-center gap-5 rounded-[16px] bg-brand-blue px-7 py-4 text-[25px] font-semibold tracking-[-0.02em] text-white transition-[background-color,transform] duration-200 hover:bg-[#54d2f1] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none motion-reduce:active:scale-100 sm:w-auto"
         >
           견적문의
           <ArrowRight

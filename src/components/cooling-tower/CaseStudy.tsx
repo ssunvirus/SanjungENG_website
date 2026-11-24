@@ -20,7 +20,7 @@ export default function CaseStudy() {
       }
       image="/images/projects/church-cooling-tower/photo-9.jpg"
       imageAlt="교회 냉각탑 충진물 교체공사"
-      href={projectListHref(1, "냉동공조")}
+      href={projectListHref(1, "냉각탑")}
       details={details.map(([icon, title, description]) => ({ icon, title, description }))}
     />
   );

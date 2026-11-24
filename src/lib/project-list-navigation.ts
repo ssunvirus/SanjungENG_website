@@ -1,8 +1,30 @@
-export const projectCategories = ["전체", "냉동공조", "패브릭덕트"] as const;
+export const projectCategories = [
+  "전체",
+  "냉동기",
+  "저온저장고",
+  "냉각탑",
+  "항온항습기",
+  "패브릭덕트",
+] as const;
 export type ProjectCategory = (typeof projectCategories)[number];
 type SearchValues = Pick<URLSearchParams, "get">;
 
-const categoryKeys = ["all", "refrigeration", "fabric"] as const;
+const categoryKeys = [
+  "all",
+  "chiller",
+  "cold-storage",
+  "cooling-tower",
+  "precision-ac",
+  "fabric",
+] as const;
+
+export function matchesProjectCategory(project: { tag: string }, category: ProjectCategory) {
+  return category === "전체" || project.tag === category;
+}
+
+export function projectCategoryForTag(tag: string): ProjectCategory {
+  return projectCategories.find((category) => category === tag) ?? "전체";
+}
 
 export const projectListLocationEvent = "projects-list-location-change";
 export const projectListStorageKey = "sanjung-projects-last-list";

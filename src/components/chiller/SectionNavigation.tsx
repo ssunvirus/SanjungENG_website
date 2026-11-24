@@ -3,6 +3,7 @@
 const items = [
   ["chiller-service", "주요 서비스"],
   ["chiller-process", "시공 과정"],
+  ["chiller-cleaning", "냉동기 세관"],
   ["chiller-maintenance", "유지보수"],
   ["chiller-products", "주요 냉동기"],
   ["chiller-cases", "시공사례"],

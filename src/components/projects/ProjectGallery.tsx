@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useSyncExternalStore } from "react";
 import {
   projectCategories as categories,
+  matchesProjectCategory,
   type ProjectCategory,
   readProjectListState,
   projectListHref,
@@ -15,6 +16,7 @@ import {
 } from "@/src/lib/project-list-navigation";
 import { projects as existingProjects, type Project } from "./data";
 import ProjectCard from "./ProjectCard";
+import ProjectCategoryIcon from "./ProjectCategoryIcon";
 
 const pageSize = 6;
 
@@ -55,9 +57,7 @@ export default function ProjectGallery({
     new URLSearchParams(location === null ? initialSearch : location.split("#")[0]),
   );
   const targetId = location?.split("#")[1] ?? "";
-  const filtered = projects.filter(
-    (project) => category === "전체" || project.category === category,
-  );
+  const filtered = projects.filter((project) => matchesProjectCategory(project, category));
   const targetIndex = filtered.findIndex((project) => project.id === targetId);
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const page = Math.min(
@@ -106,7 +106,7 @@ export default function ProjectGallery({
       <div
         role="group"
         aria-label="시공사례 분류"
-        className="mt-6 flex gap-3 lg:mt-[46px] lg:h-[56px] lg:gap-[160px]"
+        className="mt-6 flex gap-2 overflow-x-auto px-1 py-3 lg:mt-[34px] lg:gap-3"
       >
         {categories.map((value) => (
           <button
@@ -117,20 +117,17 @@ export default function ProjectGallery({
             onClick={() => {
               setListing(1, value);
             }}
-            className={`min-h-12 flex-1 lg:flex-none lg:w-[219px] border-b-2 pb-3 lg:border-0 lg:pb-0 cursor-pointer self-start whitespace-nowrap text-center lg:text-left text-base lg:text-[30px] font-semibold focus-visible:outline-2 focus-visible:outline-brand-blue ${category === value ? "text-brand-blue border-brand-blue" : "text-brand-navy/60 border-[#B7C6CF]"}`}
+            onFocus={(event) => {
+              event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
+            }}
+            className={`flex min-h-12 min-w-max flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-full border px-3 py-2.5 text-lg font-semibold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue motion-reduce:transition-none lg:min-h-[76px] lg:gap-1.5 lg:px-2 lg:py-3 lg:text-[22px] xl:gap-2 xl:text-[28px] ${category === value ? "border-brand-blue bg-brand-blue text-white shadow-[0_6px_20px_rgba(0,173,219,0.18)]" : "border-white/80 bg-white/75 text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.04)] hover:border-brand-blue/25 hover:bg-white hover:text-brand-blue"}`}
           >
-            {value}
+            <ProjectCategoryIcon category={value} />
+            <span>{value}</span>
           </button>
         ))}
       </div>
-      <div aria-hidden="true" className="relative hidden lg:block">
-        <div className="h-[3px] w-full bg-brand-navy/20" />
-        <div
-          className="absolute top-0 h-[3px] w-[219px] bg-brand-blue transition-transform"
-          style={{ transform: `translateX(${categories.indexOf(category) * 379}px)` }}
-        />
-      </div>
-      <div id="projects-list" aria-live="polite" className="mt-6 lg:mt-[55px] lg:min-h-[912px]">
+      <div id="projects-list" aria-live="polite" className="mt-6 lg:mt-[36px] lg:min-h-[912px]">
         {visible.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-x-[22.5px] lg:gap-y-[48px]">
             {visible.map((project) => (

@@ -279,10 +279,10 @@ export default function AdminWorkspace() {
           file.size > MAX_PROJECT_IMAGE_BYTES,
       )
     ) {
-      setNotice("JPG·PNG·WEBP, 사진당 3MB 이하만 선택해주세요.");
+      setNotice("JPG·PNG·WEBP, 사진당 5MB 이하만 선택해주세요.");
       setPhotoFeedback({
         message:
-          "사진이 추가되지 않았습니다. JPG·PNG·WEBP 형식인지, 사진 한 장이 3MB 이하인지 확인해주세요.",
+          "사진이 추가되지 않았습니다. JPG·PNG·WEBP 형식인지, 사진 한 장이 5MB 이하인지 확인해주세요.",
         error: true,
       });
       if (photoInput.current) photoInput.current.value = "";
@@ -306,7 +306,7 @@ export default function AdminWorkspace() {
         const data = await response.json().catch(() => ({
           error:
             response.status === 413
-              ? "사진 용량이 너무 큽니다. 3MB 이하 사진으로 다시 선택해주세요."
+              ? "사진 용량이 너무 큽니다. 5MB 이하 사진으로 다시 선택해주세요."
               : "사진 전송 결과를 확인하지 못했습니다. 다시 로그인하거나 잠시 후 시도해주세요.",
         }));
         if (!response.ok) throw new Error(data.error);

@@ -1,0 +1,12 @@
+.page h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+@media (min-width: 1024px) {
+  .page h2 {
+    font-size: 50px;
+  }
+}

@@ -178,7 +178,7 @@ test("invalid photo selection reports an error next to the picker instead of app
   });
   await flush();
   assert.equal(feedback(ui.render()).props.role, "alert");
-  assert.match(text(feedback(ui.render())), /3MB/);
+  assert.match(text(feedback(ui.render())), /5MB/);
   assert.equal(
     ui.calls.some((call) => call.url.endsWith("project-images")),
     false,

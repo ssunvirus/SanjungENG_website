@@ -5,7 +5,11 @@ import { ArrowRight, ArrowRightCircle, ChevronLeft, ChevronRight, Pause, Play } 
 import { useEffect, useRef, useState } from "react";
 import { desktopFeaturedProjects, type Project } from "@/src/components/projects/data";
 import useProjectAutoplay from "./useProjectAutoplay";
-import { projectListHref } from "@/src/lib/project-list-navigation";
+import {
+  projectListHref,
+  projectDetailHref,
+  projectCategoryForTag,
+} from "@/src/lib/project-list-navigation";
 
 const CARD_STEP = 536.25;
 
@@ -186,7 +190,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
                 className="h-[498px] w-[502.5px] shrink-0 snap-start overflow-hidden rounded-[10px] bg-white"
               >
                 <Link
-                  href={project.href}
+                  href={projectDetailHref(project.href, 1, projectCategoryForTag(project.tag))}
                   tabIndex={index >= projects.length ? -1 : undefined}
                   className={cardClassName}
                 >

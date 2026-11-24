@@ -39,7 +39,7 @@ export default function Hero() {
         </p>
         <div className="mt-5 flex flex-col gap-3 lg:mt-[34px] lg:flex-row lg:gap-[26px]">
           <Link
-            href={projectListHref(1, "냉동공조")}
+            href={projectListHref(1, "저온저장고")}
             className="flex min-h-11 h-auto w-[180px] max-w-full py-2 lg:py-0 lg:h-[65px] lg:w-[210px] items-center justify-center gap-2 rounded-[9px] lg:gap-[14px] lg:rounded-[23px] bg-brand-blue text-lg lg:text-[30px] font-semibold"
           >
             시공사례 <ArrowRight size={18} aria-hidden="true" className="lg:hidden" />

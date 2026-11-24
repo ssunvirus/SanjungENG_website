@@ -6,10 +6,12 @@ import EquipmentFaq from "@/src/components/shared/EquipmentFaq";
 import Hero from "@/src/components/chiller/Hero";
 import Maintenance from "@/src/components/chiller/Maintenance";
 import Services from "@/src/components/chiller/Services";
+import TubeCleaning from "@/src/components/chiller/TubeCleaning";
 import WorkProcess from "@/src/components/chiller/WorkProcess";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
 import SectionNavigation from "@/src/components/chiller/SectionNavigation";
+import headingStyles from "@/src/components/chiller/section-headings.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions" },
@@ -19,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <main className="flex-1 bg-[#EFF7FB] text-brand-text">
+    <main className={`${headingStyles.page} flex-1 bg-[#EFF7FB] text-brand-text`}>
       <Hero />
       <SectionNavigation />
       <WaveSurface>
@@ -36,6 +38,13 @@ export default function SolutionsPage() {
           className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-[#E3F6FC]"
         >
           <WorkProcess />
+        </div>
+        <div
+          id="chiller-cleaning"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-white/50"
+        >
+          <TubeCleaning />
         </div>
         <div
           id="chiller-maintenance"

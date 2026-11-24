@@ -85,7 +85,7 @@ export async function readProjectImage(key: string) {
   const result = await client.send(new GetObjectCommand({ Bucket, Key: `projects/${key}` }));
   if (!result.Body) throw new Error("ImageNotFound");
   // Consume the body fully so its connection returns to the shared pool.
-  // Uploads are capped at 3MiB.
+  // Uploads are capped at 5MiB.
   const bytes = await result.Body.transformToByteArray();
   const type = key.endsWith(".jpg")
     ? "image/jpeg"

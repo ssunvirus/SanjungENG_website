@@ -209,7 +209,7 @@ export function BusinessOverview() {
                             className="h-[210px] w-full object-cover object-[center_45%]"
                           />
                           <Link
-                            href="/projects/siheung-commercial-absorption-chiller-repair?listPage=1&listCategory=all"
+                            href="/projects/siheung-commercial-absorption-chiller-repair?listPage=1&listCategory=chiller"
                             className="flex items-center justify-between gap-3 px-4 py-3 text-[18px] font-semibold text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-blue"
                           >
                             냉동설비 수리 현장

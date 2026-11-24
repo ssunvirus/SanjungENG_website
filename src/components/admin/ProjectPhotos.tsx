@@ -63,7 +63,7 @@ export default function ProjectPhotos({
         />
         <ImagePlus size={28} />
         <strong>{uploading ? "사진 업로드 중…" : "사진 선택하기"}</strong>
-        <small>JPG·PNG·WEBP · 사진당 3MB 이하 · 최대 30장</small>
+        <small>JPG·PNG·WEBP · 사진당 5MB 이하 · 최대 30장</small>
       </div>
       <p
         id="photo-upload-feedback"

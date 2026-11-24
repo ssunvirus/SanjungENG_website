@@ -7,17 +7,49 @@ import {
   subscribeProjectListLocation,
   projectListLocationEvent,
   resolveProjectListLocation,
+  matchesProjectCategory,
+  projectCategories,
+  projectListHref,
+  projectCategoryForTag,
 } from "../src/lib/project-list-navigation.ts";
+
+test("equipment filters and detail return links use six separate categories", () => {
+  assert.deepEqual(projectCategories, [
+    "전체",
+    "냉동기",
+    "저온저장고",
+    "냉각탑",
+    "항온항습기",
+    "패브릭덕트",
+  ]);
+  for (const category of projectCategories) {
+    assert.equal(projectCategoryForTag(category), category);
+    const list = projectListHref(2, category);
+    const detail = projectDetailHref("/projects/example", 2, category);
+    assert.equal(projectListReturnHref(new URL(detail, "https://example.test").searchParams), list);
+    for (const tag of ["냉동기", "항온항습기", "냉각탑", "패브릭덕트", "저온저장고", "기타"])
+      assert.equal(
+        matchesProjectCategory({ tag }, category),
+        category === "전체" || tag === category,
+      );
+  }
+  assert.equal(projectCategoryForTag("저온저장고"), "저온저장고");
+  assert.equal(projectCategoryForTag("기타"), "전체");
+  assert.equal(
+    readProjectListState(new URLSearchParams("category=refrigeration")).category,
+    "전체",
+  );
+});
 
 test("plain list navigation restores the last viewed pagination rather than page one", () => {
   for (const page of [2, 3]) {
     const location = resolveProjectListLocation(
       { search: "", hash: "" },
-      `/projects?page=${page}&category=refrigeration#projects-list-heading`,
+      `/projects?page=${page}&category=chiller#projects-list-heading`,
     );
     assert.deepEqual(readProjectListState(new URLSearchParams(location.split("#")[0])), {
       page,
-      category: "냉동공조",
+      category: "냉동기",
     });
   }
 });
@@ -45,9 +77,9 @@ test("browser back and cache restoration refresh the page and category from the 
   const unsubscribe = subscribeProjectListLocation(browser, () => {
     states.push(readProjectListState(url.searchParams));
   });
-  url = new URL("https://example.test/projects?page=3&category=refrigeration");
+  url = new URL("https://example.test/projects?page=3&category=chiller");
   browser.dispatchEvent(new Event("popstate"));
-  assert.deepEqual(states.at(-1), { page: 3, category: "냉동공조" });
+  assert.deepEqual(states.at(-1), { page: 3, category: "냉동기" });
   url = new URL("https://example.test/projects?page=2&category=fabric");
   browser.dispatchEvent(new Event("pageshow"));
   assert.deepEqual(states.at(-1), { page: 2, category: "패브릭덕트" });
