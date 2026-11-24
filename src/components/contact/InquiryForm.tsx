@@ -131,7 +131,6 @@ export default function InquiryForm() {
   return (
     <form
       id="inquiry-form"
-      data-estimate-form
       onSubmit={handleSubmit}
       aria-labelledby="inquiry-form-heading"
       aria-busy={status === "sending"}

@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import MobileContactBar from "./MobileContactBar";
+import FloatingBlogLink from "./FloatingBlogLink";
 
 export default function SiteFrame({ children }: { children: React.ReactNode }) {
   return (
@@ -8,7 +8,7 @@ export default function SiteFrame({ children }: { children: React.ReactNode }) {
       <Header />
       {children}
       <Footer />
-      <MobileContactBar />
+      <FloatingBlogLink />
     </>
   );
 }
