@@ -19,6 +19,7 @@ export default function WorkProcess() {
         온/습도 제어 상태부터 주요 부품까지 점검하고, 필요시 정비 후 정상 작동을 확인합니다.
       </p>
       <WorkProcessCards
+        mobileCarousel
         steps={process.map(([number, title, description, image]) => ({
           number,
           title,
