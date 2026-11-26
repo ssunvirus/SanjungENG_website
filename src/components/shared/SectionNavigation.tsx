@@ -4,29 +4,24 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./SectionNavigation.module.css";
 
 const mobileLabels: Record<string, string> = {
-  "산정엔지니어링 소개": "소개",
   "패브릭덕트 소개": "소개",
   "공기 분배 설계": "공기 분배",
   "자주 묻는 질문": "FAQ",
-  "주요 항온항습기": "주요 장비",
 };
 
 export default function SectionNavigation({
   items,
   label,
   compact = false,
-  sticky = false,
   rightRail = false,
 }: {
   items: readonly (readonly [string, string])[];
   label: string;
   compact?: boolean;
-  sticky?: boolean;
   rightRail?: boolean;
 }) {
   const [active, setActive] = useState<string>(items[0][0]);
   const [canScrollRight, setCanScrollRight] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,15 +59,11 @@ export default function SectionNavigation({
     let frame = 0;
     const update = () => {
       frame = 0;
-      const nav = navRef.current;
-      if (!nav) return;
       let current: string = items[0][0];
       for (const [id] of items) {
         const section = document.getElementById(id);
         if (!section) continue;
-        const offset = sticky
-          ? parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 16
-          : parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+        const offset = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
         // Use the same landing position as clicking the menu, allowing rounding.
         if (section.getBoundingClientRect().top <= offset + 2) {
           current = id;
@@ -88,7 +79,8 @@ export default function SectionNavigation({
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     }
-    if (document.querySelector("main")) observer.observe(document.querySelector("main")!);
+    const main = document.querySelector("main");
+    if (main) observer.observe(main);
     schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
@@ -98,13 +90,12 @@ export default function SectionNavigation({
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, [items, sticky]);
+  }, [items]);
 
   return (
     <nav
-      ref={navRef}
       aria-label={label}
-      className={`${rightRail ? styles.rightRail : ""} ${sticky ? "sticky top-[64px] min-[768px]:top-[72px] lg:top-[98px]" : "relative top-0"} z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:-mt-6 lg:px-10`}
+      className={`${rightRail ? styles.rightRail : ""} relative top-0 z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:-mt-6 lg:px-10`}
     >
       {rightRail && (
         <header className={styles.railHeader}>
@@ -128,10 +119,7 @@ export default function SectionNavigation({
               const target = document.getElementById(id);
               if (!target) return;
               event.preventDefault();
-              const nav = navRef.current!;
-              const offset = sticky
-                ? parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 16
-                : parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+              const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
               target.focus({ preventScroll: true });
               window.scrollTo({
                 top: window.scrollY + target.getBoundingClientRect().top - offset,

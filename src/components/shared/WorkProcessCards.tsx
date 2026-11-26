@@ -125,7 +125,7 @@ export default function WorkProcessCards({
                 sizes={
                   step.imageSizes || "(min-width: 1440px) 365px, (min-width: 640px) 45vw, 90vw"
                 }
-                quality={100}
+                quality={85}
                 unoptimized={step.unoptimized}
                 className={`object-cover ${step.imageClassName || ""}`}
               />

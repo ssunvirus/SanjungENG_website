@@ -21,7 +21,7 @@ const areas = [
     title: "패브릭덕트",
     href: "/fabric-duct",
     image: "/images/about/business-fabric-duct.jpg",
-    quality: 100,
+    quality: 85,
     top: "-24.56%",
     lines: [
       "패브릭덕트 설계/공급/설치",
@@ -35,7 +35,7 @@ const areas = [
     title: "저온저장고",
     href: "/solutions/cold-storage",
     image: "/images/projects/wonsam-nonghyup/photo-4.jpg",
-    quality: 100,
+    quality: 85,
     top: "-17.96%",
     lines: [
       "저온저장고 설비 설치",
@@ -71,7 +71,10 @@ export default function BusinessAreas() {
       className="mx-auto w-full lg:max-w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-20"
     >
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">
-        <div data-desktop-section-eyebrow className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue">
+        <div
+          data-desktop-section-eyebrow
+          className="flex max-w-full items-center gap-3 lg:gap-[16px] text-[14px] lg:text-[20px] font-bold tracking-[3px] lg:tracking-[6px] text-brand-blue"
+        >
           <span aria-hidden="true" className="h-0.5 min-w-0 w-8 bg-brand-blue sm:w-20" />
           <p data-section-eyebrow className="shrink-0 whitespace-nowrap">
             BUSINESS AREA

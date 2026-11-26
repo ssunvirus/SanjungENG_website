@@ -298,7 +298,7 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
             alt={card.imageAlt}
             fill
             sizes="266px"
-            quality={card.image.includes("business-cold-storage") ? 75 : 100}
+            quality={card.image.includes("business-cold-storage") ? 75 : 85}
             unoptimized={card.image === "/images/home-refresh/business-hvac-card.png"}
             className="object-cover"
           />
@@ -332,9 +332,15 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
 
 export function BusinessAreas() {
   return (
-    <section data-laptop-layout="business" className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]">
+    <section
+      data-laptop-layout="business"
+      className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
+    >
       <div className="mx-auto w-[1200px]">
-        <div data-desktop-section-eyebrow className="flex h-6 items-center gap-[20px] text-brand-blue/60">
+        <div
+          data-desktop-section-eyebrow
+          className="flex h-6 items-center gap-[20px] text-brand-blue/60"
+        >
           <span className="text-[20px] font-medium tracking-[6px]">OUR BUSINESS</span>
           <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
         </div>

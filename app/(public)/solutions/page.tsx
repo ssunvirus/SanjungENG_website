@@ -1,4 +1,5 @@
-﻿import WaveSurface from "@/src/components/shared/WaveSurface";
+import layoutStyles from "@/src/components/shared/ServiceSectionLayout.module.css";
+import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/chiller/CaseStudy";
 import ChillerTypes from "@/src/components/chiller/ChillerTypes";
@@ -22,7 +23,9 @@ export const metadata: Metadata = {
 
 export default function SolutionsPage() {
   return (
-    <main className={`${headingStyles.page} flex-1 bg-[#EFF7FB] text-brand-text`}>
+    <main
+      className={`${headingStyles.page} ${layoutStyles.page} flex-1 bg-[#EFF7FB] text-brand-text`}
+    >
       <Hero />
       <SectionNavigation />
       <WaveSurface>

@@ -8,7 +8,7 @@ import Hero from "@/src/components/cold-storage/Hero";
 import WorkProcess from "@/src/components/cold-storage/WorkProcess";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
-import layoutStyles from "@/src/components/cold-storage/section-layout.module.css";
+import layoutStyles from "@/src/components/shared/ServiceSectionLayout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cold-storage" },

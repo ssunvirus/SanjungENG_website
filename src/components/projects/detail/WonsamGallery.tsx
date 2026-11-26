@@ -29,7 +29,7 @@ export default function WonsamGallery() {
                 alt={photo.alt}
                 fill
                 sizes="(max-width: 1023px) 100vw, 1000px"
-                quality={100}
+                quality={85}
                 className={index === 5 ? "object-cover lg:object-fill" : "object-cover"}
               />
             </div>

@@ -28,7 +28,7 @@ export default function ProjectCard({
               alt={project.title}
               fill
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 465px"
-              quality={100}
+              quality={85}
               unoptimized={project.image.startsWith("/api/")}
               className={
                 project.imageFit === "contain"

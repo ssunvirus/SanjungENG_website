@@ -74,7 +74,10 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
     >
       <div className="flex min-h-[546px] w-[1230px] items-center justify-center gap-[60px]">
         <div className="flex w-[525px] shrink-0 flex-col items-start gap-[21px] text-brand-navy">
-          <div data-desktop-section-eyebrow className="flex h-6 items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-brand-blue/60">
+          <div
+            data-desktop-section-eyebrow
+            className="flex h-6 items-center gap-[20px] text-[20px] font-medium tracking-[6px] text-brand-blue/60"
+          >
             <span>SOLUTION</span>
             <span aria-hidden="true" className="h-[2px] w-[46px] bg-current" />
           </div>

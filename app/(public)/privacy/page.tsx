@@ -70,7 +70,7 @@ export default function PrivacyPage() {
             <a className="underline" href="tel:028911728">
               02-891-1728
             </a>{" "}
- / 이메일{" "}
+            / 이메일{" "}
             <a className="underline" href="mailto:sanjungeng@naver.com">
               sanjungeng@naver.com
             </a>

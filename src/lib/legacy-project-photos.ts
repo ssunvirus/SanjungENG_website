@@ -200,16 +200,6 @@ export function completeLegacyProject(record: ProjectRecord, cover?: string): Pr
   return { ...record, photosVersion: 1, photos: [...record.photos, ...missing] };
 }
 
-export function hasDefaultLegacyPhotos(record: ProjectRecord, cover: string, alt: string) {
-  const expected = initialLegacyPhotos(record.id, cover, alt);
-  return (
-    record.photos.length === expected.length &&
-    record.photos.every(
-      (photo, index) => photo.src === expected[index].src && photo.alt === expected[index].alt,
-    )
-  );
-}
-
 export function legacyPhotoDimensions(
   photo: { src: string; alt: string },
   id: string,

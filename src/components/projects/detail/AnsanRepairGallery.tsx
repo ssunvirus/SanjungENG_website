@@ -25,7 +25,7 @@ export default function AnsanRepairGallery() {
             width={photo.width}
             height={photo.height}
             sizes="(max-width: 800px) calc(100vw - 40px), 760px"
-            quality={100}
+            quality={85}
             className="h-auto w-full"
           />
           <figcaption className="px-1 pb-2 pt-3 text-[15px] leading-6 text-slate-500 sm:text-[16px]">

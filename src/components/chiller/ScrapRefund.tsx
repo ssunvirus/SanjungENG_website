@@ -62,8 +62,8 @@ export default function ScrapRefund() {
             <span className="text-brand-blue">차액을 환급</span>받을 수 있습니다.
           </h3>
           <p className="mt-3 text-lg font-semibold leading-8 text-brand-navy/75 lg:text-xl">
-            회수 가능한 고재는 재질과 수량, 현장 조건에 따라 가치를 산정하고, 협의한 철거 비용과 함께
-            정산합니다.
+            회수 가능한 고재는 재질과 수량, 현장 조건에 따라 가치를 산정하고, 협의한 철거 비용과
+            함께 정산합니다.
           </p>
           <ul className="mt-5 grid gap-3 sm:grid-cols-3">
             {items.map(({ icon, title, description }) => (

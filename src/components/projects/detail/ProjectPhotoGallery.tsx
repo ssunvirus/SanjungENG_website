@@ -54,7 +54,7 @@ export default function ProjectPhotoGallery({
                   ? `(max-width: ${photo.displayWidth + 40}px) calc(100vw - 40px), ${photo.displayWidth}px`
                   : "(max-width: 1439px) calc(100vw - 40px), 1000px"
               }
-              quality={100}
+              quality={85}
               unoptimized={photo.src.startsWith("/api/")}
               className={photo.width === undefined ? "object-cover" : "h-auto w-full"}
             />

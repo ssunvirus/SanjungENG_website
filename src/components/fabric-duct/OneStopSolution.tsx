@@ -10,18 +10,21 @@ const steps = [
   {
     number: "01",
     title: "냉동공조설비 설치",
+    mobileTitle: "설비 연결",
     description: "CDU/유니트쿨러 설치, 냉매 배관 연결",
     image: "/images/fabric-duct/one-stop-equipment-installation.webp",
   },
   {
     number: "02",
     title: "패브릭덕트 설계/설치",
+    mobileTitle: "패브릭덕트 설치",
     description: "패브릭덕트 배치 설계, 제작 및 현장 설치",
     image: "/images/fabric-duct/one-stop-design-huiji.webp",
   },
   {
     number: "03",
     title: "세척 및 유지보수",
+    mobileTitle: "세척 관리",
     description: "덕트 탈착/세척, 설비 정기점검",
     image: "/images/fabric-duct/one-stop-maintenance-lottemart.webp",
   },
@@ -123,7 +126,7 @@ export default function OneStopSolution() {
                   alt={step.title}
                   fill
                   sizes="374px"
-                  quality={100}
+                  quality={85}
                   className={index === 0 ? "object-fill" : "object-cover"}
                 />
               </div>

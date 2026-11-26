@@ -44,7 +44,7 @@
 }
 
 /* Keep the mobile and large desktop layouts unchanged. */
-@media (min-width: 1200px) and (max-width: 1919px) {
+@media (min-width: 1024px) and (max-width: 1919px) {
   .introduction {
     padding: 48px 40px 36px;
   }

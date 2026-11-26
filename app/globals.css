@@ -2,9 +2,9 @@
 @import "./pretendard.css";
 @import "./compact-desktop.css";
 
-/* Compact desktop starts at 1200px; large desktop retains its existing layout. */
+/* Shared fluid desktop starts at 1024px; large desktop retains its existing layout. */
 @theme {
-  --breakpoint-lg: 75rem;
+  --breakpoint-lg: 64rem;
   --breakpoint-xl: 100rem;
 }
 
@@ -29,7 +29,7 @@ body {
 }
 
 /* Keep section titles concise in the compact layout, including tablets. */
-@media (width < 75rem) {
+@media (width < 64rem) {
   [data-section-eyebrow] {
     display: none;
   }
@@ -40,7 +40,7 @@ body {
 }
 
 /* Shared desktop section labels; compact layouts retain their existing rules. */
-@media (width >= 75rem) {
+@media (width >= 64rem) {
   :is([data-section-eyebrow], [data-desktop-section-eyebrow]) {
     display: flex;
     align-items: center;

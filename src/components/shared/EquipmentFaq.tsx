@@ -105,7 +105,10 @@ export default function EquipmentFaq({
             aria-hidden="true"
             className="absolute inset-0 -z-10 bg-gradient-to-r from-brand-navy/95 to-brand-navy/80"
           />
-          <p data-desktop-section-eyebrow className="flex items-center gap-4 text-sm font-medium tracking-[6px] text-brand-blue lg:text-xl">
+          <p
+            data-desktop-section-eyebrow
+            className="flex items-center gap-4 text-sm font-medium tracking-[6px] text-brand-blue lg:text-xl"
+          >
             FAQ
             <span aria-hidden="true" className="h-0.5 w-10 bg-brand-blue" />
           </p>

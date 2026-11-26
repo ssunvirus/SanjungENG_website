@@ -7,7 +7,6 @@ import {
   legacyProjectPhotos,
   initialLegacyPhotos,
   completeLegacyProject,
-  hasDefaultLegacyPhotos,
   legacyPhotoDimensions,
 } from "../src/lib/legacy-project-photos.ts";
 
@@ -83,9 +82,7 @@ test("admin merging repairs legacy seeds; unchanged gallery layout and portrait 
     photosVersion: 1,
   };
   const [record] = mergeAdminProjects([initial], [seed(base)]);
-  assert.ok(hasDefaultLegacyPhotos(record, base.image, base.title));
-  const added = { ...record, photos: [...record.photos, { src: "/images/extra.jpg", alt: "" }] };
-  assert.equal(hasDefaultLegacyPhotos(added, base.image, base.title), false);
+  assert.deepEqual(record.photos, initial.photos);
   const portrait = legacyPhotoDimensions(
     { src: "/images/projects/aju-pharmaceutical/1.jpg", alt: "Edited alt" },
     base.id,

@@ -9,7 +9,7 @@ import WorkProcess from "@/src/components/cooling-tower/WorkProcess";
 import CoolingTowerFaq from "@/src/components/cooling-tower/CoolingTowerFaq";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
-import layoutStyles from "@/src/components/cooling-tower/section-layout.module.css";
+import layoutStyles from "@/src/components/shared/ServiceSectionLayout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cooling-tower" },

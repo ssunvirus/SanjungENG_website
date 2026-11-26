@@ -1,8 +1,0 @@
-@media (min-width: 1024px) {
-  .page [id^="cold-storage-"] > section,
-  .page [id="cold-storage-inquiry"] > div > section {
-    max-width: 1440px;
-    margin-inline: auto;
-    padding-inline: 63px;
-  }
-}

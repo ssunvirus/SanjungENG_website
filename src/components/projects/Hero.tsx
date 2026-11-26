@@ -4,21 +4,21 @@ import { ChevronRight } from "lucide-react";
 
 export default function Hero({ headingTag: Heading = "p" }: { headingTag?: "h1" | "p" }) {
   return (
-    <section className="relative mx-auto h-[320px] w-full max-w-[1920px] overflow-hidden text-white lg:h-[600px]">
+    <section className="relative mx-auto h-[320px] w-full overflow-hidden text-white lg:h-[600px]">
       <Image
         src="/images/about/hero.jpg"
         alt="작업자가 고소작업대에서 냉동공조 설비를 설치하는 현장"
         fill
         priority
-        sizes="(max-width: 1023px) 100vw, 1920px"
-        quality={100}
-        className="object-cover"
+        sizes="100vw"
+        quality={85}
+        className="object-cover lg:object-[center_35%]"
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#102D4A_0%,rgba(16,45,74,0.7)_40%,rgba(16,45,74,0)_100%)]"
       />
-      <div className="relative mx-auto w-full px-7 pt-[45px] lg:w-[1430px] lg:px-0 lg:pt-[108px]">
+      <div className="relative mx-auto w-full max-w-[1920px] px-7 pt-[45px] lg:px-[245px] lg:pt-[108px]">
         <nav
           aria-label="현재 위치"
           className="hidden items-center text-[22.5px] font-bold text-brand-blue lg:flex"

@@ -32,7 +32,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate mx-auto h-[900px] w-full max-w-[1920px] overflow-hidden bg-brand-navy text-white"
+      className="relative isolate mx-auto h-[900px] w-full overflow-hidden bg-brand-navy text-white"
       aria-roledescription="carousel"
       aria-label="산정엔지니어링 주요 서비스"
     >
@@ -49,7 +49,7 @@ export default function Hero() {
               alt={index === currentSlide ? item.imageAlt : ""}
               fill
               priority={index === 0}
-              sizes={index === 1 ? "1536px" : "1920px"}
+              sizes={index === 1 ? "80vw" : "100vw"}
               style={index === 1 ? { objectPosition: "center 42%" } : undefined}
               className="pointer-events-none z-0 object-cover"
             />
@@ -63,94 +63,96 @@ export default function Hero() {
         </div>
       ))}
 
-      <div
-        key={currentSlide}
-        className="absolute top-[178px] left-[239px] z-10 animate-[hero-content_700ms_ease-out]"
-        aria-live="polite"
-      >
-        <p className="text-[23px] font-bold leading-[29px] text-brand-blue">{slide.category}</p>
+      <div className="relative mx-auto h-full w-full max-w-[1920px]">
+        <div
+          key={currentSlide}
+          className="absolute top-[178px] left-[239px] z-10 animate-[hero-content_700ms_ease-out]"
+          aria-live="polite"
+        >
+          <p className="text-[23px] font-bold leading-[29px] text-brand-blue">{slide.category}</p>
 
-        <h2 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
-          {slide.title[0]}
-          <br />
-          {slide.title[1]}
-        </h2>
+          <h2 className="mt-[34px] text-[45px] font-extrabold leading-[56px]">
+            {slide.title[0]}
+            <br />
+            {slide.title[1]}
+          </h2>
 
-        <p className="mt-[34px] text-[34px] font-medium leading-[42px]">{slide.subtitle}</p>
+          <p className="mt-[34px] text-[34px] font-medium leading-[42px]">{slide.subtitle}</p>
 
-        <p className="mt-[34px] whitespace-pre text-[23px] font-normal leading-[29px]">
-          {slide.details}
-        </p>
+          <p className="mt-[34px] whitespace-pre text-[23px] font-normal leading-[29px]">
+            {slide.details}
+          </p>
 
-        <div className="mt-[34px] flex gap-[26px]">
-          <Link
-            href={slide.projectsHref}
-            className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-brand-blue text-[30px] font-semibold"
-          >
-            시공사례&nbsp; →
-          </Link>
-          <Link
-            href="/contact"
-            className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] border border-white bg-white/30 text-[30px] font-semibold"
-          >
-            견적 문의&nbsp; →
-          </Link>
-        </div>
-      </div>
-
-      <div
-        className="pointer-events-auto absolute bottom-[60px] left-[237px] z-20 flex h-12 items-center gap-2"
-        aria-label="Hero 슬라이드 컨트롤"
-      >
-        <div className="mr-5 flex gap-3">
-          {slides.map((item, index) => (
-            <button
-              key={item.image}
-              type="button"
-              onClick={() => showSlide(index)}
-              className="group flex h-12 w-20 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-              aria-label={`${index + 1}번 슬라이드 보기`}
-              aria-current={index === currentSlide}
+          <div className="mt-[34px] flex gap-[26px]">
+            <Link
+              href={slide.projectsHref}
+              className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] bg-brand-blue text-[30px] font-semibold"
             >
-              <span
-                aria-hidden="true"
-                className={`h-[3px] w-full transition-colors ${
-                  index === currentSlide ? "bg-brand-blue" : "bg-white/75 group-hover:bg-white"
-                }`}
-              />
-            </button>
-          ))}
+              시공사례&nbsp; →
+            </Link>
+            <Link
+              href="/contact"
+              className="flex h-[65px] w-[210px] items-center justify-center rounded-[23px] border border-white bg-white/30 text-[30px] font-semibold"
+            >
+              견적 문의&nbsp; →
+            </Link>
+          </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsPlaying((playing) => !playing)}
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          aria-label={isPlaying ? "슬라이드 일시 정지" : "슬라이드 자동 재생"}
+        <div
+          className="pointer-events-auto absolute bottom-[60px] left-[237px] z-20 flex h-12 items-center gap-2"
+          aria-label="Hero 슬라이드 컨트롤"
         >
-          {isPlaying ? (
-            <Pause size={18} aria-hidden="true" />
-          ) : (
-            <Play size={18} aria-hidden="true" />
-          )}
-        </button>
+          <div className="mr-5 flex gap-3">
+            {slides.map((item, index) => (
+              <button
+                key={item.image}
+                type="button"
+                onClick={() => showSlide(index)}
+                className="group flex h-12 w-20 cursor-pointer items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                aria-label={`${index + 1}번 슬라이드 보기`}
+                aria-current={index === currentSlide}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`h-[3px] w-full transition-colors ${
+                    index === currentSlide ? "bg-brand-blue" : "bg-white/75 group-hover:bg-white"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
 
-        <button
-          type="button"
-          onClick={showPreviousSlide}
-          aria-label="이전 슬라이드"
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          <ChevronLeft size={24} aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          onClick={showNextSlide}
-          aria-label="다음 슬라이드"
-          className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-        >
-          <ChevronRight size={24} aria-hidden="true" />
-        </button>
+          <button
+            type="button"
+            onClick={() => setIsPlaying((playing) => !playing)}
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            aria-label={isPlaying ? "슬라이드 일시 정지" : "슬라이드 자동 재생"}
+          >
+            {isPlaying ? (
+              <Pause size={18} aria-hidden="true" />
+            ) : (
+              <Play size={18} aria-hidden="true" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={showPreviousSlide}
+            aria-label="이전 슬라이드"
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <ChevronLeft size={24} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            onClick={showNextSlide}
+            aria-label="다음 슬라이드"
+            className="flex size-11 cursor-pointer items-center justify-center rounded-full bg-brand-navy text-white transition-colors hover:bg-brand-blue focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <ChevronRight size={24} aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </section>
   );

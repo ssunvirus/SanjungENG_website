@@ -89,13 +89,8 @@ export default function Applications() {
             key={title}
             className={`flex min-h-[88px] min-w-0 w-full flex-1 flex-col cursor-pointer items-center justify-center gap-1.5 rounded-2xl border px-1 py-2.5 text-[16px] min-[360px]:text-[18px] font-semibold whitespace-nowrap transition-colors motion-reduce:transition-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue lg:min-h-[76px] lg:flex-row lg:rounded-full lg:px-2 lg:py-3 lg:text-[22px] xl:gap-2 xl:text-[28px] ${index === activeIndex ? "border-brand-blue bg-brand-blue text-white shadow-[0_6px_20px_rgba(0,173,219,0.18)]" : "border-white/80 bg-white/75 text-brand-navy shadow-[0_4px_16px_rgba(16,45,74,0.04)] hover:border-brand-blue/25 hover:bg-white hover:text-brand-blue"}`}
           >
-            <ApplicationIcon
-              index={index}
-              className="size-[30px] shrink-0 lg:size-10 xl:size-11"
-            />
-            <span className="leading-[1.4]">
-              {title}
-            </span>
+            <ApplicationIcon index={index} className="size-[30px] shrink-0 lg:size-10 xl:size-11" />
+            <span className="leading-[1.4]">{title}</span>
           </button>
         ))}
       </div>
@@ -120,7 +115,7 @@ export default function Applications() {
               alt={`${slide.title} 패브릭덕트 설치 현장`}
               fill
               sizes="(max-width: 1023px) 100vw, 904px"
-              quality={100}
+              quality={85}
               className="object-cover"
             />
           </div>

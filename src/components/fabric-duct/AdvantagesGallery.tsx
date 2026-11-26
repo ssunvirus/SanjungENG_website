@@ -70,7 +70,7 @@ export default function AdvantagesGallery() {
         alt={photos[index].alt}
         fill
         sizes="(min-width: 1024px) 717px, calc(100vw - 40px)"
-        quality={100}
+        quality={85}
         className="object-cover"
       />
       <button

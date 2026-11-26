@@ -1,5 +1,5 @@
-/* Only the 1200–1439px desktop tier. Large desktop and compact/mobile stay intact. */
-@media (75rem <= width < 90rem) {
+/* Shared fluid desktop at 1024–1439px. Large desktop and mobile stay intact. */
+@media (64rem <= width < 90rem) {
   body > header > div.relative {
     padding-left: 40px;
   }
@@ -36,8 +36,8 @@
     padding-inline: 64px;
   }
 
-  main section[aria-roledescription="carousel"] > div[aria-live],
-  main section[aria-roledescription="carousel"] > div[aria-label] {
+  main section[aria-roledescription="carousel"] > div > div[aria-live],
+  main section[aria-roledescription="carousel"] > div > div[aria-label] {
     left: 64px;
   }
 

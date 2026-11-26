@@ -53,7 +53,7 @@ export default function EquipmentCaseStudy({
             alt={imageAlt}
             fill
             sizes="(min-width: 1600px) 840px, (min-width: 1024px) 60vw, (max-width: 639px) calc(100vw - 40px), 100vw"
-            quality={100}
+            quality={85}
             className="object-cover"
           />
         </div>

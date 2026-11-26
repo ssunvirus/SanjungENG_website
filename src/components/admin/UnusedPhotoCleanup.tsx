@@ -120,7 +120,7 @@ export default function UnusedPhotoCleanup({
                       />
                     </div>
                     <figcaption className="mt-1 break-all text-xs text-slate-500">
-                      {new Date(image.modifiedAt).toLocaleDateString("ko-KR")} , {" "}
+                      {new Date(image.modifiedAt).toLocaleDateString("ko-KR")} ,{" "}
                       {(image.bytes / 1024 / 1024).toFixed(2)}MB
                     </figcaption>
                   </figure>

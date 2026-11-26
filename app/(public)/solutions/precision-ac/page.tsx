@@ -10,7 +10,7 @@ import Hero from "@/src/components/precision-ac/Hero";
 import Products from "@/src/components/precision-ac/Products";
 import Services from "@/src/components/precision-ac/Services";
 import WorkProcess from "@/src/components/precision-ac/WorkProcess";
-import layoutStyles from "@/src/components/precision-ac/section-layout.module.css";
+import layoutStyles from "@/src/components/shared/ServiceSectionLayout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/precision-ac" },

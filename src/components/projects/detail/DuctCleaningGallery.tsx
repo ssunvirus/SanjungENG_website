@@ -13,7 +13,7 @@ export default function DuctCleaningGallery() {
             width={photo.width}
             height={photo.height}
             sizes="(max-width: 1439px) calc(100vw - 40px), 1000px"
-            quality={100}
+            quality={85}
             className="h-auto w-full"
           />
           {photo.caption && (

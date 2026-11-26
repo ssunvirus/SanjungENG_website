@@ -263,7 +263,9 @@ export default function TubeCleaning() {
         className="mt-12 border-t border-brand-navy/15 pt-7 lg:mt-16 lg:pt-9"
       >
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <h3 className="text-[26px] font-bold text-brand-navy lg:text-[32px]">사진으로 보는 세관 효과</h3>
+          <h3 className="text-[26px] font-bold text-brand-navy lg:text-[32px]">
+            사진으로 보는 세관 효과
+          </h3>
           <div className="flex items-center gap-3">
             <button
               type="button"

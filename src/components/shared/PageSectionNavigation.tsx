@@ -57,7 +57,7 @@ export default function PageSectionNavigation({
   return (
     <>
       <div ref={horizontalRef}>
-        <SectionNavigation items={items} label={label} compact={compact} sticky={false} />
+        <SectionNavigation items={items} label={label} compact={compact} />
       </div>
       {showRail && (
         <div ref={railRef} style={{ visibility: footerVisible ? "hidden" : "visible" }}>
@@ -65,7 +65,7 @@ export default function PageSectionNavigation({
             items={items}
             label={label}
             compact={compact}
-            sticky={false}
+
             rightRail
           />
         </div>

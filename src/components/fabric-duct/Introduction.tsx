@@ -34,7 +34,7 @@ export default function Introduction() {
               alt="MultiXair 공기분배 덕트 설치 현장"
               fill
               sizes="739px"
-              quality={100}
+              quality={85}
               className="object-cover"
             />
           </div>
@@ -80,7 +80,7 @@ export default function Introduction() {
                 alt="천장에 설치된 덕트와 공조설비"
                 fill
                 sizes="683px"
-                quality={100}
+                quality={85}
                 className="object-cover"
               />
             </div>
