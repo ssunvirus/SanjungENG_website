@@ -33,7 +33,7 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto w-full bg-[#E3F6FC] px-5 py-9 lg:max-w-[1600px] lg:px-10 lg:py-[64px]">
+    <section className="mx-auto w-full bg-[#E3F6FC] px-5 py-9 lg:max-w-[1440px] lg:px-[63px] lg:py-[64px]">
       <p
         data-section-eyebrow
         className="flex items-center gap-3 text-xs font-medium tracking-[3px] text-brand-blue/60 lg:gap-[20px] lg:text-[20px] lg:tracking-[6px]"
@@ -46,7 +46,7 @@ export default function WorkProcess() {
       <p className="mt-3 text-[15px] font-semibold lg:mt-[25px] lg:text-[19px]">
         현장 분석부터 설치, 교체, 시운전까지,
         <br />
-        체계적이고 신속한 작업으로{" "}
+        30년의 경험과 실력으로{" "}
         <strong className="font-extrabold text-brand-blue">산정엔지니어링</strong>이 책임집니다.
       </p>
       <WorkProcessCards

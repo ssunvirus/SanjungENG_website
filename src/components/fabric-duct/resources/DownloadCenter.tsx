@@ -151,6 +151,7 @@ export default function DownloadCenter({ initialTab = 0 }: { initialTab?: 0 | 1 
     <section
       className="mx-auto mt-1 w-full px-5 py-9 lg:min-h-[1416px] lg:max-w-[1440px] lg:px-0 lg:pt-[30px] lg:pb-[60px]"
       aria-labelledby="download-title"
+      data-laptop-layout="downloads"
     >
       <header className="ml-0 mt-0 lg:ml-[78px] lg:mt-[30px]">
         <p

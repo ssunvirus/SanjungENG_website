@@ -110,7 +110,7 @@ export default function Maintenance() {
                   <span className="flex size-14 shrink-0 items-center justify-center rounded-[18px] bg-brand-blue/10 text-brand-blue lg:size-16">
                     <service.icon size={34} strokeWidth={2} aria-hidden="true" />
                   </span>
-                  <div className="min-w-0 border-l border-brand-blue/35 pl-4 lg:pl-5">
+                  <div className="min-w-0 pl-4 lg:pl-5">
                     <span className="hidden text-[24px] font-bold leading-none tabular-nums text-brand-blue lg:inline lg:text-[28px]">
                       {service.number}
                     </span>

@@ -21,6 +21,7 @@ export default function ContactPage() {
       <WaveSurface>
         <section
           aria-label="견적 상담 및 문의 작성"
+          data-laptop-layout="contact"
           className="mx-auto grid w-full grid-cols-1 gap-8 px-5 pb-9 lg:min-h-[1302px] lg:max-w-[1440px] lg:grid-cols-[473px_856px] lg:gap-[111px] lg:px-0 lg:pb-[25px]"
         >
           <ContactInfo />

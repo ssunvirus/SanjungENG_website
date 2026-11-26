@@ -68,6 +68,7 @@ export default function EstimateCta({ title, description, note }: EstimateIntroP
   return (
     <section
       id="contact"
+      data-laptop-layout="estimate"
       aria-labelledby="estimate-heading"
       className="mx-auto min-h-[696px] w-full max-w-[1440px] bg-[#EFF7FB] px-[105px] py-[75px]"
     >

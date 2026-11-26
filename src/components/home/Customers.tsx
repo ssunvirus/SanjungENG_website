@@ -5,6 +5,7 @@ const customerLogos = [
   ["akzo", "AkzoNobel"],
   ["plakor", "PLAKOR"],
   ["nonghyup", "농협"],
+  ["saffco", "서울시농수산식품공사"],
   ["logiport", "LOGIPORT"],
   ["orion", "오리온"],
   ["sungmin", "성민글로벌"],
@@ -48,14 +49,16 @@ export default function Customers() {
                   {logos.map(([file, name]) => (
                     <li
                       key={file}
-                      className={`flex h-[100px] w-[160px] shrink-0 items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 shadow-[0_3px_12px_rgba(16,47,73,0.05)] lg:h-[118px] lg:w-[200px] ${file === "kogas" ? "px-2" : "px-4 sm:px-3 lg:px-6"}`}
+                      className={`flex h-[100px] shrink-0 items-center justify-center rounded-2xl border border-brand-navy/10 bg-white/90 shadow-[0_3px_12px_rgba(16,47,73,0.05)] lg:h-[118px] ${file === "saffco" ? "w-[220px] px-3 lg:w-[260px]" : `w-[160px] lg:w-[200px] ${file === "kogas" ? "px-2" : "px-4 sm:px-3 lg:px-6"}`}`}
                     >
                       <div
                         className={`relative w-full ${file === "avenue-france" ? "h-[68px] lg:h-[78px]" : "h-14 lg:h-16"}`}
                       >
                         <Image
                           src={
-                            file === "avenue-france"
+                            file === "saffco"
+                              ? "/images/home-refresh/customer-saffco.svg"
+                              : file === "avenue-france"
                               ? "/images/home-refresh/customer-avenue-france.svg"
                               : file === "hwaseong"
                                 ? "/images/home-refresh/customer-hwaseong-updated.png"
@@ -65,7 +68,7 @@ export default function Customers() {
                           }
                           alt={copy === 0 ? name : ""}
                           fill
-                          sizes={file === "kogas" ? "(min-width: 1024px) 184px, 144px" : "(min-width: 1024px) 152px, 128px"}
+                          sizes={file === "saffco" ? "(min-width: 1200px) 236px, 196px" : file === "kogas" ? "(min-width: 1024px) 184px, 144px" : "(min-width: 1024px) 152px, 128px"}
                           className="object-contain"
                         />
                       </div>

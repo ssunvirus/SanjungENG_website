@@ -41,7 +41,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="mx-auto h-[auto] w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
+    <section data-laptop-layout="services" className="mx-auto h-[auto] w-full lg:max-w-[1440px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]">
       <header className="text-center">
         <p
           data-section-eyebrow

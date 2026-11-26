@@ -13,9 +13,11 @@ const mobileLabels: Record<string, string> = {
 export default function SectionNavigation({
   items,
   label,
+  compact = false,
 }: {
   items: readonly (readonly [string, string])[];
   label: string;
+  compact?: boolean;
 }) {
   const [active, setActive] = useState<string>(items[0][0]);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -38,7 +40,7 @@ export default function SectionNavigation({
   }, [items]);
 
   useEffect(() => {
-    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    if (!compact && !window.matchMedia("(max-width: 767px)").matches) return;
     const list = listRef.current;
     const selected = list?.querySelector<HTMLElement>('[aria-current="location"]');
     if (!list || !selected) return;
@@ -51,7 +53,7 @@ export default function SectionNavigation({
         ? "instant"
         : "smooth",
     });
-  }, [active]);
+  }, [active, compact]);
 
   useEffect(() => {
     let frame = 0;
@@ -114,7 +116,7 @@ export default function SectionNavigation({
               });
               history.replaceState(null, "", `#${id}`);
             }}
-            className={`flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 py-2 text-[16px] font-semibold transition-[background-color,color,box-shadow] duration-200 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue min-[768px]:px-5 min-[768px]:text-[17px] min-[1200px]:flex-1 lg:px-6 lg:text-[20px] ${active === id ? "bg-brand-blue text-white min-[768px]:shadow-[0_3px_8px_rgba(0,173,219,0.2)]" : "bg-transparent text-brand-navy hover:bg-brand-blue/15 hover:text-[#006EB8] min-[768px]:bg-[#EFF5FC]"}`}
+            className={`flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full px-3 py-2 text-[16px] font-semibold transition-[background-color,color,box-shadow] duration-200 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue min-[1200px]:flex-1 ${compact ? "min-[768px]:px-3 min-[768px]:text-[17px]" : "min-[768px]:px-5 min-[768px]:text-[17px] lg:px-6 lg:text-[20px]"} ${active === id ? "bg-brand-blue text-white min-[768px]:shadow-[0_3px_8px_rgba(0,173,219,0.2)]" : "bg-transparent text-brand-navy hover:bg-brand-blue/15 hover:text-[#006EB8] min-[768px]:bg-[#EFF5FC]"}`}
           >
             <span className="min-[768px]:hidden">{mobileLabels[label] ?? label}</span>
             <span className="hidden min-[768px]:inline">{label}</span>
@@ -125,7 +127,7 @@ export default function SectionNavigation({
         <button
           type="button"
           aria-label="오른쪽 이동메뉴 더 보기"
-          className="absolute inset-y-0 right-0 flex w-10 items-center justify-end bg-gradient-to-l from-white via-white/95 to-transparent pr-2 text-brand-navy min-[768px]:hidden"
+          className={`absolute inset-y-0 right-0 flex w-10 items-center justify-end bg-gradient-to-l from-white via-white/95 to-transparent pr-2 text-brand-navy ${compact ? "min-[768px]:right-4 lg:right-10" : "min-[768px]:hidden"}`}
           onClick={() =>
             listRef.current?.scrollBy({
               left: Math.max(140, listRef.current.clientWidth * 0.6),

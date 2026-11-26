@@ -67,6 +67,7 @@ export default function BusinessAreas() {
   return (
     <section
       aria-labelledby="about-business-heading"
+      data-laptop-layout="about-business"
       className="mx-auto w-full lg:max-w-[1440px] px-[20px] lg:px-[75px] py-[36px] lg:py-20"
     >
       <header className="flex flex-col items-center gap-[16px] lg:gap-[10px]">

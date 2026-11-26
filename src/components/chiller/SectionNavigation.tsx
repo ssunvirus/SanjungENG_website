@@ -2,7 +2,8 @@
 
 const items = [
   ["chiller-service", "주요 서비스"],
-  ["chiller-process", "시공 과정"],
+  ["chiller-process", "냉동기 설치/교체"],
+  ["chiller-removal", "냉동기 철거"],
   ["chiller-cleaning", "냉동기 세관"],
   ["chiller-maintenance", "유지보수"],
   ["chiller-products", "주요 냉동기"],
@@ -12,5 +13,5 @@ const items = [
 ] as const;
 
 export default function ChillerSectionNavigation() {
-  return <SectionNavigation items={items} label="냉동기 페이지 구간 이동" />;
+  return <SectionNavigation items={items} label="냉동기 페이지 구간 이동" compact />;
 }

@@ -12,14 +12,17 @@ export type WorkProcessStep = {
   alt?: string;
   unoptimized?: boolean;
   imageClassName?: string;
+  imageSizes?: string;
 };
 
 export default function WorkProcessCards({
   steps,
   mobileCarousel = false,
+  desktopColumns = 4,
 }: {
   steps: readonly WorkProcessStep[];
   mobileCarousel?: boolean;
+  desktopColumns?: 3 | 4;
 }) {
   const [active, setActive] = useState(0);
   const track = useRef<HTMLOListElement>(null);
@@ -99,8 +102,8 @@ export default function WorkProcessCards({
         }
         className={
           mobileCarousel
-            ? "relative z-10 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:p-0"
-            : "relative z-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+            ? `relative z-10 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"} lg:gap-5 lg:overflow-visible lg:p-0`
+            : `relative z-10 grid grid-cols-1 gap-6 sm:grid-cols-2 ${desktopColumns === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"} lg:gap-5`
         }
       >
         {steps.map((step) => (
@@ -119,7 +122,9 @@ export default function WorkProcessCards({
                 src={step.image}
                 alt={step.alt || `${step.title} 작업 현장`}
                 fill
-                sizes="(min-width: 1440px) 365px, (min-width: 640px) 45vw, 90vw"
+                sizes={
+                  step.imageSizes || "(min-width: 1440px) 365px, (min-width: 640px) 45vw, 90vw"
+                }
                 quality={100}
                 unoptimized={step.unoptimized}
                 className={`object-cover ${step.imageClassName || ""}`}

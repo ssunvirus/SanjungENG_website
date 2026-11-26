@@ -47,6 +47,13 @@ function CleaningImage({ src, alt, ...props }: Omit<ImageProps, "src"> & { src: 
 
 export default function TubeCleaning() {
   const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setActiveStep((current) => (current + 1) % steps.length);
+    }, 5000);
+    return () => window.clearTimeout(timer);
+  }, [activeStep]);
+
   const [comparisonIndex, setComparisonIndex] = useState(0);
   const comparisonTrack = useRef<HTMLDivElement>(null);
   const comparisonSection = useRef<HTMLDivElement>(null);
@@ -151,10 +158,8 @@ export default function TubeCleaning() {
             </span>
           </h3>
           <p className="mt-5 text-[18px] font-semibold leading-8 text-brand-navy/85 lg:text-[20px] lg:leading-9">
-            <span className="block">전열관 내부의 스케일과 이물질을 확인하고 세척합니다.</span>
-            <span className="mt-2 block">
-              냉동기 종류와 오염 상태에 따라 작업 방법과 범위를 안내해 드립니다.
-            </span>
+            <span className="block">전열관 내부의 스케일과 이물질을 브러시로 세척.</span>
+            <span className="mt-2 block">냉동기 종류와 오염 상태에 맞춰 세관을 진행합니다.</span>
           </p>
           <dl className="mt-7 space-y-3 border-t border-brand-navy/10 pt-6 text-[18px] font-semibold leading-8 text-brand-navy lg:text-[20px]">
             <div className="grid grid-cols-[104px_1fr] items-start gap-3 lg:gap-4">
@@ -182,7 +187,7 @@ export default function TubeCleaning() {
       <div className="mt-12 grid gap-5 border-t border-brand-navy/10 pt-8 lg:mt-16 lg:grid-cols-[1fr_2fr] lg:gap-x-10 lg:gap-y-6 lg:pt-10">
         <div className="flex items-center justify-between gap-4 lg:col-span-2">
           <h3 className="text-[26px] font-bold leading-snug tracking-tight text-brand-navy lg:text-[32px]">
-            이런 순서로 진행됩니다
+            냉동기 세관 작업 과정
           </h3>
         </div>
         <div className="-mt-8 min-w-0 lg:hidden">
@@ -259,9 +264,31 @@ export default function TubeCleaning() {
       >
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h3 className="text-[26px] font-bold text-brand-navy lg:text-[32px]">세관 전과 후</h3>
-          <p className="text-lg font-semibold tabular-nums text-brand-navy" aria-live="polite">
-            사례 {comparisonIndex + 1} / {comparisons.length}
-          </p>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              aria-label="이전 세관 전후 사례"
+              onClick={() =>
+                setComparisonIndex(
+                  (current) => (current + comparisons.length - 1) % comparisons.length,
+                )
+              }
+              className="hidden size-11 lg:flex cursor-pointer items-center justify-center rounded-full border border-brand-navy/10 bg-white text-brand-navy shadow-sm hover:bg-brand-blue/10 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              <ChevronLeft aria-hidden="true" />
+            </button>
+            <p className="text-base font-bold tabular-nums text-brand-navy" aria-live="polite">
+              사례 {comparisonIndex + 1} / {comparisons.length}
+            </p>
+            <button
+              type="button"
+              aria-label="다음 세관 전후 사례"
+              onClick={() => setComparisonIndex((current) => (current + 1) % comparisons.length)}
+              className="hidden size-11 lg:flex cursor-pointer items-center justify-center rounded-full border border-brand-navy/10 bg-white text-brand-navy shadow-sm hover:bg-brand-blue/10 focus-visible:outline-2 focus-visible:outline-brand-blue"
+            >
+              <ChevronRight aria-hidden="true" />
+            </button>
+          </div>
         </div>
         <div className="lg:hidden">
           <div
@@ -291,9 +318,9 @@ export default function TubeCleaning() {
                 key={item.before}
                 role="group"
                 aria-label={`사례 ${index + 1}`}
-                className="w-[90%] shrink-0 snap-start rounded-xl border border-brand-navy/10 bg-white p-3 shadow-[0_4px_16px_rgba(16,46,73,0.08)] last:mr-[10%]"
+                className="w-[90%] shrink-0 snap-start rounded-[24px] border border-brand-navy/10 bg-white/85 p-4 shadow-[0_10px_30px_rgba(16,45,74,0.07)] last:mr-[10%]"
               >
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-4">
                   {[
                     { label: "세관 전", src: item.before },
                     { label: "세관 후", src: item.after },
@@ -306,14 +333,14 @@ export default function TubeCleaning() {
                         onClick={() =>
                           setPreview({ src: photo.src, title: `사례 ${index + 1} ${photo.label}` })
                         }
-                        className="relative block aspect-[3/4] w-full cursor-zoom-in overflow-hidden rounded-[8px] bg-[#E8EFF3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+                        className="relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-[8px] bg-[#E8EFF3] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
                       >
                         <Image
                           src={mobilePhoto(photo.src)}
                           alt={`사례 ${index + 1} ${photo.label} 냉동기 수실 내부`}
                           fill
                           unoptimized
-                          sizes="45vw"
+                          sizes="90vw"
                           className="object-cover object-center"
                         />
                         <span
@@ -323,7 +350,9 @@ export default function TubeCleaning() {
                           <ZoomIn size={18} />
                         </span>
                       </button>
-                      <figcaption className="mt-3 text-center text-base font-bold text-brand-navy">
+                      <figcaption
+                        className={`mt-2 text-sm font-bold ${photo.src === item.after ? "text-brand-blue" : "text-brand-navy"}`}
+                      >
                         {photo.label}
                       </figcaption>
                     </figure>
@@ -361,19 +390,7 @@ export default function TubeCleaning() {
             ))}
           </div>
         </div>
-        <div className="relative hidden px-12 lg:block">
-          <button
-            type="button"
-            aria-label="이전 세관 전후 사례"
-            onClick={() =>
-              setComparisonIndex(
-                (current) => (current + comparisons.length - 1) % comparisons.length,
-              )
-            }
-            className="absolute left-0 top-1/2 z-10 flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-brand-navy/10 bg-white text-brand-navy shadow-sm hover:bg-brand-blue/10 focus-visible:outline-2 focus-visible:outline-brand-blue"
-          >
-            <ChevronLeft aria-hidden="true" />
-          </button>
+        <div className="hidden rounded-[28px] border border-brand-navy/10 bg-white/85 p-5 shadow-[0_10px_30px_rgba(16,45,74,0.07)] lg:block lg:p-6">
           <div className="grid gap-5 sm:grid-cols-2">
             {[
               {
@@ -387,7 +404,7 @@ export default function TubeCleaning() {
                 alt: "세관과 방청 도장을 마친 냉동기 수실 내부",
               },
             ].map(({ label, src, alt }) => (
-              <figure key={label}>
+              <figure key={label} className="relative min-w-0">
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[10px] bg-[#E8EFF3]">
                   <CleaningImage
                     src={src}
@@ -398,20 +415,14 @@ export default function TubeCleaning() {
                     className="object-cover object-center"
                   />
                 </div>
-                <figcaption className="mt-3 text-lg font-semibold text-brand-navy lg:text-xl">
+                <figcaption
+                  className={`absolute left-4 top-4 rounded-full px-4 py-2 text-base font-bold shadow-sm ${src === comparison.after ? "bg-brand-blue text-white" : "bg-white/95 text-brand-navy"}`}
+                >
                   {label}
                 </figcaption>
               </figure>
             ))}
           </div>
-          <button
-            type="button"
-            aria-label="다음 세관 전후 사례"
-            onClick={() => setComparisonIndex((current) => (current + 1) % comparisons.length)}
-            className="absolute right-0 top-1/2 z-10 flex size-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-brand-navy/10 bg-white text-brand-navy shadow-sm hover:bg-brand-blue/10 focus-visible:outline-2 focus-visible:outline-brand-blue"
-          >
-            <ChevronRight aria-hidden="true" />
-          </button>
         </div>
       </div>
       <div className="mt-6 flex justify-center lg:mt-8">

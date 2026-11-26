@@ -118,7 +118,7 @@ export default function ProjectGallery({
               setListing(1, value);
             }}
             onFocus={(event) => {
-              if (window.matchMedia("(min-width: 90rem)").matches) {
+              if (window.matchMedia("(min-width: 75rem)").matches) {
                 event.currentTarget.scrollIntoView({ block: "nearest", inline: "nearest" });
               }
             }}

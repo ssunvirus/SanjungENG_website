@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Introduction() {
   return (
-    <section className="mx-auto flex h-auto lg:h-[730px] w-full lg:max-w-[1440px] items-center justify-center px-[20px] lg:px-[120px] py-[36px] lg:py-[103px]">
+    <section data-laptop-layout="about-introduction" className="mx-auto flex h-auto lg:h-[730px] w-full lg:max-w-[1440px] items-center justify-center px-[20px] lg:px-[120px] py-[36px] lg:py-[103px]">
       <div className="flex flex-col lg:flex-row h-auto lg:h-[524px] items-center justify-center gap-[28px] lg:gap-[82px]">
         <div className="flex h-auto lg:h-[524px] w-full lg:w-[650px] shrink-0 flex-col items-start gap-[16px] lg:gap-[15px]">
           <div className="flex w-full lg:w-[568px] flex-col items-start gap-[16px] lg:gap-[26px]">

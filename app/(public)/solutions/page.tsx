@@ -5,6 +5,7 @@ import ChillerTypes from "@/src/components/chiller/ChillerTypes";
 import EquipmentFaq from "@/src/components/shared/EquipmentFaq";
 import Hero from "@/src/components/chiller/Hero";
 import Maintenance from "@/src/components/chiller/Maintenance";
+import Removal from "@/src/components/chiller/Removal";
 import Services from "@/src/components/chiller/Services";
 import TubeCleaning from "@/src/components/chiller/TubeCleaning";
 import WorkProcess from "@/src/components/chiller/WorkProcess";
@@ -38,6 +39,13 @@ export default function SolutionsPage() {
           className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px] bg-[#E3F6FC]"
         >
           <WorkProcess />
+        </div>
+        <div
+          id="chiller-removal"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
+          <Removal />
         </div>
         <div
           id="chiller-cleaning"

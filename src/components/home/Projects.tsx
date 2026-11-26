@@ -61,6 +61,7 @@ export default function Projects({ projects = desktopFeaturedProjects }: { proje
           setInteracting(false);
       }}
       id="projects"
+      data-laptop-layout="projects"
       aria-labelledby="projects-heading"
       className="relative mx-auto h-[929px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
     >

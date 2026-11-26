@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @import "./pretendard.css";
+@import "./compact-desktop.css";
 
-/* The desktop layouts need the full content width; use the compact layout on laptops. */
+/* Compact desktop starts at 1200px; large desktop retains its existing layout. */
 @theme {
-  --breakpoint-lg: 90rem;
+  --breakpoint-lg: 75rem;
   --breakpoint-xl: 100rem;
 }
 
@@ -28,7 +29,7 @@ body {
 }
 
 /* Keep section titles concise in the compact layout, including tablets. */
-@media (width < 90rem) {
+@media (width < 75rem) {
   [data-section-eyebrow] {
     display: none;
   }
@@ -39,7 +40,7 @@ body {
 }
 
 /* Shared desktop section labels; compact layouts retain their existing rules. */
-@media (width >= 90rem) {
+@media (width >= 75rem) {
   :is([data-section-eyebrow], [data-desktop-section-eyebrow]) {
     display: flex;
     align-items: center;
