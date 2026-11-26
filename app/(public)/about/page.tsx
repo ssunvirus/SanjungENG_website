@@ -5,7 +5,7 @@ import Hero from "@/src/components/about/Hero";
 import Highlights from "@/src/components/about/Highlights";
 import Introduction from "@/src/components/about/Introduction";
 import WaveSurface from "@/src/components/shared/WaveSurface";
-import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/PageSectionNavigation";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const navigationItems = [
-  ["about-introduction", "산정엔지니어링 소개"],
+  ["about-introduction", "회사 소개"],
   ["about-overview", "회사 개요"],
   ["about-business", "사업 영역"],
 ] as const;

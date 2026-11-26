@@ -1,0 +1,106 @@
+@media (min-width: 1024px) {
+  .page [id^="fabric-"] > section,
+  .page [id^="fabric-"]:not([id="fabric-introduction"]) > div > section {
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 63px;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] {
+    height: auto;
+    grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.5fr);
+    gap: 32px;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] > div,
+  .page section[aria-labelledby="one-stop-heading"] li > div {
+    min-width: 0;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] h2,
+  .page section[aria-labelledby="one-stop-heading"] h3 {
+    white-space: normal;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] h2 {
+    font-size: clamp(28px, 2.4vw, 45px);
+    line-height: 1.45;
+    letter-spacing: -0.02em;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li {
+    position: relative;
+    isolation: isolate;
+    height: auto;
+    min-height: 212px;
+    grid-template-columns: 56px minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 20px;
+    padding: 16px 20px 16px 0;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 76px;
+    border: 1px solid rgb(16 45 74 / 8%);
+    border-radius: 22px;
+    background: white;
+    box-shadow: 0 6px 20px rgb(16 45 74 / 5%);
+    transition:
+      background-color 200ms,
+      border-color 200ms;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li[data-active="true"]::before {
+    background-color: rgb(0 173 219 / 8%);
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li > div:first-child {
+    display: block;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li > div:last-child > span {
+    display: none;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li > div:nth-child(2) {
+    width: calc(100% - 16px);
+    height: 180px;
+    margin-left: 16px;
+    overflow: hidden;
+    border-radius: 14px;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li > div:last-child {
+    gap: 14px;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li h3 {
+    color: #102d4a;
+    font-size: clamp(26px, 1.7vw, 30px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] li p {
+    white-space: pre-line;
+    color: #30465b;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .page section[aria-labelledby="one-stop-heading"] > div > img {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page section[aria-labelledby="one-stop-heading"] li::before {
+    transition: none;
+  }
+}

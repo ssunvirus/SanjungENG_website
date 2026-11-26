@@ -9,7 +9,7 @@ const steps = [
 
 export default function WorkProcess() {
   return (
-    <section className="mx-auto w-full bg-[#E3F6FC] px-5 py-9 lg:max-w-[1600px] lg:px-10 lg:py-[64px]">
+    <section className="mx-auto w-full bg-transparent px-5 py-9 lg:max-w-[1600px] lg:px-10 lg:py-[64px]">
       <header>
         <div
           data-section-eyebrow

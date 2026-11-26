@@ -43,7 +43,7 @@ export default function Customers() {
       <div className="mt-8 space-y-3 overflow-hidden py-2 lg:mt-10 lg:space-y-4">
         {[customerLogos.slice(0, 8), customerLogos.slice(8)].map((logos, row) => (
           <div key={row} className={styles.viewport}>
-            <div className={`${styles.track} ${row === 0 ? styles.right : styles.left}`}>
+            <div className={`${styles.track} ${row % 2 === 0 ? styles.right : styles.left}`}>
               {[0, 1].map((copy) => (
                 <ul key={copy} aria-hidden={copy === 1 ? true : undefined} className={styles.group}>
                   {logos.map(([file, name]) => (
@@ -59,16 +59,22 @@ export default function Customers() {
                             file === "saffco"
                               ? "/images/home-refresh/customer-saffco.svg"
                               : file === "avenue-france"
-                              ? "/images/home-refresh/customer-avenue-france.svg"
-                              : file === "hwaseong"
-                                ? "/images/home-refresh/customer-hwaseong-updated.png"
-                                : ["orion", "pkc", "bbq"].includes(file)
-                                  ? `/images/home-refresh/customer-${file}-transparent.png`
-                                  : `/images/home-refresh/customer-${file}.${file === "kogas" ? "jpg" : "png"}`
+                                ? "/images/home-refresh/customer-avenue-france.svg"
+                                : file === "hwaseong"
+                                  ? "/images/home-refresh/customer-hwaseong-updated.png"
+                                  : ["orion", "pkc", "bbq"].includes(file)
+                                    ? `/images/home-refresh/customer-${file}-transparent.png`
+                                    : `/images/home-refresh/customer-${file}.${file === "kogas" ? "jpg" : "png"}`
                           }
                           alt={copy === 0 ? name : ""}
                           fill
-                          sizes={file === "saffco" ? "(min-width: 1200px) 236px, 196px" : file === "kogas" ? "(min-width: 1024px) 184px, 144px" : "(min-width: 1024px) 152px, 128px"}
+                          sizes={
+                            file === "saffco"
+                              ? "(min-width: 1200px) 236px, 196px"
+                              : file === "kogas"
+                                ? "(min-width: 1024px) 184px, 144px"
+                                : "(min-width: 1024px) 152px, 128px"
+                          }
                           className="object-contain"
                         />
                       </div>

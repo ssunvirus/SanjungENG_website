@@ -38,7 +38,7 @@ export default function Services() {
           항온항습기 주요 서비스
         </h2>
         <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-brand-text/60">
-          항온항습기 설치부터 유지관리까지
+          항온항습기 설치부터 유지관리까지.
         </p>
       </header>
       <div className="flex flex-col lg:flex-row h-auto lg:h-[623px] w-full lg:w-[1159px] gap-[28px] lg:gap-[52px]">

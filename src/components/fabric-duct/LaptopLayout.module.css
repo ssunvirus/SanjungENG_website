@@ -3,23 +3,16 @@
 }
 
 .stepNumber {
-  animation: stepNumberFill 5.4s ease-in-out infinite;
+  transition:
+    background-color 200ms,
+    border-color 200ms,
+    color 200ms;
 }
 
-@keyframes stepNumberFill {
-  0%,
-  33.33%,
-  100% {
-    background-color: white;
-    border-color: var(--color-brand-blue);
-    color: var(--color-brand-blue);
-  }
-  6%,
-  27% {
-    background-color: var(--color-brand-navy);
-    border-color: var(--color-brand-navy);
-    color: white;
-  }
+.serviceStep[data-active="true"] .stepNumber {
+  background-color: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: white;
 }
 
 .stepArrow {
@@ -46,7 +39,7 @@
   }
 
   .stepNumber {
-    animation: none;
+    transition: none;
   }
 }
 

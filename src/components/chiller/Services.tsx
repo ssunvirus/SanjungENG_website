@@ -1,11 +1,26 @@
-import { ClipboardCheck, Droplets, Hammer, Settings, Wrench } from "lucide-react";
+import { Droplets, Hammer, Settings, Wrench } from "lucide-react";
 
 const chillerServices = [
-  { title: "설치 및 교체", icon: Wrench, href: "#chiller-process" },
-  { title: "철거 및 반출", icon: Hammer, href: "#chiller-removal" },
-  { title: "세관 및 정비", icon: Droplets, href: "#chiller-cleaning" },
-  { title: "수리 및 오버홀", icon: Settings, href: "#chiller-maintenance" },
-  { title: "정기점검 및 유지보수", icon: ClipboardCheck, href: "#chiller-maintenance" },
+  {
+    title: "설치 및 교체",
+    icon: Wrench,
+    href: "#chiller-process",
+  },
+  {
+    title: "철거 및 반출",
+    icon: Hammer,
+    href: "#chiller-removal",
+  },
+  {
+    title: "세관 및 정비",
+    icon: Droplets,
+    href: "#chiller-cleaning",
+  },
+  {
+    title: "수리 및 유지보수",
+    icon: Settings,
+    href: "#chiller-maintenance",
+  },
 ];
 
 export default function Services() {
@@ -29,24 +44,20 @@ export default function Services() {
           >
             냉동기 주요 서비스
           </h2>
-          <p className="mt-3 text-[15px] font-semibold lg:mt-[25px] lg:text-[19px]">
-            필요한 서비스를 선택하면 관련 섹션으로 이동합니다.
-          </p>
         </header>
-        <div className="overflow-hidden rounded-[10px] border border-brand-navy/15 bg-white shadow-[0_4px_16px_rgba(16,46,73,0.06)]">
-          {chillerServices.map((service, index) => (
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5">
+          {chillerServices.map((service) => (
             <a
               key={service.title}
               href={service.href}
-              className="flex items-center gap-4 border-b border-brand-navy/15 px-5 py-8 transition-colors last:border-b-0 hover:bg-[#00ADDB]/15 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue motion-reduce:transition-none lg:gap-6 lg:px-8 lg:py-9"
+              className="group flex min-w-0 flex-col rounded-[20px] border border-white/90 bg-white/85 p-4 shadow-[0_10px_30px_rgba(16,45,74,0.07)] transition-[background-color,border-color,box-shadow] hover:border-brand-blue/25 hover:bg-[#EAF8FD] hover:shadow-[0_12px_32px_rgba(0,173,219,0.12)] focus-visible:border-brand-blue/25 focus-visible:bg-[#EAF8FD] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none lg:rounded-[28px] lg:p-6"
             >
-              <span className="text-sm font-bold tabular-nums text-brand-blue lg:text-xl">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-blue/10 text-brand-navy lg:size-12">
-                <service.icon aria-hidden="true" className="size-6 lg:size-7" strokeWidth={1.8} />
-              </span>
-              <h3 className="flex-1 text-lg font-bold text-brand-navy lg:text-[25px]">
+              <div className="mb-5 flex items-center justify-between gap-2 lg:mb-7">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-[14px] bg-brand-blue/10 text-brand-blue lg:size-14 lg:rounded-[18px]">
+                  <service.icon aria-hidden="true" className="size-7 lg:size-8" strokeWidth={1.8} />
+                </span>
+              </div>
+              <h3 className="break-keep text-[20px] font-bold leading-snug tracking-tight text-brand-navy lg:text-[28px]">
                 {service.title}
               </h3>
             </a>

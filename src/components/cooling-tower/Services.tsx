@@ -53,7 +53,7 @@ export default function Services() {
           냉각탑 주요 서비스
         </h2>
         <p className="mt-[10px] lg:mt-[25px] text-[15px] lg:text-[25px] font-semibold text-brand-text/60">
-          냉각탑 설치부터 유지관리까지 한 번에 제공합니다.
+          냉각탑 설치부터 유지관리까지.
         </p>
       </header>
 

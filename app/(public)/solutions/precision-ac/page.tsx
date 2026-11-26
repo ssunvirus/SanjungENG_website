@@ -1,4 +1,4 @@
-﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/PageSectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import PrecisionAcFaq from "@/src/components/precision-ac/PrecisionAcFaq";
@@ -10,6 +10,7 @@ import Hero from "@/src/components/precision-ac/Hero";
 import Products from "@/src/components/precision-ac/Products";
 import Services from "@/src/components/precision-ac/Services";
 import WorkProcess from "@/src/components/precision-ac/WorkProcess";
+import layoutStyles from "@/src/components/precision-ac/section-layout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/precision-ac" },
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
 const navigationItems = [
   ["precision-ac-services", "주요 서비스"],
   ["precision-ac-process", "시공 과정"],
-  ["precision-ac-products", "주요 장비"],
+  ["precision-ac-products", "제품 안내"],
   ["precision-ac-cases", "시공사례"],
   ["precision-ac-questions", "자주 묻는 질문"],
   ["precision-ac-inquiry", "견적문의"],
@@ -29,7 +30,7 @@ const navigationItems = [
 
 export default function PrecisionAcPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
+    <main className={`${layoutStyles.page} min-w-0 flex-1 bg-[#EFF7FB] text-brand-text`}>
       <Hero />
       <SectionNavigation items={navigationItems} label="항온항습기 페이지 구간 이동" />
       <WaveSurface>

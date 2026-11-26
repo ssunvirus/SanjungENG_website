@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
+import styles from "./SectionNavigation.module.css";
 
 const mobileLabels: Record<string, string> = {
   "산정엔지니어링 소개": "소개",
@@ -14,10 +15,14 @@ export default function SectionNavigation({
   items,
   label,
   compact = false,
+  sticky = false,
+  rightRail = false,
 }: {
   items: readonly (readonly [string, string])[];
   label: string;
   compact?: boolean;
+  sticky?: boolean;
+  rightRail?: boolean;
 }) {
   const [active, setActive] = useState<string>(items[0][0]);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -61,37 +66,55 @@ export default function SectionNavigation({
       frame = 0;
       const nav = navRef.current;
       if (!nav) return;
-      const offset = parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 24;
       let current: string = items[0][0];
       for (const [id] of items) {
-        if ((document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= offset) {
+        const section = document.getElementById(id);
+        if (!section) continue;
+        const offset = sticky
+          ? parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 16
+          : parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+        // Use the same landing position as clicking the menu, allowing rounding.
+        if (section.getBoundingClientRect().top <= offset + 2) {
           current = id;
         }
-      }
-      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) {
-        current = items[items.length - 1][0];
       }
       setActive(current);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const observer = new ResizeObserver(schedule);
+    for (const [id] of items) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
+    if (document.querySelector("main")) observer.observe(document.querySelector("main")!);
     schedule();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
       cancelAnimationFrame(frame);
+      observer.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
-  }, [items]);
+  }, [items, sticky]);
 
   return (
     <nav
       ref={navRef}
       aria-label={label}
-      className="sticky top-[64px] z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:top-[72px] min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:top-[98px] lg:-mt-6 lg:px-10"
+      className={`${rightRail ? styles.rightRail : ""} ${sticky ? "sticky top-[64px] min-[768px]:top-[72px] lg:top-[98px]" : "relative top-0"} z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:-mt-6 lg:px-10`}
     >
+      {rightRail && (
+        <header className={styles.railHeader}>
+          <span>바로가기</span>
+          <span className={styles.railPosition} aria-hidden="true">
+            {String(items.findIndex(([id]) => id === active) + 1).padStart(2, "0")}
+            <span> / {String(items.length).padStart(2, "0")}</span>
+          </span>
+        </header>
+      )}
       <div
         ref={listRef}
         className="mx-auto flex max-w-[1280px] items-center gap-1 overflow-x-auto bg-white px-3 py-2 [scrollbar-width:none] min-[768px]:gap-2 min-[768px]:rounded-[24px] min-[768px]:border min-[768px]:border-brand-navy/10 min-[768px]:py-3 min-[768px]:shadow-[0_6px_16px_rgba(16,47,73,0.2)] lg:gap-3 lg:px-5 [&::-webkit-scrollbar]:hidden"
@@ -106,7 +129,9 @@ export default function SectionNavigation({
               if (!target) return;
               event.preventDefault();
               const nav = navRef.current!;
-              const offset = parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 16;
+              const offset = sticky
+                ? parseFloat(getComputedStyle(nav).top) + nav.offsetHeight + 16
+                : parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
               target.focus({ preventScroll: true });
               window.scrollTo({
                 top: window.scrollY + target.getBoundingClientRect().top - offset,

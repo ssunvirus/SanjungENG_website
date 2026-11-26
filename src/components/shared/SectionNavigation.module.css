@@ -1,0 +1,89 @@
+.rightRail {
+  display: none;
+}
+
+.railHeader {
+  display: none;
+}
+
+/* Keep the 1440px content area clear and leave room for the contact button. */
+@media (min-width: 1800px) and (min-height: 700px) {
+  .rightRail.rightRail {
+    display: block;
+    position: fixed;
+    inset: 50% 16px auto auto;
+    transform: translateY(-50%);
+    width: 150px;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid rgb(16 45 74 / 10%);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgb(16 45 74 / 10%);
+  }
+
+  .rightRail .railHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+    margin: 0 4px 8px;
+    padding: 8px 0 12px;
+    border-bottom: 1px solid rgb(16 45 74 / 8%);
+    color: #102d4a;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .railPosition {
+    color: #007da5;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .railPosition > span {
+    color: rgb(16 45 74 / 40%);
+    font-weight: 500;
+  }
+
+  .rightRail > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    overflow: visible;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .rightRail a {
+    flex: none;
+    justify-content: center;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 6px;
+    border: 0;
+    border-radius: 12px;
+    background: #f4f7fa;
+    color: rgb(16 45 74 / 65%);
+    font-size: 13px;
+    box-shadow: none;
+  }
+
+  .rightRail a:hover {
+    background: #eaf8fd;
+    color: #007da5;
+  }
+
+  .rightRail a[aria-current="location"] {
+    background: #00addb;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgb(0 173 219 / 20%);
+  }
+
+  .rightRail > button {
+    display: none;
+  }
+}

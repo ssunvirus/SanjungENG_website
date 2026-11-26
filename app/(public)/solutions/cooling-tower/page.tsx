@@ -1,4 +1,4 @@
-import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/PageSectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/cooling-tower/CaseStudy";
@@ -9,6 +9,7 @@ import WorkProcess from "@/src/components/cooling-tower/WorkProcess";
 import CoolingTowerFaq from "@/src/components/cooling-tower/CoolingTowerFaq";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
+import layoutStyles from "@/src/components/cooling-tower/section-layout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cooling-tower" },
@@ -27,7 +28,7 @@ const navigationItems = [
 
 export default function CoolingTowerPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
+    <main className={`${layoutStyles.page} min-w-0 flex-1 bg-[#EFF7FB] text-brand-text`}>
       <Hero />
       <SectionNavigation items={navigationItems} label="냉각탑 페이지 구간 이동" />
       <WaveSurface>
@@ -41,7 +42,7 @@ export default function CoolingTowerPage() {
         <div
           id="cooling-tower-maintenance"
           tabIndex={-1}
-          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+          className="scroll-mt-[144px] bg-white outline-none lg:scroll-mt-[170px]"
         >
           <Maintenance />
         </div>

@@ -1,4 +1,4 @@
-import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/PageSectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import CaseStudy from "@/src/components/cold-storage/CaseStudy";
@@ -8,6 +8,7 @@ import Hero from "@/src/components/cold-storage/Hero";
 import WorkProcess from "@/src/components/cold-storage/WorkProcess";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
+import layoutStyles from "@/src/components/cold-storage/section-layout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/solutions/cold-storage" },
@@ -25,7 +26,7 @@ const navigationItems = [
 
 export default function ColdStoragePage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
+    <main className={`${layoutStyles.page} min-w-0 flex-1 bg-[#EFF7FB] text-brand-text`}>
       <Hero />
       <SectionNavigation items={navigationItems} label="저온저장고 페이지 구간 이동" />
       <WaveSurface>
@@ -39,7 +40,7 @@ export default function ColdStoragePage() {
         <div
           id="cold-storage-process"
           tabIndex={-1}
-          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+          className="scroll-mt-[144px] bg-[#E3F6FC] outline-none lg:scroll-mt-[170px]"
         >
           <WorkProcess />
         </div>

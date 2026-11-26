@@ -1,4 +1,4 @@
-﻿import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import PageSectionNavigation from "@/src/components/shared/PageSectionNavigation";
 
 const items = [
   ["chiller-service", "주요 서비스"],
@@ -13,5 +13,5 @@ const items = [
 ] as const;
 
 export default function ChillerSectionNavigation() {
-  return <SectionNavigation items={items} label="냉동기 페이지 구간 이동" compact />;
+  return <PageSectionNavigation items={items} label="냉동기 페이지 구간 이동" compact />;
 }

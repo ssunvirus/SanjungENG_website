@@ -1,4 +1,4 @@
-import SectionNavigation from "@/src/components/shared/SectionNavigation";
+import SectionNavigation from "@/src/components/shared/PageSectionNavigation";
 import WaveSurface from "@/src/components/shared/WaveSurface";
 import type { Metadata } from "next";
 import Hero from "@/src/components/fabric-duct/Hero";
@@ -11,6 +11,7 @@ import Partners from "@/src/components/fabric-duct/Partners";
 import FabricDuctFaq from "@/src/components/fabric-duct/FabricDuctFaq";
 import EstimateCta from "@/src/components/home/EstimateCta";
 import MobileEstimate from "@/src/components/home/mobile/MobileEstimate";
+import layoutStyles from "@/src/components/fabric-duct/section-layout.module.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/fabric-duct" },
@@ -33,6 +34,7 @@ const navigationItems = [
   ["fabric-introduction", "패브릭덕트 소개"],
   ["fabric-applications", "적용 사례"],
   ["fabric-design", "공기 분배 설계"],
+  ["fabric-one-stop", "원스톱 솔루션"],
   ["fabric-partners", "파트너"],
   ["fabric-questions", "자주 묻는 질문"],
   ["fabric-inquiry", "견적문의"],
@@ -40,7 +42,7 @@ const navigationItems = [
 
 export default function FabricDuctPage() {
   return (
-    <main className="min-w-0 flex-1 bg-[#EFF7FB] text-brand-text">
+    <main className={`${layoutStyles.page} min-w-0 flex-1 bg-[#EFF7FB] text-brand-text`}>
       <Hero />
       <SectionNavigation items={navigationItems} label="패브릭덕트 페이지 구간 이동" />
       <WaveSurface>
@@ -69,6 +71,12 @@ export default function FabricDuctPage() {
           <div className="bg-white">
             <AirFlowDesign />
           </div>
+        </div>
+        <div
+          id="fabric-one-stop"
+          tabIndex={-1}
+          className="scroll-mt-[144px] outline-none lg:scroll-mt-[170px]"
+        >
           <OneStopSolution />
         </div>
         <div

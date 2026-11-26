@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from "./LaptopLayout.module.css";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
@@ -6,25 +9,33 @@ import MobileServiceSteps from "./MobileServiceSteps";
 const steps = [
   {
     number: "01",
-    title: "냉동/공조설비 설치",
-    description: "현장에 맞는 설비 설치",
-    image: "/images/cold-storage/process-unit-installation.jpg",
+    title: "냉동공조설비 설치",
+    description: "CDU/유니트쿨러 설치, 냉매 배관 연결",
+    image: "/images/fabric-duct/one-stop-equipment-installation.webp",
   },
   {
     number: "02",
     title: "패브릭덕트 설계/설치",
-    description: "공간에 맞춘 기류 설계와 공기분배",
-    image: "/images/projects/orion-production/cc_P5243359.jpg",
+    description: "패브릭덕트 배치 설계, 제작 및 현장 설치",
+    image: "/images/fabric-duct/one-stop-design-huiji.webp",
   },
   {
     number: "03",
-    title: "세척 / 유지보수",
-    description: "설치 후 세척과 정기점검으로\n이어지는 관리",
-    image: "/images/fabric-duct/one-stop-maintenance.png",
+    title: "세척 및 유지보수",
+    description: "덕트 탈착/세척, 설비 정기점검",
+    image: "/images/fabric-duct/one-stop-maintenance-lottemart.webp",
   },
 ];
 
 export default function OneStopSolution() {
+  const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setActiveStep((current) => (current + 1) % steps.length);
+    }, 1800);
+    return () => window.clearInterval(timer);
+  }, []);
   return (
     <section
       aria-labelledby="one-stop-heading"
@@ -52,7 +63,8 @@ export default function OneStopSolution() {
             패브릭덕트까지,
             <br />
             설치부터 관리까지
-            <span className="ml-[11px] text-brand-blue">한 번에</span>
+            <br />
+            <span className="whitespace-nowrap text-brand-blue">한 번에</span>
           </span>
         </h2>
         <p className="mt-[24px] lg:mt-[27px] text-[16px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] text-brand-text/60">
@@ -76,15 +88,13 @@ export default function OneStopSolution() {
         {steps.map((step, index) => (
           <li
             key={step.number}
+            data-active={activeStep === index}
             className={`${styles.serviceStep} grid h-auto lg:h-[194px] grid-cols-1 lg:grid-cols-[56px_374px_263px] items-center gap-y-4 lg:gap-y-0 gap-x-[20px]`}
           >
             <div aria-hidden="true" className="hidden lg:block relative h-full">
               <div className="absolute inset-y-0 left-1/2 w-[2px] -translate-x-1/2 bg-brand-blue" />
               <span
                 className={`${styles.stepNumber} absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex size-[56px] items-center justify-center rounded-full border border-brand-blue bg-white text-[21px] lg:text-[30px] font-medium leading-[24px] lg:leading-[36px] text-brand-blue`}
-                style={{
-                  animationDelay: `${index * 1.8}s`,
-                }}
               >
                 {step.number}
               </span>
