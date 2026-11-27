@@ -25,17 +25,17 @@ const slides: { title: string; image: string; description: string; href?: string
     description: "생산 설비와 작업 구역에 맞춰\n공기를 고르게 공급해 쾌적한 작업환경을 조성합니다.",
   },
   {
-    title: "상업시설",
+    title: "가구매장",
     image: "/images/fabric-duct/application-commercial.jpg",
     description:
-      "넓은 상업공간에 공기를 균일하게 분배해\n공간별 온도 편차를 줄이고 쾌적함을 높입니다.",
+      "패브릭덕트가 가구 진열 구역과 고객 통로에 공기를 고르게 보내, 매장 어디서든 쾌적하게 가구를 둘러볼 수 있도록 돕습니다.",
   },
   {
     title: "구례 실내수영장",
     href: "/projects/gurye-pool",
     image: "/images/fabric-duct/hero.jpg",
     description:
-      "실내수영장의 온/습도 조건을 고려한 고른 공기 분배와\n세척 가능한 패브릭덕트로 쾌적하고 위생적인 실내 환경을 조성합니다.",
+      "실내수영장의 온도와 습도를 고려해 공기를 고르게 분배합니다. 세척이 가능한 패브릭덕트로 쾌적하고 위생적인 환경을 유지할 수 있습니다.",
   },
 ];
 

@@ -8,7 +8,7 @@ const businessCards = [
   {
     number: "01",
     title: "냉동공조",
-    description: "현장에 맞는 설계, 설치, 교체",
+    description: "현장에 맞춘 냉동공조 설계, 시공",
     services: "냉동기 / 항온항습기 / 냉각탑",
     image: "/images/home-refresh/business-hvac-card.png",
     imageAlt: "산업용 냉동공조 설비",
@@ -17,7 +17,7 @@ const businessCards = [
   {
     number: "02",
     title: "패브릭덕트",
-    description: "공간에 맞춘 공기 분배 설계",
+    description: "공간에 맞춘 패브릭덕트 설계, 시공",
     services: "맞춤 설계 / 제작 / 시공",
     image: "/images/business/fabric-duct-card.jpg",
     imageAlt: "실내 천장에 설치된 패브릭덕트",
@@ -26,7 +26,7 @@ const businessCards = [
   {
     number: "03",
     title: "저온저장고",
-    description: "저온 보관을 위한 설비 구축",
+    description: "보관 조건에 맞춘 저온저장고 구축",
     services: "저장고 설계 / CDU 및 유니트쿨러 설치",
     image: "/images/cold-storage/process-unit-installation.jpg",
     imageAlt: "저온저장고 설비현장",
@@ -35,11 +35,11 @@ const businessCards = [
   {
     number: "04",
     title: "유지보수",
-    description: "안정적인 가동을 위한 정기점검",
+    description: "안정적인 설비 운영을 위한 점검, 정비",
     services: "정기점검 / 예방정비 / 수리 / 오버홀",
     image: "/images/business/maintenance-card.jpg",
     imageAlt: "냉동공조 설비 유지보수 현장",
-    href: "/solutions#maintenance",
+    href: "/solutions#chiller-cleaning",
   },
 ];
 
@@ -52,7 +52,7 @@ export function BusinessOverview() {
           alt="냉동공조와 패브릭덕트가 적용된 산업 시설"
           fill
           sizes="(max-width: 1920px) 100vw, 1920px"
-          className="object-cover"
+          className="object-cover min-[1921px]:hidden"
         />
 
         <div className="absolute top-[51px] left-[240px]">
@@ -128,7 +128,16 @@ export function BusinessOverview() {
                   style={{ width: service.width, left: -service.offset }}
                 >
                   <h3 className="whitespace-nowrap text-[30px] font-bold leading-9 text-[#006EB8]">
-                    {service.title}
+                    {index === 2 ? (
+                      <Link
+                        href="/solutions#chiller-cleaning"
+                        className="focus-visible:outline-2 focus-visible:outline-brand-blue"
+                      >
+                        {service.title}
+                      </Link>
+                    ) : (
+                      service.title
+                    )}
                   </h3>
                   <p className="ml-[8px] whitespace-nowrap text-[20px] font-semibold leading-6 text-brand-text">
                     {service.description}
@@ -274,7 +283,7 @@ export function BusinessOverview() {
 
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#EFF7FB]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#EFF7FB] min-[1921px]:hidden"
         />
         <div className="absolute top-[950px] left-1/2 z-10 -translate-x-1/2">
           <BusinessWorkflow />
@@ -286,13 +295,13 @@ export function BusinessOverview() {
 
 function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
   return (
-    <article className="h-[632px] w-[266px] shrink-0 overflow-hidden rounded-[10px] bg-white">
+    <article className="flex h-auto w-[266px] min-w-0 shrink-0 flex-col overflow-hidden rounded-[20px] border border-brand-navy/10 bg-white shadow-[0_4px_16px_rgba(16,46,73,0.06)]">
       <Link
         href={card.href}
         aria-label={`${card.title} 자세히 보기`}
-        className="group/business-image relative block h-[346px] bg-[#EFF7FB] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue"
+        className="group/business-image relative block aspect-[4/3] w-full shrink-0 bg-[#EFF7FB] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand-blue"
       >
-        <div className="absolute inset-0 overflow-hidden rounded-[10px] transition-transform duration-300 ease-out motion-safe:group-hover/business-image:translate-y-[6px] motion-reduce:transition-none">
+        <div className="absolute inset-0 overflow-hidden transition-transform duration-300 ease-out motion-safe:group-hover/business-image:scale-[1.03] motion-reduce:transition-none">
           <Image
             src={card.image}
             alt={card.imageAlt}
@@ -305,25 +314,27 @@ function BusinessCard({ card }: { card: (typeof businessCards)[number] }) {
         </div>
       </Link>
 
-      <div className="px-[12px] pt-[19px] pb-[15px]">
-        <p className="text-[15px] font-medium leading-5 text-brand-blue">{card.number}</p>
-        <h3 className="mt-[18px] whitespace-nowrap text-[34px] font-extrabold leading-[42px] text-brand-navy">
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[17px] font-medium leading-6 text-brand-blue">{card.number}</p>
+        <h3 className="mt-2 break-keep text-[34px] font-extrabold leading-[44px] text-brand-navy">
           {card.title}
         </h3>
-        <p className="mt-[19px] whitespace-nowrap text-[18px] font-semibold leading-[26px] text-brand-text">
-          {card.description}
-        </p>
-        <div className="mx-[5px] mt-[18px] border-t border-black/15 pt-[15px]">
-          <p className="whitespace-nowrap text-[15px] leading-5 text-brand-text/80">
+        <div className="mt-3 min-h-[76px] border-t border-brand-navy/10 py-3">
+          <p className="break-keep text-[17px] font-medium leading-[26px] text-brand-text/90">
             {card.services}
           </p>
         </div>
         <Link
           href={card.href}
-          className="mx-[5px] mt-[16px] flex items-center justify-between border-t border-black/15 px-[2px] pt-[15px] text-[15px] font-medium leading-5 text-brand-text"
+          className="mt-auto flex min-h-12 items-center justify-between gap-3 border-t border-brand-navy/10 pt-3 text-[17px] font-bold leading-6 text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue"
         >
           <span>자세히 보기</span>
-          <ArrowRightCircle size={36} strokeWidth={2} aria-hidden="true" />
+          <ArrowRightCircle
+            size={28}
+            strokeWidth={2}
+            aria-hidden="true"
+            className="shrink-0 text-[#006EB8]"
+          />
         </Link>
       </div>
     </article>
@@ -334,7 +345,7 @@ export function BusinessAreas() {
   return (
     <section
       data-laptop-layout="business"
-      className="mx-auto h-[869px] w-full max-w-[1440px] overflow-hidden bg-[#EFF7FB] pt-[40px]"
+      className="mx-auto w-full max-w-[1440px] bg-[#EFF7FB] pb-[60px] pt-[40px] min-[1921px]:max-w-none"
     >
       <div className="mx-auto w-[1200px]">
         <div

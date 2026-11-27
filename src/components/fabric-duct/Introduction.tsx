@@ -1,4 +1,4 @@
-﻿import styles from "./LaptopLayout.module.css";
+import styles from "./LaptopLayout.module.css";
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 
@@ -30,12 +30,11 @@ export default function Introduction() {
           </div>
           <div className="relative h-[260px] lg:h-[510px]">
             <Image
-              src="/images/fabric-duct/introduction.png"
-              alt="MultiXair 공기분배 덕트 설치 현장"
+              src="/images/fabric-duct/introduction-installation.jpg"
+              alt="실내 천장에 설치된 패브릭덕트"
               fill
-              sizes="739px"
-              quality={85}
-              className="object-cover"
+              unoptimized
+              className="object-cover object-center"
             />
           </div>
         </div>

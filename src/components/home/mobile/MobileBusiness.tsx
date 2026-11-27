@@ -1,40 +1,39 @@
 ﻿import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ArrowRightCircle,
-  ClipboardCheck,
-  Snowflake,
-  Wrench,
-  Wind,
-} from "lucide-react";
+import { ArrowRightCircle, ClipboardCheck, Snowflake, Wrench, Wind } from "lucide-react";
 import Eyebrow from "@/src/components/shared/SectionEyebrow";
 import BusinessWorkflow from "@/src/components/home/BusinessWorkflow";
 
 const business = [
   {
     title: "냉동기",
-    description: "안정적인 냉방 설계, 설치, 교체",
+    description: "설치/철거/수리/유지보수",
     image: "/images/projects/semiconductor-chiller/source-7.jpg",
     href: "/solutions",
   },
   {
-    title: "패브릭덕트",
-    description: "공간에 맞춘 공기 분배 설계",
-    image: "/images/business/fabric-duct-card.jpg",
-    href: "/fabric-duct",
-  },
-  {
     title: "저온저장고",
-    description: "저온 보관을 위한 설비 구축",
+    description: "설계/시공",
     image: "/images/cold-storage/process-unit-installation.jpg",
     href: "/solutions/cold-storage",
   },
   {
-    title: "수리 & 유지보수",
-    description: "안정적인 가동을 위한 정기점검",
-    image: "/images/business/maintenance-card.jpg",
-    href: "/solutions#maintenance",
+    title: "냉각탑",
+    description: "설치/교체/부품 정비",
+    image: "/images/business/cooling-tower-card.jpg",
+    href: "/solutions/cooling-tower",
+  },
+  {
+    title: "항온항습기",
+    description: "설치/교체/수리/유지보수",
+    image: "/images/business/precision-ac-card.jpg",
+    href: "/solutions/precision-ac",
+  },
+  {
+    title: "패브릭덕트",
+    description: "패브릭덕트 설계/시공",
+    image: "/images/business/fabric-duct-card.jpg",
+    href: "/fabric-duct",
   },
 ];
 
@@ -47,9 +46,7 @@ export function MobileBusinessOverview() {
         </p>
         <h2 className="mt-5 text-[28px] font-extrabold">냉동공조 설계 &amp; 시공</h2>
         <p className="mt-3 px-5 text-base font-medium leading-7">
-          냉동기부터 패브릭덕트까지
-          <br />
-          원스톱으로 제공하는 산정엔지니어링
+          냉동설비부터 패브릭덕트까지 원스톱 시공
         </p>
         <div className="mt-6 grid grid-cols-2 gap-3 px-5">
           {[
@@ -62,7 +59,7 @@ export function MobileBusinessOverview() {
             },
             {
               icon: ClipboardCheck,
-              title: "유지보수",
+              title: "유지보수 & 정기점검",
               text: "정기점검",
               href: "/solutions#maintenance",
             },
@@ -80,18 +77,8 @@ export function MobileBusinessOverview() {
                 className="mb-2 text-brand-blue"
               />
               <h3 className="text-base font-bold">{service.title}</h3>
-              <p className="text-sm">{service.text}</p>
             </Link>
           ))}
-        </div>
-        <div className="relative mt-4 aspect-[1.6] w-full">
-          <Image
-            src="/images/business/overview-background.png"
-            alt="산업 시설 냉동공조 설계 및 시공"
-            fill
-            sizes="(max-width: 600px) 100vw, 600px"
-            className="object-cover object-bottom"
-          />
         </div>
         <div className="hidden px-5 py-7 lg:block">
           <BusinessWorkflow />
@@ -103,39 +90,51 @@ export function MobileBusinessOverview() {
 
 export function MobileBusinessAreas() {
   return (
-    <section className="mx-auto max-w-[600px] px-5 py-8">
+    <section className="mx-auto w-full max-w-[600px] px-5 py-8 md:max-w-[960px] md:px-8">
       <Eyebrow variant="compact">OUR BUSINESS</Eyebrow>
       <div className="mt-3 flex items-center justify-between">
         <h2 className="text-[28px] font-extrabold">사업영역</h2>
-        <Link href="/solutions" className="flex min-h-11 items-center gap-2 text-sm">
-          전체 보기
-          <ArrowRight size={16} aria-hidden="true" />
-        </Link>
       </div>
-      <div className="mt-5 space-y-3">
+      <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
         {business.map((item) => (
           <Link
             key={item.title}
             href={item.href}
-            className="flex min-h-[130px] items-center gap-4 rounded-[22px] bg-white p-3"
+            className={`group flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-brand-navy/10 bg-white shadow-[0_4px_16px_rgba(16,46,73,0.06)] transition-[border-color,box-shadow] hover:border-brand-blue/50 hover:shadow-[0_8px_24px_rgba(16,46,73,0.1)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none ${item.href === "/fabric-duct" ? "col-span-2 md:col-span-1" : ""}`}
           >
-            <div className="relative h-[108px] w-[100px] shrink-0 overflow-hidden rounded-xl">
-              <Image
-                src={item.image}
-                alt={item.title}
-                fill
-                sizes="100px"
-                className="object-cover"
-              />
+            <div className="relative h-[140px] w-full shrink-0 overflow-hidden bg-[#EAF3F8] md:h-[170px]">
+              {item.image && (
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes={
+                    item.href === "/fabric-duct"
+                      ? "(min-width: 768px) 300px, (min-width: 600px) 560px, calc(100vw - 40px)"
+                      : "(min-width: 768px) 300px, (min-width: 600px) 274px, calc((100vw - 52px) / 2)"
+                  }
+                  className={
+                    item.href === "/fabric-duct"
+                      ? "object-cover object-[center_35%]"
+                      : "object-cover"
+                  }
+                />
+              )}
             </div>
-            <div className="min-w-0 flex-1">
-              <h3 className="text-[21px] font-bold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-5 text-[#637382]">{item.description}</p>
-              <ArrowRightCircle
-                size={28}
-                aria-hidden="true"
-                className="ml-auto mt-3 text-[#006EB8]"
-              />
+            <div className="min-w-0 flex-1 p-3.5 md:p-4">
+              <div className="flex items-center justify-between gap-2">
+                <h3 className="min-w-0 break-keep text-[18px] font-bold text-brand-navy md:text-[20px]">
+                  {item.title}
+                </h3>
+                <ArrowRightCircle
+                  size={20}
+                  aria-hidden="true"
+                  className="shrink-0 text-[#006EB8]"
+                />
+              </div>
+              <p className="mt-2 break-keep text-[13px] leading-5 text-[#637382] md:text-sm">
+                {item.description}
+              </p>
             </div>
           </Link>
         ))}

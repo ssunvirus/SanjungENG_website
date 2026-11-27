@@ -1,0 +1,21 @@
+.surface {
+  width: 100%;
+  background-color: #eff7fb;
+}
+
+/* Keep the original illustration and annotation coordinates at normal widths. */
+@media (width > 1920px) {
+  .surface {
+    position: relative;
+    background-image:
+      linear-gradient(to bottom, transparent, #eff7fb),
+      url("/images/business/overview-background-wide.png");
+    background-position:
+      center bottom,
+      center;
+    background-size:
+      100% 112px,
+      max(3840px, 100%) 1081px;
+    background-repeat: no-repeat;
+  }
+}

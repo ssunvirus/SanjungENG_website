@@ -81,7 +81,7 @@ export default function Removal() {
             ].map(([label, text]) => (
               <div
                 key={label}
-                className="grid grid-cols-[104px_minmax(0,1fr)] items-start gap-3 lg:gap-4"
+                className="grid grid-cols-[104px_minmax(0,1fr)] items-center gap-3 lg:items-start lg:gap-4"
               >
                 <dt className="rounded-[5px] border border-brand-blue/25 bg-brand-blue/10 px-2 py-1 text-center font-bold">
                   {label}

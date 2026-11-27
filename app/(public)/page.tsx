@@ -53,11 +53,7 @@ export default async function Home() {
       <div className="w-full min-w-0 bg-gradient-to-b from-[#EFF7FB] to-[#F3FBFE] text-brand-navy lg:hidden">
         <MobileHero />
         <MobileBusinessOverview />
-        <div className="relative">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 -top-20 z-10 h-20 bg-gradient-to-b from-transparent to-[#EFF7FB] lg:-top-28 lg:h-28"
-          />
+        <div className="relative mt-6">
           <WaveSurface blendTop>
             <MobileBusinessAreas />
             <MobileProjects cases={mobileCases} />

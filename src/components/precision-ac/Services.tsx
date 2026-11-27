@@ -26,10 +26,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section
-      data-laptop-layout="services"
-      className="mx-auto flex h-auto w-full lg:max-w-[1920px] flex-col items-center gap-[28px] lg:gap-[67px] bg-white px-[20px] lg:px-[120px] py-[36px] lg:py-[60px]"
-    >
+    <section className="mx-auto h-auto w-full lg:max-w-[1440px] bg-white px-5 lg:px-10 py-9 lg:py-[60px]">
       <header className="text-center">
         <p
           data-section-eyebrow
@@ -44,48 +41,44 @@ export default function Services() {
           항온항습기 설치부터 유지관리까지.
         </p>
       </header>
-      <div className="flex flex-col lg:flex-row h-auto lg:h-[623px] w-full lg:w-[1159px] gap-[28px] lg:gap-[52px]">
-        <div className="relative h-[240px] lg:h-[623px] w-full lg:w-[467px] shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="mx-auto mt-7 grid w-full max-w-[1200px] grid-cols-1 gap-5 lg:mt-10 lg:grid-cols-[minmax(0,390fr)_minmax(0,666fr)] lg:gap-8">
+        <div className="relative h-[260px] lg:min-h-[520px] w-full min-w-0 shrink-0 overflow-hidden rounded-[24px] border border-brand-navy/10 shadow-[0_12px_32px_rgba(16,46,73,0.1)] lg:h-auto">
           <Image
             src="/images/projects/warehouse-precision-ac/4.jpg"
             alt="항온항습기 내부 전기 설비"
             fill
-            sizes="467px"
+            sizes="(min-width: 1440px) 422px, (min-width: 1024px) 34vw, calc(100vw - 40px)"
             quality={85}
             className="object-cover"
           />
         </div>
-        <div className="flex w-full lg:w-[640px] flex-col gap-8 lg:gap-0 justify-center">
-          {services.map(([number, title, line1, line2, image], index) => (
-            <div key={number}>
-              <article className="flex h-auto lg:h-[190px] items-center gap-[16px] lg:gap-[20px]">
-                <div className="relative hidden lg:block size-[100px] shrink-0">
-                  <Image
-                    src={`/images/precision-ac/${image}`}
-                    alt=""
-                    fill
-                    sizes="100px"
-                    className="object-contain"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
-                    {number}
-                  </p>
-                  <h3 className="mt-[10px] lg:whitespace-nowrap text-[21px] lg:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-brand-navy">
-                    {title}
-                  </h3>
-                  <p className="mt-[10px] lg:whitespace-nowrap text-[15px] lg:text-[25px] font-semibold leading-[24px] lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-brand-text/80">
-                    {line1}
-                    <br />
-                    {line2}
-                  </p>
-                </div>
-              </article>
-              {index < services.length - 1 && (
-                <div className="hidden lg:block h-[2px] my-4 w-full bg-brand-blue/30" />
-              )}
-            </div>
+        <div className="flex w-full min-w-0 flex-col gap-3 lg:gap-4">
+          {services.map(([number, title, line1, line2, image]) => (
+            <article
+              key={number}
+              className="flex min-w-0 flex-1 items-center gap-4 rounded-[22px] border border-brand-navy/10 bg-white p-5 shadow-[0_4px_18px_rgba(16,46,73,0.05)] lg:gap-5 lg:p-6"
+            >
+              <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-[#EFF8FC] lg:size-24">
+                <Image
+                  src={`/images/precision-ac/${image}`}
+                  alt=""
+                  width={80}
+                  height={80}
+                  sizes="(min-width: 1024px) 80px, 64px"
+                  className="size-16 object-contain lg:size-20"
+                />
+              </div>
+              <div className="min-w-0">
+                <h3 className="break-keep text-[21px] font-bold leading-snug text-brand-navy lg:text-[29px]">
+                  {title}
+                </h3>
+                <p className="mt-2 break-keep text-[16px] font-medium leading-7 text-brand-text/80 lg:text-[21px] lg:leading-8">
+                  {line1}
+                  <br className="hidden lg:block" />
+                  {line2}
+                </p>
+              </div>
+            </article>
           ))}
         </div>
       </div>

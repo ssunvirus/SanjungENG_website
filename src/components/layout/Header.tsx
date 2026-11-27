@@ -11,10 +11,10 @@ import {
 } from "@/src/lib/browser-location-store";
 
 const previewPanelClassName =
-  "invisible absolute left-1/2 -translate-x-1/2 top-full z-50 grid w-[min(1040px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[300px_minmax(0,1fr)] gap-8 rounded-[26px] border border-[#D1DFE8] bg-white p-8 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none";
+  "invisible absolute left-1/2 -translate-x-1/2 top-full z-50 grid w-[min(1040px,calc(100vw-48px))] translate-y-[-4px] grid-cols-[270px_minmax(0,1fr)] gap-5 rounded-[20px] border border-[#D1DFE8] bg-white p-6 text-left opacity-0 shadow-[0_16px_40px_rgba(16,46,73,0.16)] transition-[opacity,transform,visibility] duration-200 before:absolute before:-top-[10px] before:left-0 before:h-[10px] before:w-full before:content-[''] group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none";
 
 const previewButtonClassName =
-  "group/detail mt-5 inline-flex min-h-14 items-center justify-between gap-6 rounded-xl border border-[#B9D2E4] bg-[#F4F9FC] px-5 py-2.5 text-[22px] font-bold leading-8 text-brand-navy transition-colors hover:border-brand-navy hover:bg-brand-navy hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none";
+  "group/detail mt-5 inline-flex min-h-12 items-center justify-between gap-6 rounded-xl border border-brand-navy bg-brand-navy px-5 py-2.5 text-[20px] font-bold leading-7 text-white transition-colors hover:border-[#006EB8] hover:bg-[#006EB8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none";
 
 const menus = [
   { label: "회사소개", href: "/about" },
@@ -156,7 +156,7 @@ export default function Header() {
 
         <div className="hidden h-full items-center gap-[clamp(24px,7.1875vw,138px)] lg:flex">
           <nav aria-label="주요 메뉴" className="h-full">
-            <ul className="flex h-full items-center justify-center gap-[clamp(20px,3.125vw,60px)]">
+            <ul className="-mx-[clamp(10px,1.5625vw,30px)] flex h-full items-center justify-center">
               {menus.map((menu) => {
                 const isFabric = menu.href === "/fabric-duct";
                 const previews = isFabric ? fabricPreviews : solutionPreviews;
@@ -173,19 +173,19 @@ export default function Header() {
                     <Link
                       href={menu.href}
                       onClick={(event) => event.currentTarget.blur()}
-                      className={`relative inline-block min-w-[87px] whitespace-nowrap pb-[6px] text-[25px] font-bold transition-colors after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:-translate-x-1/2 after:bg-brand-blue after:transition-[width] after:duration-200 group-hover:text-[#006EB8] group-hover:after:w-full focus-visible:text-[#006EB8] focus-visible:outline-none focus-visible:after:w-full ${
+                      className={`relative isolate inline-flex h-full min-w-[87px] items-center justify-center whitespace-nowrap px-[clamp(10px,1.5625vw,30px)] text-[25px] font-bold transition-colors before:pointer-events-none before:absolute before:inset-y-0 before:-inset-x-px before:-z-10 before:-skew-x-[18deg] before:bg-[#006EB8] before:opacity-0 before:transition-opacity before:duration-200 group-hover:before:opacity-100 focus-visible:before:opacity-100 motion-reduce:before:transition-none group-hover:text-white focus-visible:text-white focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-brand-blue ${
                         contactActive
-                          ? "text-white after:w-0"
+                          ? "text-white"
                           : isMenuActive(menu.href)
-                            ? "text-[#006EB8] after:w-full"
-                            : "text-brand-text after:w-0"
+                            ? "text-white before:opacity-100"
+                            : "text-brand-text"
                       }`}
                     >
                       {menu.label}
                     </Link>
                     {menu.submenu ? (
                       <div aria-label={`${menu.label} 하위 메뉴`} className={previewPanelClassName}>
-                        <ul className="space-y-2 border-r border-[#D1DFE8] pr-6">
+                        <ul className="space-y-2">
                           {previews.map((item, index) => (
                             <li key={item.href}>
                               <Link
@@ -194,27 +194,27 @@ export default function Header() {
                                 onFocus={() => selectPreview(index)}
                                 onClick={(event) => event.currentTarget.blur()}
                                 aria-current={pathname === item.href ? "page" : undefined}
-                                className={`flex min-h-16 items-center justify-between gap-3 whitespace-nowrap rounded-full px-4 py-3 text-[24px] font-bold leading-8 transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#EFF7FB] text-[#006EB8]" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
+                                className={`flex min-h-16 items-center justify-between gap-3 whitespace-nowrap rounded-xl px-4 py-3 text-[23px] font-bold leading-8 transition-colors focus-visible:outline-2 focus-visible:outline-brand-blue ${selectedIndex === index ? "bg-[#006EB8] text-white" : "text-brand-text/80 hover:bg-[#EFF7FB]"}`}
                               >
                                 {item.label}
                                 {
                                   <ChevronRight
                                     size={25}
                                     aria-hidden="true"
-                                    className={`shrink-0 text-brand-blue ${selectedIndex === index ? "opacity-100" : "opacity-0"}`}
+                                    className={`shrink-0 ${selectedIndex === index ? "text-white opacity-100" : "text-brand-blue opacity-0"}`}
                                   />
                                 }
                               </Link>
                             </li>
                           ))}
                         </ul>
-                        <div className="flex min-w-0 items-center gap-6">
-                          <div className="relative size-[128px] shrink-0 overflow-hidden rounded-3xl bg-[#EFF7FB]">
+                        <div className="flex min-w-0 items-center gap-6 rounded-2xl border border-brand-blue/10 bg-[#EFF8FC] p-6">
+                          <div className="relative size-[144px] shrink-0">
                             <Image
                               src={`/images/navigation/${preview.image}`}
                               alt=""
                               fill
-                              sizes="128px"
+                              sizes="144px"
                               className={`object-contain ${isFabric ? "[filter:hue-rotate(-25deg)]" : ""}`}
                             />
                           </div>
@@ -235,7 +235,7 @@ export default function Header() {
                               <ArrowRight
                                 size={24}
                                 aria-hidden="true"
-                                className="shrink-0 text-[#006EB8] transition-colors group-hover/detail:text-white motion-reduce:transition-none"
+                                className="shrink-0 text-white"
                               />
                             </Link>
                           </div>

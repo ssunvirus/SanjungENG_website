@@ -55,7 +55,7 @@ export default function WorkProcess() {
           WORK PROCESS <span aria-hidden="true" className="h-[2px] w-[46px] bg-brand-blue/60" />
         </p>
         <h2 className="mt-3 text-[28px] font-bold tracking-[1px] text-brand-navy lg:mt-[10px] lg:text-[50px] lg:tracking-[2.5px]">
-          저온저장고 냉동설비 이렇게 시공합니다.
+          저온저장고 시공절차
         </h2>
 
         <WorkProcessCards

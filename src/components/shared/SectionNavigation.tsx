@@ -95,7 +95,7 @@ export default function SectionNavigation({
   return (
     <nav
       aria-label={label}
-      className={`${rightRail ? styles.rightRail : ""} relative top-0 z-40 mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:-mt-6 lg:px-10`}
+      className={`${rightRail ? styles.rightRail : ""} relative top-0 z-40 mb-0 min-[768px]:mb-4 w-full border-b border-brand-navy/10 bg-white min-[768px]:-mt-5 min-[768px]:border-0 min-[768px]:bg-transparent min-[768px]:px-4 lg:-mt-6 lg:px-10`}
     >
       {rightRail && (
         <header className={styles.railHeader}>

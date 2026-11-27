@@ -40,33 +40,39 @@ export default function Equipment() {
         </p>
       </header>
 
-      <div className="mx-auto mt-[24px] lg:mt-[51px] grid w-full max-w-[1200px] grid-cols-1 lg:grid-cols-[minmax(0,390fr)_minmax(0,666fr)] gap-[28px] lg:gap-[52px]">
-        <div className="relative h-[260px] lg:h-[520px] w-full min-w-0 shrink-0 overflow-hidden rounded-[10px] shadow-[0_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="mx-auto mt-7 grid w-full max-w-[1200px] grid-cols-1 gap-5 lg:mt-10 lg:grid-cols-[minmax(0,390fr)_minmax(0,666fr)] lg:gap-8">
+        <div className="relative h-[260px] lg:min-h-[520px] w-full min-w-0 shrink-0 overflow-hidden rounded-[24px] border border-brand-navy/10 shadow-[0_12px_32px_rgba(16,46,73,0.1)] lg:h-auto">
           <Image
-            src="/images/cold-storage/equipment-overview.jpg"
-            alt="저온저장고 냉동설비"
+            src="/images/cold-storage/equipment-unit-cooler.jpg"
+            alt="저온저장고 천장 증발기 설치 현장"
             fill
-            sizes="374px"
-            className="object-cover object-top lg:object-center"
+            sizes="(min-width: 1440px) 422px, (min-width: 1024px) 34vw, calc(100vw - 40px)"
+            quality={100}
+            className="object-cover object-[center_38%] lg:object-center"
           />
         </div>
-        <div className="flex w-full min-w-0 flex-col gap-[16px] lg:gap-[30px]">
-          {equipmentPoints.map((point, index) => (
+        <div className="flex w-full min-w-0 flex-col gap-3 lg:gap-4">
+          {equipmentPoints.map((point) => (
             <article
               key={point.number}
-              className={`flex h-auto min-h-[120px] lg:min-h-0 lg:h-[159px] items-center gap-4 lg:gap-[20px] ${index < equipmentPoints.length - 1 ? "border-b border-brand-blue/30 lg:border-b-2" : ""}`}
+              className="flex min-w-0 flex-1 items-center gap-4 rounded-[22px] border border-brand-navy/10 bg-white p-5 shadow-[0_4px_18px_rgba(16,46,73,0.05)] lg:gap-5 lg:p-6"
             >
-              <div className="relative size-[56px] lg:size-[100px] shrink-0">
-                <Image src={point.icon} alt="" fill sizes="100px" className="object-cover" />
+              <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-[#EFF8FC] lg:size-24">
+                <div className="relative size-16 lg:size-20">
+                  <Image
+                    src={point.icon}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 80px, 64px"
+                    className="object-contain"
+                  />
+                </div>
               </div>
               <div className="min-w-0">
-                <p className="text-[15px] lg:text-[25px] font-bold tracking-[3px] lg:tracking-[5px] text-brand-blue">
-                  {point.number}
-                </p>
-                <h3 className="mt-[10px] text-[21px] lg:text-[28px] xl:text-[35px] font-bold tracking-[1px] lg:tracking-[1.75px] text-brand-navy">
+                <h3 className="break-keep text-[21px] font-bold leading-snug text-brand-navy lg:text-[29px]">
                   {point.title}
                 </h3>
-                <p className="mt-[10px] text-[15px] lg:text-[20px] xl:text-[25px] font-semibold leading-6 lg:leading-[40px] tracking-[1px] lg:tracking-[1.25px] text-brand-text/80">
+                <p className="mt-2 break-keep text-[16px] font-medium leading-7 text-brand-text/80 lg:text-[21px] lg:leading-8">
                   {point.description}
                 </p>
               </div>

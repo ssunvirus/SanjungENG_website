@@ -28,13 +28,15 @@ export default function Footer() {
           />
           <address className="w-full not-italic md:w-[250px] xl:w-[194px] xl:shrink-0">
             <p className="text-[11px] font-light text-white/75">상담 및 문의</p>
-            <a href="tel:01053401728" className="mt-[9px] block text-[19px] font-medium">
-              010-5340-1728
-            </a>
             <dl className="mx-auto mt-[9px] grid w-fit grid-cols-[48px_1fr] gap-y-[9px] text-left text-[14px] md:mx-0 xl:text-[11px]">
               <dt className="font-light text-white/75">Tel</dt>
-              <dd className="font-medium">
-                <a href="tel:028911728">02-891-1728</a>
+              <dd className="flex flex-col items-start gap-1 font-medium">
+                <a href="tel:01053401728" className="whitespace-nowrap">
+                  010-5340-1728
+                </a>
+                <a href="tel:028911728" className="whitespace-nowrap">
+                  02-891-1728
+                </a>
               </dd>
               <dt className="font-light text-white/75">E-mail</dt>
               <dd className="font-medium">

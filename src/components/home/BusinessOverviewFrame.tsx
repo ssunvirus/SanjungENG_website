@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, type ReactNode } from "react";
+import styles from "./BusinessOverviewFrame.module.css";
 
 // Keep the illustration and its annotations in the same 1920px coordinate space.
 export default function BusinessOverviewFrame({ children }: { children: ReactNode }) {
@@ -23,15 +24,17 @@ export default function BusinessOverviewFrame({ children }: { children: ReactNod
   }, []);
 
   return (
-    <div
-      ref={frameRef}
-      className="relative mx-auto aspect-[1920/1081] w-full max-w-[1920px] overflow-hidden"
-    >
+    <div className={styles.surface}>
       <div
-        ref={canvasRef}
-        className="invisible absolute left-0 top-0 h-[1081px] w-[1920px] origin-top-left"
+        ref={frameRef}
+        className="relative mx-auto aspect-[1920/1081] w-full max-w-[1920px] overflow-hidden"
       >
-        {children}
+        <div
+          ref={canvasRef}
+          className="invisible absolute left-0 top-0 h-[1081px] w-[1920px] origin-top-left"
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

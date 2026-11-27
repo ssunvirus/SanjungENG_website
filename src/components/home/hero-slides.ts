@@ -18,7 +18,7 @@ export const heroSlides = [
     imageAlt: "패브릭덕트가 설치된 산업 시설 내부",
     imagePosition: "object-[80%_center]",
     category: "패브릭덕트 솔루션",
-    title: ["공간에 맞춘 설계", "고르게 퍼지는 공기"],
+    title: ["고르게 퍼지는 냉난방", "패브릭덕트"],
     subtitle: "패브릭덕트 설계부터 시공까지 함께",
     mobileDescription: "패브릭덕트 설계부터 시공까지 함께합니다.",
     details: "CFD 설계   |   제품 공급   |   설치 & 시공",

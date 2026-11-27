@@ -52,10 +52,12 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
         <h2 className="text-[28px] font-extrabold">시공사례</h2>
         <Link
           href={projectListHref(1, "전체")}
-          className="flex min-h-11 items-center gap-2 text-sm"
+          className="group inline-flex min-h-11 shrink-0 items-center gap-3 rounded-full border border-brand-navy/10 bg-white py-1.5 pl-4 pr-1.5 text-sm font-bold text-brand-navy shadow-[0_3px_10px_rgba(16,46,73,0.07)] transition-[border-color,box-shadow] hover:border-brand-blue/50 hover:shadow-[0_5px_16px_rgba(0,173,219,0.15)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-blue motion-reduce:transition-none"
         >
           전체 보기
-          <ArrowRight size={16} aria-hidden="true" />
+          <span className="flex size-8 items-center justify-center rounded-full bg-brand-navy text-white transition-colors group-hover:bg-[#006EB8] motion-reduce:transition-none">
+            <ArrowRight size={17} strokeWidth={2} aria-hidden="true" />
+          </span>
         </Link>
       </div>
       <div
@@ -119,7 +121,7 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
           type="button"
           aria-label={autoplay ? "시공사례 자동재생 정지" : "시공사례 자동재생 시작"}
           onClick={() => setAutoplay((value) => !value)}
-          className="flex min-h-11 w-8 items-center justify-center text-brand-navy"
+          className="flex min-h-11 w-8 items-center justify-center rounded-full text-brand-navy focus-visible:outline-2 focus-visible:outline-brand-blue"
         >
           {autoplay ? (
             <Pause size={16} aria-hidden="true" />
@@ -130,6 +132,7 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
         {cases.map((item, index) => (
           <button
             key={item.href}
+            type="button"
             onClick={() => {
               pauseAfterInteraction();
               const track = trackRef.current;
@@ -143,10 +146,11 @@ export default function MobileProjects({ cases = mobileFeaturedProjects }: { cas
             }}
             aria-label={`${item.title} 보기`}
             aria-pressed={caseIndex === index}
-            className="flex min-h-11 w-8 items-center justify-center"
+            className="flex min-h-11 w-8 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-brand-blue"
           >
             <span
-              className={`h-[6px] w-5 rounded-full ${caseIndex === index ? "bg-[#006EB8]" : "bg-[#D9E5EC]"}`}
+              aria-hidden="true"
+              className={`h-2 rounded-full ${caseIndex === index ? "w-5 bg-brand-blue" : "w-2 bg-brand-navy/20"}`}
             />
           </button>
         ))}

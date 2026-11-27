@@ -53,6 +53,11 @@ export default function WorkProcess() {
         mobileCarousel
         steps={steps.map((step) => ({
           ...step,
+          imageQuality: step.number === "01" ? 100 : undefined,
+          imageSizes:
+            step.number === "01"
+              ? "(min-width: 1440px) 365px, (min-width: 1024px) 25vw, 90vw"
+              : undefined,
           unoptimized: step.number === "03" || step.number === "04",
           imageClassName: step.number === "04" ? "object-[56%_center]" : "",
         }))}

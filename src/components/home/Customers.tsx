@@ -19,6 +19,7 @@ const customerLogos = [
   ["sk-shieldus", "SK쉴더스"],
   ["kanavi-mobility", "카나비모빌리티"],
   ["kogas", "한국가스공사"],
+  ["lotte-mart", "롯데마트"],
 ];
 
 export default function Customers() {
@@ -56,8 +57,8 @@ export default function Customers() {
                       >
                         <Image
                           src={
-                            file === "saffco"
-                              ? "/images/home-refresh/customer-saffco.svg"
+                            ["saffco", "lotte-mart"].includes(file)
+                              ? `/images/home-refresh/customer-${file}.svg`
                               : file === "avenue-france"
                                 ? "/images/home-refresh/customer-avenue-france.svg"
                                 : file === "hwaseong"
